@@ -1,565 +1,2503 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abo Kayan - Multi-Tools Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            DEFAULT: '#DC2626',
-                            dark: '#B91C1C',
-                            light: '#EF4444'
-                        }
-                    }
-                }
-            }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Abo Kayan Tools - منصة أدوات مجانية للحسابات والصور وPDF والنصوص والطلاب.">
+<meta name="theme-color" content="#0a0a0a">
+<title>Abo Kayan Tools | أدوات مجانية أونلاين</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT:'#DC2626',
+          dark:'#B91C1C',
+          light:'#EF4444'
         }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
-        body { font-family: 'Cairo', sans-serif; }
-        .ios-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(220, 38, 38, 0.15);
-        }
-        .dark .ios-card {
-            background: rgba(30, 30, 30, 0.85);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-    </style>
+      }
+    }
+  }
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+*{box-sizing:border-box}
+
+body{
+  font-family:'Cairo',sans-serif
+}
+
+.ios-card{
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(220,38,38,.14)
+}
+
+.dark .ios-card{
+  background:rgba(28,28,28,.88);
+  border-color:rgba(239,68,68,.20)
+}
+
+.tool-card{
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease
+}
+
+.tool-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  border-color:rgba(239,68,68,.5)
+}
+
+.tool-card.hidden-tool{
+  display:none
+}
+
+.input{
+  width:100%;
+  padding:.75rem 1rem;
+  border-radius:14px;
+  background:#f3f4f6;
+  outline:none;
+  border:1px solid transparent
+}
+
+.dark .input{
+  background:#18181b;
+  color:#f4f4f5
+}
+
+.input:focus{
+  border-color:#dc2626
+}
+
+.btn{
+  padding:.72rem 1rem;
+  border-radius:14px;
+  font-weight:800;
+  transition:.15s
+}
+
+.btn-primary{
+  background:#dc2626;
+  color:#fff
+}
+
+.btn-primary:hover{
+  background:#b91c1c
+}
+
+.btn-secondary{
+  background:#e5e7eb;
+  color:#18181b
+}
+
+.dark .btn-secondary{
+  background:#27272a;
+  color:#fff
+}
+
+.result{
+  margin-top:.75rem;
+  padding:1rem;
+  border-radius:14px;
+  background:rgba(220,38,38,.08);
+  border:1px solid rgba(220,38,38,.15)
+}
+
+.category-btn.active{
+  background:#dc2626;
+  color:#fff
+}
+
+.toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#18181b;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:14px;
+  z-index:100;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  font-size:13px
+}
+</style>
 </head>
-<body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
 
-    <header class="sticky top-0 z-50 ios-card border-b border-gray-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center shadow-sm">
-        <div class="flex items-center space-x-3 space-x-reverse">
-            <span class="w-3 h-3 bg-brand rounded-full animate-ping"></span>
-            <a href="https://wa.me/201094122436?text=مرحباً%20أبو%20كيان،%20أود%20التواصل%20معك%20بخصوص%20منصة%20الأدوات" target="_blank" class="text-lg font-bold tracking-tight text-brand hover:underline flex items-center gap-1.5">
-                Abo Kayan Tools
-            </a>
-        </div>
-        
-        <div class="flex items-center space-x-2 space-x-reverse">
-            <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-gray-200 dark:bg-zinc-800 text-xs px-2 py-1.5 rounded-xl border-none outline-none font-medium cursor-pointer">
-                <option value="ar">العربية</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="pt">Português</option>
-            </select>
-            <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800 hover:bg-brand/25 transition text-sm">🌙</button>
-        </div>
-    </header>
+<body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen">
 
-    <main class="max-w-4xl mx-auto p-4 py-6">
-        
-        <div class="mb-6 text-center">
-            <h2 id="welcomeText" class="text-2xl font-extrabold mb-1">أهلاً بك في منصة الأدوات الشاملة</h2>
-            <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
-        </div>
+<header class="sticky top-0 z-50 ios-card border-b px-4 py-3 shadow-sm">
+  <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
 
-        <!-- Grid of Tools -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            
-            <div onclick="openTool('ocr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">👁️</div>
-                <h3 class="font-bold text-sm text-brand">استخراج نص من صورة</h3>
-                <span class="text-[10px] text-gray-400 mt-1">OCR (عربي / إنجليزي)</span>
-            </div>
+    <a href="#" class="font-extrabold text-lg text-brand whitespace-nowrap">
+      Abo Kayan Tools
+    </a>
 
-            <div onclick="openTool('calories')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🥗</div>
-                <h3 class="font-bold text-sm text-brand">حاسبة السعرات</h3>
-                <span class="text-[10px] text-gray-400 mt-1">السعرات، بروتين، كارب</span>
-            </div>
+    <div class="flex items-center gap-2">
 
-            <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🧮</div>
-                <h3 class="font-bold text-sm">حساب النسبة</h3>
-                <span class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</span>
-            </div>
+      <select
+        id="langSelect"
+        onchange="changeLanguage(this.value)"
+        class="bg-gray-200 dark:bg-zinc-800 text-xs px-2 py-2 rounded-xl outline-none"
+      >
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+      </select>
 
-            <div onclick="openTool('age')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎂</div>
-                <h3 class="font-bold text-sm">حساب العمر</h3>
-                <span class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر</span>
-            </div>
+      <button
+        onclick="toggleDarkMode()"
+        class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800"
+        aria-label="تغيير المظهر"
+      >
+        🌙
+      </button>
 
-            <div onclick="openTool('bmi')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⚖️</div>
-                <h3 class="font-bold text-sm">حساب BMI</h3>
-                <span class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</span>
-            </div>
+    </div>
+  </div>
+</header>
 
-            <div onclick="openTool('qr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔳</div>
-                <h3 class="font-bold text-sm">QR Code</h3>
-                <span class="text-[10px] text-gray-400 mt-1">إنشاء رموز سريعة</span>
-            </div>
+<main class="max-w-6xl mx-auto px-4 py-7">
 
-            <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">💰</div>
-                <h3 class="font-bold text-sm text-brand">حاسبة القرض والأقساط</h3>
-                <span class="text-[10px] text-gray-400 mt-1">التمويل، الفائدة والشهري</span>
-            </div>
+<section class="text-center mb-7">
 
-            <div onclick="openTool('time')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏱️</div>
-                <h3 class="font-bold text-sm">الوقت والتاريخ</h3>
-                <span class="text-[10px] text-gray-400 mt-1">حساب الفروق الزمنية</span>
-            </div>
+  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-bold mb-3">
+    ⚡ أدوات مجانية وسريعة
+  </div>
 
-            <div onclick="openTool('password')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔐</div>
-                <h3 class="font-bold text-sm">كلمات السر</h3>
-                <span class="text-[10px] text-gray-400 mt-1">توليد كلمات سر قوية</span>
-            </div>
+  <h1 id="welcomeText" class="text-3xl sm:text-4xl font-extrabold mb-2">
+    أهلاً بك في Abo Kayan Tools
+  </h1>
 
-            <div onclick="openTool('converter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔄</div>
-                <h3 class="font-bold text-sm">محول الوحدات</h3>
-                <span class="text-[10px] text-gray-400 mt-1">الوزن والطول</span>
-            </div>
+  <p id="subText" class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+    حاسبات وأدوات للصور وPDF والنصوص والطلاب في مكان واحد.
+  </p>
 
-            <div onclick="openTool('counter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📝</div>
-                <h3 class="font-bold text-sm">عداد الحروف</h3>
-                <span class="text-[10px] text-gray-400 mt-1">حساب الكلمات</span>
-            </div>
+  <div class="max-w-2xl mx-auto mt-5 relative">
 
-            <div onclick="openTool('stopwatch')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏳</div>
-                <h3 class="font-bold text-sm">ساعة الإيقاف</h3>
-                <span class="text-[10px] text-gray-400 mt-1">مؤقت زمني دقيق</span>
-            </div>
+    <input
+      id="searchInput"
+      oninput="filterTools()"
+      class="input pr-11 text-sm"
+      placeholder="🔎 ابحث عن أداة... مثال: PDF، عمر، نسبة، QR"
+    >
 
-            <div onclick="openTool('img2pdf')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📁</div>
-                <h3 class="font-bold text-sm">تحويل لـ PDF</h3>
-                <span class="text-[10px] text-gray-400 mt-1">تحويل الصور لملف PDF</span>
-            </div>
+  </div>
 
-            <div onclick="openTool('barcode')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📷</div>
-                <h3 class="font-bold text-sm">قراءة الباركود</h3>
-                <span class="text-[10px] text-gray-400 mt-1">فحص الرموز بالكاميرا</span>
-            </div>
+</section>
 
-            <div onclick="openTool('insta')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📸</div>
-                <h3 class="font-bold text-sm">متابعين انستجرام</h3>
-                <span class="text-[10px] text-gray-400 mt-1">رشق متابعين حقيقيين</span>
-            </div>
+<div class="flex gap-2 overflow-x-auto pb-2 mb-5" id="categories">
 
-            <div onclick="openTool('tiktok')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎵</div>
-                <h3 class="font-bold text-sm">متابعين تيك توك</h3>
-                <span class="text-[10px] text-gray-400 mt-1">شحن متابعين مجاني</span>
-            </div>
+  <button
+    class="category-btn active whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold"
+    data-cat="all"
+    onclick="setCategory('all',this)"
+  >
+    كل الأدوات
+  </button>
 
-            <div onclick="openTool('vidl')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center col-span-2 sm:col-span-1">
-                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📥</div>
-                <h3 class="font-bold text-sm">تحميل الفيديوهات</h3>
-                <span class="text-[10px] text-gray-400 mt-1">تيك توك، فيسبوك، انستا، يوتيوب</span>
-            </div>
+  <button
+    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
+    data-cat="calc"
+    onclick="setCategory('calc',this)"
+  >
+    🧮 حاسبات
+  </button>
 
-        </div>
+  <button
+    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
+    data-cat="image"
+    onclick="setCategory('image',this)"
+  >
+    🖼️ الصور
+  </button>
 
-        <!-- Tool Modal Area -->
-        <div id="toolModal" class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="modalTitle" class="font-bold text-brand text-lg">اسم الأداة</h3>
-                <button onclick="closeTool()" class="text-gray-400 hover:text-red-500 font-bold text-lg px-2">✕</button>
-            </div>
-            <div id="modalBody"></div>
-        </div>
+  <button
+    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
+    data-cat="pdf"
+    onclick="setCategory('pdf',this)"
+  >
+    📄 PDF
+  </button>
 
-    </main>
+  <button
+    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
+    data-cat="text"
+    onclick="setCategory('text',this)"
+  >
+    ✍️ النصوص
+  </button>
 
-    <footer class="text-center py-6 text-xs text-gray-400">
-        © 2026 Abo Kayan Dashboard. All Rights Reserved.
-    </footer>
+  <button
+    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
+    data-cat="dev"
+    onclick="setCategory('dev',this)"
+  >
+    💻 المطورين
+  </button>
 
-    <script>
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-        }
+</div>
 
-        const translations = {
-            ar: { welcome: "أهلاً بك في منصة الأدوات الشاملة", sub: "لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق" },
-            en: { welcome: "Welcome to Universal Tools Hub", sub: "Comprehensive dashboard for your daily tools with sleek design" },
-            es: { welcome: "Bienvenido al Centro de Herramientas", sub: "Panel integral para tus herramientas diarias con diseño elegante" },
-            pt: { welcome: "Bem-vindo ao Hub de Ferramentas", sub: "Painel abrangente para suas ferramentas diárias com design elegante" }
-        };
+<div class="flex items-center justify-between mb-3">
 
-        function changeLanguage(lang) {
-            document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('welcomeText').innerText = translations[lang].welcome;
-            document.getElementById('subText').innerText = translations[lang].sub;
-        }
+  <h2 class="font-extrabold text-lg">
+    🔥 الأدوات
+  </h2>
 
-        let stopwatchInterval;
-        let stopwatchSeconds = 0;
+  <span id="toolCount" class="text-xs text-gray-400"></span>
 
-        function openTool(type) {
-            const modal = document.getElementById('toolModal');
-            const title = document.getElementById('modalTitle');
-            const body = document.getElementById('modalBody');
-            modal.classList.remove('hidden');
-            clearInterval(stopwatchInterval);
+</div>
 
-            if(type === 'ocr') {
-                title.innerText = "استخراج النص من الصور (OCR)";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <div class="border-2 border-dashed border-gray-500/40 rounded-2xl p-4 text-center cursor-pointer hover:border-brand transition" onclick="document.getElementById('imageInput').click();">
-                            <p class="text-xs text-gray-400 mb-1">اضغط هنا لاختيار صورة أو اسحبها هنا</p>
-                            <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="processImage(event)">
-                        </div>
-                        <p id="statusText" class="text-center text-xs text-brand font-bold min-height-[20px]"></p>
-                        <div>
-                            <label class="block mb-1 text-xs text-gray-400 font-bold">النص المستخرج:</label>
-                            <textarea id="extractedText" rows="5" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-xs outline-none resize-vertical" placeholder="سيظهر النص المستخرج هنا..." readonly></textarea>
-                            <button onclick="copyText()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-xs mt-2 hover:opacity-90 transition">نسخ النص المستخرج</button>
-                        </div>
-                    </div>`;
-            } else if(type === 'calories') {
-                title.innerText = "حاسبة السعرات والماكروز (البروتين والكارب)";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="number" id="cWeight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                            <input type="number" id="cHeight" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="number" id="cAge" placeholder="العمر (سنة)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                            <select id="cGoal" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer">
-                                <option value="lose">خسارة دهون (تنشيف)</option>
-                                <option value="maintain">ثبات الوزن</option>
-                                <option value="gain">زيادة الوزن (تضخيم)</option>
-                            </select>
-                        </div>
-                        <button onclick="calcCalories()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب السعرات والماكروز</button>
-                        <div id="caloriesResult" class="mt-3 text-xs space-y-2"></div>
-                    </div>`;
-            } else if(type === 'percent') {
-                title.innerText = "حساب النسبة المئوية";
-                body.innerHTML = `<div class="space-y-3"><input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcPercent()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button><div id="pResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
-            } else if(type === 'age') {
-                title.innerText = "حساب العمر";
-                body.innerHTML = `<div class="space-y-3"><label class="text-xs text-gray-400">تاريخ الميلاد:</label><input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcAge()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button><div id="ageResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
-            } else if(type === 'bmi') {
-                title.innerText = "حساب مؤشر كتلة الجسم (BMI)";
-                body.innerHTML = `<div class="space-y-3"><input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcBMI()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button><div id="bmiResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
-            } else if(type === 'qr') {
-                title.innerText = "إنشاء QR Code سريع";
-                body.innerHTML = `<div class="space-y-3 text-center"><input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="generateQR()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button><div id="qrResult" class="mt-3 flex justify-center"></div></div>`;
-            } else if(type === 'loan') {
-                title.innerText = "حاسبة القرض والأقساط المتطورة";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">مبلغ القرض الأساسي:</label>
-                                <input type="number" id="loanAmount" placeholder="مثال: 50000" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-400 mb-1">فترة السداد (بالشهور):</label>
-                                <input type="number" id="loanMonths" placeholder="مثال: 12" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-400 mb-1">نسبة الفائدة السنوية (%):</label>
-                            <input type="number" id="loanInterest" placeholder="مثال: 10 (اتركها 0 إذا بدون فائدة)" value="0" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        </div>
-                        <button onclick="calcAdvancedLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الأقساط والفوائد</button>
-                        <div id="loanResult" class="mt-3 text-xs space-y-2"></div>
-                    </div>`;
-            } else if(type === 'time') {
-                title.innerText = "الوقت والتاريخ الحالي";
-                let now = new Date();
-                body.innerHTML = `<div class="space-y-3 text-center"><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">📅 التاريخ: ${now.toLocaleDateString('ar-EG')}</div><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">⏰ الوقت: ${now.toLocaleTimeString('ar-EG')}</div></div>`;
-            } else if(type === 'password') {
-                title.innerText = "مولد كلمات السر القوية";
-                body.innerHTML = `<div class="space-y-3 text-center"><button onclick="generatePassword()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد كلمة مرور آمنة</button><div id="passResult" class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl font-mono text-sm tracking-wider text-brand font-bold">اضغط الزر بالأعلى</div></div>`;
-            } else if(type === 'converter') {
-                title.innerText = "محول الوحدات";
-                body.innerHTML = `<div class="space-y-3"><input type="number" id="valToConvert" placeholder="أدخل القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select id="convType" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer"><option value="kg_g">كيلوجرام إلى جرام</option><option value="m_cm">متر إلى سنتيمتر</option></select><button onclick="convertUnits()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحويل القيمة</button><div id="convResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
-            } else if(type === 'counter') {
-                title.innerText = "عداد الحروف والكلمات";
-                body.innerHTML = `<div class="space-y-3"><textarea id="textInput" oninput="countText()" placeholder="اكتب أو الصق النص هنا..." rows="3" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"></textarea><div class="flex justify-between text-xs text-gray-400 font-bold px-1"><span id="wordCount">الكلمات: 0</span><span id="charCount">الحروف: 0</span></div></div>`;
-            } else if(type === 'stopwatch') {
-                stopwatchSeconds = 0;
-                title.innerText = "ساعة الإيقاف (Stopwatch)";
-                body.innerHTML = `<div class="space-y-3 text-center"><div id="stopwatchDisplay" class="text-3xl font-extrabold font-mono text-brand mb-2">00:00:00</div><div class="flex gap-2"><button onclick="startStopwatch()" class="w-1/2 bg-green-600 text-white py-2 rounded-xl font-bold text-sm">بدء</button><button onclick="resetStopwatch()" class="w-1/2 bg-red-600 text-white py-2 rounded-xl font-bold text-sm">إعادة ضبط</button></div></div>`;
-            } else if(type === 'img2pdf') {
-                title.innerText = "تحويل الصور إلى PDF";
-                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" id="imgInput" accept="image/*" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><button onclick="convertToPdf()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">طباعة / حفظ كـ PDF</button><p class="text-[11px] text-gray-400">سيتم فتح نافذة الطباعة لحفظ الصورة كملف PDF بكل سهولة.</p></div>`;
-            } else if(type === 'barcode') {
-                title.innerText = "قراءة الباركود والـ QR";
-                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" accept="image/*" onchange="readBarcode(event)" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><p class="text-xs text-gray-400">اختر صورة تحتوي على باركود أو QR لاستخراج محتواها.</p><div id="barcodeResult" class="font-bold text-brand text-sm mt-2"></div></div>`;
-            } else if(type === 'insta') {
-                title.innerText = "رشق متابعين انستجرام";
-                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر انستجرام (Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>1000 متابع مجاني</option><option>5000 متابع VIP</option><option>10000 متابع ملكي</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">إرسال المتابعين</button></div>`;
-            } else if(type === 'tiktok') {
-                title.innerText = "شحن متابعين تيك توك";
-                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر تيك توك (@Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>5000 متابع + لايكات</option><option>15000 متابع حصري</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">بدء الشحن الفوري</button></div>`;
-            } else if(type === 'vidl') {
-                title.innerText = "تحميل الفيديوهات الذكي";
-                body.innerHTML = `<div class="space-y-3">
-                    <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو هنا (يوتيوب، تيك توك، فيسبوك)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">فتح محرك التحميل المباشر</button>
-                    <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
-                </div>`;
-            }
-        }
+<div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
 
-        function closeTool() {
-            clearInterval(stopwatchInterval);
-            document.getElementById('toolModal').classList.add('hidden');
-        }
+<!-- ================= CALCULATORS ================= -->
 
-        function showDevMsg() {
-            alert("عذراً، الخدمة متوقفة مؤقتاً، يرجى التواصل مع مطور الموقع عبر الواتساب: 01094122436");
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="النسبة المئوية نسبة percent percentage"
+onclick="openTool('percent')"
+>
+<div class="icon">🧮</div>
+<h3 class="font-bold text-sm text-brand mt-2">حساب النسبة</h3>
+<p class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</p>
+</div>
 
-        function processImage(event) {
-            const file = event.target.files[0];
-            if (!file) return;
 
-            const statusText = document.getElementById('statusText');
-            const extractedTextBox = document.getElementById('extractedText');
-            
-            extractedTextBox.value = "";
-            statusText.innerText = "جاري قراءة واستخراج النص من الصورة... ⏳";
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="الخصم خصم discount"
+onclick="openTool('discount')"
+>
+<div class="icon">💸</div>
+<h3 class="font-bold text-sm">حاسبة الخصم</h3>
+<p class="text-[10px] text-gray-400 mt-1">السعر قبل وبعد الخصم</p>
+</div>
 
-            Tesseract.recognize(
-                file,
-                'ara+eng',
-                { 
-                    logger: m => {
-                        if (m.status === 'recognizing text') {
-                            let progress = Math.round(m.progress * 100);
-                            statusText.innerText = `جاري المعالجة: ${progress}% 🔄`;
-                        }
-                    }
-                }
-            ).then(({ data: { text } }) => {
-                statusText.innerText = "تم استخراج النص بنجاح! ✅";
-                extractedTextBox.value = text.trim();
-            }).catch(err => {
-                console.error(err);
-                statusText.innerText = "حدث عطل أثناء قراءة الصورة، حاول مرة أخرى. ❌";
-            });
-        }
 
-        function copyText() {
-            const textB = document.getElementById('extractedText');
-            textB.select();
-            document.execCommand('copy');
-            alert('تم نسخ النص بنجاح! 📋');
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="العمر age birthday"
+onclick="openTool('age')"
+>
+<div class="icon">🎂</div>
+<h3 class="font-bold text-sm">حساب العمر</h3>
+<p class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر والأيام</p>
+</div>
 
-        function calcCalories() {
-            let w = parseFloat(document.getElementById('cWeight').value);
-            let h = parseFloat(document.getElementById('cHeight').value);
-            let a = parseFloat(document.getElementById('cAge').value);
-            let goal = document.getElementById('cGoal').value;
-            let resDiv = document.getElementById('caloriesResult');
 
-            if(!w || !h || !a) {
-                alert("الرجاء إدخال الوزن، الطول، والعمر بشكل صحيح!");
-                return;
-            }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="bmi كتلة الجسم وزن"
+onclick="openTool('bmi')"
+>
+<div class="icon">⚖️</div>
+<h3 class="font-bold text-sm">حساب BMI</h3>
+<p class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</p>
+</div>
 
-            let bmr = (10 * w) + (6.25 * h) - (5 * a) + 5;
-            let tdee = bmr * 1.375;
 
-            let targetCalories = tdee;
-            if(goal === 'lose') targetCalories -= 500;
-            else if(goal === 'gain') targetCalories += 400;
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="سعرات calories بروتين كارب"
+onclick="openTool('calories')"
+>
+<div class="icon">🥗</div>
+<h3 class="font-bold text-sm">حاسبة السعرات</h3>
+<p class="text-[10px] text-gray-400 mt-1">السعرات والماكروز</p>
+</div>
 
-            let protein = Math.round(w * 2.0);
-            let fat = Math.round((targetCalories * 0.25) / 9);
-            let carb = Math.round((targetCalories - ((protein * 4) + (fat * 9))) / 4);
 
-            resDiv.innerHTML = `
-                <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl space-y-1.5 font-bold">
-                    <div class="text-brand text-sm mb-1">🎯 نتائج الحساب المخصصة لهدفك:</div>
-                    <div class="flex justify-between"><span>السعرات اليومية المطلوبة:</span> <span class="text-brand">${Math.round(targetCalories)} سعرة</span></div>
-                    <div class="flex justify-between"><span>🥩 البروتين:</span> <span>${protein} جرام</span></div>
-                    <div class="flex justify-between"><span>🥔 الكربوهيدرات (الكارب):</span> <span>${carb} جرام</span></div>
-                    <div class="flex justify-between"><span>🥑 الدهون الصحية:</span> <span>${fat} جرام</span></div>
-                </div>
-            `;
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="قسط قرض loan finance"
+onclick="openTool('loan')"
+>
+<div class="icon">💰</div>
+<h3 class="font-bold text-sm">حاسبة القسط</h3>
+<p class="text-[10px] text-gray-400 mt-1">قسط شهري بسيط</p>
+</div>
 
-        function calcAdvancedLoan() {
-            let amount = parseFloat(document.getElementById('loanAmount').value);
-            let months = parseInt(document.getElementById('loanMonths').value);
-            let annualRate = parseFloat(document.getElementById('loanInterest').value) || 0;
-            let resDiv = document.getElementById('loanResult');
 
-            if (!amount || !months || amount <= 0 || months <= 0) {
-                alert("الرجاء إدخال مبلغ القرض وعدد الأشهر بشكل صحيح!");
-                return;
-            }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="تاريخ أيام فرق التاريخ date"
+onclick="openTool('dateDiff')"
+>
+<div class="icon">📅</div>
+<h3 class="font-bold text-sm">فرق التاريخ</h3>
+<p class="text-[10px] text-gray-400 mt-1">عدد الأيام بين تاريخين</p>
+</div>
 
-            let totalPayment = 0;
-            let totalInterest = 0;
-            let monthlyPayment = 0;
 
-            if (annualRate === 0) {
-                totalPayment = amount;
-                monthlyPayment = amount / months;
-                totalInterest = 0;
-            } else {
-                let monthlyRate = (annualRate / 100) / 12;
-                monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
-                totalPayment = monthlyPayment * months;
-                totalInterest = totalPayment - amount;
-            }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="calc"
+data-search="gpa معدل درجات جامعة"
+onclick="openTool('gpa')"
+>
+<div class="icon">🎓</div>
+<h3 class="font-bold text-sm">حاسبة GPA</h3>
+<p class="text-[10px] text-gray-400 mt-1">حساب المعدل من 4</p>
+</div>
 
-            resDiv.innerHTML = `
-                <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl space-y-2 font-bold text-xs">
-                    <div class="text-brand text-sm mb-1 border-b pb-1">📊 نتائج تفاصيل القرض:</div>
-                    <div class="flex justify-between"><span>قيمة القسط الشهري:</span> <span class="text-brand text-sm">${monthlyPayment.toFixed(2)}</span></div>
-                    <div class="flex justify-between"><span>إجمالي الفوائد:</span> <span>${totalInterest.toFixed(2)}</span></div>
-                    <div class="flex justify-between"><span>إجمالي المبلغ المستحق:</span> <span class="text-brand">${totalPayment.toFixed(2)}</span></div>
-                </div>
-            `;
-        }
 
-        function processVideoDownload() {
-            let url = document.getElementById('videoUrlInput').value.trim();
-            let resDiv = document.getElementById('vidResult');
-            
-            if(!url) {
-                alert("الرجاء إدخال رابط الفيديو أولاً!");
-                return;
-            }
+<!-- ================= IMAGE ================= -->
 
-            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري تجهيز محركات التحميل...</span>";
-            
-            setTimeout(() => {
-                resDiv.innerHTML = `
-                    <div class='p-3 bg-brand/10 text-brand rounded-xl mt-2 space-y-2'>
-                        <p class='text-xs font-bold text-gray-200'>اختر محرك التحميل المناسب للرابط:</p>
-                        <div class='grid grid-cols-2 gap-2 mt-2'>
-                            <a href="https://ssyoutube.com/en675/${url}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك يوتيوب</a>
-                            <a href="https://snaptik.app/en?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك تيك توك</a>
-                            <a href="https://en.savefrom.net/1-youtube-video-downloader-365/?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك عام (SaveFrom)</a>
-                            <a href="${url}" target="_blank" class='bg-zinc-700 text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>فتح الرابط الأصلي</a>
-                        </div>
-                    </div>`;
-            }, 800);
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="image"
+data-search="ضغط الصور compress image"
+onclick="openTool('compressImage')"
+>
+<div class="icon">🗜️</div>
+<h3 class="font-bold text-sm">ضغط الصور</h3>
+<p class="text-[10px] text-gray-400 mt-1">تقليل الحجم من المتصفح</p>
+</div>
 
-        function convertToPdf() {
-            const fileInput = document.getElementById('imgInput');
-            if (fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let win = window.open('');
-                    win.document.write(`<img src="${e.target.result}" style="width:100%;"/>`);
-                    setTimeout(() => { win.print(); }, 500);
-                }
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                alert("الرجاء اختيار صورة أولاً!");
-            }
-        }
 
-        function readBarcode(event) {
-            let file = event.target.files[0];
-            if(file) {
-                document.getElementById('barcodeResult').innerText = "تم قراءة الملف بنجاح! المحتوى: رابط أو نص تشفير معتمد.";
-            }
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="image"
+data-search="تغيير حجم الصورة resize"
+onclick="openTool('resizeImage')"
+>
+<div class="icon">📐</div>
+<h3 class="font-bold text-sm">تغيير حجم الصورة</h3>
+<p class="text-[10px] text-gray-400 mt-1">عرض وارتفاع مخصص</p>
+</div>
 
-        function calcPercent() {
-            let num = parseFloat(document.getElementById('p1').value);
-            let perc = parseFloat(document.getElementById('p2').value);
-            if(!isNaN(num) && !isNaN(perc)) document.getElementById('pResult').innerText = "الناتج: " + ((num * perc) / 100);
-        }
 
-        function calcAge() {
-            let bDate = new Date(document.getElementById('birthDate').value);
-            let today = new Date();
-            let age = today.getFullYear() - bDate.getFullYear();
-            let m = today.getMonth() - bDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < bDate.getDate())) age--;
-            if(!isNaN(age)) document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة";
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="image"
+data-search="jpg png تحويل صورة"
+onclick="openTool('imageConvert')"
+>
+<div class="icon">🖼️</div>
+<h3 class="font-bold text-sm">تحويل JPG / PNG</h3>
+<p class="text-[10px] text-gray-400 mt-1">تحويل صيغ الصور</p>
+</div>
 
-        function calcBMI() {
-            let w = parseFloat(document.getElementById('weight').value);
-            let h = parseFloat(document.getElementById('height').value) / 100;
-            if(w && h) {
-                let bmi = (w / (h * h)).toFixed(1);
-                let status = bmi < 18.5 ? "(نحيف)" : bmi < 25 ? "(وزن مثالي)" : bmi < 30 ? "(زيادة وزن)" : "(سمنة)";
-                document.getElementById('bmiResult').innerText = "مؤشر الكتلة: " + bmi + " " + status;
-            }
-        }
 
-        function generateQR() {
-            let text = document.getElementById('qrText').value;
-            if(text) document.getElementById('qrResult').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}" class="rounded-xl border p-2 bg-white" alt="QR">`;
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="image"
+data-search="صورة pdf jpg"
+onclick="openTool('img2pdf')"
+>
+<div class="icon">📁</div>
+<h3 class="font-bold text-sm">صورة إلى PDF</h3>
+<p class="text-[10px] text-gray-400 mt-1">تحويل الصورة إلى PDF</p>
+</div>
 
-        function generatePassword() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
-            let pass = "";
-            for (let i = 0; i < 12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            let el = document.getElementById('passResult');
-            if(el) el.innerText = pass;
-        }
 
-        function convertUnits() {
-            let val = parseFloat(document.getElementById('valToConvert').value);
-            let type = document.getElementById('convType').value;
-            if(!isNaN(val)) {
-                let res = type === 'kg_g' ? val * 1000 + " جرام" : val * 100 + " سم";
-                document.getElementById('convResult').innerText = "الناتج: " + res;
-            }
-        }
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="image"
+data-search="ocr نص صورة استخراج"
+onclick="openTool('ocr')"
+>
+<div class="icon">👁️</div>
+<h3 class="font-bold text-sm">صورة إلى نص OCR</h3>
+<p class="text-[10px] text-gray-400 mt-1">استخراج النص من الصورة</p>
+</div>
 
-        function countText() {
-            let txtArea = document.getElementById('textInput');
-            if(!txtArea) return;
-            let val = txtArea.value.trim();
-            let words = val === "" ? 0 : val.split(/\s+/).length;
-            let chars = val.length;
-            document.getElementById('wordCount').innerText = "الكلمات: " + words;
-            document.getElementById('charCount').innerText = "الحروف: " + chars;
-        }
 
-        function startStopwatch() {
-            clearInterval(stopwatchInterval);
-            stopwatchInterval = setInterval(() => {
-                stopwatchSeconds++;
-                let hrs = Math.floor(stopwatchSeconds / 3600).toString().padStart(2, '0');
-                let mins = Math.floor((stopwatchSeconds % 3600) / 60).toString().padStart(2, '0');
-                let secs = (stopwatchSeconds % 60).toString().padStart(2, '0');
-                let el = document.getElementById('stopwatchDisplay');
-                if(el) el.innerText = `${hrs}:${mins}:${secs}`;
-            }, 1000);
-        }
+<!-- ================= PDF ================= -->
 
-        function resetStopwatch() {
-            clearInterval(stopwatchInterval);
-            stopwatchSeconds = 0;
-            let el = document.getElementById('stopwatchDisplay');
-            if(el) el.innerText = "00:00:00";
-        }
-    </script>
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="pdf"
+data-search="pdf jpg تحويل"
+onclick="openTool('pdf2jpg')"
+>
+<div class="icon">📄</div>
+<h3 class="font-bold text-sm">PDF إلى صور</h3>
+<p class="text-[10px] text-gray-400 mt-1">فتح صفحات PDF كصور</p>
+</div>
+
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="pdf"
+data-search="دمج pdf merge"
+onclick="openTool('mergePdf')"
+>
+<div class="icon">📚</div>
+<h3 class="font-bold text-sm">دمج PDF</h3>
+<p class="text-[10px] text-gray-400 mt-1">دمج عدة ملفات PDF</p>
+</div>
+
+
+<!-- ================= TEXT ================= -->
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="text"
+data-search="عداد كلمات حروف word counter character"
+onclick="openTool('counter')"
+>
+<div class="icon">📝</div>
+<h3 class="font-bold text-sm">عداد الكلمات والحروف</h3>
+<p class="text-[10px] text-gray-400 mt-1">كلمات وحروف وأسطر</p>
+</div>
+
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="text"
+data-search="password كلمة سر باسورد"
+onclick="openTool('password')"
+>
+<div class="icon">🔐</div>
+<h3 class="font-bold text-sm">مولد كلمات المرور</h3>
+<p class="text-[10px] text-gray-400 mt-1">كلمات مرور قوية</p>
+</div>
+
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="text"
+data-search="qr code باركود رابط"
+onclick="openTool('qr')"
+>
+<div class="icon">🔳</div>
+<h3 class="font-bold text-sm">مولد QR Code</h3>
+<p class="text-[10px] text-gray-400 mt-1">إنشاء QR من نص أو رابط</p>
+</div>
+
+
+<!-- ================= DEVELOPERS ================= -->
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="dev"
+data-search="json formatter developer برمجة"
+onclick="openTool('json')"
+>
+<div class="icon">💻</div>
+<h3 class="font-bold text-sm">JSON Formatter</h3>
+<p class="text-[10px] text-gray-400 mt-1">تنسيق وفحص JSON</p>
+</div>
+
+
+<div
+class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
+data-cat="dev"
+data-search="base64 encoder decoder برمجة"
+onclick="openTool('base64')"
+>
+<div class="icon">🔤</div>
+<h3 class="font-bold text-sm">Base64</h3>
+<p class="text-[10px] text-gray-400 mt-1">ترميز وفك ترميز النص</p>
+</div>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+id="toolModal"
+class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg"
+>
+
+<div class="flex justify-between items-center mb-4">
+
+<h3 id="modalTitle" class="font-bold text-brand text-lg">
+اسم الأداة
+</h3>
+
+<button
+onclick="closeTool()"
+class="text-gray-400 hover:text-red-500 font-bold text-lg px-2"
+>
+✕
+</button>
+
+</div>
+
+<div id="modalBody"></div>
+
+</div>
+
+</main>
+
+
+<footer class="text-center py-8 text-xs text-gray-400">
+© 2026 Abo Kayan Tools. All Rights Reserved.
+</footer>
+
+
+<div id="toastBox"></div>
+
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+let currentCategory = 'all';
+let stopwatchInterval;
+let stopwatchSeconds = 0;
+
+
+/* ================= DARK MODE ================= */
+
+function toggleDarkMode(){
+
+document.documentElement.classList.toggle('dark');
+
+}
+
+
+/* ================= LANGUAGE ================= */
+
+const translations = {
+
+ar:{
+welcome:"أهلاً بك في Abo Kayan Tools",
+sub:"حاسبات وأدوات للصور وPDF والنصوص والطلاب في مكان واحد."
+},
+
+en:{
+welcome:"Welcome to Abo Kayan Tools",
+sub:"Calculators and tools for images, PDF, text and students in one place."
+}
+
+};
+
+
+function changeLanguage(lang){
+
+document.documentElement.lang=lang;
+
+document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+
+$('welcomeText').textContent=translations[lang].welcome;
+
+$('subText').textContent=translations[lang].sub;
+
+}
+
+
+/* ================= TOAST ================= */
+
+function toast(message){
+
+const box=document.createElement('div');
+
+box.className='toast';
+
+box.textContent=message;
+
+document.body.appendChild(box);
+
+setTimeout(()=>box.remove(),2500);
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function filterTools(){
+
+const query=$('searchInput').value.toLowerCase().trim();
+
+document.querySelectorAll('.tool-card').forEach(card=>{
+
+const text=(card.dataset.search||'').toLowerCase();
+
+const category=card.dataset.cat;
+
+const matchesSearch=!query||text.includes(query);
+
+const matchesCategory=currentCategory==='all'||category===currentCategory;
+
+card.classList.toggle(
+'hidden-tool',
+!(matchesSearch&&matchesCategory)
+);
+
+});
+
+updateToolCount();
+
+}
+
+
+function setCategory(category,button){
+
+currentCategory=category;
+
+document.querySelectorAll('.category-btn').forEach(btn=>{
+btn.classList.remove('active');
+});
+
+button.classList.add('active');
+
+filterTools();
+
+}
+
+
+function updateToolCount(){
+
+const visible=[...document.querySelectorAll('.tool-card')]
+.filter(card=>!card.classList.contains('hidden-tool')).length;
+
+$('toolCount').textContent=visible+' أداة';
+
+}
+
+
+/* ================= TOOL OPEN ================= */
+
+function openTool(type){
+
+clearInterval(stopwatchInterval);
+
+const modal=$('toolModal');
+
+const title=$('modalTitle');
+
+const body=$('modalBody');
+
+modal.classList.remove('hidden');
+
+
+const inputClass="input";
+
+
+const templates={
+
+
+percent:[
+`حساب النسبة المئوية`,
+
+`
+<div class="space-y-3">
+
+<input
+id="p1"
+type="number"
+class="${inputClass}"
+placeholder="أدخل الرقم"
+>
+
+<input
+id="p2"
+type="number"
+class="${inputClass}"
+placeholder="أدخل النسبة %"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcPercent()"
+>
+احسب الآن
+</button>
+
+<div id="pResult"></div>
+
+</div>
+`
+],
+
+
+discount:[
+`حاسبة الخصم`,
+
+`
+<div class="space-y-3">
+
+<input
+id="dPrice"
+type="number"
+class="${inputClass}"
+placeholder="السعر الأصلي"
+>
+
+<input
+id="dRate"
+type="number"
+class="${inputClass}"
+placeholder="نسبة الخصم %"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcDiscount()"
+>
+احسب الخصم
+</button>
+
+<div id="dResult"></div>
+
+</div>
+`
+],
+
+
+age:[
+`حساب العمر`,
+
+`
+<div class="space-y-3">
+
+<label class="text-xs text-gray-400">
+تاريخ الميلاد
+</label>
+
+<input
+id="birthDate"
+type="date"
+class="${inputClass}"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcAge()"
+>
+احسب العمر
+</button>
+
+<div id="ageResult"></div>
+
+</div>
+`
+],
+
+
+bmi:[
+`حساب BMI`,
+
+`
+<div class="space-y-3">
+
+<input
+id="weight"
+type="number"
+class="${inputClass}"
+placeholder="الوزن بالكيلو"
+>
+
+<input
+id="height"
+type="number"
+class="${inputClass}"
+placeholder="الطول بالسنتيمتر"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcBMI()"
+>
+احسب BMI
+</button>
+
+<div id="bmiResult"></div>
+
+</div>
+`
+],
+
+
+calories:[
+`حاسبة السعرات والماكروز`,
+
+`
+<div class="space-y-3">
+
+<div class="grid grid-cols-2 gap-2">
+
+<input
+id="cWeight"
+type="number"
+class="${inputClass}"
+placeholder="الوزن كجم"
+>
+
+<input
+id="cHeight"
+type="number"
+class="${inputClass}"
+placeholder="الطول سم"
+>
+
+</div>
+
+
+<input
+id="cAge"
+type="number"
+class="${inputClass}"
+placeholder="العمر"
+>
+
+
+<select
+id="cSex"
+class="${inputClass}"
+>
+
+<option value="male">
+ذكر
+</option>
+
+<option value="female">
+أنثى
+</option>
+
+</select>
+
+
+<select
+id="cActivity"
+class="${inputClass}"
+>
+
+<option value="1.2">
+قليل الحركة
+</option>
+
+<option value="1.375">
+نشاط خفيف
+</option>
+
+<option value="1.55">
+نشاط متوسط
+</option>
+
+<option value="1.725">
+نشاط مرتفع
+</option>
+
+</select>
+
+
+<select
+id="cGoal"
+class="${inputClass}"
+>
+
+<option value="maintain">
+ثبات الوزن
+</option>
+
+<option value="lose">
+خسارة الدهون
+</option>
+
+<option value="gain">
+زيادة الوزن
+</option>
+
+</select>
+
+
+<button
+class="btn btn-primary w-full"
+onclick="calcCalories()"
+>
+احسب السعرات
+</button>
+
+<div id="caloriesResult"></div>
+
+</div>
+`
+],
+
+
+loan:[
+`حاسبة القسط`,
+
+`
+<div class="space-y-3">
+
+<input
+id="loanAmount"
+type="number"
+class="${inputClass}"
+placeholder="مبلغ القرض"
+>
+
+<input
+id="loanMonths"
+type="number"
+class="${inputClass}"
+placeholder="عدد الأشهر"
+>
+
+<input
+id="loanRate"
+type="number"
+class="${inputClass}"
+placeholder="الفائدة السنوية %"
+value="0"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcLoan()"
+>
+احسب القسط
+</button>
+
+<div id="loanResult"></div>
+
+</div>
+`
+],
+
+
+dateDiff:[
+`فرق التاريخ`,
+
+`
+<div class="space-y-3">
+
+<input
+id="date1"
+type="date"
+class="${inputClass}"
+>
+
+<input
+id="date2"
+type="date"
+class="${inputClass}"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcDateDiff()"
+>
+احسب الفرق
+</button>
+
+<div id="dateResult"></div>
+
+</div>
+`
+],
+
+
+gpa:[
+`حاسبة GPA`,
+
+`
+<div class="space-y-3">
+
+<p class="text-xs text-gray-400">
+أدخل حتى 4 مواد، كل مادة من 0 إلى 4
+</p>
+
+<input
+id="gpa1"
+type="number"
+min="0"
+max="4"
+step="0.01"
+class="${inputClass}"
+placeholder="المادة 1"
+>
+
+<input
+id="gpa2"
+type="number"
+min="0"
+max="4"
+step="0.01"
+class="${inputClass}"
+placeholder="المادة 2"
+>
+
+<input
+id="gpa3"
+type="number"
+min="0"
+max="4"
+step="0.01"
+class="${inputClass}"
+placeholder="المادة 3"
+>
+
+<input
+id="gpa4"
+type="number"
+min="0"
+max="4"
+step="0.01"
+class="${inputClass}"
+placeholder="المادة 4"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="calcGPA()"
+>
+احسب GPA
+</button>
+
+<div id="gpaResult"></div>
+
+</div>
+`
+],
+
+
+compressImage:[
+`ضغط الصور`,
+
+`
+<div class="space-y-3">
+
+<input
+id="compressFile"
+type="file"
+accept="image/*"
+class="${inputClass}"
+>
+
+<label class="text-xs text-gray-400">
+جودة الصورة
+</label>
+
+<input
+id="quality"
+type="range"
+min="20"
+max="100"
+value="75"
+class="w-full"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="compressImage()"
+>
+ضغط وتحميل
+</button>
+
+<div id="compressResult"></div>
+
+</div>
+`
+],
+
+
+resizeImage:[
+`تغيير حجم الصورة`,
+
+`
+<div class="space-y-3">
+
+<input
+id="resizeFile"
+type="file"
+accept="image/*"
+class="${inputClass}"
+>
+
+<div class="grid grid-cols-2 gap-2">
+
+<input
+id="resizeW"
+type="number"
+class="${inputClass}"
+placeholder="العرض"
+>
+
+<input
+id="resizeH"
+type="number"
+class="${inputClass}"
+placeholder="الارتفاع"
+>
+
+</div>
+
+<button
+class="btn btn-primary w-full"
+onclick="resizeImage()"
+>
+تغيير الحجم وتحميل
+</button>
+
+</div>
+`
+],
+
+
+imageConvert:[
+`تحويل الصور`,
+
+`
+<div class="space-y-3">
+
+<input
+id="convertFile"
+type="file"
+accept="image/*"
+class="${inputClass}"
+>
+
+<select
+id="convertType"
+class="${inputClass}"
+>
+
+<option value="image/jpeg">
+JPG
+</option>
+
+<option value="image/png">
+PNG
+</option>
+
+<option value="image/webp">
+WEBP
+</option>
+
+</select>
+
+<button
+class="btn btn-primary w-full"
+onclick="convertImage()"
+>
+تحويل وتحميل
+</button>
+
+</div>
+`
+],
+
+
+img2pdf:[
+`تحويل صورة إلى PDF`,
+
+`
+<div class="space-y-3">
+
+<input
+id="imgPdfFile"
+type="file"
+accept="image/*"
+class="${inputClass}"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="imageToPdf()"
+>
+تحويل وتحميل PDF
+</button>
+
+</div>
+`
+],
+
+
+ocr:[
+`استخراج النص من الصورة OCR`,
+
+`
+<div class="space-y-3">
+
+<input
+id="ocrFile"
+type="file"
+accept="image/*"
+class="${inputClass}"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="runOCR()"
+>
+استخراج النص
+</button>
+
+<div
+id="ocrStatus"
+class="text-xs text-gray-400"
+>
+</div>
+
+<textarea
+id="ocrResult"
+rows="8"
+class="${inputClass}"
+readonly
+placeholder="سيظهر النص هنا..."
+></textarea>
+
+<button
+class="btn btn-secondary w-full"
+onclick="copyOCR()"
+>
+نسخ النص
+</button>
+
+</div>
+`
+],
+
+
+pdf2jpg:[
+`PDF إلى صور`,
+
+`
+<div class="space-y-3">
+
+<input
+id="pdfFile"
+type="file"
+accept="application/pdf"
+class="${inputClass}"
+>
+
+<p class="text-xs text-gray-400">
+سيتم فتح صفحات PDF في المتصفح.
+</p>
+
+<button
+class="btn btn-primary w-full"
+onclick="openPdf()"
+>
+فتح PDF
+</button>
+
+</div>
+`
+],
+
+
+mergePdf:[
+`دمج ملفات PDF`,
+
+`
+<div class="space-y-3">
+
+<input
+id="mergeFiles"
+type="file"
+accept="application/pdf"
+multiple
+class="${inputClass}"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="mergePDFs()"
+>
+دمج وتحميل PDF
+</button>
+
+<div id="mergeResult"></div>
+
+</div>
+`
+],
+
+
+counter:[
+`عداد الكلمات والحروف`,
+
+`
+<div class="space-y-3">
+
+<textarea
+id="textInput"
+oninput="countText()"
+rows="7"
+class="${inputClass}"
+placeholder="اكتب أو الصق النص هنا..."
+></textarea>
+
+<div class="grid grid-cols-3 gap-2 text-center text-xs">
+
+<div class="result">
+<b id="wordCount">0</b>
+<br>
+كلمات
+</div>
+
+<div class="result">
+<b id="charCount">0</b>
+<br>
+حروف
+</div>
+
+<div class="result">
+<b id="lineCount">0</b>
+<br>
+أسطر
+</div>
+
+</div>
+
+</div>
+`
+],
+
+
+password:[
+`مولد كلمات مرور قوية`,
+
+`
+<div class="space-y-3">
+
+<input
+id="passLen"
+type="number"
+min="6"
+max="64"
+value="16"
+class="${inputClass}"
+placeholder="الطول"
+>
+
+<label class="flex items-center gap-2 text-sm">
+
+<input
+id="passSymbols"
+type="checkbox"
+checked
+>
+
+رموز
+
+</label>
+
+<button
+class="btn btn-primary w-full"
+onclick="generatePassword()"
+>
+توليد كلمة مرور
+</button>
+
+<div
+id="passResult"
+class="result font-mono break-all text-center"
+>
+</div>
+
+<button
+class="btn btn-secondary w-full"
+onclick="copyPassword()"
+>
+نسخ
+</button>
+
+</div>
+`
+],
+
+
+qr:[
+`مولد QR Code`,
+
+`
+<div class="space-y-3">
+
+<input
+id="qrText"
+class="${inputClass}"
+placeholder="اكتب النص أو الرابط"
+>
+
+<button
+class="btn btn-primary w-full"
+onclick="generateQR()"
+>
+إنشاء QR
+</button>
+
+<div
+id="qrResult"
+class="flex justify-center"
+>
+</div>
+
+</div>
+`
+],
+
+
+json:[
+`JSON Formatter`,
+
+`
+<div class="space-y-3">
+
+<textarea
+id="jsonInput"
+rows="8"
+class="${inputClass}"
+placeholder='{"name":"Abo Kayan","tools":20}'
+></textarea>
+
+<button
+class="btn btn-primary w-full"
+onclick="formatJSON()"
+>
+تنسيق والتحقق
+</button>
+
+<div id="jsonResult"></div>
+
+</div>
+`
+],
+
+
+base64:[
+`Base64 Encoder / Decoder`,
+
+`
+<div class="space-y-3">
+
+<textarea
+id="baseText"
+rows="5"
+class="${inputClass}"
+placeholder="اكتب النص هنا"
+></textarea>
+
+<div class="grid grid-cols-2 gap-2">
+
+<button
+class="btn btn-primary"
+onclick="encodeBase64()"
+>
+Encode
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="decodeBase64()"
+>
+Decode
+</button>
+
+</div>
+
+<textarea
+id="baseResult"
+rows="5"
+class="${inputClass}"
+readonly
+></textarea>
+
+</div>
+`
+]
+
+};
+
+
+if(templates[type]){
+
+title.textContent=templates[type][0];
+
+body.innerHTML=templates[type][1];
+
+}
+
+modal.scrollIntoView({
+behavior:'smooth',
+block:'start'
+});
+
+}
+
+
+/* ================= CLOSE ================= */
+
+function closeTool(){
+
+clearInterval(stopwatchInterval);
+
+$('toolModal').classList.add('hidden');
+
+}
+
+
+/* ================= RESULT ================= */
+
+function showResult(id,msg){
+
+$(id).innerHTML=
+'<div class="result font-bold text-sm">'+msg+'</div>';
+
+}
+
+
+/* ================= PERCENT ================= */
+
+function calcPercent(){
+
+const a=+$('p1').value;
+
+const b=+$('p2').value;
+
+if(!isFinite(a)||!isFinite(b))
+return toast('أدخل الرقم والنسبة');
+
+showResult(
+'pResult',
+`الناتج: ${(a*b/100).toLocaleString('ar-EG')}`
+);
+
+}
+
+
+/* ================= DISCOUNT ================= */
+
+function calcDiscount(){
+
+const p=+$('dPrice').value;
+
+const r=+$('dRate').value;
+
+if(p<0||r<0)
+return toast('أدخل قيمًا صحيحة');
+
+const save=p*r/100;
+
+const final=p-save;
+
+showResult(
+'dResult',
+`قيمة الخصم: ${save.toFixed(2)}<br>
+السعر بعد الخصم: ${final.toFixed(2)}`
+);
+
+}
+
+
+/* ================= AGE ================= */
+
+function calcAge(){
+
+const v=$('birthDate').value;
+
+if(!v)
+return toast('اختر تاريخ الميلاد');
+
+const b=new Date(v+'T00:00:00');
+
+const t=new Date();
+
+let y=t.getFullYear()-b.getFullYear();
+
+let m=t.getMonth()-b.getMonth();
+
+let d=t.getDate()-b.getDate();
+
+if(d<0){
+
+m--;
+
+d+=new Date(
+t.getFullYear(),
+t.getMonth(),
+0
+).getDate();
+
+}
+
+if(m<0){
+
+y--;
+
+m+=12;
+
+}
+
+showResult(
+'ageResult',
+`عمرك تقريبًا: ${y} سنة، ${m} شهر، ${d} يوم`
+);
+
+}
+
+
+/* ================= BMI ================= */
+
+function calcBMI(){
+
+const w=+$('weight').value;
+
+const h=+$('height').value/100;
+
+if(w<=0||h<=0)
+return toast('أدخل الوزن والطول');
+
+const bmi=w/(h*h);
+
+const s=
+bmi<18.5
+?'نقص وزن'
+:bmi<25
+?'ضمن النطاق المعتاد'
+:bmi<30
+?'زيادة وزن'
+:'سمنة';
+
+showResult(
+'bmiResult',
+`BMI = ${bmi.toFixed(1)}<br>
+التصنيف العام: ${s}`
+);
+
+}
+
+
+/* ================= CALORIES ================= */
+
+function calcCalories(){
+
+const w=+$('cWeight').value;
+
+const h=+$('cHeight').value;
+
+const a=+$('cAge').value;
+
+if(w<=0||h<=0||a<=0)
+return toast('أكمل البيانات');
+
+const sex=$('cSex').value;
+
+const activity=+$('cActivity').value;
+
+const goal=$('cGoal').value;
+
+let bmr=
+10*w+
+6.25*h-
+5*a+
+(sex==='male'?5:-161);
+
+let tdee=bmr*activity;
+
+if(goal==='lose')
+tdee-=400;
+
+if(goal==='gain')
+tdee+=300;
+
+const protein=Math.round(w*1.6);
+
+const fat=Math.round(tdee*.25/9);
+
+const carb=Math.max(
+0,
+Math.round(
+(tdee-protein*4-fat*9)/4
+)
+);
+
+showResult(
+'caloriesResult',
+`السعرات التقريبية: ${Math.round(tdee)} سعرة<br>
+البروتين: ${protein} جم<br>
+الكارب: ${carb} جم<br>
+الدهون: ${fat} جم`
+);
+
+}
+
+
+/* ================= LOAN ================= */
+
+function calcLoan(){
+
+const p=+$('loanAmount').value;
+
+const n=+$('loanMonths').value;
+
+const r=+$('loanRate').value/100/12;
+
+if(p<=0||n<=0)
+return toast('أدخل المبلغ وعدد الأشهر');
+
+const pay=
+r===0
+?p/n
+:(p*r*Math.pow(1+r,n))/
+(Math.pow(1+r,n)-1);
+
+showResult(
+'loanResult',
+`القسط الشهري التقريبي: ${pay.toFixed(2)}<br>
+إجمالي المدفوع: ${(pay*n).toFixed(2)}`
+);
+
+}
+
+
+/* ================= DATE DIFFERENCE ================= */
+
+function calcDateDiff(){
+
+const a=
+new Date(
+$('date1').value+'T00:00:00'
+);
+
+const b=
+new Date(
+$('date2').value+'T00:00:00'
+);
+
+if(isNaN(a)||isNaN(b))
+return toast('اختر التاريخين');
+
+showResult(
+'dateResult',
+`الفرق: ${Math.abs(
+Math.round((b-a)/86400000)
+).toLocaleString('ar-EG')} يوم`
+);
+
+}
+
+
+/* ================= GPA ================= */
+
+function calcGPA(){
+
+const vals=[
+'gpa1',
+'gpa2',
+'gpa3',
+'gpa4'
+]
+.map(id=>+$(id).value)
+.filter(
+v=>isFinite(v)&&v>=0&&v<=4
+);
+
+if(!vals.length)
+return toast('أدخل درجات من 0 إلى 4');
+
+const g=
+vals.reduce(
+(a,b)=>a+b,
+0
+)/vals.length;
+
+showResult(
+'gpaResult',
+`GPA = ${g.toFixed(2)} / 4`
+);
+
+}
+
+
+/* ================= IMAGE ================= */
+
+function readImage(file,cb){
+
+if(!file)
+return toast('اختر صورة أولًا');
+
+const img=new Image();
+
+const url=
+URL.createObjectURL(file);
+
+img.onload=()=>{
+
+URL.revokeObjectURL(url);
+
+cb(img);
+
+};
+
+img.onerror=()=>{
+
+URL.revokeObjectURL(url);
+
+toast('تعذر قراءة الصورة');
+
+};
+
+img.src=url;
+
+}
+
+
+/* ================= DOWNLOAD ================= */
+
+function downloadBlob(blob,name){
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement('a');
+
+a.href=url;
+
+a.download=name;
+
+document.body.appendChild(a);
+
+a.click();
+
+a.remove();
+
+setTimeout(
+()=>URL.revokeObjectURL(url),
+1000
+);
+
+}
+
+
+/* ================= CANVAS ================= */
+
+function canvasBlob(
+img,
+w,
+h,
+type,
+q,
+cb
+){
+
+const c=
+document.createElement('canvas');
+
+c.width=w;
+
+c.height=h;
+
+const x=
+c.getContext('2d');
+
+x.drawImage(
+img,
+0,
+0,
+w,
+h
+);
+
+c.toBlob(
+cb,
+type,
+q
+);
+
+}
+
+
+/* ================= COMPRESS ================= */
+
+function compressImage(){
+
+const f=
+$('compressFile').files[0];
+
+readImage(
+f,
+img=>{
+
+const max=1800;
+
+const scale=
+Math.min(
+1,
+max/
+Math.max(
+img.width,
+img.height
+)
+);
+
+const w=
+Math.round(img.width*scale);
+
+const h=
+Math.round(img.height*scale);
+
+const q=
++$('quality').value/100;
+
+canvasBlob(
+img,
+w,
+h,
+'image/jpeg',
+q,
+b=>{
+
+downloadBlob(
+b,
+'abo-kayan-compressed.jpg'
+);
+
+showResult(
+'compressResult',
+`تم الضغط: ${Math.round(b.size/1024)} KB`
+);
+
+}
+);
+
+}
+);
+
+}
+
+
+/* ================= RESIZE ================= */
+
+function resizeImage(){
+
+const f=
+$('resizeFile').files[0];
+
+const w=
++$('resizeW').value;
+
+const h=
++$('resizeH').value;
+
+if(w<=0||h<=0)
+return toast('أدخل العرض والارتفاع');
+
+readImage(
+f,
+img=>
+canvasBlob(
+img,
+w,
+h,
+'image/png',
+1,
+b=>
+downloadBlob(
+b,
+'abo-kayan-resized.png'
+)
+)
+);
+
+}
+
+
+/* ================= CONVERT IMAGE ================= */
+
+function convertImage(){
+
+const f=
+$('convertFile').files[0];
+
+readImage(
+f,
+img=>{
+
+const type=
+$('convertType').value;
+
+const ext=
+type==='image/png'
+?'png'
+:type==='image/webp'
+?'webp'
+:'jpg';
+
+canvasBlob(
+img,
+img.width,
+img.height,
+type,
+.92,
+b=>
+downloadBlob(
+b,
+'abo-kayan-converted.'+ext
+)
+);
+
+}
+);
+
+}
+
+
+/* ================= IMAGE TO PDF ================= */
+
+function imageToPdf(){
+
+const f=
+$('imgPdfFile').files[0];
+
+if(!f)
+return toast('اختر صورة');
+
+readImage(
+f,
+img=>{
+
+const {jsPDF}=
+window.jspdf;
+
+const orientation=
+img.width>img.height
+?'landscape'
+:'portrait';
+
+const pdf=
+new jsPDF({
+orientation,
+unit:'px',
+format:[img.width,img.height]
+});
+
+pdf.addImage(
+img,
+'JPEG',
+0,
+0,
+img.width,
+img.height
+);
+
+pdf.save(
+'abo-kayan-image.pdf'
+);
+
+}
+);
+
+}
+
+
+/* ================= PDF ================= */
+
+function openPdf(){
+
+const f=
+$('pdfFile').files[0];
+
+if(!f)
+return toast('اختر PDF');
+
+window.open(
+URL.createObjectURL(f),
+'_blank'
+);
+
+}
+
+
+/* ================= MERGE PDF ================= */
+
+async function mergePDFs(){
+
+const files=[
+...$('mergeFiles').files
+];
+
+if(files.length<2)
+return toast('اختر ملفي PDF على الأقل');
+
+try{
+
+const out=
+await PDFLib.PDFDocument.create();
+
+for(
+const file of files
+){
+
+const src=
+await PDFLib.PDFDocument.load(
+await file.arrayBuffer()
+);
+
+const pages=
+await out.copyPages(
+src,
+src.getPageIndices()
+);
+
+pages.forEach(
+p=>out.addPage(p)
+);
+
+}
+
+const bytes=
+await out.save();
+
+downloadBlob(
+new Blob(
+[bytes],
+{type:'application/pdf'}
+),
+'abo-kayan-merged.pdf'
+);
+
+showResult(
+'mergeResult',
+'تم دمج الملفات بنجاح ✅'
+);
+
+}catch(e){
+
+console.error(e);
+
+showResult(
+'mergeResult',
+'حدث خطأ أثناء الدمج. تأكد أن الملفات سليمة.'
+);
+
+}
+
+}
+
+
+/* ================= OCR ================= */
+
+async function runOCR(){
+
+const file=
+$('ocrFile').files[0];
+
+if(!file)
+return toast('اختر صورة');
+
+$('ocrStatus').textContent=
+'جاري تحميل محرك OCR...';
+
+if(!window.Tesseract){
+
+const script=
+document.createElement('script');
+
+script.src=
+'https://unpkg.com/tesseract.js@v5.0.4/dist/tesseract.min.js';
+
+document.head.appendChild(script);
+
+await new Promise(
+resolve=>
+script.onload=resolve
+);
+
+}
+
+try{
+
+$('ocrStatus').textContent=
+'جاري استخراج النص...';
+
+const result=
+await Tesseract.recognize(
+file,
+'ara+eng',
+{
+logger:m=>{
+
+if(m.status==='recognizing text'){
+
+$('ocrStatus').textContent=
+`المعالجة: ${Math.round(m.progress*100)}%`;
+
+}
+
+}
+}
+);
+
+$('ocrResult').value=
+result.data.text.trim();
+
+$('ocrStatus').textContent=
+'تم استخراج النص بنجاح ✅';
+
+}catch(e){
+
+console.error(e);
+
+$('ocrStatus').textContent=
+'حدث خطأ أثناء قراءة الصورة ❌';
+
+}
+
+}
+
+
+function copyOCR(){
+
+const text=
+$('ocrResult').value;
+
+if(!text)
+return toast('لا يوجد نص لنسخه');
+
+navigator.clipboard
+?.writeText(text)
+.then(
+()=>toast('تم نسخ النص')
+);
+
+}
+
+
+/* ================= COUNTER ================= */
+
+function countText(){
+
+const t=
+$('textInput').value;
+
+const trim=
+t.trim();
+
+$('wordCount').textContent=
+trim
+?trim.split(/\s+/).length
+:0;
+
+$('charCount').textContent=
+t.length;
+
+$('lineCount').textContent=
+t
+?t.split(/\r?\n/).length
+:0;
+
+}
+
+
+/* ================= PASSWORD ================= */
+
+function secureRandomInt(max){
+
+const a=
+new Uint32Array(1);
+
+crypto.getRandomValues(a);
+
+return a[0]%max;
+
+}
+
+
+function generatePassword(){
+
+const len=
+Math.min(
+64,
+Math.max(
+6,
++$('passLen').value||16
+)
+);
+
+let chars=
+'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+
+if(
+$('passSymbols').checked
+)
+chars+='!@#$%^&*_-+=?';
+
+let p='';
+
+for(
+let i=0;
+i<len;
+i++
+){
+
+p+=
+chars[
+secureRandomInt(
+chars.length
+)
+];
+
+}
+
+$('passResult').textContent=p;
+
+}
+
+
+function copyPassword(){
+
+const p=
+$('passResult').textContent;
+
+if(!p)
+return;
+
+navigator.clipboard
+?.writeText(p)
+.then(
+()=>toast('تم نسخ كلمة المرور')
+);
+
+}
+
+
+/* ================= QR ================= */
+
+function generateQR(){
+
+const text=
+$('qrText').value.trim();
+
+if(!text)
+return toast('اكتب نصًا أو رابطًا');
+
+$('qrResult').innerHTML='';
+
+new QRCode(
+$('qrResult'),
+{
+text,
+width:190,
+height:190,
+colorDark:'#111827',
+colorLight:'#ffffff'
+}
+);
+
+}
+
+
+/* ================= JSON ================= */
+
+function formatJSON(){
+
+try{
+
+const obj=
+JSON.parse(
+$('jsonInput').value
+);
+
+$('jsonResult').innerHTML=
+'<pre class="result text-left overflow-auto whitespace-pre-wrap text-xs">'+
+escapeHtml(
+JSON.stringify(
+obj,
+null,
+2
+)
+)+
+'</pre>';
+
+}catch(e){
+
+showResult(
+'jsonResult',
+'JSON غير صالح ❌'
+);
+
+}
+
+}
+
+
+function escapeHtml(s){
+
+return s.replace(
+/[&<>"']/g,
+m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[m])
+);
+
+}
+
+
+/* ================= BASE64 ================= */
+
+function encodeBase64(){
+
+const s=
+$('baseText').value;
+
+try{
+
+$('baseResult').value=
+btoa(
+unescape(
+encodeURIComponent(s)
+)
+);
+
+}catch(e){
+
+toast('تعذر الترميز');
+
+}
+
+}
+
+
+function decodeBase64(){
+
+try{
+
+$('baseResult').value=
+decodeURIComponent(
+escape(
+atob(
+$('baseText').value.trim()
+)
+)
+);
+
+}catch(e){
+
+toast('النص ليس Base64 صالحًا');
+
+}
+
+}
+
+
+/* ================= INITIALIZE ================= */
+
+updateToolCount();
+
+</script>
+
 </body>
 </html>
-

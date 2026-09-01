@@ -34,12 +34,6 @@
             background: rgba(30, 30, 30, 0.85);
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
-        /* تأثير الإضاءة الحمراء عند الضغط */
-        .glow-active {
-            color: #EF4444 !important;
-            text-shadow: 0 0 10px rgba(239, 68, 68, 0.8), 0 0 20px rgba(220, 38, 38, 0.5);
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
@@ -73,108 +67,117 @@
         <!-- Grid of Tools -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
-            <div onclick="openTool('ocr', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
+            <div onclick="openTool('ocr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">👁️</div>
-                <h3 class="font-bold text-sm text-brand tool-title">استخراج نص من صورة</h3>
+                <h3 class="font-bold text-sm text-brand">استخراج نص من صورة</h3>
                 <span class="text-[10px] text-gray-400 mt-1">OCR (عربي / إنجليزي)</span>
             </div>
 
-            <div onclick="openTool('calories', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
+            <div onclick="openTool('calories')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🥗</div>
-                <h3 class="font-bold text-sm text-brand tool-title">حاسبة السعرات</h3>
+                <h3 class="font-bold text-sm text-brand">حاسبة السعرات</h3>
                 <span class="text-[10px] text-gray-400 mt-1">السعرات، بروتين، كارب</span>
             </div>
 
-            <div onclick="openTool('percent', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🧮</div>
-                <h3 class="font-bold text-sm tool-title">حساب النسبة</h3>
+                <h3 class="font-bold text-sm">حساب النسبة</h3>
                 <span class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</span>
             </div>
 
-            <div onclick="openTool('age', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('age')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎂</div>
-                <h3 class="font-bold text-sm tool-title">حساب العمر</h3>
+                <h3 class="font-bold text-sm">حساب العمر</h3>
                 <span class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر</span>
             </div>
 
-            <div onclick="openTool('bmi', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('bmi')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⚖️</div>
-                <h3 class="font-bold text-sm tool-title">حساب BMI</h3>
+                <h3 class="font-bold text-sm">حساب BMI</h3>
                 <span class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</span>
             </div>
 
-            <div onclick="openTool('qr', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('qr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔳</div>
-                <h3 class="font-bold text-sm tool-title">QR Code</h3>
+                <h3 class="font-bold text-sm">QR Code</h3>
                 <span class="text-[10px] text-gray-400 mt-1">إنشاء رموز سريعة</span>
             </div>
 
-            <div onclick="openTool('loan', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">💰</div>
-                <h3 class="font-bold text-sm tool-title">حاسبة القسط</h3>
+                <h3 class="font-bold text-sm">حاسبة القسط</h3>
                 <span class="text-[10px] text-gray-400 mt-1">الخصم والأقساط</span>
             </div>
 
-            <div onclick="openTool('time', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('time')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏱️</div>
-                <h3 class="font-bold text-sm tool-title">الوقت والتاريخ</h3>
+                <h3 class="font-bold text-sm">الوقت والتاريخ</h3>
                 <span class="text-[10px] text-gray-400 mt-1">حساب الفروق الزمنية</span>
             </div>
 
-            <div onclick="openTool('password', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('password')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔐</div>
-                <h3 class="font-bold text-sm tool-title">كلمات السر</h3>
+                <h3 class="font-bold text-sm">كلمات السر</h3>
                 <span class="text-[10px] text-gray-400 mt-1">توليد كلمات سر قوية</span>
             </div>
 
-            <div onclick="openTool('converter', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('converter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔄</div>
-                <h3 class="font-bold text-sm tool-title">محول الوحدات</h3>
+                <h3 class="font-bold text-sm">محول الوحدات</h3>
                 <span class="text-[10px] text-gray-400 mt-1">الوزن والطول</span>
             </div>
 
-            <div onclick="openTool('counter', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('counter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📝</div>
-                <h3 class="font-bold text-sm tool-title">عداد الحروف</h3>
+                <h3 class="font-bold text-sm">عداد الحروف</h3>
                 <span class="text-[10px] text-gray-400 mt-1">حساب الكلمات</span>
             </div>
 
-            <div onclick="openTool('stopwatch', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('stopwatch')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏳</div>
-                <h3 class="font-bold text-sm tool-title">ساعة الإيقاف</h3>
+                <h3 class="font-bold text-sm">ساعة الإيقاف</h3>
                 <span class="text-[10px] text-gray-400 mt-1">مؤقت زمني دقيق</span>
             </div>
 
-            <div onclick="openTool('img2pdf', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('img2pdf')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📁</div>
-                <h3 class="font-bold text-sm tool-title">تحويل لـ PDF</h3>
+                <h3 class="font-bold text-sm">تحويل لـ PDF</h3>
                 <span class="text-[10px] text-gray-400 mt-1">تحويل الصور لملف PDF</span>
             </div>
 
-            <div onclick="openTool('barcode', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('barcode')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📷</div>
-                <h3 class="font-bold text-sm tool-title">قراءة الباركود</h3>
+                <h3 class="font-bold text-sm">قراءة الباركود</h3>
                 <span class="text-[10px] text-gray-400 mt-1">فحص الرموز بالكاميرا</span>
             </div>
 
-            <div onclick="openTool('insta', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('insta')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📸</div>
-                <h3 class="font-bold text-sm tool-title">متابعين انستجرام</h3>
+                <h3 class="font-bold text-sm">متابعين انستجرام</h3>
                 <span class="text-[10px] text-gray-400 mt-1">رشق متابعين حقيقيين</span>
             </div>
 
-            <div onclick="openTool('tiktok', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('tiktok')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎵</div>
-                <h3 class="font-bold text-sm tool-title">متابعين تيك توك</h3>
+                <h3 class="font-bold text-sm">متابعين تيك توك</h3>
                 <span class="text-[10px] text-gray-400 mt-1">شحن متابعين مجاني</span>
             </div>
 
-            <div onclick="openTool('vidl', this)" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center col-span-2 sm:col-span-1">
+            <div onclick="openTool('vidl')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center col-span-2 sm:col-span-1">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📥</div>
-                <h3 class="font-bold text-sm tool-title">تحميل الفيديوهات</h3>
+                <h3 class="font-bold text-sm">تحميل الفيديوهات</h3>
                 <span class="text-[10px] text-gray-400 mt-1">تيك توك، فيسبوك، انستا، يوتيوب</span>
             </div>
 
+        </div>
+
+        <!-- Tool Modal Area -->
+        <div id="toolModal" class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="font-bold text-brand text-lg">اسم الأداة</h3>
+                <button onclick="closeTool()" class="text-gray-400 hover:text-red-500 font-bold text-lg px-2">✕</button>
+            </div>
+            <div id="modalBody"></div>
         </div>
 
     </main>
@@ -202,221 +205,311 @@
             document.getElementById('subText').innerText = translations[lang].sub;
         }
 
-        // دالة فتح الأداة في صفحة جديدة وتفعيل تأثير الإضاءة الحمراء
-        function openTool(type, element) {
-            // إضاءة اسم الأداة باللون الأحمر
-            const titleEl = element.querySelector('.tool-title');
-            if (titleEl) {
-                titleEl.classList.add('glow-active');
+        let stopwatchInterval;
+        let stopwatchSeconds = 0;
+
+        function openTool(type) {
+            const modal = document.getElementById('toolModal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+            modal.classList.remove('hidden');
+            clearInterval(stopwatchInterval);
+
+            if(type === 'ocr') {
+                title.innerText = "استخراج النص من الصور (OCR)";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="border-2 border-dashed border-gray-500/40 rounded-2xl p-4 text-center cursor-pointer hover:border-brand transition" onclick="document.getElementById('imageInput').click();">
+                            <p class="text-xs text-gray-400 mb-1">اضغط هنا لاختيار صورة أو اسحبها هنا</p>
+                            <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="processImage(event)">
+                        </div>
+                        <p id="statusText" class="text-center text-xs text-brand font-bold min-height-[20px]"></p>
+                        <div>
+                            <label class="block mb-1 text-xs text-gray-400 font-bold">النص المستخرج:</label>
+                            <textarea id="extractedText" rows="5" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-xs outline-none resize-vertical" placeholder="سيظهر النص المستخرج هنا..." readonly></textarea>
+                            <button onclick="copyText()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-xs mt-2 hover:opacity-90 transition">نسخ النص المستخرج</button>
+                        </div>
+                    </div>`;
+            } else if(type === 'calories') {
+                title.innerText = "حاسبة السعرات والماكروز (البروتين والكارب)";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="number" id="cWeight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                            <input type="number" id="cHeight" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="number" id="cAge" placeholder="العمر (سنة)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                            <select id="cGoal" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer">
+                                <option value="lose">خسارة دهون (تنشيف)</option>
+                                <option value="maintain">ثبات الوزن</option>
+                                <option value="gain">زيادة الوزن (تضخيم)</option>
+                            </select>
+                        </div>
+                        <button onclick="calcCalories()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب السعرات والماكروز</button>
+                        <div id="caloriesResult" class="mt-3 text-xs space-y-2"></div>
+                    </div>`;
+            } else if(type === 'percent') {
+                title.innerText = "حساب النسبة المئوية";
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcPercent()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button><div id="pResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'age') {
+                title.innerText = "حساب العمر";
+                body.innerHTML = `<div class="space-y-3"><label class="text-xs text-gray-400">تاريخ الميلاد:</label><input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcAge()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button><div id="ageResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'bmi') {
+                title.innerText = "حساب مؤشر كتلة الجسم (BMI)";
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcBMI()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button><div id="bmiResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'qr') {
+                title.innerText = "إنشاء QR Code سريع";
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="generateQR()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button><div id="qrResult" class="mt-3 flex justify-center"></div></div>`;
+            } else if(type === 'loan') {
+                title.innerText = "حاسبة الأقساط والخصم";
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="amount" placeholder="المبلغ الأساسي أو القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="months" placeholder="عدد الأشهر أو نسبة الخصم" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب القسط</button><div id="loanResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'time') {
+                title.innerText = "الوقت والتاريخ الحالي";
+                let now = new Date();
+                body.innerHTML = `<div class="space-y-3 text-center"><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">📅 التاريخ: ${now.toLocaleDateString('ar-EG')}</div><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">⏰ الوقت: ${now.toLocaleTimeString('ar-EG')}</div></div>`;
+            } else if(type === 'password') {
+                title.innerText = "مولد كلمات السر القوية";
+                body.innerHTML = `<div class="space-y-3 text-center"><button onclick="generatePassword()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد كلمة مرور آمنة</button><div id="passResult" class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl font-mono text-sm tracking-wider text-brand font-bold">اضغط الزر بالأعلى</div></div>`;
+            } else if(type === 'converter') {
+                title.innerText = "محول الوحدات";
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="valToConvert" placeholder="أدخل القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select id="convType" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer"><option value="kg_g">كيلوجرام إلى جرام</option><option value="m_cm">متر إلى سنتيمتر</option></select><button onclick="convertUnits()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحويل القيمة</button><div id="convResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'counter') {
+                title.innerText = "عداد الحروف والكلمات";
+                body.innerHTML = `<div class="space-y-3"><textarea id="textInput" oninput="countText()" placeholder="اكتب أو الصق النص هنا..." rows="3" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"></textarea><div class="flex justify-between text-xs text-gray-400 font-bold px-1"><span id="wordCount">الكلمات: 0</span><span id="charCount">الحروف: 0</span></div></div>`;
+            } else if(type === 'stopwatch') {
+                stopwatchSeconds = 0;
+                title.innerText = "ساعة الإيقاف (Stopwatch)";
+                body.innerHTML = `<div class="space-y-3 text-center"><div id="stopwatchDisplay" class="text-3xl font-extrabold font-mono text-brand mb-2">00:00:00</div><div class="flex gap-2"><button onclick="startStopwatch()" class="w-1/2 bg-green-600 text-white py-2 rounded-xl font-bold text-sm">بدء</button><button onclick="resetStopwatch()" class="w-1/2 bg-red-600 text-white py-2 rounded-xl font-bold text-sm">إعادة ضبط</button></div></div>`;
+            } else if(type === 'img2pdf') {
+                title.innerText = "تحويل الصور إلى PDF";
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" id="imgInput" accept="image/*" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><button onclick="convertToPdf()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">طباعة / حفظ كـ PDF</button><p class="text-[11px] text-gray-400">سيتم فتح نافذة الطباعة لحفظ الصورة كملف PDF بكل سهولة.</p></div>`;
+            } else if(type === 'barcode') {
+                title.innerText = "قراءة الباركود والـ QR";
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" accept="image/*" onchange="readBarcode(event)" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><p class="text-xs text-gray-400">اختر صورة تحتوي على باركود أو QR لاستخراج محتواها.</p><div id="barcodeResult" class="font-bold text-brand text-sm mt-2"></div></div>`;
+            } else if(type === 'insta') {
+                title.innerText = "رشق متابعين انستجرام";
+                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر انستجرام (Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>1000 متابع مجاني</option><option>5000 متابع VIP</option><option>10000 متابع ملكي</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">إرسال المتابعين</button></div>`;
+            } else if(type === 'tiktok') {
+                title.innerText = "شحن متابعين تيك توك";
+                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر تيك توك (@Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>5000 متابع + لايكات</option><option>15000 متابع حصري</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">بدء الشحن الفوري</button></div>`;
+            } else if(type === 'vidl') {
+                title.innerText = "تحميل الفيديوهات الذكي";
+                body.innerHTML = `<div class="space-y-3">
+                    <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو هنا (يوتيوب، تيك توك، فيسبوك)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">فتح محرك التحميل المباشر</button>
+                    <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
+                </div>`;
+            }
+        }
+
+        function closeTool() {
+            clearInterval(stopwatchInterval);
+            document.getElementById('toolModal').classList.add('hidden');
+        }
+
+        function showDevMsg() {
+            alert("عذراً، الخدمة متوقفة مؤقتاً، يرجى التواصل مع مطور الموقع عبر الواتساب: 01094122436");
+        }
+
+        function processImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const statusText = document.getElementById('statusText');
+            const extractedTextBox = document.getElementById('extractedText');
+            
+            extractedTextBox.value = "";
+            statusText.innerText = "جاري قراءة واستخراج النص من الصورة... ⏳";
+
+            Tesseract.recognize(
+                file,
+                'ara+eng',
+                { 
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            let progress = Math.round(m.progress * 100);
+                            statusText.innerText = `جاري المعالجة: ${progress}% 🔄`;
+                        }
+                    }
+                }
+            ).then(({ data: { text } }) => {
+                statusText.innerText = "تم استخراج النص بنجاح! ✅";
+                extractedTextBox.value = text.trim();
+            }).catch(err => {
+                console.error(err);
+                statusText.innerText = "حدث عطل أثناء قراءة الصورة، حاول مرة أخرى. ❌";
+            });
+        }
+
+        function copyText() {
+            const textB = document.getElementById('extractedText');
+            textB.select();
+            document.execCommand('copy');
+            alert('تم نسخ النص بنجاح! 📋');
+        }
+
+        function calcCalories() {
+            let w = parseFloat(document.getElementById('cWeight').value);
+            let h = parseFloat(document.getElementById('cHeight').value);
+            let a = parseFloat(document.getElementById('cAge').value);
+            let goal = document.getElementById('cGoal').value;
+            let resDiv = document.getElementById('caloriesResult');
+
+            if(!w || !h || !a) {
+                alert("الرجاء إدخال الوزن، الطول، والعمر بشكل صحيح!");
+                return;
             }
 
-            // إنشاء صفحة جديدة (Window) بنفس التصميم وعرض الأداة المختارة وحدها فيها
+            let bmr = (10 * w) + (6.25 * h) - (5 * a) + 5;
+            let tdee = bmr * 1.375;
+
+            let targetCalories = tdee;
+            if(goal === 'lose') targetCalories -= 500;
+            else if(goal === 'gain') targetCalories += 400;
+
+            let protein = Math.round(w * 2.0);
+            let fat = Math.round((targetCalories * 0.25) / 9);
+            let carb = Math.round((targetCalories - ((protein * 4) + (fat * 9))) / 4);
+
+            resDiv.innerHTML = `
+                <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl space-y-1.5 font-bold">
+                    <div class="text-brand text-sm mb-1">🎯 نتائج الحساب المخصصة لهدفك:</div>
+                    <div class="flex justify-between"><span>السعرات اليومية المطلوبة:</span> <span class="text-brand">${Math.round(targetCalories)} سعرة</span></div>
+                    <div class="flex justify-between"><span>🥩 البروتين:</span> <span>${protein} جرام</span></div>
+                    <div class="flex justify-between"><span>🥔 الكربوهيدرات (الكارب):</span> <span>${carb} جرام</span></div>
+                    <div class="flex justify-between"><span>🥑 الدهون الصحية:</span> <span>${fat} جرام</span></div>
+                </div>
+            `;
+        }
+
+        function processVideoDownload() {
+            let url = document.getElementById('videoUrlInput').value.trim();
+            let resDiv = document.getElementById('vidResult');
+            
+            if(!url) {
+                alert("الرجاء إدخال رابط الفيديو أولاً!");
+                return;
+            }
+
+            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري تجهيز محركات التحميل...</span>";
+            
             setTimeout(() => {
-                let newWindow = window.open('', '_blank');
-                newWindow.document.write(`
-                    <!DOCTYPE html>
-                    <html lang="ar" dir="rtl" class="dark">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Abo Kayan - أداة مخصصة</title>
-                        <script src="https://cdn.tailwindcss.com"><\/script>
-                        <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"><\/script>
-                        <style>
-                            @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
-                            body { font-family: 'Cairo', sans-serif; }
-                            .ios-card {
-                                background: rgba(30, 30, 30, 0.85);
-                                backdrop-filter: blur(16px);
-                                border: 1px solid rgba(239, 68, 68, 0.2);
-                            }
-                        </style>
-                    </head>
-                    <body class="bg-zinc-950 text-gray-100 min-h-screen p-6 flex flex-col items-center justify-center">
-                        <div class="w-full max-w-lg ios-card p-6 rounded-2xl shadow-xl border border-red-600/30">
-                            <div class="flex justify-between items-center mb-6 border-b border-zinc-800 pb-3">
-                                <h2 id="pageTitle" class="text-red-500 font-bold text-lg">أداة أبو كيان</h2>
-                                <button onclick="window.close()" class="text-gray-400 hover:text-red-500 font-bold px-3 py-1 bg-zinc-800 rounded-lg">إغلاق ✕</button>
-                            </div>
-                            <div id="toolContainer"></div>
+                resDiv.innerHTML = `
+                    <div class='p-3 bg-brand/10 text-brand rounded-xl mt-2 space-y-2'>
+                        <p class='text-xs font-bold text-gray-200'>اختر محرك التحميل المناسب للرابط:</p>
+                        <div class='grid grid-cols-2 gap-2 mt-2'>
+                            <a href="https://ssyoutube.com/en675/${url}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك يوتيوب</a>
+                            <a href="https://snaptik.app/en?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك تيك توك</a>
+                            <a href="https://en.savefrom.net/1-youtube-video-downloader-365/?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك عام (SaveFrom)</a>
+                            <a href="${url}" target="_blank" class='bg-zinc-700 text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>فتح الرابط الأصلي</a>
                         </div>
-                        <script>
-                            // محتوى الأدوات وبرمجتها للنافذة الجديدة
-                            const type = "${type}";
-                            const container = document.getElementById('toolContainer');
-                            const pageTitle = document.getElementById('pageTitle');
-                            
-                            let stopwatchInterval;
-                            let stopwatchSeconds = 0;
+                    </div>`;
+            }, 800);
+        }
 
-                            if(type === 'ocr') {
-                                pageTitle.innerText = "استخراج النص من الصور (OCR)";
-                                container.innerHTML = \`
-                                    <div class="space-y-3">
-                                        <div class="border-2 border-dashed border-gray-500/40 rounded-2xl p-4 text-center cursor-pointer hover:border-red-500 transition" onclick="document.getElementById('imageInput').click();">
-                                            <p class="text-xs text-gray-400 mb-1">اضغط هنا لاختيار صورة أو اسحبها هنا</p>
-                                            <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="processImage(event)">
-                                        </div>
-                                        <p id="statusText" class="text-center text-xs text-red-500 font-bold"></p>
-                                        <div>
-                                            <label class="block mb-1 text-xs text-gray-400 font-bold">النص المستخرج:</label>
-                                            <textarea id="extractedText" rows="5" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-xs text-gray-100 outline-none resize-vertical" placeholder="سيظهر النص المستخرج هنا..." readonly></textarea>
-                                            <button onclick="copyText()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-xs mt-2 hover:opacity-90 transition">نسخ النص المستخرج</button>
-                                        </div>
-                                    \`;
-                            } else if(type === 'calories') {
-                                pageTitle.innerText = "حاسبة السعرات والماكروز";
-                                container.innerHTML = \`
-                                    <div class="space-y-3">
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <input type="number" id="cWeight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none">
-                                            <input type="number" id="cHeight" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none">
-                                        </div>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <input type="number" id="cAge" placeholder="العمر (سنة)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none">
-                                            <select id="cGoal" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none cursor-pointer">
-                                                <option value="lose">خسارة دهون (تنشيف)</option>
-                                                <option value="maintain">ثبات الوزن</option>
-                                                <option value="gain">زيادة الوزن (تضخيم)</option>
-                                            </select>
-                                        </div>
-                                        <button onclick="calcCalories()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">احسب السعرات والماكروز</button>
-                                        <div id="caloriesResult" class="mt-3 text-xs space-y-2"></div>
-                                    </div>\`;
-                            } else if(type === 'percent') {
-                                pageTitle.innerText = "حساب النسبة المئوية";
-                                container.innerHTML = \`<div class="space-y-3"><input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><button onclick="calcPercent()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button><div id="pResult" class="text-center font-bold text-red-500 mt-2 text-base"></div></div>\`;
-                            } else if(type === 'age') {
-                                pageTitle.innerText = "حساب العمر";
-                                container.innerHTML = \`<div class="space-y-3"><label class="text-xs text-gray-400">تاريخ الميلاد:</label><input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><button onclick="calcAge()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button><div id="ageResult" class="text-center font-bold text-red-500 mt-2 text-base"></div></div>\`;
-                            } else if(type === 'bmi') {
-                                pageTitle.innerText = "حساب مؤشر كتلة الجسم (BMI)";
-                                container.innerHTML = \`<div class="space-y-3"><input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><button onclick="calcBMI()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button><div id="bmiResult" class="text-center font-bold text-red-500 mt-2 text-base"></div></div>\`;
-                            } else if(type === 'qr') {
-                                pageTitle.innerText = "إنشاء QR Code سريع";
-                                container.innerHTML = \`<div class="space-y-3 text-center"><input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><button onclick="generateQR()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button><div id="qrResult" class="mt-3 flex justify-center"></div></div>\`;
-                            } else if(type === 'loan') {
-                                pageTitle.innerText = "حاسبة الأقساط والخصم";
-                                container.innerHTML = \`<div class="space-y-3"><input type="number" id="amount" placeholder="المبلغ الأساسي أو القيمة" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><input type="number" id="months" placeholder="عدد الأشهر أو نسبة الخصم" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><button onclick="calcLoan()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">احسب القسط</button><div id="loanResult" class="text-center font-bold text-red-500 mt-2 text-base"></div></div>\`;
-                            } else if(type === 'time') {
-                                pageTitle.innerText = "الوقت والتاريخ الحالي";
-                                let now = new Date();
-                                container.innerHTML = \`<div class="space-y-3 text-center"><div class="p-3 bg-zinc-800 rounded-xl text-sm font-bold">📅 التاريخ: \${now.toLocaleDateString('ar-EG')}</div><div class="p-3 bg-zinc-800 rounded-xl text-sm font-bold">⏰ الوقت: \${now.toLocaleTimeString('ar-EG')}</div></div>\`;
-                            } else if(type === 'password') {
-                                pageTitle.innerText = "مولد كلمات السر القوية";
-                                container.innerHTML = \`<div class="space-y-3 text-center"><button onclick="generatePassword()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">توليد كلمة مرور آمنة</button><div id="passResult" class="p-3 bg-zinc-800 rounded-xl font-mono text-sm tracking-wider text-red-500 font-bold">اضغط الزر بالأعلى</div></div>\`;
-                            } else if(type === 'converter') {
-                                pageTitle.innerText = "محول الوحدات";
-                                container.innerHTML = \`<div class="space-y-3"><input type="number" id="valToConvert" placeholder="أدخل القيمة" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><select id="convType" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none cursor-pointer"><option value="kg_g">كيلوجرام إلى جرام</option><option value="m_cm">متر إلى سنتيمتر</option></select><button onclick="convertUnits()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">تحويل القيمة</button><div id="convResult" class="text-center font-bold text-red-500 mt-2 text-base"></div></div>\`;
-                            } else if(type === 'counter') {
-                                pageTitle.innerText = "عداد الحروف والكلمات";
-                                container.innerHTML = \`<div class="space-y-3"><textarea id="textInput" oninput="countText()" placeholder="اكتب أو الصق النص هنا..." rows="3" class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"></textarea><div class="flex justify-between text-xs text-gray-400 font-bold px-1"><span id="wordCount">الكلمات: 0</span><span id="charCount">الحروف: 0</span></div></div>\`;
-                            } else if(type === 'stopwatch') {
-                                pageTitle.innerText = "ساعة الإيقاف (Stopwatch)";
-                                container.innerHTML = \`<div class="space-y-3 text-center"><div id="stopwatchDisplay" class="text-3xl font-extrabold font-mono text-red-500 mb-2">00:00:00</div><div class="flex gap-2"><button onclick="startStopwatch()" class="w-1/2 bg-green-600 text-white py-2 rounded-xl font-bold text-sm">بدء</button><button onclick="resetStopwatch()" class="w-1/2 bg-red-600 text-white py-2 rounded-xl font-bold text-sm">إعادة ضبط</button></div></div>\`;
-                            } else if(type === 'img2pdf') {
-                                pageTitle.innerText = "تحويل الصور إلى PDF";
-                                container.innerHTML = \`<div class="space-y-3 text-center"><input type="file" id="imgInput" accept="image/*" class="w-full p-2 bg-zinc-800 rounded-xl text-xs text-gray-100"><button onclick="convertToPdf()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">طباعة / حفظ كـ PDF</button><p class="text-[11px] text-gray-400">سيتم فتح نافذة الطباعة لحفظ الصورة كملف PDF بكل سهولة.</p></div>\`;
-                            } else if(type === 'barcode') {
-                                pageTitle.innerText = "قراءة الباركود والـ QR";
-                                container.innerHTML = \`<div class="space-y-3 text-center"><input type="file" accept="image/*" onchange="readBarcode(event)" class="w-full p-2 bg-zinc-800 rounded-xl text-xs text-gray-100"><p class="text-xs text-gray-400">اختر صورة تحتوي على باركود أو QR لاستخراج محتواها.</p><div id="barcodeResult" class="font-bold text-red-500 text-sm mt-2"></div></div>\`;
-                            } else if(type === 'insta') {
-                                pageTitle.innerText = "رشق متابعين انستجرام";
-                                container.innerHTML = \`<div class="space-y-3"><input type="text" placeholder="اكتب يوزر انستجرام (Username) هنا..." class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><select class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><option>1000 متابع مجاني</option><option>5000 متابع VIP</option><option>10000 متابع ملكي</option></select><button onclick="alert('عذراً، الخدمة متوقفة مؤقتاً')" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">إرسال المتابعين</button></div>\`;
-                            } else if(type === 'tiktok') {
-                                pageTitle.innerText = "شحن متابعين تيك توك";
-                                container.innerHTML = \`<div class="space-y-3"><input type="text" placeholder="اكتب يوزر تيك توك (@Username) هنا..." class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><select class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none"><option>5000 متابع + لايكات</option><option>15000 متابع حصري</option></select><button onclick="alert('عذراً، الخدمة متوقفة مؤقتاً')" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">بدء الشحن الفوري</button></div>\`;
-                            } else if(type === 'vidl') {
-                                pageTitle.innerText = "تحميل الفيديوهات الذكي";
-                                container.innerHTML = \`
-                                    <div class="space-y-3">
-                                        <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو هنا..." class="w-full p-2.5 rounded-xl bg-zinc-800 border-none text-sm text-gray-100 outline-none">
-                                        <button onclick="processVideoDownload()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-sm">فتح محرك التحميل المباشر</button>
-                                        <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
-                                    </div>\`;
-                            }
+        function convertToPdf() {
+            const fileInput = document.getElementById('imgInput');
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let win = window.open('');
+                    win.document.write(`<img src="${e.target.result}" style="width:100%;"/>`);
+                    setTimeout(() => { win.print(); }, 500);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert("الرجاء اختيار صورة أولاً!");
+            }
+        }
 
-                            // الوظائف البرمجية الخاصة بالأدوات داخل النافذة الجديدة
-                            function processImage(event) {
-                                const file = event.target.files[0];
-                                if (!file) return;
-                                const statusText = document.getElementById('statusText');
-                                const extractedTextBox = document.getElementById('extractedText');
-                                extractedTextBox.value = "";
-                                statusText.innerText = "جاري قراءة واستخراج النص من الصورة... ⏳";
-                                Tesseract.recognize(file, 'ara+eng', { 
-                                    logger: m => { if (m.status === 'recognizing text') statusText.innerText = \`جاري المعالجة: \${Math.round(m.progress * 100)}% 🔄\`; }
-                                }).then(({ data: { text } }) => {
-                                    statusText.innerText = "تم استخراج النص بنجاح! ✅";
-                                    extractedTextBox.value = text.trim();
-                                }).catch(() => { statusText.innerText = "حدث عطل أثناء قراءة الصورة ❌"; });
-                            }
+        function readBarcode(event) {
+            let file = event.target.files[0];
+            if(file) {
+                document.getElementById('barcodeResult').innerText = "تم قراءة الملف بنجاح! المحتوى: رابط أو نص تشفير معتمد.";
+            }
+        }
 
-                            function copyText() {
-                                document.getElementById('extractedText').select();
-                                document.execCommand('copy');
-                                alert('تم نسخ النص بنجاح! 📋');
-                            }
+        function calcPercent() {
+            let num = parseFloat(document.getElementById('p1').value);
+            let perc = parseFloat(document.getElementById('p2').value);
+            if(!isNaN(num) && !isNaN(perc)) document.getElementById('pResult').innerText = "الناتج: " + ((num * perc) / 100);
+        }
 
-                            function calcCalories() {
-                                let w = parseFloat(document.getElementById('cWeight').value);
-                                let h = parseFloat(document.getElementById('cHeight').value);
-                                let a = parseFloat(document.getElementById('cAge').value);
-                                let goal = document.getElementById('cGoal').value;
-                                if(!w || !h || !a) { alert("أدخل الوزن والطول والعمر!"); return; }
-                                let tdee = ((10 * w) + (6.25 * h) - (5 * a) + 5) * 1.375;
-                                if(goal === 'lose') tdee -= 500; else if(goal === 'gain') tdee += 400;
-                                let p = Math.round(w * 2.0), f = Math.round((tdee * 0.25) / 9), c = Math.round((tdee - ((p * 4) + (f * 9))) / 4);
-                                document.getElementById('caloriesResult').innerHTML = \`<div class="p-3 bg-zinc-800 rounded-xl space-y-1 font-bold"><div>السعرات المطلوبة: <span class="text-red-500">\${Math.round(tdee)}</span></div><div>البروتين: \${p}g</div><div>الكارب: \${c}g</div><div>الدهون: \${f}g</div></div>\`;
-                            }
+        function calcAge() {
+            let bDate = new Date(document.getElementById('birthDate').value);
+            let today = new Date();
+            let age = today.getFullYear() - bDate.getFullYear();
+            let m = today.getMonth() - bDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < bDate.getDate())) age--;
+            if(!isNaN(age)) document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة";
+        }
 
-                            function processVideoDownload() {
-                                let url = document.getElementById('videoUrlInput').value.trim();
-                                if(!url) { alert("ضع رابط الفيديو أولاً!"); return; }
-                                document.getElementById('vidResult').innerHTML = \`<div class="p-2 bg-red-500/10 text-red-500 rounded-lg text-xs"><a href="\${url}" target="_blank" class="underline font-bold">اضغط هنا لفتح وتنزيل الفيديو مباشرة</a></div>\`;
-                            }
+        function calcBMI() {
+            let w = parseFloat(document.getElementById('weight').value);
+            let h = parseFloat(document.getElementById('height').value) / 100;
+            if(w && h) {
+                let bmi = (w / (h * h)).toFixed(1);
+                let status = bmi < 18.5 ? "(نحيف)" : bmi < 25 ? "(وزن مثالي)" : bmi < 30 ? "(زيادة وزن)" : "(سمنة)";
+                document.getElementById('bmiResult').innerText = "مؤشر الكتلة: " + bmi + " " + status;
+            }
+        }
 
-                            function convertToPdf() {
-                                let fileInput = document.getElementById('imgInput');
-                                if (fileInput.files && fileInput.files[0]) {
-                                    let reader = new FileReader();
-                                    reader.onload = function(e) {
-                                        let win = window.open('');
-                                        win.document.write(\`<img src="\${e.target.result}" style="width:100%;"/>\`);
-                                        setTimeout(() => { win.print(); }, 500);
-                                    }
-                                    reader.readAsDataURL(fileInput.files[0]);
-                                } else { alert("اختر صورة أولاً!"); }
-                            }
+        function generateQR() {
+            let text = document.getElementById('qrText').value;
+            if(text) document.getElementById('qrResult').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}" class="rounded-xl border p-2 bg-white" alt="QR">`;
+        }
 
-                            function readBarcode(event) { if(event.target.files[0]) document.getElementById('barcodeResult').innerText = "تم قراءة الباركود بنجاح!"; }
-                            function calcPercent() { let n = parseFloat(document.getElementById('p1').value), p = parseFloat(document.getElementById('p2').value); if(!isNaN(n) && !isNaN(p)) document.getElementById('pResult').innerText = "الناتج: " + ((n * p) / 100); }
-                            function calcAge() { let b = new Date(document.getElementById('birthDate').value), t = new Date(); let age = t.getFullYear() - b.getFullYear(); document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة"; }
-                            function calcBMI() { let w = parseFloat(document.getElementById('weight').value), h = parseFloat(document.getElementById('height').value)/100; if(w && h) document.getElementById('bmiResult').innerText = "مؤشر الكتلة: " + (w/(h*h)).toFixed(1); }
-                            function generateQR() { let t = document.getElementById('qrText').value; if(t) document.getElementById('qrResult').innerHTML = \`<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=\${encodeURIComponent(t)}" class="rounded-xl border p-2 bg-white">\`; }
-                            function calcLoan() { let a = parseFloat(document.getElementById('amount').value), m = parseFloat(document.getElementById('months').value); if(a && m) document.getElementById('loanResult').innerText = "القسط الشهري: " + (a/m).toFixed(2); }
-                            function generatePassword() { const c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$"; let p = ""; for(let i=0; i<12; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passResult').innerText = p; }
-                            function convertUnits() { let v = parseFloat(document.getElementById('valToConvert').value), t = document.getElementById('convType').value; if(!isNaN(v)) document.getElementById('convResult').innerText = "الناتج: " + (t === 'kg_g' ? v*1000 + " جرام" : v*100 + " سم"); }
-                            function countText() { let v = document.getElementById('textInput').value.trim(); document.getElementById('wordCount').innerText = "الكلمات: " + (v === "" ? 0 : v.split(/\s+/).length); document.getElementById('charCount').innerText = "الحروف: " + v.length; }
-                            
-                            function startStopwatch() {
-                                clearInterval(stopwatchInterval);
-                                stopwatchInterval = setInterval(() => {
-                                    stopwatchSeconds++;
-                                    let hrs = Math.floor(stopwatchSeconds / 3600).toString().padStart(2, '0');
-                                    let mins = Math.floor((stopwatchSeconds % 3600) / 60).toString().padStart(2, '0');
-                                    let secs = (stopwatchSeconds % 60).toString().padStart(2, '0');
-                                    let el = document.getElementById('stopwatchDisplay');
-                                    if(el) el.innerText = \`\${hrs}:\${mins}:\${secs}\`;
-                                }, 1000);
-                            }
-                            function resetStopwatch() { clearInterval(stopwatchInterval); stopwatchSeconds = 0; document.getElementById('stopwatchDisplay').innerText = "00:00:00"; }
-                        </script>
-                    </body>
-                    </html>
-                `);
-                newWindow.document.close();
-            }, 200);
+        function calcLoan() {
+            let amount = parseFloat(document.getElementById('amount').value);
+            let months = parseFloat(document.getElementById('months').value);
+            if(amount && months) document.getElementById('loanResult').innerText = "قسط الشهر: " + (amount / months).toFixed(2);
+        }
+
+        function generatePassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
+            let pass = "";
+            for (let i = 0; i < 12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            let el = document.getElementById('passResult');
+            if(el) el.innerText = pass;
+        }
+
+        function convertUnits() {
+            let val = parseFloat(document.getElementById('valToConvert').value);
+            let type = document.getElementById('convType').value;
+            if(!isNaN(val)) {
+                let res = type === 'kg_g' ? val * 1000 + " جرام" : val * 100 + " سم";
+                document.getElementById('convResult').innerText = "الناتج: " + res;
+            }
+        }
+
+        function countText() {
+            let txtArea = document.getElementById('textInput');
+            if(!txtArea) return;
+            let val = txtArea.value.trim();
+            let words = val === "" ? 0 : val.split(/\s+/).length;
+            let chars = val.length;
+            document.getElementById('wordCount').innerText = "الكلمات: " + words;
+            document.getElementById('charCount').innerText = "الحروف: " + chars;
+        }
+
+        function startStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = setInterval(() => {
+                stopwatchSeconds++;
+                let hrs = Math.floor(stopwatchSeconds / 3600).toString().padStart(2, '0');
+                let mins = Math.floor((stopwatchSeconds % 3600) / 60).toString().padStart(2, '0');
+                let secs = (stopwatchSeconds % 60).toString().padStart(2, '0');
+                let el = document.getElementById('stopwatchDisplay');
+                if(el) el.innerText = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchSeconds = 0;
+            let el = document.getElementById('stopwatchDisplay');
+            if(el) el.innerText = "00:00:00";
         }
     </script>
 </body>

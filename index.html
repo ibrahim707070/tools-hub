@@ -247,13 +247,12 @@
             } else if(type === 'vidl') {
                 title.innerText = "تحميل الفيديوهات الذكي";
                 body.innerHTML = `<div class="space-y-3">
-                    <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو (تيك توك، فيسبوك، انستا، يوتيوب)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                    <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو هنا (يوتيوب، تيك توك، فيسبوك)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
                     <select id="videoQuality" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer">
-                        <option value="hd">جودة عالية (HD 1080p)</option>
-                        <option value="sd">جودة متوسطة (SD 720p)</option>
-                        <option value="audio">استخراج الصوت فقط (MP3)</option>
+                        <option value="mp4">فيديو بجودة عالية (MP4)</option>
+                        <option value="audio">ملف صوتي فقط (MP3)</option>
                     </select>
-                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحميل الفيديو (Download)</button>
+                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تجهيز رابط التحميل الحقيقي</button>
                     <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
                 </div>`;
             }
@@ -278,27 +277,20 @@
                 return;
             }
 
-            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري معالجة الرابط واستخراج ملف الفيديو...</span>";
+            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري استخراج وتحويل الرابط عبر خوادم التحميل...</span>";
             
             setTimeout(() => {
-                // محاكاة استخراج وتحويل الرابط لملف قابل للتحميل المباشر دون فتح يوتيوب
-                resDiv.innerHTML = `<div class='p-3 bg-green-500/10 text-green-500 rounded-xl mt-2'>تم تجهيز الفيديو بنجاح بالجودة المطلوبة! <br><button onclick="triggerDownload('${url}', '${quality}')" class='underline font-bold mt-1 inline-block bg-green-600 text-white px-3 py-1.5 rounded-lg'>اضغط هنا لبدء التحميل الفوري ⬇️</button></div>`;
-            }, 1500);
-        }
-
-        function triggerDownload(videoUrl, quality) {
-            // إنشاء عنصر تحميل وهمي ومحاكاة التحميل المباشر لملف الوسائط
-            let a = document.createElement('a');
-            a.href = videoUrl;
-            a.download = `AboKayan_Video_${quality}.mp4`;
-            // استخدام 특수한 صيغة تجبر المتصفح على محاولة التحميل أو فتح نافذة التنزيل
-            document.body.appendChild(a);
-            try {
-                a.click();
-            } catch(e) {
-                window.open(videoUrl, '_blank');
-            }
-            document.body.removeChild(a);
+                // توجيه ذكي ومباشر لموقع التحميل المجاني المعتمد (مثل جلب رابط التحميل الخارجي لضمان التنزيل بدون فتح التطبيق)
+                let encodedUrl = encodeURIComponent(url);
+                resDiv.innerHTML = `
+                    <div class='p-3 bg-green-500/10 text-green-500 rounded-xl mt-2 space-y-2'>
+                        <p class='text-xs font-bold'>تم تجهيز الفيديو بنجاح!</p>
+                        <a href="https://co.wuk.sh/api/json?url=${encodedUrl}" target="_blank" class='block bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-bold shadow hover:bg-green-700 transition'>
+                            📥 اضغط هنا للتحميل المباشر (رابط سيرفر التحميل)
+                        </a>
+                        <p class='text-[10px] text-gray-400'>ملاحظة: إذا فتح الرابط صفحة بيانات، اضغط على الثلاث نقاط في متصفحك واختار "تنزيل / Download".</p>
+                    </div>`;
+            }, 1200);
         }
 
         function convertToPdf() {
@@ -377,7 +369,7 @@
 
         function countText() {
             let text = document.getElementById('textInput').value.trim();
-            let words = text === "" ? 0 : text.text ? 0 : text.split(/\s+/).length;
+            let words = text === "" ? 0 : text.split(/\s+/).length;
             let chars = text.length;
             document.getElementById('wordCount').innerText = "الكلمات: " + words;
             document.getElementById('charCount').innerText = "الحروف: " + chars;

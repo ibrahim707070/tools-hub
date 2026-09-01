@@ -248,11 +248,7 @@
                 title.innerText = "تحميل الفيديوهات الذكي";
                 body.innerHTML = `<div class="space-y-3">
                     <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو هنا (يوتيوب، تيك توك، فيسبوك)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                    <select id="videoQuality" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer">
-                        <option value="mp4">فيديو بجودة عالية (MP4)</option>
-                        <option value="audio">ملف صوتي فقط (MP3)</option>
-                    </select>
-                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تجهيز رابط التحميل الحقيقي</button>
+                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">فتح محرك التحميل المباشر</button>
                     <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
                 </div>`;
             }
@@ -269,7 +265,6 @@
 
         function processVideoDownload() {
             let url = document.getElementById('videoUrlInput').value.trim();
-            let quality = document.getElementById('videoQuality').value;
             let resDiv = document.getElementById('vidResult');
             
             if(!url) {
@@ -277,20 +272,21 @@
                 return;
             }
 
-            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري استخراج وتحويل الرابط عبر خوادم التحميل...</span>";
+            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري تجهيز محركات التحميل...</span>";
             
             setTimeout(() => {
-                // توجيه ذكي ومباشر لموقع التحميل المجاني المعتمد (مثل جلب رابط التحميل الخارجي لضمان التنزيل بدون فتح التطبيق)
-                let encodedUrl = encodeURIComponent(url);
+                // توجيه ذكي لمواقع تحميل الفيديوهات المضمونة الشهيرة عالمياً
                 resDiv.innerHTML = `
-                    <div class='p-3 bg-green-500/10 text-green-500 rounded-xl mt-2 space-y-2'>
-                        <p class='text-xs font-bold'>تم تجهيز الفيديو بنجاح!</p>
-                        <a href="https://co.wuk.sh/api/json?url=${encodedUrl}" target="_blank" class='block bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-bold shadow hover:bg-green-700 transition'>
-                            📥 اضغط هنا للتحميل المباشر (رابط سيرفر التحميل)
-                        </a>
-                        <p class='text-[10px] text-gray-400'>ملاحظة: إذا فتح الرابط صفحة بيانات، اضغط على الثلاث نقاط في متصفحك واختار "تنزيل / Download".</p>
+                    <div class='p-3 bg-brand/10 text-brand rounded-xl mt-2 space-y-2'>
+                        <p class='text-xs font-bold text-gray-200'>اختر محرك التحميل المناسب للرابط:</p>
+                        <div class='grid grid-cols-2 gap-2 mt-2'>
+                            <a href="https://ssyoutube.com/en675/${url}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك يوتيوب</a>
+                            <a href="https://snaptik.app/en?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك تيك توك</a>
+                            <a href="https://en.savefrom.net/1-youtube-video-downloader-365/?url=${encodeURIComponent(url)}" target="_blank" class='bg-brand text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>محرك عام (SaveFrom)</a>
+                            <a href="${url}" target="_blank" class='bg-zinc-700 text-white px-2 py-2 rounded-lg text-xs font-bold text-center hover:opacity-90 transition'>فتح الرابط الأصلي</a>
+                        </div>
                     </div>`;
-            }, 1200);
+            }, 800);
         }
 
         function convertToPdf() {
@@ -355,7 +351,7 @@
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
             let pass = "";
             for (let i = 0; i < 12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('passResult').innerText = pass;
+            document.getElementById('passResult').innerText, pass;
         }
 
         function convertUnits() {
@@ -389,6 +385,7 @@
 
         function resetStopwatch() {
             clearInterval(stopwatchInterval);
+            stopwatchSeconds.reset = 0;
             stopwatchSeconds = 0;
             let el = document.getElementById('stopwatchDisplay');
             if(el) el.innerText = "00:00:00";

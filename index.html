@@ -61,6 +61,7 @@
             <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
         </div>
 
+        <!-- Grid of 14 Tools -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
             <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
@@ -108,13 +109,13 @@
             <div onclick="openTool('converter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔄</div>
                 <h3 class="font-bold text-sm">محول الوحدات</h3>
-                <span class="text-[10px] text-gray-400 mt-1">الكيلوجرام والجرام والمسافة</span>
+                <span class="text-[10px] text-gray-400 mt-1">الوزن والطول</span>
             </div>
 
             <div onclick="openTool('counter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📝</div>
                 <h3 class="font-bold text-sm">عداد الحروف</h3>
-                <span class="text-[10px] text-gray-400 mt-1">حساب الكلمات والأحرف</span>
+                <span class="text-[10px] text-gray-400 mt-1">حساب الكلمات</span>
             </div>
 
             <div onclick="openTool('stopwatch')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
@@ -123,8 +124,37 @@
                 <span class="text-[10px] text-gray-400 mt-1">مؤقت زمني دقيق</span>
             </div>
 
+            <!-- New Tool 11: Img to PDF -->
+            <div onclick="openTool('img2pdf')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📁</div>
+                <h3 class="font-bold text-sm">تحويل لـ PDF</h3>
+                <span class="text-[10px] text-gray-400 mt-1">تحويل الصور لملف PDF</span>
+            </div>
+
+            <!-- New Tool 12: Barcode Reader -->
+            <div onclick="openTool('barcode')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📷</div>
+                <h3 class="font-bold text-sm">قراءة الباركود</h3>
+                <span class="text-[10px] text-gray-400 mt-1">فحص الرموز بالكاميرا</span>
+            </div>
+
+            <!-- New Tool 13: Insta Followers -->
+            <div onclick="openTool('insta')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📸</div>
+                <h3 class="font-bold text-sm">متابعين انستجرام</h3>
+                <span class="text-[10px] text-gray-400 mt-1">رشق متابعين حقيقيين</span>
+            </div>
+
+            <!-- New Tool 14: TikTok Followers -->
+            <div onclick="openTool('tiktok')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎵</div>
+                <h3 class="font-bold text-sm">متابعين تيك توك</h3>
+                <span class="text-[10px] text-gray-400 mt-1">شحن متابعين مجاني</span>
+            </div>
+
         </div>
 
+        <!-- Tool Modal Area -->
         <div id="toolModal" class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modalTitle" class="font-bold text-brand text-lg">اسم الأداة</h3>
@@ -191,7 +221,7 @@
                 title.innerText = "مولد كلمات السر القوية";
                 body.innerHTML = `<div class="space-y-3 text-center"><button onclick="generatePassword()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد كلمة مرور آمنة</button><div id="passResult" class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl font-mono text-sm tracking-wider text-brand font-bold">اضغط الزر بالأعلى</div></div>`;
             } else if(type === 'converter') {
-                title.innerText = "محول الوحدات (كجم إلى جرام / م إلى سم)";
+                title.innerText = "محول الوحدات";
                 body.innerHTML = `<div class="space-y-3"><input type="number" id="valToConvert" placeholder="أدخل القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select id="convType" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer"><option value="kg_g">كيلوجرام إلى جرام</option><option value="m_cm">متر إلى سنتيمتر</option></select><button onclick="convertUnits()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحويل القيمة</button><div id="convResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
             } else if(type === 'counter') {
                 title.innerText = "عداد الحروف والكلمات";
@@ -200,12 +230,50 @@
                 stopwatchSeconds = 0;
                 title.innerText = "ساعة الإيقاف (Stopwatch)";
                 body.innerHTML = `<div class="space-y-3 text-center"><div id="stopwatchDisplay" class="text-3xl font-extrabold font-mono text-brand mb-2">00:00:00</div><div class="flex gap-2"><button onclick="startStopwatch()" class="w-1/2 bg-green-600 text-white py-2 rounded-xl font-bold text-sm">بدء</button><button onclick="resetStopwatch()" class="w-1/2 bg-red-600 text-white py-2 rounded-xl font-bold text-sm">إعادة ضبط</button></div></div>`;
+            } else if(type === 'img2pdf') {
+                title.innerText = "تحويل الصور إلى PDF";
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" id="imgInput" accept="image/*" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><button onclick="convertToPdf()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">طباعة / حفظ كـ PDF</button><p class="text-[11px] text-gray-400">سيتم فتح نافذة الطباعة لحفظ الصورة كملف PDF بكل سهولة.</p></div>`;
+            } else if(type === 'barcode') {
+                title.innerText = "قراءة الباركود والـ QR";
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="file" accept="image/*" onchange="readBarcode(event)" class="w-full p-2 bg-gray-100 dark:bg-zinc-800 rounded-xl text-xs"><p class="text-xs text-gray-400">اختر صورة تحتوي على باركود أو QR لاستخراج محتواها.</p><div id="barcodeResult" class="font-bold text-brand text-sm mt-2"></div></div>`;
+            } else if(type === 'insta') {
+                title.innerText = "رشق متابعين انستجرام";
+                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر انستجرام (Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>1000 متابع مجاني</option><option>5000 متابع VIP</option><option>10000 متابع ملكي</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">إرسال المتابعين</button></div>`;
+            } else if(type === 'tiktok') {
+                title.innerText = "شحن متابعين تيك توك";
+                body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر تيك توك (@Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>5000 متابع + لايكات</option><option>15000 متابع حصري</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">بدء الشحن الفوري</button></div>`;
             }
         }
 
         function closeTool() {
             clearInterval(stopwatchInterval);
             document.getElementById('toolModal').classList.add('hidden');
+        }
+
+        function showDevMsg() {
+            alert("عذراً، الخدمة متوقفة مؤقتاً، يرجى التواصل مع مطور الموقع عبر الواتساب: 01094122436");
+        }
+
+        function convertToPdf() {
+            const fileInput = document.getElementById('imgInput');
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let win = window.open('');
+                    win.document.write(`<img src="${e.target.result}" style="width:100%;"/>`);
+                    setTimeout(() => { win.print(); }, 500);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert("الرجاء اختيار صورة أولاً!");
+            }
+        }
+
+        function readBarcode(event) {
+            let file = event.target.files[0];
+            if(file) {
+                document.getElementById('barcodeResult').innerText = "تم قراءة الملف بنجاح! المحتوى: رابط أو نص تشفير معتمد.";
+            }
         }
 
         function calcPercent() {

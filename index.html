@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abo Kayan - Multi-Tools Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#DC2626',
+                            dark: '#B91C1C',
+                            light: '#EF4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
+        .ios-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+        }
+        .dark .ios-card {
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
+
+    <!-- شريط العلوي (Header) -->
+    <header class="sticky top-0 z-50 ios-card border-b border-gray-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <span class="w-3 h-3 bg-brand rounded-full animate-ping"></span>
+            <h1 class="text-lg font-bold tracking-tight text-brand">Abo Kayan Tools</h1>
+        </div>
+        
+        <div class="flex items-center space-x-2 space-x-reverse">
+            <!-- اختيار اللغة -->
+            <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-gray-200 dark:bg-zinc-800 text-xs px-2 py-1.5 rounded-xl border-none outline-none font-medium cursor-pointer">
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="pt">Português</option>
+            </select>
+
+            <!-- زر الوضع الليلي -->
+            <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800 hover:bg-brand/20 transition text-sm">
+                🌙
+            </button>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="max-w-4xl mx-auto p-4 py-6">
+        
+        <!-- قسم الترحيب -->
+        <div class="mb-6 text-center">
+            <h2 id="welcomeText" class="text-2xl font-extrabold mb-1">أهلاً بك يا إبراهيم</h2>
+            <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
+        </div>
+
+        <!-- شبكة الأدوات (تصميم آيفون شبيه بالـ Widgets) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            
+            <!-- أداة 1: النسبة المئوية -->
+            <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🧮</div>
+                <h3 class="font-bold text-sm">حساب النسبة</h3>
+                <span class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</span>
+            </div>
+
+            <!-- أداة 2: حساب العمر -->
+            <div onclick="openTool('age')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎂</div>
+                <h3 class="font-bold text-sm">حساب العمر</h3>
+                <span class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر</span>
+            </div>
+
+            <!-- أداة 3: مؤشر كتلة الجسم BMI -->
+            <div onclick="openTool('bmi')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⚖️</div>
+                <h3 class="font-bold text-sm">حساب BMI</h3>
+                <span class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</span>
+            </div>
+
+            <!-- أداة 4: إنشاء QR Code -->
+            <div onclick="openTool('qr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔳</div>
+                <h3 class="font-bold text-sm">QR Code</h3>
+                <span class="text-[10px] text-gray-400 mt-1">إنشاء رموز سريعة</span>
+            </div>
+
+            <!-- أداة 5: حاسبة الأقساط -->
+            <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">💰</div>
+                <h3 class="font-bold text-sm">حاسبة القسط</h3>
+                <span class="text-[10px] text-gray-400 mt-1">الخصم والأقساط</span>
+            </div>
+
+            <!-- أداة 6: الوقت والتاريخ -->
+            <div onclick="openTool('time')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏱️</div>
+                <h3 class="font-bold text-sm">الوقت والتاريخ</h3>
+                <span class="text-[10px] text-gray-400 mt-1">حساب الفروق الزمنية</span>
+            </div>
+
+        </div>
+
+        <!-- منطقة ظهور تفاصيل الأداة عند النقر -->
+        <div id="toolModal" class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="font-bold text-brand text-lg">اسم الأداة</h3>
+                <button onclick="closeTool()" class="text-gray-400 hover:text-red-500 font-bold">✕</button>
+            </div>
+            <div id="modalBody">
+                <!-- محتوى الأداة الديناميكي يظهر هنا -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- حقوق النشر -->
+    <footer class="text-center py-6 text-xs text-gray-400">
+        © 2026 Abo Kayan Dashboard. All Rights Reserved.
+    </footer>
+
+    <!-- سكربت التشغيل والتحكم التفاعلي -->
+    <script>
+        // تبديل الوضع الليلي
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+        }
+
+        // ترجمة النصوص الأساسية
+        const translations = {
+            ar: { welcome: "أهلاً بك يا إبراهيم", sub: "لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق" },
+            en: { welcome: "Welcome, Ibrahim", sub: "Comprehensive dashboard for your daily tools with sleek design" },
+            es: { welcome: "Bienvenido, Ibrahim", sub: "Panel integral para tus herramientas diarias con diseño elegante" },
+            pt: { welcome: "Bem-vindo, Ibrahim", sub: "Painel abrangente para suas ferramentas diárias com design elegante" }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.getElementById('welcomeText').innerText = translations[lang].welcome;
+            document.getElementById('subText').innerText = translations[lang].sub;
+        }
+
+        // فتح الأدوات بشكل تفاعلي
+        function openTool(type) {
+            const modal = document.getElementById('toolModal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+            modal.classList.remove('hidden');
+
+            if(type === 'percent') {
+                title.innerText = "حساب النسبة المئوية";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        <input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        <button onclick="calcPercent()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button>
+                        <div id="pResult" class="text-center font-bold text-brand mt-2"></div>
+                    </div>
+                `;
+            } else if(type === 'age') {
+                title.innerText = "حساب العمر";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <label class="text-xs text-gray-400">تاريخ الميلاد:</label>
+                        <input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        <button onclick="calcAge()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button>
+                        <div id="ageResult" class="text-center font-bold text-brand mt-2"></div>
+                    </div>
+                `;
+            } else if(type === 'bmi') {
+                title.innerText = "حساب مؤشر كتلة الجسم (BMI)";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        <input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        <button onclick="calcBMI()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button>
+                        <div id="bmiResult" class="text-center font-bold text-brand mt-2"></div>
+                    </div>
+                `;
+            } else {
+                title.innerText = "قريباً";
+                body.innerHTML = `<p class="text-center text-gray-400">هذه الأداة قيد التحديث والإضافة لتكون بأفضل شكل!</p>`;
+            }
+        }
+
+        function closeTool() {
+            document.getElementById('toolModal').classList.add('hidden');
+        }
+
+        // دوال الحسابات البسيطة داخل الأدوات
+        function calcPercent() {
+            let num = document.getElementById('p1').value;
+            let perc = document.getElementById('p2').value;
+            if(num && perc) {
+                let res = (num * perc) / 100;
+                document.getElementById('pResult').innerText = "الناتج: " + res;
+            }
+        }
+
+        function calcAge() {
+            let bDate = new Date(document.getElementById('birthDate').value);
+            let today = new Date();
+            let age = today.getFullYear() - bDate.getFullYear();
+            let m = today.getMonth() - bDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < bDate.getDate())) { age--; }
+            if(!isNaN(age)) {
+                document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة";
+            }
+        }
+
+        function calcBMI() {
+            let w = parseFloat(document.getElementById('weight').value);
+            let h = parseFloat(document.getElementById('height').value) / 100;
+            if(w && h) {
+                let bmi = (w / (h * h)).toFixed(1);
+                document.getElementById('bmiResult').innerText = "مؤشر الكتلة: " + bmi;
+            }
+        }
+    </script>
+</body>
+</html>
+

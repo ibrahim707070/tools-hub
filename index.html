@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abo Kayan - Multi-Tools Dashboard</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -38,7 +37,6 @@
 </head>
 <body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
 
-    <!-- شريط العلوي (Header) -->
     <header class="sticky top-0 z-50 ios-card border-b border-gray-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center shadow-sm">
         <div class="flex items-center space-x-3 space-x-reverse">
             <span class="w-3 h-3 bg-brand rounded-full animate-ping"></span>
@@ -46,96 +44,101 @@
         </div>
         
         <div class="flex items-center space-x-2 space-x-reverse">
-            <!-- اختيار اللغة -->
             <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-gray-200 dark:bg-zinc-800 text-xs px-2 py-1.5 rounded-xl border-none outline-none font-medium cursor-pointer">
                 <option value="ar">العربية</option>
                 <option value="en">English</option>
                 <option value="es">Español</option>
                 <option value="pt">Português</option>
             </select>
-
-            <!-- زر الوضع الليلي -->
-            <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800 hover:bg-brand/25 transition text-sm">
-                🌙
-            </button>
+            <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800 hover:bg-brand/25 transition text-sm">🌙</button>
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
     <main class="max-w-4xl mx-auto p-4 py-6">
         
-        <!-- قسم الترحيب -->
         <div class="mb-6 text-center">
             <h2 id="welcomeText" class="text-2xl font-extrabold mb-1">أهلاً بك في منصة الأدوات الشاملة</h2>
             <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
         </div>
 
-        <!-- شبكة الأدوات (تصميم آيفون شبيه بالـ Widgets) -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
-            <!-- أداة 1: النسبة المئوية -->
             <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🧮</div>
                 <h3 class="font-bold text-sm">حساب النسبة</h3>
                 <span class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</span>
             </div>
 
-            <!-- أداة 2: حساب العمر -->
             <div onclick="openTool('age')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎂</div>
                 <h3 class="font-bold text-sm">حساب العمر</h3>
                 <span class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر</span>
             </div>
 
-            <!-- أداة 3: مؤشر كتلة الجسم BMI -->
             <div onclick="openTool('bmi')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⚖️</div>
                 <h3 class="font-bold text-sm">حساب BMI</h3>
                 <span class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</span>
             </div>
 
-            <!-- أداة 4: إنشاء QR Code -->
             <div onclick="openTool('qr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔳</div>
                 <h3 class="font-bold text-sm">QR Code</h3>
                 <span class="text-[10px] text-gray-400 mt-1">إنشاء رموز سريعة</span>
             </div>
 
-            <!-- أداة 5: حاسبة الأقساط -->
             <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">💰</div>
                 <h3 class="font-bold text-sm">حاسبة القسط</h3>
                 <span class="text-[10px] text-gray-400 mt-1">الخصم والأقساط</span>
             </div>
 
-            <!-- أداة 6: الوقت والتاريخ -->
             <div onclick="openTool('time')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏱️</div>
                 <h3 class="font-bold text-sm">الوقت والتاريخ</h3>
                 <span class="text-[10px] text-gray-400 mt-1">حساب الفروق الزمنية</span>
             </div>
 
+            <div onclick="openTool('password')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔐</div>
+                <h3 class="font-bold text-sm">كلمات السر</h3>
+                <span class="text-[10px] text-gray-400 mt-1">توليد كلمات سر قوية</span>
+            </div>
+
+            <div onclick="openTool('converter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🔄</div>
+                <h3 class="font-bold text-sm">محول الوحدات</h3>
+                <span class="text-[10px] text-gray-400 mt-1">الكيلوجرام والجرام والمسافة</span>
+            </div>
+
+            <div onclick="openTool('counter')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📝</div>
+                <h3 class="font-bold text-sm">عداد الحروف</h3>
+                <span class="text-[10px] text-gray-400 mt-1">حساب الكلمات والأحرف</span>
+            </div>
+
+            <div onclick="openTool('stopwatch')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">⏳</div>
+                <h3 class="font-bold text-sm">ساعة الإيقاف</h3>
+                <span class="text-[10px] text-gray-400 mt-1">مؤقت زمني دقيق</span>
+            </div>
+
         </div>
 
-        <!-- منطقة ظهور تفاصيل الأداة عند النقر -->
         <div id="toolModal" class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modalTitle" class="font-bold text-brand text-lg">اسم الأداة</h3>
                 <button onclick="closeTool()" class="text-gray-400 hover:text-red-500 font-bold text-lg px-2">✕</button>
             </div>
-            <div id="modalBody">
-                <!-- محتوى الأداة الديناميكي -->
-            </div>
+            <div id="modalBody"></div>
         </div>
 
     </main>
 
-    <!-- حقوق النشر -->
     <footer class="text-center py-6 text-xs text-gray-400">
         © 2026 Abo Kayan Dashboard. All Rights Reserved.
     </footer>
 
-    <!-- سكربت التشغيل وتفعيل جميع الأدوات -->
     <script>
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
@@ -155,88 +158,60 @@
             document.getElementById('subText').innerText = translations[lang].sub;
         }
 
+        let stopwatchInterval;
+        let stopwatchSeconds = 0;
+
         function openTool(type) {
             const modal = document.getElementById('toolModal');
             const title = document.getElementById('modalTitle');
             const body = document.getElementById('modalBody');
             modal.classList.remove('hidden');
+            clearInterval(stopwatchInterval);
 
             if(type === 'percent') {
                 title.innerText = "حساب النسبة المئوية";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <button onclick="calcPercent()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button>
-                        <div id="pResult" class="text-center font-bold text-brand mt-2 text-base"></div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="p1" placeholder="أدخل الرقم الأساسي" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="p2" placeholder="نسبة المئوية (%)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcPercent()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الآن</button><div id="pResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
             } else if(type === 'age') {
                 title.innerText = "حساب العمر";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <label class="text-xs text-gray-400">تاريخ الميلاد:</label>
-                        <input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <button onclick="calcAge()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button>
-                        <div id="ageResult" class="text-center font-bold text-brand mt-2 text-base"></div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3"><label class="text-xs text-gray-400">تاريخ الميلاد:</label><input type="date" id="birthDate" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcAge()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب العمر</button><div id="ageResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
             } else if(type === 'bmi') {
                 title.innerText = "حساب مؤشر كتلة الجسم (BMI)";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <button onclick="calcBMI()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button>
-                        <div id="bmiResult" class="text-center font-bold text-brand mt-2 text-base"></div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="height" placeholder="الطول (سم)" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcBMI()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب المؤشر</button><div id="bmiResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
             } else if(type === 'qr') {
                 title.innerText = "إنشاء QR Code سريع";
-                body.innerHTML = `
-                    <div class="space-y-3 text-center">
-                        <input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <button onclick="generateQR()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button>
-                        <div id="qrResult" class="mt-3 flex justify-center"></div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3 text-center"><input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="generateQR()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button><div id="qrResult" class="mt-3 flex justify-center"></div></div>`;
             } else if(type === 'loan') {
                 title.innerText = "حاسبة الأقساط والخصم";
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <input type="number" id="amount" placeholder="المبلغ الأساسي أو القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <input type="number" id="months" placeholder="عدد الأشهر أو نسبة الخصم" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
-                        <button onclick="calcLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب القسط</button>
-                        <div id="loanResult" class="text-center font-bold text-brand mt-2 text-base"></div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="amount" placeholder="المبلغ الأساسي أو القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="months" placeholder="عدد الأشهر أو نسبة الخصم" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب القسط</button><div id="loanResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
             } else if(type === 'time') {
                 title.innerText = "الوقت والتاريخ الحالي";
                 let now = new Date();
-                body.innerHTML = `
-                    <div class="space-y-3 text-center">
-                        <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">
-                            📅 التاريخ: ${now.toLocaleDateString('ar-EG')}
-                        </div>
-                        <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">
-                            ⏰ الوقت: ${now.toLocaleTimeString('ar-EG')}
-                        </div>
-                    </div>
-                `;
+                body.innerHTML = `<div class="space-y-3 text-center"><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">📅 التاريخ: ${now.toLocaleDateString('ar-EG')}</div><div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl text-sm font-bold">⏰ الوقت: ${now.toLocaleTimeString('ar-EG')}</div></div>`;
+            } else if(type === 'password') {
+                title.innerText = "مولد كلمات السر القوية";
+                body.innerHTML = `<div class="space-y-3 text-center"><button onclick="generatePassword()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد كلمة مرور آمنة</button><div id="passResult" class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl font-mono text-sm tracking-wider text-brand font-bold">اضغط الزر بالأعلى</div></div>`;
+            } else if(type === 'converter') {
+                title.innerText = "محول الوحدات (كجم إلى جرام / م إلى سم)";
+                body.innerHTML = `<div class="space-y-3"><input type="number" id="valToConvert" placeholder="أدخل القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select id="convType" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer"><option value="kg_g">كيلوجرام إلى جرام</option><option value="m_cm">متر إلى سنتيمتر</option></select><button onclick="convertUnits()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحويل القيمة</button><div id="convResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+            } else if(type === 'counter') {
+                title.innerText = "عداد الحروف والكلمات";
+                body.innerHTML = `<div class="space-y-3"><textarea id="textInput" oninput="countText()" placeholder="اكتب أو الصق النص هنا..." rows="3" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"></textarea><div class="flex justify-between text-xs text-gray-400 font-bold px-1"><span id="wordCount">الكلمات: 0</span><span id="charCount">الحروف: 0</span></div></div>`;
+            } else if(type === 'stopwatch') {
+                stopwatchSeconds = 0;
+                title.innerText = "ساعة الإيقاف (Stopwatch)";
+                body.innerHTML = `<div class="space-y-3 text-center"><div id="stopwatchDisplay" class="text-3xl font-extrabold font-mono text-brand mb-2">00:00:00</div><div class="flex gap-2"><button onclick="startStopwatch()" class="w-1/2 bg-green-600 text-white py-2 rounded-xl font-bold text-sm">بدء</button><button onclick="resetStopwatch()" class="w-1/2 bg-red-600 text-white py-2 rounded-xl font-bold text-sm">إعادة ضبط</button></div></div>`;
             }
         }
 
         function closeTool() {
+            clearInterval(stopwatchInterval);
             document.getElementById('toolModal').classList.add('hidden');
         }
 
         function calcPercent() {
             let num = parseFloat(document.getElementById('p1').value);
             let perc = parseFloat(document.getElementById('p2').value);
-            if(!isNaN(num) && !isNaN(perc)) {
-                let res = (num * perc) / 100;
-                document.getElementById('pResult').innerText = "الناتج: " + res;
-            }
+            if(!isNaN(num) && !isNaN(perc)) document.getElementById('pResult').innerText = "الناتج: " + ((num * perc) / 100);
         }
 
         function calcAge() {
@@ -244,10 +219,8 @@
             let today = new Date();
             let age = today.getFullYear() - bDate.getFullYear();
             let m = today.getMonth() - bDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < bDate.getDate())) { age--; }
-            if(!isNaN(age)) {
-                document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة";
-            }
+            if (m < 0 || (m === 0 && today.getDate() < bDate.getDate())) age--;
+            if(!isNaN(age)) document.getElementById('ageResult').innerText = "عمرك هو: " + age + " سنة";
         }
 
         function calcBMI() {
@@ -255,30 +228,63 @@
             let h = parseFloat(document.getElementById('height').value) / 100;
             if(w && h) {
                 let bmi = (w / (h * h)).toFixed(1);
-                let status = "";
-                if(bmi < 18.5) status = "(وزن مفقود / نحيف)";
-                else if(bmi < 25) status = "(وزن مثالي ورائع)";
-                else if(bmi < 30) status = "(زيادة في الوزن)";
-                else status = "(سمنة مفرطة)";
+                let status = bmi < 18.5 ? "(نحيف)" : bmi < 25 ? "(وزن مثالي)" : bmi < 30 ? "(زيادة وزن)" : "(سمنة)";
                 document.getElementById('bmiResult').innerText = "مؤشر الكتلة: " + bmi + " " + status;
             }
         }
 
         function generateQR() {
             let text = document.getElementById('qrText').value;
-            if(text) {
-                let qrContainer = document.getElementById('qrResult');
-                qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}" class="rounded-xl border p-2 bg-white" alt="QR Code">`;
-            }
+            if(text) document.getElementById('qrResult').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}" class="rounded-xl border p-2 bg-white" alt="QR">`;
         }
 
         function calcLoan() {
             let amount = parseFloat(document.getElementById('amount').value);
             let months = parseFloat(document.getElementById('months').value);
-            if(amount && months) {
-                let monthly = (amount / months).toFixed(2);
-                document.getElementById('loanResult').innerText = "قسط الشهر الواحد: " + monthly;
+            if(amount && months) document.getElementById('loanResult').innerText = "قسط الشهر: " + (amount / months).toFixed(2);
+        }
+
+        function generatePassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
+            let pass = "";
+            for (let i = 0; i < 12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('passResult').innerText = pass;
+        }
+
+        function convertUnits() {
+            let val = parseFloat(document.getElementById('valToConvert').value);
+            let type = document.getElementById('convType').value;
+            if(!isNaN(val)) {
+                let res = type === 'kg_g' ? val * 1000 + " جرام" : val * 100 + " سم";
+                document.getElementById('convResult').innerText = "الناتج: " + res;
             }
+        }
+
+        function countText() {
+            let text = document.getElementById('textInput').value.trim();
+            let words = text === "" ? 0 : text.split(/\s+/).length;
+            let chars = text.length;
+            document.getElementById('wordCount').innerText = "الكلمات: " + words;
+            document.getElementById('charCount').innerText = "الحروف: " + chars;
+        }
+
+        function startStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = setInterval(() => {
+                stopwatchSeconds++;
+                let hrs = Math.floor(stopwatchSeconds / 3600).toString().padStart(2, '0');
+                let mins = Math.floor((stopwatchSeconds % 3600) / 60).toString().padStart(2, '0');
+                let secs = (stopwatchSeconds % 60).toString().padStart(2, '0');
+                let el = document.getElementById('stopwatchDisplay');
+                if(el) el.innerText = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchSeconds = 0;
+            let el = document.getElementById('stopwatchDisplay');
+            if(el) el.innerText = "00:00:00";
         }
     </script>
 </body>

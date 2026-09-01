@@ -103,10 +103,10 @@
                 <span class="text-[10px] text-gray-400 mt-1">إنشاء رموز سريعة</span>
             </div>
 
-            <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
+            <div onclick="openTool('loan')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">💰</div>
-                <h3 class="font-bold text-sm">حاسبة القسط</h3>
-                <span class="text-[10px] text-gray-400 mt-1">الخصم والأقساط</span>
+                <h3 class="font-bold text-sm text-brand">حاسبة القرض والأقساط</h3>
+                <span class="text-[10px] text-gray-400 mt-1">التمويل، الفائدة والشهري</span>
             </div>
 
             <div onclick="openTool('time')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
@@ -262,8 +262,26 @@
                 title.innerText = "إنشاء QR Code سريع";
                 body.innerHTML = `<div class="space-y-3 text-center"><input type="text" id="qrText" placeholder="اكتب الرابط أو النص هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="generateQR()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">توليد الرمز</button><div id="qrResult" class="mt-3 flex justify-center"></div></div>`;
             } else if(type === 'loan') {
-                title.innerText = "حاسبة الأقساط والخصم";
-                body.innerHTML = `<div class="space-y-3"><input type="number" id="amount" placeholder="المبلغ الأساسي أو القيمة" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><input type="number" id="months" placeholder="عدد الأشهر أو نسبة الخصم" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><button onclick="calcLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب القسط</button><div id="loanResult" class="text-center font-bold text-brand mt-2 text-base"></div></div>`;
+                title.innerText = "حاسبة القرض والأقساط المتطورة";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">مبلغ القرض الأساسي:</label>
+                                <input type="number" id="loanAmount" placeholder="مثال: 50000" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">فترة السداد (بالشهور):</label>
+                                <input type="number" id="loanMonths" placeholder="مثال: 12" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">نسبة الفائدة السنوية (%):</label>
+                            <input type="number" id="loanInterest" placeholder="مثال: 10 (اتركها 0 إذا بدون فائدة)" value="0" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                        </div>
+                        <button onclick="calcAdvancedLoan()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">احسب الأقساط والفوائد</button>
+                        <div id="loanResult" class="mt-3 text-xs space-y-2"></div>
+                    </div>`;
             } else if(type === 'time') {
                 title.innerText = "الوقت والتاريخ الحالي";
                 let now = new Date();
@@ -383,6 +401,42 @@
             `;
         }
 
+        function calcAdvancedLoan() {
+            let amount = parseFloat(document.getElementById('loanAmount').value);
+            let months = parseInt(document.getElementById('loanMonths').value);
+            let annualRate = parseFloat(document.getElementById('loanInterest').value) || 0;
+            let resDiv = document.getElementById('loanResult');
+
+            if (!amount || !months || amount <= 0 || months <= 0) {
+                alert("الرجاء إدخال مبلغ القرض وعدد الأشهر بشكل صحيح!");
+                return;
+            }
+
+            let totalPayment = 0;
+            let totalInterest = 0;
+            let monthlyPayment = 0;
+
+            if (annualRate === 0) {
+                totalPayment = amount;
+                monthlyPayment = amount / months;
+                totalInterest = 0;
+            } else {
+                let monthlyRate = (annualRate / 100) / 12;
+                monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+                totalPayment = monthlyPayment * months;
+                totalInterest = totalPayment - amount;
+            }
+
+            resDiv.innerHTML = `
+                <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl space-y-2 font-bold text-xs">
+                    <div class="text-brand text-sm mb-1 border-b pb-1">📊 نتائج تفاصيل القرض:</div>
+                    <div class="flex justify-between"><span>قيمة القسط الشهري:</span> <span class="text-brand text-sm">${monthlyPayment.toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span>إجمالي الفوائد:</span> <span>${totalInterest.toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span>إجمالي المبلغ المستحق:</span> <span class="text-brand">${totalPayment.toFixed(2)}</span></div>
+                </div>
+            `;
+        }
+
         function processVideoDownload() {
             let url = document.getElementById('videoUrlInput').value.trim();
             let resDiv = document.getElementById('vidResult');
@@ -458,12 +512,6 @@
         function generateQR() {
             let text = document.getElementById('qrText').value;
             if(text) document.getElementById('qrResult').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}" class="rounded-xl border p-2 bg-white" alt="QR">`;
-        }
-
-        function calcLoan() {
-            let amount = parseFloat(document.getElementById('amount').value);
-            let months = parseFloat(document.getElementById('months').value);
-            if(amount && months) document.getElementById('loanResult').innerText = "قسط الشهر: " + (amount / months).toFixed(2);
         }
 
         function generatePassword() {

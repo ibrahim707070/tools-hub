@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abo Kayan - Multi-Tools Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -63,9 +64,15 @@
             <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
         </div>
 
-        <!-- Grid of Tools (Including Calories Calculator) -->
+        <!-- Grid of Tools -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
+            <div onclick="openTool('ocr')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">👁️</div>
+                <h3 class="font-bold text-sm text-brand">استخراج نص من صورة</h3>
+                <span class="text-[10px] text-gray-400 mt-1">OCR (عربي / إنجليزي)</span>
+            </div>
+
             <div onclick="openTool('calories')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center border-2 border-brand/40">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🥗</div>
                 <h3 class="font-bold text-sm text-brand">حاسبة السعرات</h3>
@@ -208,7 +215,22 @@
             modal.classList.remove('hidden');
             clearInterval(stopwatchInterval);
 
-            if(type === 'calories') {
+            if(type === 'ocr') {
+                title.innerText = "استخراج النص من الصور (OCR)";
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="border-2 border-dashed border-gray-500/40 rounded-2xl p-4 text-center cursor-pointer hover:border-brand transition" onclick="document.getElementById('imageInput').click();">
+                            <p class="text-xs text-gray-400 mb-1">اضغط هنا لاختيار صورة أو اسحبها هنا</p>
+                            <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="processImage(event)">
+                        </div>
+                        <p id="statusText" class="text-center text-xs text-brand font-bold min-height-[20px]"></p>
+                        <div>
+                            <label class="block mb-1 text-xs text-gray-400 font-bold">النص المستخرج:</label>
+                            <textarea id="extractedText" rows="5" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-xs outline-none resize-vertical" placeholder="سيظهر النص المستخرج هنا..." readonly></textarea>
+                            <button onclick="copyText()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-xs mt-2 hover:opacity-90 transition">نسخ النص المستخرج</button>
+                        </div>
+                    </div>`;
+            } else if(type === 'calories') {
                 title.innerText = "حاسبة السعرات والماكروز (البروتين والكارب)";
                 body.innerHTML = `
                     <div class="space-y-3">
@@ -290,6 +312,43 @@
             alert("عذراً، الخدمة متوقفة مؤقتاً، يرجى التواصل مع مطور الموقع عبر الواتساب: 01094122436");
         }
 
+        function processImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const statusText = document.getElementById('statusText');
+            const extractedTextBox = document.getElementById('extractedText');
+            
+            extractedTextBox.value = "";
+            statusText.innerText = "جاري قراءة واستخراج النص من الصورة... ⏳";
+
+            Tesseract.recognize(
+                file,
+                'ara+eng',
+                { 
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            let progress = Math.round(m.progress * 100);
+                            statusText.innerText = `جاري المعالجة: ${progress}% 🔄`;
+                        }
+                    }
+                }
+            ).then(({ data: { text } }) => {
+                statusText.innerText = "تم استخراج النص بنجاح! ✅";
+                extractedTextBox.value = text.trim();
+            }).catch(err => {
+                console.error(err);
+                statusText.innerText = "حدث عطل أثناء قراءة الصورة، حاول مرة أخرى. ❌";
+            });
+        }
+
+        function copyText() {
+            const textB = document.getElementById('extractedText');
+            textB.select();
+            document.execCommand('copy');
+            alert('تم نسخ النص بنجاح! 📋');
+        }
+
         function calcCalories() {
             let w = parseFloat(document.getElementById('cWeight').value);
             let h = parseFloat(document.getElementById('cHeight').value);
@@ -302,18 +361,16 @@
                 return;
             }
 
-            // معادلة Mifflin-St Jeor التقريبية لحساب السعرات الأساسية (BMR افتراضي للرجال/النساء بمعدل نشاط متوسط)
             let bmr = (10 * w) + (6.25 * h) - (5 * a) + 5;
-            let tdee = bmr * 1.375; // بمعدل نشاط خفيف
+            let tdee = bmr * 1.375;
 
             let targetCalories = tdee;
-            if(goal === 'lose') targetCalories -= 500; // عجز للسعرات لخسارة الدهون
-            else if(goal === 'gain') targetCalories += 400; // فائض لزيادة الوزن
+            if(goal === 'lose') targetCalories -= 500;
+            else if(goal === 'gain') targetCalories += 400;
 
-            // حساب الماكروز (بروتين، كارب، دهون)
-            let protein = Math.round(w * 2.0); // 2 جرام بروتين لكل كيلو من الوزن
-            let fat = Math.round((targetCalories * 0.25) / 9); // 25% من السعرات دهون
-            let carb = Math.round((targetCalories - ((protein * 4) + (fat * 9))) / 4); // الباقي كربوهيدرات
+            let protein = Math.round(w * 2.0);
+            let fat = Math.round((targetCalories * 0.25) / 9);
+            let carb = Math.round((targetCalories - ((protein * 4) + (fat * 9))) / 4);
 
             resDiv.innerHTML = `
                 <div class="p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl space-y-1.5 font-bold">

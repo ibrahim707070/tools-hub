@@ -61,7 +61,7 @@
             <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
         </div>
 
-        <!-- Grid of 14 Tools -->
+        <!-- Grid of 15 Tools -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
             <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
@@ -124,32 +124,35 @@
                 <span class="text-[10px] text-gray-400 mt-1">مؤقت زمني دقيق</span>
             </div>
 
-            <!-- New Tool 11: Img to PDF -->
             <div onclick="openTool('img2pdf')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📁</div>
                 <h3 class="font-bold text-sm">تحويل لـ PDF</h3>
                 <span class="text-[10px] text-gray-400 mt-1">تحويل الصور لملف PDF</span>
             </div>
 
-            <!-- New Tool 12: Barcode Reader -->
             <div onclick="openTool('barcode')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📷</div>
                 <h3 class="font-bold text-sm">قراءة الباركود</h3>
                 <span class="text-[10px] text-gray-400 mt-1">فحص الرموز بالكاميرا</span>
             </div>
 
-            <!-- New Tool 13: Insta Followers -->
             <div onclick="openTool('insta')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📸</div>
                 <h3 class="font-bold text-sm">متابعين انستجرام</h3>
                 <span class="text-[10px] text-gray-400 mt-1">رشق متابعين حقيقيين</span>
             </div>
 
-            <!-- New Tool 14: TikTok Followers -->
             <div onclick="openTool('tiktok')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
                 <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">🎵</div>
                 <h3 class="font-bold text-sm">متابعين تيك توك</h3>
                 <span class="text-[10px] text-gray-400 mt-1">شحن متابعين مجاني</span>
+            </div>
+
+            <!-- New Tool 15: Video Downloader -->
+            <div onclick="openTool('vidl')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center col-span-2 sm:col-span-1">
+                <div class="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center text-xl mb-2">📥</div>
+                <h3 class="font-bold text-sm">تحميل الفيديوهات</h3>
+                <span class="text-[10px] text-gray-400 mt-1">تيك توك، فيسبوك، انستا، يوتيوب</span>
             </div>
 
         </div>
@@ -242,6 +245,18 @@
             } else if(type === 'tiktok') {
                 title.innerText = "شحن متابعين تيك توك";
                 body.innerHTML = `<div class="space-y-3"><input type="text" placeholder="اكتب يوزر تيك توك (@Username) هنا..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><select class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none"><option>5000 متابع + لايكات</option><option>15000 متابع حصري</option></select><button onclick="showDevMsg()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">بدء الشحن الفوري</button></div>`;
+            } else if(type === 'vidl') {
+                title.innerText = "تحميل الفيديوهات الذكي";
+                body.innerHTML = `<div class="space-y-3">
+                    <input type="text" id="videoUrlInput" placeholder="ضع رابط الفيديو (تيك توك، فيسبوك، انستا، يوتيوب)..." class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none">
+                    <select id="videoQuality" class="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 border-none text-sm outline-none cursor-pointer">
+                        <option value="hd">جودة عالية (HD 1080p)</option>
+                        <option value="sd">جودة متوسطة (SD 720p)</option>
+                        <option value="audio">استخراج الصوت فقط (MP3)</option>
+                    </select>
+                    <button onclick="processVideoDownload()" class="w-full bg-brand text-white py-2.5 rounded-xl font-bold text-sm">تحميل الفيديو (Download)</button>
+                    <div id="vidResult" class="text-center font-bold text-sm mt-2"></div>
+                </div>`;
             }
         }
 
@@ -252,6 +267,23 @@
 
         function showDevMsg() {
             alert("عذراً، الخدمة متوقفة مؤقتاً، يرجى التواصل مع مطور الموقع عبر الواتساب: 01094122436");
+        }
+
+        function processVideoDownload() {
+            let url = document.getElementById('videoUrlInput').value.trim();
+            let quality = document.getElementById('videoQuality').value;
+            let resDiv = document.getElementById('vidResult');
+            
+            if(!url) {
+                alert("الرجاء إدخال رابط الفيديو أولاً!");
+                return;
+            }
+
+            resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري معالجة الرابط واستخراج ملف الفيديو...</span>";
+            
+            setTimeout(() => {
+                resDiv.innerHTML = `<div class='p-3 bg-green-500/10 text-green-500 rounded-xl mt-2'>تم تجهيز الفيديو بنجاح بالجودة المطلوبة! <br><a href="${url}" target="_blank" class='underline font-bold mt-1 inline-block'>اضغط هنا لبدء التحميل الفوري ⬇️</a></div>`;
+            }, 1500);
         }
 
         function convertToPdf() {

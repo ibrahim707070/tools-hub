@@ -40,7 +40,9 @@
     <header class="sticky top-0 z-50 ios-card border-b border-gray-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center shadow-sm">
         <div class="flex items-center space-x-3 space-x-reverse">
             <span class="w-3 h-3 bg-brand rounded-full animate-ping"></span>
-            <h1 class="text-lg font-bold tracking-tight text-brand">Abo Kayan Tools</h1>
+            <a href="https://wa.me/201094122436?text=مرحباً%20أبو%20كيان،%20أود%20التواصل%20معك%20بخصوص%20منصة%20الأدوات" target="_blank" class="text-lg font-bold tracking-tight text-brand hover:underline flex items-center gap-1.5">
+                Abo Kayan Tools
+            </a>
         </div>
         
         <div class="flex items-center space-x-2 space-x-reverse">
@@ -61,7 +63,7 @@
             <p id="subText" class="text-sm text-gray-500 dark:text-gray-400">لوحة التحكم الشاملة لأدواتك اليومية بتصميم أنيق</p>
         </div>
 
-        <!-- Grid of 15 Tools -->
+        <!-- Grid of Tools -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             
             <div onclick="openTool('percent')" class="ios-card p-4 rounded-2xl shadow-sm hover:scale-[1.02] transition cursor-pointer flex flex-col items-center text-center">
@@ -275,7 +277,6 @@
             resDiv.innerHTML = "<span class='text-yellow-500 animate-pulse'>جاري تجهيز محركات التحميل...</span>";
             
             setTimeout(() => {
-                // توجيه ذكي لمواقع تحميل الفيديوهات المضمونة الشهيرة عالمياً
                 resDiv.innerHTML = `
                     <div class='p-3 bg-brand/10 text-brand rounded-xl mt-2 space-y-2'>
                         <p class='text-xs font-bold text-gray-200'>اختر محرك التحميل المناسب للرابط:</p>
@@ -351,7 +352,8 @@
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%*?&";
             let pass = "";
             for (let i = 0; i < 12; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('passResult').innerText, pass;
+            let el = document.getElementById('passResult');
+            if(el) el.innerText = pass;
         }
 
         function convertUnits() {
@@ -364,9 +366,13 @@
         }
 
         function countText() {
-            let text = document.getElementById('textInput').value.trim();
-            let words = text === "" ? 0 : text.split(/\s+/).length;
-            let chars = text.length;
+            let text = document.getElementById('textInput').value.text; // Fixed safety
+            // handled inside element
+            let txtArea = document.getElementById('textInput');
+            if(!txtArea) return;
+            let val = txtArea.value.trim();
+            let words = val === "" ? 0 : val.split(/\s+/).length;
+            let chars = val.length;
             document.getElementById('wordCount').innerText = "الكلمات: " + words;
             document.getElementById('charCount').innerText = "الحروف: " + chars;
         }
@@ -385,7 +391,6 @@
 
         function resetStopwatch() {
             clearInterval(stopwatchInterval);
-            stopwatchSeconds.reset = 0;
             stopwatchSeconds = 0;
             let el = document.getElementById('stopwatchDisplay');
             if(el) el.innerText = "00:00:00";

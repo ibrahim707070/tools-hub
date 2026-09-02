@@ -718,6 +718,13 @@ oninput="searchTools()">
 <span class="arrow">←</span>
 </div>
 
+<div class="tool" data-cat="dev" data-name="ضغط الأكواد">
+<div class="icon">⚡</div>
+<h3>ضغط الأكواد</h3>
+<p>HTML, CSS, JS Minifier</p>
+<span class="arrow">←</span>
+</div>
+
 <div class="tool" data-cat="image" data-name="Resize Image">
 <div class="icon">🖼️</div>
 <h3>تغيير حجم الصورة</h3>
@@ -1243,6 +1250,38 @@ html=`
 
 }
 
+else if(name==="ضغط الأكواد"){
+
+html=`
+<div class="field">
+<label>نوع الكود:</label>
+<select id="codeType" style="margin-bottom:10px;">
+<option value="html">HTML</option>
+<option value="css">CSS</option>
+<option value="js">JavaScript</option>
+</select>
+</div>
+
+<div class="field">
+<label>الكود الأصلي:</label>
+<textarea id="inputCode" rows="6" placeholder="ألصق كود الـ HTML أو CSS أو JS هنا..."></textarea>
+</div>
+
+<button class="btn" onclick="minifyCode()">ضغط وتنظيف الكود</button>
+
+<div class="field" style="margin-top:15px;">
+<label>الكود بعد الضغط:</label>
+<textarea id="outputCode" rows="6" readonly placeholder="سيظهر الكود المضغوط هنا..."></textarea>
+</div>
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+<span id="stats" class="stats" style="font-size:13px; font-weight:bold;"></span>
+<button class="btn" style="margin-top:0; background:linear-gradient(135deg,#20d978,#16b957);" onclick="copyResult()">نسخ النتيجة</button>
+</div>
+`;
+
+}
+
 else if(name==="Resize Image"){
 
 html=`
@@ -1759,6 +1798,65 @@ document.getElementById("result").textContent=out;
 
 }
 
+function minifyCode() {
+    let type = document.getElementById('codeType').value;
+    let input = document.getElementById('inputCode').value;
+    let output = '';
+
+    if (!input.trim()) {
+        alert('الرجاء إدخال بعض الأكواد أولاً!');
+        return;
+    }
+
+    if (type === 'html') {
+        output = input
+            .replace(/<!--[\s\S]*?-->/g, '')
+            .replace(/\s+/g, ' ')
+            .replace(/>\s+</g, '><')
+            .trim();
+    } 
+    else if (type === 'css') {
+        output = input
+            .replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/\s+/g, ' ')
+            .replace(/\s*([{}:;,])\s*/g, '$1')
+            .replace(/;\}/g, '}')
+            .trim();
+    } 
+    else if (type === 'js') {
+        output = input
+            .replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/\/\/.*/g, '')
+            .replace(/^\s*[\r\n]/gm, '')
+            .trim();
+    }
+
+    document.getElementById('outputCode').value = output;
+
+    let originalSize = new Blob([input]).size;
+    let compressedSize = new Blob([output]).size;
+    let saved = originalSize - compressedSize;
+    let percentage = originalSize > 0 ? ((saved / originalSize) * 100).toFixed(1) : 0;
+
+    let statsEl = document.getElementById('stats');
+    if (saved > 0) {
+        statsEl.style.color = '#20d978';
+        statsEl.innerText = `تم توفير: ${saved} بايت (${percentage}%)`;
+    } else {
+        statsEl.style.color = '#858b99';
+        statsEl.innerText = 'الكود مضغوط بالفعل أو قصير جداً';
+    }
+}
+
+function copyResult() {
+    let outputBox = document.getElementById('outputCode');
+    if (!outputBox.value) return;
+    
+    outputBox.select();
+    navigator.clipboard.writeText(outputBox.value);
+    alert('تم نسخ الكود المضغوط بنجاح!');
+}
+
 
 /* IMAGE */
 
@@ -1905,3 +2003,4 @@ closeTool();
 
 </body>
 </html>
+

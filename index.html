@@ -3,46 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07080d">
 
-<title>HeMa Tools</title>
+<title>HeMa Tools | أدوات مجانية وسريعة</title>
+<meta name="description" content="HeMa Tools - مجموعة أدوات مجانية للحساب والتحويل والنصوص والصور والمزيد.">
+<meta name="theme-color" content="#090b11">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
+:root{
+    --bg:#07080d;
+    --bg2:#0c0f17;
+    --card:#10131c;
+    --card2:#151923;
+    --border:#242936;
+    --text:#f7f7f8;
+    --muted:#858b99;
+    --red:#ff294d;
+    --red2:#ff4967;
+    --green:#19d66b;
+    --blue:#4da3ff;
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-:root{
-    --bg:#06070b;
-    --card:#10131b;
-    --card2:#151923;
-    --border:#252a35;
-    --text:#f5f5f7;
-    --muted:#858b99;
-    --red:#ff304f;
-    --green:#20d978;
-    --blue:#4b8cff;
-    --yellow:#ffc857;
-    --purple:#a855f7;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:Cairo,sans-serif;
+    font-family:"Cairo",sans-serif;
     background:
-        radial-gradient(circle at 85% 0%,rgba(255,48,79,.13),transparent 27%),
-        radial-gradient(circle at 10% 35%,rgba(70,100,255,.08),transparent 25%),
+        radial-gradient(circle at 85% 15%,rgba(255,25,70,.10),transparent 28%),
+        radial-gradient(circle at 10% 60%,rgba(20,90,255,.06),transparent 25%),
         var(--bg);
     color:var(--text);
     min-height:100vh;
 }
 
-button,input,select,textarea{
+button,input,textarea,select{
     font-family:inherit;
 }
 
@@ -51,254 +59,432 @@ button{
 }
 
 a{
-    text-decoration:none;
     color:inherit;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
-header{
+.header{
     position:sticky;
     top:0;
     z-index:1000;
-    height:72px;
-    background:rgba(6,7,11,.88);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid #20242d;
+    background:rgba(7,8,13,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.header{
+.nav{
     max-width:1200px;
-    height:100%;
     margin:auto;
-    padding:0 18px;
+    min-height:76px;
+    padding:0 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:15px;
 }
 
 .hema-brand{
     display:flex;
     align-items:center;
     gap:9px;
+    text-decoration:none;
     direction:ltr;
 }
 
 .hema-name{
-    color:#ff304f;
-    font-size:23px;
+    color:#ef2b2b;
+    font-size:22px;
     font-weight:900;
-    animation:glow 2s infinite;
+    letter-spacing:-.7px;
+    animation:hemaGlow 1.8s ease-in-out infinite;
 }
 
 .online-dot{
     width:10px;
     height:10px;
+    background:#22c55e;
     border-radius:50%;
-    background:#20d978;
-    box-shadow:0 0 7px #20d978,0 0 18px #20d978;
-    animation:pulse 1.7s infinite;
+    display:inline-block;
+    animation:onlinePulse 1.8s ease-in-out infinite;
 }
 
-@keyframes glow{
+@keyframes hemaGlow{
     0%,100%{
-        opacity:.5;
-        text-shadow:0 0 3px #ff304f;
+        opacity:.55;
+        text-shadow:0 0 3px rgba(239,43,43,.2);
     }
     50%{
         opacity:1;
-        text-shadow:0 0 7px #ff304f,0 0 22px #ff304f;
+        text-shadow:
+            0 0 5px #ef2b2b,
+            0 0 14px #ef2b2b,
+            0 0 25px rgba(239,43,43,.7);
     }
 }
 
-@keyframes pulse{
+@keyframes onlinePulse{
     0%,100%{
         opacity:.35;
-        transform:scale(.75);
+        transform:scale(.8);
+        box-shadow:0 0 3px #22c55e;
     }
     50%{
         opacity:1;
         transform:scale(1.15);
+        box-shadow:
+            0 0 6px #22c55e,
+            0 0 15px #22c55e,
+            0 0 25px rgba(34,197,94,.8);
     }
 }
 
-.whatsapp{
-    background:#16b957;
-    padding:9px 16px;
-    border-radius:13px;
-    font-weight:800;
-    box-shadow:0 0 20px rgba(22,185,87,.2);
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-/* HERO */
+.whatsapp-btn{
+    background:#19c964;
+    color:#fff;
+    border:0;
+    border-radius:14px;
+    padding:10px 17px;
+    font-weight:800;
+    text-decoration:none;
+    box-shadow:0 8px 25px rgba(25,201,100,.18);
+    transition:.2s;
+}
 
-main{
-    max-width:1200px;
+.whatsapp-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:min(1200px,calc(100% - 32px));
     margin:auto;
-    padding:25px 16px 80px;
 }
 
 .hero{
+    margin-top:28px;
+    min-height:345px;
+    border:1px solid #2b303c;
+    border-radius:30px;
+    padding:50px 30px;
     position:relative;
     overflow:hidden;
-    padding:38px 28px;
-    border-radius:27px;
-    border:1px solid #282d38;
     background:
-        radial-gradient(circle at 85% 20%,rgba(255,48,79,.14),transparent 32%),
-        radial-gradient(circle at 5% 90%,rgba(70,100,255,.08),transparent 30%),
-        #0d1017;
-    margin-bottom:24px;
+        radial-gradient(circle at 85% 25%,rgba(255,35,75,.16),transparent 35%),
+        radial-gradient(circle at 10% 90%,rgba(40,110,255,.10),transparent 35%),
+        linear-gradient(145deg,#0d1119,#0b0d14);
+    box-shadow:var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,35,75,.08);
+    filter:blur(70px);
+    left:-80px;
+    bottom:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:850px;
+}
+
+.hero-small{
+    color:#8c93a1;
+    font-size:18px;
+    margin-bottom:15px;
 }
 
 .hero h1{
-    font-size:36px;
+    font-size:clamp(32px,6vw,58px);
+    line-height:1.25;
     font-weight:900;
-    margin:8px 0;
+    margin-bottom:18px;
 }
 
 .hero h1 span{
-    color:#ff304f;
+    color:var(--red);
+    text-shadow:0 0 25px rgba(255,41,77,.25);
 }
 
 .hero p{
-    color:#858b99;
+    color:#9096a4;
+    font-size:18px;
+    line-height:2;
+    margin-bottom:24px;
 }
 
-.hero small{
-    color:#7e8491;
+.hero-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#ff254b,#d9163b);
+    color:#fff;
+    font-weight:800;
+    text-decoration:none;
+    box-shadow:0 12px 35px rgba(255,35,70,.18);
+    transition:.25s;
 }
 
-/* SEARCH */
+.hero-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= SEARCH ================= */
 
 .search-box{
-    margin-bottom:20px;
+    margin:25px 0 18px;
     position:relative;
 }
 
 .search-box input{
     width:100%;
-    height:55px;
-    border:1px solid #292e39;
+    height:62px;
+    padding:0 58px 0 20px;
     background:#0e1118;
-    color:white;
-    border-radius:17px;
-    padding:0 18px;
+    border:1px solid #292e39;
+    border-radius:20px;
+    color:#fff;
     outline:none;
-    font-size:14px;
+    font-size:16px;
+    transition:.2s;
 }
 
 .search-box input:focus{
-    border-color:#ff304f;
-    box-shadow:0 0 0 3px rgba(255,48,79,.08);
+    border-color:rgba(255,41,77,.7);
+    box-shadow:0 0 0 4px rgba(255,41,77,.07);
 }
 
-/* CATEGORIES */
+.search-icon{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:23px;
+}
+
+/* ================= CATEGORIES ================= */
 
 .categories{
     display:flex;
-    gap:8px;
+    gap:10px;
     overflow-x:auto;
-    padding-bottom:8px;
-    margin-bottom:20px;
+    padding:3px 2px 14px;
+    scrollbar-width:none;
 }
 
-.categories button{
-    white-space:nowrap;
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.cat{
+    flex:0 0 auto;
+    padding:11px 19px;
+    border-radius:15px;
+    background:#10131b;
+    color:#9096a4;
     border:1px solid #252a35;
-    color:#8d93a0;
-    background:#10131a;
-    padding:10px 16px;
-    border-radius:13px;
     font-weight:700;
+    transition:.2s;
 }
 
-.categories button.active,
-.categories button:hover{
-    color:white;
-    background:#211118;
-    border-color:#ff304f;
+.cat:hover{
+    border-color:#ff294d;
+    color:#fff;
 }
 
-/* TOOLS */
+.cat.active{
+    color:#fff;
+    border-color:#ff294d;
+    background:rgba(255,41,77,.08);
+    box-shadow:0 0 20px rgba(255,41,77,.08);
+}
 
-.tools{
+/* ================= SECTION ================= */
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin:25px 0 17px;
+}
+
+.section-title{
+    font-size:22px;
+    font-weight:900;
+}
+
+.section-title span{
+    color:var(--red);
+}
+
+.section-link{
+    color:#888e9c;
+    font-size:14px;
+    cursor:pointer;
+}
+
+/* ================= TOOLS GRID ================= */
+
+.tools-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:16px;
 }
 
-.tool{
+.tool-card{
+    min-height:220px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.025),transparent),
+        #10131b;
+    border:1px solid #252a36;
+    border-radius:24px;
+    padding:21px;
     position:relative;
     overflow:hidden;
-    min-height:175px;
-    padding:20px;
-    border-radius:21px;
-    border:1px solid #252a35;
-    background:linear-gradient(145deg,#11141c,#0c0f15);
-    cursor:pointer;
     transition:.25s;
+    cursor:pointer;
 }
 
-.tool:hover{
-    transform:translateY(-5px);
-    border-color:#40303a;
-    box-shadow:0 18px 45px rgba(0,0,0,.3);
-}
-
-.tool:after{
+.tool-card:after{
     content:"";
     position:absolute;
     width:100px;
     height:100px;
-    background:#ff304f;
-    filter:blur(70px);
-    opacity:.05;
-    left:-30px;
-    bottom:-40px;
+    right:-45px;
+    top:-45px;
+    background:rgba(255,41,77,.07);
+    border-radius:50%;
+    filter:blur(15px);
 }
 
-.icon{
-    width:50px;
-    height:50px;
-    border-radius:15px;
-    background:#191c25;
+.tool-card:hover{
+    transform:translateY(-5px);
+    border-color:#343b4a;
+    box-shadow:0 18px 45px rgba(0,0,0,.3);
+}
+
+.tool-icon{
+    width:58px;
+    height:58px;
+    border-radius:17px;
+    background:#181c27;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
-    margin-bottom:18px;
+    font-size:28px;
+    margin-bottom:28px;
 }
 
-.tool h3{
-    font-size:16px;
+.tool-title{
+    font-size:19px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-.tool p{
-    color:#777e8c;
-    font-size:12px;
-    margin-top:5px;
+.tool-desc{
+    color:#7e8491;
+    font-size:13px;
+    line-height:1.9;
 }
 
-.arrow{
+.tool-bottom{
     position:absolute;
-    left:18px;
     bottom:16px;
-    color:#555c68;
+    left:18px;
+    color:#737987;
+    font-size:14px;
 }
 
-/* MODAL */
+.favorite{
+    position:absolute;
+    top:16px;
+    left:16px;
+    border:0;
+    background:#171b24;
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    color:#6e7481;
+    font-size:17px;
+    z-index:4;
+}
+
+.favorite.active{
+    color:#ffd23f;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    display:none;
+    padding:45px 20px;
+    text-align:center;
+    color:#777d8a;
+    background:#10131a;
+    border:1px solid #252a35;
+    border-radius:20px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    margin:35px 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.stat{
+    background:#0f1219;
+    border:1px solid #252a35;
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+    color:#fff;
+}
+
+.stat span{
+    color:#777e8c;
+    font-size:13px;
+}
+
+/* ================= MODAL ================= */
 
 .modal{
-    display:none;
     position:fixed;
     inset:0;
-    z-index:3000;
     background:rgba(0,0,0,.78);
     backdrop-filter:blur(10px);
+    z-index:3000;
+    display:none;
     align-items:center;
     justify-content:center;
-    padding:18px;
+    padding:15px;
 }
 
 .modal.show{
@@ -306,172 +492,274 @@ main{
 }
 
 .modal-box{
-    width:min(570px,100%);
+    width:min(620px,100%);
     max-height:90vh;
     overflow:auto;
-    background:#10131b;
-    border:1px solid #303541;
+    background:#0d1017;
+    border:1px solid #303643;
     border-radius:25px;
-    padding:23px;
-    box-shadow:0 30px 100px #000;
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-head h2{
-    font-size:21px;
+    padding:25px;
+    box-shadow:0 30px 90px rgba(0,0,0,.65);
+    position:relative;
 }
 
 .close{
+    position:absolute;
+    left:17px;
+    top:15px;
+    width:38px;
+    height:38px;
     border:0;
-    width:40px;
-    height:40px;
     border-radius:12px;
-    background:#1c2029;
-    color:#aaa;
-    font-size:20px;
+    background:#191d26;
+    color:#fff;
+    font-size:21px;
 }
 
-.field{
-    margin-bottom:13px;
+.modal-title{
+    font-size:25px;
+    font-weight:900;
+    margin-bottom:7px;
+    padding-left:45px;
 }
 
-.field label{
-    display:block;
-    color:#8d93a0;
-    font-size:13px;
-    margin-bottom:6px;
+.modal-desc{
+    color:#7f8694;
+    margin-bottom:22px;
 }
 
-.field input,
-.field select,
-.field textarea{
+.tool-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.tool-form label{
+    color:#aeb4c0;
+    font-size:14px;
+}
+
+.tool-form input,
+.tool-form textarea,
+.tool-form select{
     width:100%;
-    border:1px solid #292e39;
-    background:#090b10;
-    color:white;
-    padding:13px;
+    background:#151922;
+    color:#fff;
+    border:1px solid #2a303c;
     border-radius:13px;
+    padding:13px;
     outline:none;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-    border-color:#ff304f;
+.tool-form textarea{
+    min-height:170px;
+    resize:vertical;
+    direction:ltr;
+    text-align:left;
+    font-family:monospace;
 }
 
-.btn{
+.tool-form input:focus,
+.tool-form textarea:focus,
+.tool-form select:focus{
+    border-color:#ff294d;
+}
+
+.action{
     border:0;
+    background:linear-gradient(135deg,#ff294d,#dc153c);
+    color:#fff;
     padding:13px 18px;
     border-radius:13px;
-    color:white;
     font-weight:800;
-    background:linear-gradient(135deg,#ff304f,#d91e3d);
     margin-top:5px;
+}
+
+.secondary{
+    border:1px solid #303642;
+    background:#171b24;
+    color:#fff;
+    padding:12px 17px;
+    border-radius:13px;
+    font-weight:700;
 }
 
 .result{
     margin-top:15px;
-    padding:18px;
+    background:#080b10;
+    border:1px solid #252b36;
     border-radius:15px;
-    background:#171a22;
-    border:1px solid #292e39;
-    text-align:center;
+    padding:16px;
+    line-height:1.9;
+    word-break:break-word;
 }
 
 .result strong{
-    font-size:25px;
-    color:#20d978;
+    color:#ff4967;
 }
 
-.result small{
-    display:block;
-    color:#858b99;
-    margin-top:5px;
+.modal-actions{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
 }
 
-/* FLOAT */
+.qr-holder{
+    background:#fff;
+    padding:15px;
+    width:max-content;
+    margin:15px auto;
+    border-radius:12px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-top:55px;
+    padding:35px 20px;
+    border-top:1px solid #1e232d;
+    text-align:center;
+    color:#707784;
+}
+
+footer strong{
+    color:#ef2b2b;
+}
+
+/* ================= FLOATING WHATSAPP ================= */
 
 .float-wa{
     position:fixed;
-    left:18px;
-    bottom:18px;
-    z-index:2000;
-    width:56px;
-    height:56px;
+    bottom:20px;
+    left:20px;
+    width:62px;
+    height:62px;
     border-radius:50%;
+    background:#16c965;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#16c967;
-    font-size:25px;
-    box-shadow:0 0 25px rgba(22,201,103,.4);
+    font-size:30px;
+    text-decoration:none;
+    z-index:1500;
+    box-shadow:
+        0 0 12px rgba(22,201,101,.4),
+        0 0 35px rgba(22,201,101,.18);
+    animation:waPulse 2s infinite;
 }
 
-/* MOBILE */
+@keyframes waPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.06)}
+}
 
-@media(max-width:900px){
-    .tools{
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+    .tools-grid{
         grid-template-columns:repeat(3,1fr);
     }
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
+    .container{
+        width:min(100% - 22px,1200px);
+    }
 
-    header{
-        height:67px;
+    .nav{
+        min-height:65px;
+        padding:0 12px;
     }
 
     .hema-name{
-        font-size:20px;
+        font-size:19px;
     }
 
-    .whatsapp{
-        font-size:12px;
-        padding:8px 12px;
+    .online-dot{
+        width:9px;
+        height:9px;
     }
 
-    main{
-        padding:17px 11px 70px;
+    .whatsapp-btn{
+        padding:9px 13px;
+        border-radius:13px;
+        font-size:13px;
     }
 
     .hero{
-        padding:27px 20px;
-        border-radius:22px;
+        margin-top:18px;
+        min-height:325px;
+        padding:35px 20px;
+        border-radius:25px;
+    }
+
+    .hero-small{
+        font-size:15px;
     }
 
     .hero h1{
-        font-size:26px;
+        font-size:32px;
     }
 
-    .tools{
+    .hero p{
+        font-size:15px;
+        line-height:1.9;
+    }
+
+    .tools-grid{
         grid-template-columns:repeat(2,1fr);
-        gap:10px;
+        gap:12px;
     }
 
-    .tool{
-        min-height:155px;
-        padding:16px;
+    .tool-card{
+        min-height:205px;
+        padding:17px;
+        border-radius:21px;
     }
 
-    .tool h3{
-        font-size:14px;
+    .tool-icon{
+        width:51px;
+        height:51px;
+        font-size:24px;
+        margin-bottom:24px;
     }
 
-    .tool p{
-        font-size:11px;
+    .tool-title{
+        font-size:17px;
     }
 
-    .icon{
-        width:45px;
-        height:45px;
-        font-size:21px;
+    .tool-desc{
+        font-size:12px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .section-title{
+        font-size:20px;
+    }
+
+    .float-wa{
+        width:58px;
+        height:58px;
+        bottom:17px;
+        left:17px;
+    }
+}
+
+@media(max-width:380px){
+    .tools-grid{
+        gap:9px;
+    }
+
+    .tool-card{
+        padding:14px;
+    }
+
+    .tool-title{
+        font-size:15px;
     }
 }
 </style>
@@ -479,1528 +767,1829 @@ main{
 
 <body>
 
-<header>
-<div class="header">
+<!-- ================= HEADER ================= -->
 
-<a class="hema-brand"
-href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
-target="_blank">
+<header class="header">
+    <nav class="nav">
 
-<span class="online-dot"></span>
-<span class="hema-name">HeMa Tools</span>
+        <a class="hema-brand"
+           href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
+           target="_blank"
+           rel="noopener noreferrer">
 
-</a>
+            <span class="online-dot"></span>
+            <span class="hema-name">HeMa Tools</span>
 
-<a class="whatsapp"
-href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
-target="_blank">
-واتساب
-</a>
+        </a>
 
-</div>
+        <div class="nav-actions">
+
+            <a class="whatsapp-btn"
+               href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
+               target="_blank"
+               rel="noopener noreferrer">
+                واتساب
+            </a>
+
+        </div>
+
+    </nav>
 </header>
 
-<main>
 
-<div class="hero">
-<small>أدوات مجانية وسريعة</small>
+<main class="container">
 
-<h1>
-كل أدواتك في
-<span>HeMa Tools</span>
-</h1>
+<!-- ================= HERO ================= -->
 
-<p>
-حاسبات ومحولات وأدوات للنصوص والصور والملفات في مكان واحد.
-</p>
-</div>
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            ⚡ أدوات مجانية وسريعة
+        </div>
+
+        <h1>
+            كل أدواتك في
+            <span>HeMa Tools</span>
+        </h1>
+
+        <p>
+            حاسبات ومحولات وأدوات للنصوص والصور والملفات
+            في مكان واحد، بدون تحميل برامج.
+        </p>
+
+        <a href="#tools" class="hero-btn">
+            🚀 ابدأ استخدام الأدوات
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
 
 <div class="search-box">
-<input
-id="search"
-type="search"
-placeholder="🔎 ابحث عن أداة..."
-oninput="searchTools()">
-</div>
 
-<div class="categories">
+    <span class="search-icon">🔎</span>
 
-<button class="active" onclick="filterTools('all',this)">الكل</button>
-<button onclick="filterTools('calc',this)">🧮 حسابات</button>
-<button onclick="filterTools('convert',this)">🔄 محولات</button>
-<button onclick="filterTools('text',this)">📝 نصوص</button>
-<button onclick="filterTools('dev',this)">💻 تقنية</button>
-<button onclick="filterTools('image',this)">🖼️ صور</button>
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="ابحث عن أداة..."
+        autocomplete="off"
+    >
 
 </div>
 
-<div class="tools" id="tools">
 
-<div class="tool" data-cat="calc" data-name="حساب النسبة">
-<div class="icon">%</div>
-<h3>حساب النسبة</h3>
-<p>احسب النسبة المئوية بسهولة</p>
-<span class="arrow">←</span>
+<!-- ================= CATEGORIES ================= -->
+
+<div class="categories" id="categories">
+
+    <button class="cat active" data-category="all">
+        الكل
+    </button>
+
+    <button class="cat" data-category="calc">
+        🧮 حسابات
+    </button>
+
+    <button class="cat" data-category="convert">
+        🔄 محولات
+    </button>
+
+    <button class="cat" data-category="text">
+        📝 نصوص
+    </button>
+
+    <button class="cat" data-category="image">
+        🖼️ صور
+    </button>
+
+    <button class="cat" data-category="date">
+        📅 وقت وتاريخ
+    </button>
+
+    <button class="cat" data-category="developer">
+        💻 برمجة
+    </button>
+
 </div>
 
-<div class="tool" data-cat="calc" data-name="حاسبة الخصم">
-<div class="icon">🏷️</div>
-<h3>حاسبة الخصم</h3>
-<p>احسب السعر بعد الخصم</p>
-<span class="arrow">←</span>
-</div>
 
-<div class="tool" data-cat="calc" data-name="حاسبة البقشيش">
-<div class="icon">💵</div>
-<h3>حاسبة البقشيش</h3>
-<p>احسب البقشيش وتقسيمه</p>
-<span class="arrow">←</span>
-</div>
+<!-- ================= POPULAR ================= -->
 
-<div class="tool" data-cat="calc" data-name="حاسبة القسط">
-<div class="icon">💳</div>
-<h3>حاسبة القسط</h3>
-<p>احسب القسط الشهري</p>
-<span class="arrow">←</span>
-</div>
+<section id="popularSection">
 
-<div class="tool" data-cat="calc" data-name="حساب العمر">
-<div class="icon">🎂</div>
-<h3>حساب العمر</h3>
-<p>احسب عمرك بالتفصيل</p>
-<span class="arrow">←</span>
-</div>
+    <div class="section-head">
 
-<div class="tool" data-cat="calc" data-name="BMI مؤشر كتلة الجسم">
-<div class="icon">⚖️</div>
-<h3>BMI</h3>
-<p>مؤشر كتلة الجسم</p>
-<span class="arrow">←</span>
-</div>
+        <h2 class="section-title">
+            🔥 <span>الأكثر استخدامًا</span>
+        </h2>
 
-<div class="tool" data-cat="calc" data-name="حساب السعرات">
-<div class="icon">🔥</div>
-<h3>السعرات</h3>
-<p>احسب احتياجك اليومي</p>
-<span class="arrow">←</span>
-</div>
+    </div>
 
-<div class="tool" data-cat="calc" data-name="GPA المعدل">
-<div class="icon">🎓</div>
-<h3>GPA</h3>
-<p>حساب المعدل الدراسي</p>
-<span class="arrow">←</span>
-</div>
+    <div class="tools-grid" id="popularGrid"></div>
 
-<div class="tool" data-cat="calc" data-name="فرق التاريخ">
-<div class="icon">📅</div>
-<h3>فرق التاريخ</h3>
-<p>الفرق بين تاريخين</p>
-<span class="arrow">←</span>
-</div>
+</section>
 
-<div class="tool" data-cat="calc" data-name="السرعة">
-<div class="icon">🚗</div>
-<h3>حاسبة السرعة</h3>
-<p>سرعة ومسافة وزمن</p>
-<span class="arrow">←</span>
-</div>
 
-<div class="tool" data-cat="convert" data-name="محول الطول">
-<div class="icon">📏</div>
-<h3>محول الطول</h3>
-<p>متر، سم، قدم، بوصة</p>
-<span class="arrow">←</span>
-</div>
+<!-- ================= ALL TOOLS ================= -->
 
-<div class="tool" data-cat="convert" data-name="محول الوزن">
-<div class="icon">⚖️</div>
-<h3>محول الوزن</h3>
-<p>كيلو، جرام، رطل</p>
-<span class="arrow">←</span>
-</div>
+<section id="tools">
 
-<div class="tool" data-cat="convert" data-name="محول الحرارة">
-<div class="icon">🌡️</div>
-<h3>محول الحرارة</h3>
-<p>مئوية وفهرنهايت وكلفن</p>
-<span class="arrow">←</span>
-</div>
+    <div class="section-head">
 
-<div class="tool" data-cat="convert" data-name="محول البيانات">
-<div class="icon">💾</div>
-<h3>محول البيانات</h3>
-<p>KB MB GB TB</p>
-<span class="arrow">←</span>
-</div>
+        <h2 class="section-title">
+            🧰 جميع الأدوات
+        </h2>
 
-<div class="tool" data-cat="calc" data-name="فرق الوقت">
-<div class="icon">⏱️</div>
-<h3>فرق الوقت</h3>
-<p>احسب الفرق بين وقتين</p>
-<span class="arrow">←</span>
-</div>
+        <span class="section-link" onclick="showFavorites()">
+            ⭐ المفضلة
+        </span>
 
-<div class="tool" data-cat="text" data-name="عداد الكلمات">
-<div class="icon">🔤</div>
-<h3>عداد الكلمات</h3>
-<p>كلمات وحروف وأسطر</p>
-<span class="arrow">←</span>
-</div>
+    </div>
 
-<div class="tool" data-cat="text" data-name="حالة النص">
-<div class="icon">Aa</div>
-<h3>حالة النص</h3>
-<p>UPPERCASE / lowercase</p>
-<span class="arrow">←</span>
-</div>
+    <div class="tools-grid" id="toolsGrid"></div>
 
-<div class="tool" data-cat="text" data-name="عكس النص">
-<div class="icon">↔️</div>
-<h3>عكس النص</h3>
-<p>اعكس النص بضغطة</p>
-<span class="arrow">←</span>
-</div>
+    <div class="empty" id="empty">
+        😕 لم نجد أداة بهذا الاسم
+    </div>
 
-<div class="tool" data-cat="dev" data-name="Base64">
-<div class="icon">🔐</div>
-<h3>Base64</h3>
-<p>تشفير وفك Base64</p>
-<span class="arrow">←</span>
-</div>
+</section>
 
-<div class="tool" data-cat="dev" data-name="URL Encoder">
-<div class="icon">🔗</div>
-<h3>URL Encoder</h3>
-<p>ترميز وفك الروابط</p>
-<span class="arrow">←</span>
-</div>
 
-<div class="tool" data-cat="dev" data-name="JSON Formatter">
-<div class="icon">{}</div>
-<h3>JSON Formatter</h3>
-<p>تنسيق JSON</p>
-<span class="arrow">←</span>
-</div>
+<!-- ================= STATS ================= -->
 
-<div class="tool" data-cat="dev" data-name="مولد كلمات السر">
-<div class="icon">🔑</div>
-<h3>مولد كلمات السر</h3>
-<p>كلمة مرور قوية وعشوائية</p>
-<span class="arrow">←</span>
-</div>
+<div class="stats">
 
-<div class="tool" data-cat="calc" data-name="رقم عشوائي">
-<div class="icon">🎲</div>
-<h3>رقم عشوائي</h3>
-<p>توليد رقم داخل نطاق</p>
-<span class="arrow">←</span>
-</div>
+    <div class="stat">
+        <strong>30+</strong>
+        <span>أداة مجانية</span>
+    </div>
 
-<div class="tool" data-cat="dev" data-name="QR Code">
-<div class="icon">▦</div>
-<h3>QR Code</h3>
-<p>إنشاء رمز QR</p>
-<span class="arrow">←</span>
-</div>
+    <div class="stat">
+        <strong>⚡</strong>
+        <span>سريع وسهل</span>
+    </div>
 
-<div class="tool" data-cat="dev" data-name="منتقي الألوان">
-<div class="icon">🎨</div>
-<h3>منتقي الألوان</h3>
-<p>اختيار ومعرفة كود اللون</p>
-<span class="arrow">←</span>
-</div>
+    <div class="stat">
+        <strong>📱</strong>
+        <span>يعمل على الهاتف</span>
+    </div>
 
-<div class="tool" data-cat="dev" data-name="Binary">
-<div class="icon">01</div>
-<h3>Binary</h3>
-<p>تحويل النص إلى Binary</p>
-<span class="arrow">←</span>
-</div>
-
-<div class="tool" data-cat="dev" data-name="ضغط الأكواد">
-<div class="icon">⚡</div>
-<h3>ضغط الأكواد</h3>
-<p>HTML, CSS, JS Minifier</p>
-<span class="arrow">←</span>
-</div>
-
-<div class="tool" data-cat="image" data-name="Resize Image">
-<div class="icon">🖼️</div>
-<h3>تغيير حجم الصورة</h3>
-<p>Resize للصور</p>
-<span class="arrow">←</span>
-</div>
-
-<div class="tool" data-cat="image" data-name="Compress Image">
-<div class="icon">📦</div>
-<h3>ضغط الصورة</h3>
-<p>تقليل حجم الصورة</p>
-<span class="arrow">←</span>
-</div>
-
-<div class="tool" data-cat="image" data-name="Image PDF">
-<div class="icon">📄</div>
-<h3>صورة إلى PDF</h3>
-<p>تحويل الصورة إلى PDF</p>
-<span class="arrow">←</span>
-</div>
-
-<div class="tool" data-cat="calc" data-name="الساعة والتاريخ">
-<div class="icon">🕐</div>
-<h3>الساعة والتاريخ</h3>
-<p>الوقت والتاريخ الحالي</p>
-<span class="arrow">←</span>
-</div>
+    <div class="stat">
+        <strong>🔒</strong>
+        <span>بدون تسجيل</span>
+    </div>
 
 </div>
 
 </main>
 
-<a class="float-wa"
-href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
-target="_blank">
-💬
-</a>
 
-
-<!-- MODAL -->
+<!-- ================= MODAL ================= -->
 
 <div class="modal" id="modal">
 
-<div class="modal-box">
+    <div class="modal-box">
 
-<div class="modal-head">
+        <button class="close" onclick="closeModal()">×</button>
 
-<h2 id="modalTitle">الأداة</h2>
+        <h2 class="modal-title" id="modalTitle"></h2>
 
-<button class="close" onclick="closeTool()">×</button>
+        <p class="modal-desc" id="modalDesc"></p>
+
+        <div id="toolContent"></div>
+
+        <div class="modal-actions">
+
+            <button class="secondary" onclick="shareTool()">
+                🔗 مشاركة الأداة
+            </button>
+
+            <button class="secondary" onclick="copyCurrentLink()">
+                📋 نسخ الرابط
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div id="modalContent"></div>
 
-</div>
+<!-- ================= WHATSAPP ================= -->
 
-</div>
+<a class="float-wa"
+   href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="تواصل معنا على واتساب">
+    💬
+</a>
+
+
+<footer>
+
+    <div>
+        <strong>HeMa Tools</strong>
+    </div>
+
+    <div style="margin-top:8px">
+        أدوات مجانية لحياة أسهل 🚀
+    </div>
+
+    <div style="margin-top:8px;font-size:12px">
+        © 2026 HeMa Tools - جميع الحقوق محفوظة
+    </div>
+
+</footer>
 
 
 <script>
 
-const modal=document.getElementById("modal");
-const title=document.getElementById("modalTitle");
-const content=document.getElementById("modalContent");
+/* =========================================================
+   DATA
+========================================================= */
 
-function openTool(name){
+const tools = [
 
-title.textContent=name;
+{
+ id:"percentage",
+ title:"حساب النسبة",
+ icon:"%",
+ category:"calc",
+ desc:"احسب النسبة المئوية بسهولة",
+ popular:true
+},
 
-let html="";
+{
+ id:"discount",
+ title:"حاسبة الخصم",
+ icon:"🏷️",
+ category:"calc",
+ desc:"احسب السعر بعد الخصم",
+ popular:true
+},
 
-if(name==="حساب النسبة"){
+{
+ id:"tip",
+ title:"حاسبة البقشيش",
+ icon:"💵",
+ category:"calc",
+ desc:"احسب البقشيش وتقسيم الحساب",
+ popular:true
+},
 
-html=`
-<div class="field">
-<label>الجزء</label>
-<input id="a" type="number">
-</div>
+{
+ id:"installment",
+ title:"حاسبة القسط",
+ icon:"💳",
+ category:"calc",
+ desc:"احسب القسط الشهري",
+ popular:true
+},
 
-<div class="field">
-<label>الكل</label>
-<input id="b" type="number">
-</div>
+{
+ id:"age",
+ title:"حساب العمر",
+ icon:"🎂",
+ category:"date",
+ desc:"احسب عمرك بالسنوات والأيام"
+},
 
-<button class="btn" onclick="calcPercent()">احسب</button>
+{
+ id:"bmi",
+ title:"مؤشر كتلة الجسم",
+ icon:"⚖️",
+ category:"calc",
+ desc:"احسب BMI ومعرفة التصنيف"
+},
 
-<div class="result" id="result">النتيجة</div>
-`;
+{
+ id:"calories",
+ title:"حاسبة السعرات",
+ icon:"🔥",
+ category:"calc",
+ desc:"تقدير احتياجك اليومي من السعرات"
+},
 
+{
+ id:"gpa",
+ title:"حساب المعدل GPA",
+ icon:"🎓",
+ category:"calc",
+ desc:"احسب المعدل الدراسي"
+},
+
+{
+ id:"dateDiff",
+ title:"فرق التاريخ",
+ icon:"📅",
+ category:"date",
+ desc:"احسب الفرق بين تاريخين"
+},
+
+{
+ id:"speed",
+ title:"حاسبة السرعة",
+ icon:"🚗",
+ category:"calc",
+ desc:"احسب السرعة والمسافة والزمن"
+},
+
+{
+ id:"length",
+ title:"محول الطول",
+ icon:"📏",
+ category:"convert",
+ desc:"تحويل متر وسم وقدم وإنش"
+},
+
+{
+ id:"weight",
+ title:"محول الوزن",
+ icon:"⚖️",
+ category:"convert",
+ desc:"تحويل كجم وجرام ورطل"
+},
+
+{
+ id:"temperature",
+ title:"محول الحرارة",
+ icon:"🌡️",
+ category:"convert",
+ desc:"تحويل Celsius و Fahrenheit"
+},
+
+{
+ id:"data",
+ title:"محول البيانات",
+ icon:"💾",
+ category:"convert",
+ desc:"تحويل KB وMB وGB"
+},
+
+{
+ id:"timeDiff",
+ title:"فرق الوقت",
+ icon:"⏱️",
+ category:"date",
+ desc:"احسب الفرق بين وقتين"
+},
+
+{
+ id:"words",
+ title:"عداد الكلمات",
+ icon:"📝",
+ category:"text",
+ desc:"احسب الكلمات والحروف"
+},
+
+{
+ id:"case",
+ title:"تغيير حالة النص",
+ icon:"Aa",
+ category:"text",
+ desc:"UPPERCASE و lowercase"
+},
+
+{
+ id:"reverse",
+ title:"عكس النص",
+ icon:"↔️",
+ category:"text",
+ desc:"اعكس النص بضغطة واحدة"
+},
+
+{
+ id:"base64",
+ title:"Base64",
+ icon:"🔐",
+ category:"developer",
+ desc:"ترميز وفك ترميز Base64"
+},
+
+{
+ id:"url",
+ title:"URL Encoder",
+ icon:"🔗",
+ category:"developer",
+ desc:"تشفير وفك تشفير الروابط"
+},
+
+{
+ id:"json",
+ title:"JSON Formatter",
+ icon:"{ }",
+ category:"developer",
+ desc:"تنسيق والتحقق من JSON"
+},
+
+{
+ id:"password",
+ title:"مولد كلمات السر",
+ icon:"🔑",
+ category:"developer",
+ desc:"أنشئ كلمة سر قوية"
+},
+
+{
+ id:"random",
+ title:"رقم عشوائي",
+ icon:"🎲",
+ category:"calc",
+ desc:"توليد رقم عشوائي"
+},
+
+{
+ id:"qr",
+ title:"QR Code",
+ icon:"▦",
+ category:"developer",
+ desc:"أنشئ QR Code لأي رابط أو نص",
+ popular:true
+},
+
+{
+ id:"color",
+ title:"منتقي الألوان",
+ icon:"🎨",
+ category:"developer",
+ desc:"اختيار ومعرفة كود اللون"
+},
+
+{
+ id:"binary",
+ title:"Binary Converter",
+ icon:"01",
+ category:"developer",
+ desc:"تحويل النص إلى Binary والعكس"
+},
+
+{
+ id:"resize",
+ title:"تغيير حجم الصور",
+ icon:"🖼️",
+ category:"image",
+ desc:"غيّر أبعاد الصورة بسهولة"
+},
+
+{
+ id:"compress",
+ title:"ضغط الصور",
+ icon:"📦",
+ category:"image",
+ desc:"تقليل حجم الصور من المتصفح",
+ popular:true
+},
+
+{
+ id:"imagePdf",
+ title:"تحويل صورة إلى PDF",
+ icon:"📄",
+ category:"image",
+ desc:"حوّل الصورة إلى PDF بسهولة"
+},
+
+{
+ id:"clock",
+ title:"الساعة والتاريخ",
+ icon:"🕐",
+ category:"date",
+ desc:"عرض الوقت والتاريخ الحالي"
 }
 
-else if(name==="حاسبة الخصم"){
+];
 
-html=`
-<div class="field">
-<label>السعر</label>
-<input id="a" type="number">
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const toolsGrid = document.getElementById("toolsGrid");
+const popularGrid = document.getElementById("popularGrid");
+const searchInput = document.getElementById("searchInput");
+const empty = document.getElementById("empty");
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const toolContent = document.getElementById("toolContent");
+
+let currentTool = null;
+let currentCategory = "all";
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+function getFavorites(){
+    return JSON.parse(localStorage.getItem("hemaFavorites") || "[]");
+}
+
+function toggleFavorite(id,event){
+
+    event.stopPropagation();
+
+    let fav = getFavorites();
+
+    if(fav.includes(id)){
+        fav = fav.filter(x => x !== id);
+    }else{
+        fav.push(id);
+    }
+
+    localStorage.setItem("hemaFavorites",JSON.stringify(fav));
+
+    renderTools();
+    renderPopular();
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+function cardHTML(tool){
+
+    const favorites = getFavorites();
+    const active = favorites.includes(tool.id) ? "active" : "";
+
+    return `
+        <div class="tool-card" onclick="openTool('${tool.id}')">
+
+            <button
+                class="favorite ${active}"
+                onclick="toggleFavorite('${tool.id}',event)">
+                ${active ? "★" : "☆"}
+            </button>
+
+            <div class="tool-icon">
+                ${tool.icon}
+            </div>
+
+            <div class="tool-title">
+                ${tool.title}
+            </div>
+
+            <div class="tool-desc">
+                ${tool.desc}
+            </div>
+
+            <div class="tool-bottom">
+                استخدم الأداة ←
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderTools(){
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    let filtered = tools.filter(tool => {
+
+        const matchCategory =
+            currentCategory === "all" ||
+            tool.category === currentCategory;
+
+        const matchSearch =
+            !query ||
+            tool.title.toLowerCase().includes(query) ||
+            tool.desc.toLowerCase().includes(query);
+
+        return matchCategory && matchSearch;
+
+    });
+
+    toolsGrid.innerHTML = filtered.map(cardHTML).join("");
+
+    empty.style.display =
+        filtered.length ? "none" : "block";
+
+    document.getElementById("popularSection").style.display =
+        query || currentCategory !== "all" ? "none" : "block";
+}
+
+
+function renderPopular(){
+
+    const popular = tools
+        .filter(t => t.popular)
+        .slice(0,6);
+
+    popularGrid.innerHTML =
+        popular.map(cardHTML).join("");
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+document.querySelectorAll(".cat").forEach(btn => {
+
+    btn.addEventListener("click",() => {
+
+        document.querySelectorAll(".cat")
+            .forEach(x => x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        currentCategory =
+            btn.dataset.category;
+
+        renderTools();
+
+        document.getElementById("tools")
+            .scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+    });
+
+});
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput.addEventListener("input",renderTools);
+
+
+/* =========================================================
+   RECENT
+========================================================= */
+
+function saveRecent(id){
+
+    let recent =
+        JSON.parse(localStorage.getItem("hemaRecent") || "[]");
+
+    recent = recent.filter(x => x !== id);
+
+    recent.unshift(id);
+
+    recent = recent.slice(0,6);
+
+    localStorage.setItem(
+        "hemaRecent",
+        JSON.stringify(recent)
+    );
+}
+
+
+/* =========================================================
+   OPEN TOOL
+========================================================= */
+
+function openTool(id){
+
+    const tool =
+        tools.find(x => x.id === id);
+
+    if(!tool) return;
+
+    currentTool = tool;
+
+    saveRecent(id);
+
+    modalTitle.textContent = tool.title;
+    modalDesc.textContent = tool.desc;
+
+    toolContent.innerHTML =
+        getToolHTML(tool.id);
+
+    modal.classList.add("show");
+
+    history.replaceState(
+        null,
+        "",
+        "#" + tool.id
+    );
+
+    if(tool.id === "clock"){
+        updateClock();
+        window.clockTimer =
+            setInterval(updateClock,1000);
+    }
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+function closeModal(){
+
+    modal.classList.remove("show");
+
+    if(window.clockTimer){
+        clearInterval(window.clockTimer);
+    }
+
+    history.replaceState(
+        null,
+        "",
+        location.pathname + location.search
+    );
+}
+
+modal.addEventListener("click",e => {
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+});
+
+document.addEventListener("keydown",e => {
+
+    if(e.key === "Escape"){
+        closeModal();
+    }
+
+});
+
+
+/* =========================================================
+   TOOL HTML
+========================================================= */
+
+function getToolHTML(id){
+
+switch(id){
+
+case "percentage":
+return `
+<div class="tool-form">
+
+<label>الرقم</label>
+<input id="pNum" type="number" placeholder="مثال: 614">
+
+<label>من إجمالي</label>
+<input id="pTotal" type="number" placeholder="مثال: 700">
+
+<button class="action" onclick="
+let n=Number(pNum.value),t=Number(pTotal.value);
+result.innerHTML=t ? '<strong>النتيجة:</strong> '+((n/t)*100).toFixed(2)+'%' : 'أدخل القيم';
+">
+احسب النسبة
+</button>
+
+<div class="result" id="result">
+النتيجة ستظهر هنا
 </div>
 
-<div class="field">
+</div>
+`;
+
+
+case "discount":
+return `
+<div class="tool-form">
+
+<label>السعر الأصلي</label>
+<input id="price" type="number" placeholder="500">
+
 <label>نسبة الخصم %</label>
-<input id="b" type="number">
+<input id="discountValue" type="number" placeholder="20">
+
+<button class="action" onclick="
+let p=Number(price.value),d=Number(discountValue.value);
+let saving=p*d/100;
+result.innerHTML='<strong>بعد الخصم:</strong> '+(p-saving).toFixed(2)+'<br><strong>قيمة الخصم:</strong> '+saving.toFixed(2);
+">
+احسب الخصم
+</button>
+
+<div class="result" id="result">
+النتيجة ستظهر هنا
 </div>
 
-<button class="btn" onclick="calcDiscount()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+</div>
 `;
 
-}
 
-else if(name==="حاسبة البقشيش"){
+case "tip":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
-<label>قيمة الفاتورة</label>
-<input id="a" type="number">
-</div>
+<label>قيمة الحساب</label>
+<input id="bill" type="number" placeholder="500">
 
-<div class="field">
 <label>البقشيش %</label>
-<input id="b" type="number" value="10">
-</div>
+<input id="tipPercent" type="number" value="10">
 
-<div class="field">
 <label>عدد الأشخاص</label>
-<input id="c" type="number" value="1">
-</div>
+<input id="people" type="number" value="1">
 
-<button class="btn" onclick="tip()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let b=Number(bill.value),t=Number(tipPercent.value),p=Number(people.value)||1;
+let tip=b*t/100,total=b+tip;
+result.innerHTML='<strong>البقشيش:</strong> '+tip.toFixed(2)+'<br><strong>الإجمالي:</strong> '+total.toFixed(2)+'<br><strong>لكل شخص:</strong> '+(total/p).toFixed(2);
+">
+احسب
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="حاسبة القسط"){
+case "installment":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
-<label>المبلغ</label>
-<input id="a" type="number">
-</div>
+<label>قيمة المبلغ</label>
+<input id="loan" type="number" placeholder="10000">
 
-<div class="field">
 <label>عدد الشهور</label>
-<input id="b" type="number">
-</div>
+<input id="months" type="number" placeholder="12">
 
-<div class="field">
 <label>الفائدة %</label>
-<input id="c" type="number" value="0">
-</div>
+<input id="interest" type="number" value="0">
 
-<button class="btn" onclick="installment()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let l=Number(loan.value),m=Number(months.value),i=Number(interest.value);
+let total=l+(l*i/100);
+result.innerHTML='<strong>إجمالي المبلغ:</strong> '+total.toFixed(2)+'<br><strong>القسط الشهري:</strong> '+(total/m).toFixed(2);
+">
+احسب القسط
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="حساب العمر"){
+case "age":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
 <label>تاريخ الميلاد</label>
 <input id="birth" type="date">
-</div>
 
-<button class="btn" onclick="age()">احسب العمر</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let b=new Date(birth.value),n=new Date();
+if(!birth.value){result.innerHTML='اختر تاريخ الميلاد';return}
+let age=n.getFullYear()-b.getFullYear();
+let m=n.getMonth()-b.getMonth();
+if(m<0 || (m===0 && n.getDate()<b.getDate())) age--;
+result.innerHTML='<strong>عمرك:</strong> '+age+' سنة';
+">
+احسب العمر
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="BMI"){
+case "bmi":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
 <label>الوزن بالكيلو</label>
-<input id="a" type="number">
-</div>
+<input id="weightInput" type="number" placeholder="80">
 
-<div class="field">
 <label>الطول بالسنتيمتر</label>
-<input id="b" type="number">
-</div>
+<input id="heightInput" type="number" placeholder="175">
 
-<button class="btn" onclick="bmi()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let w=Number(weightInput.value),h=Number(heightInput.value)/100;
+let bmi=w/(h*h);
+let c=bmi<18.5?'نقص وزن':bmi<25?'وزن طبيعي':bmi<30?'زيادة وزن':'سمنة';
+result.innerHTML='<strong>BMI:</strong> '+bmi.toFixed(2)+'<br><strong>التصنيف:</strong> '+c;
+">
+احسب BMI
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="السعرات"){
+case "calories":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
-<label>الوزن kg</label>
-<input id="a" type="number">
-</div>
+<label>الوزن كجم</label>
+<input id="calWeight" type="number" placeholder="80">
 
-<div class="field">
-<label>الطول cm</label>
-<input id="b" type="number">
-</div>
+<label>الطول سم</label>
+<input id="calHeight" type="number" placeholder="175">
 
-<div class="field">
 <label>العمر</label>
-<input id="c" type="number">
-</div>
+<input id="calAge" type="number" placeholder="25">
 
-<div class="field">
-<label>الجنس</label>
 <select id="gender">
-<option value="m">ذكر</option>
-<option value="f">أنثى</option>
+<option value="male">ذكر</option>
+<option value="female">أنثى</option>
 </select>
-</div>
 
-<button class="btn" onclick="calories()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let w=Number(calWeight.value),h=Number(calHeight.value),a=Number(calAge.value);
+let bmr=gender.value==='male'?(10*w+6.25*h-5*a+5):(10*w+6.25*h-5*a-161);
+result.innerHTML='<strong>احتياجك التقريبي:</strong> '+Math.round(bmr)+' سعرة/يوم<br><small>هذه قيمة تقديرية لمعدل الأيض الأساسي.</small>';
+">
+احسب
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="GPA"){
+case "gpa":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
-<label>أدخل درجاتك مفصولة بفواصل</label>
-<input id="grades" placeholder="90,80,75,95">
+<label>المجموع الذي حصلت عليه</label>
+<input id="gpaGot" type="number" placeholder="85">
+
+<label>المجموع الكلي</label>
+<input id="gpaTotal" type="number" placeholder="100">
+
+<button class="action" onclick="
+let g=Number(gpaGot.value),t=Number(gpaTotal.value);
+result.innerHTML='<strong>النسبة:</strong> '+((g/t)*100).toFixed(2)+'%';
+">
+احسب
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
 </div>
-
-<button class="btn" onclick="gpa()">احسب</button>
-<div class="result" id="result">النتيجة</div>
 `;
 
-}
 
-else if(name==="فرق التاريخ"){
+case "dateDiff":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
 <label>التاريخ الأول</label>
 <input id="date1" type="date">
-</div>
 
-<div class="field">
 <label>التاريخ الثاني</label>
 <input id="date2" type="date">
-</div>
 
-<button class="btn" onclick="dateDiff()">احسب</button>
-<div class="result" id="result">النتيجة</div>
+<button class="action" onclick="
+let a=new Date(date1.value),b=new Date(date2.value);
+let days=Math.abs(Math.round((b-a)/86400000));
+result.innerHTML='<strong>الفرق:</strong> '+days+' يوم';
+">
+احسب الفرق
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
 `;
 
-}
 
-else if(name==="السرعة"){
+case "speed":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
 <label>المسافة</label>
-<input id="a" type="number">
-</div>
+<input id="distance" type="number" placeholder="100">
 
-<div class="field">
 <label>الزمن بالساعات</label>
-<input id="b" type="number">
-</div>
+<input id="hours" type="number" placeholder="2">
 
-<button class="btn" onclick="speed()">احسب</button>
-<div class="result" id="result">النتيجة</div>
-`;
+<button class="action" onclick="
+let d=Number(distance.value),h=Number(hours.value);
+result.innerHTML='<strong>السرعة:</strong> '+(d/h).toFixed(2)+' وحدة/ساعة';
+">
+احسب السرعة
+</button>
 
-}
+<div class="result" id="result">النتيجة هنا</div>
 
-else if(name==="محول الطول"){
-
-html=`
-<div class="field">
-<label>القيمة بالمتر</label>
-<input id="a" type="number">
-</div>
-
-<button class="btn" onclick="lengthConvert()">تحويل</button>
-<div class="result" id="result">النتيجة</div>
-`;
-
-}
-
-else if(name==="محول الوزن"){
-
-html=`
-<div class="field">
-<label>القيمة بالكيلو</label>
-<input id="a" type="number">
-</div>
-
-<button class="btn" onclick="weightConvert()">تحويل</button>
-<div class="result" id="result">النتيجة</div>
-`;
-
-}
-
-else if(name==="محول الحرارة"){
-
-html=`
-<div class="field">
-<label>الحرارة بالمئوية</label>
-<input id="a" type="number">
-</div>
-
-<button class="btn" onclick="tempConvert()">تحويل</button>
-<div class="result" id="result">النتيجة</div>
-`;
-
-}
-
-else if(name==="محول البيانات"){
-
-html=`
-<div class="field">
-<label>القيمة بالـ MB</label>
-<input id="a" type="number">
-</div>
-
-<button class="btn" onclick="dataConvert()">تحويل</button>
-<div class="result" id="result">النتيجة</div>
-`;
-
-}
-
-else if(name==="فرق الوقت"){
-
-html=`
-<div class="field">
-<label>الوقت الأول</label>
-<input id="t1" type="time">
-</div>
-
-<div class="field">
-<label>الوقت الثاني</label>
-<input id="t2" type="time">
-</div>
-
-<button class="btn" onclick="timeDiff()">احسب</button>
-<div class="result" id="result">النتيجة</div>
-`;
-
-}
-
-else if(name==="عداد الكلمات"){
-
-html=`
-<div class="field">
-<label>النص</label>
-<textarea id="text" rows="7" oninput="countText()"></textarea>
-</div>
-
-<div class="result" id="result">
-الكلمات: 0<br>
-الحروف: 0
 </div>
 `;
 
-}
 
-else if(name==="حالة النص"){
+case "length":
+return `
+<div class="tool-form">
 
-html=`
-<div class="field">
-<label>النص</label>
-<textarea id="text" rows="6"></textarea>
-</div>
+<input id="lengthValue" type="number" placeholder="أدخل القيمة">
 
-<button class="btn" onclick="upper()">UPPERCASE</button>
-<button class="btn" onclick="lower()">lowercase</button>
-
-`;
-
-}
-
-else if(name==="عكس النص"){
-
-html=`
-<div class="field">
-<textarea id="text" rows="6"></textarea>
-</div>
-
-<button class="btn" onclick="reverseText()">اعكس النص</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="Base64"){
-
-html=`
-<div class="field">
-<textarea id="text" rows="6"></textarea>
-</div>
-
-<button class="btn" onclick="base64Encode()">تشفير</button>
-<button class="btn" onclick="base64Decode()">فك التشفير</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="URL Encoder"){
-
-html=`
-<div class="field">
-<textarea id="text" rows="6"></textarea>
-</div>
-
-<button class="btn" onclick="urlEncode()">ترميز</button>
-<button class="btn" onclick="urlDecode()">فك الترميز</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="JSON Formatter"){
-
-html=`
-<div class="field">
-<textarea id="text" rows="10" placeholder='{"name":"HeMa"}'></textarea>
-</div>
-
-<button class="btn" onclick="formatJSON()">تنسيق JSON</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="مولد كلمات السر"){
-
-html=`
-<div class="field">
-<label>طول كلمة السر</label>
-<input id="a" type="number" value="16">
-</div>
-
-<button class="btn" onclick="password()">توليد</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="رقم عشوائي"){
-
-html=`
-<div class="field">
-<label>من</label>
-<input id="a" type="number" value="1">
-</div>
-
-<div class="field">
-<label>إلى</label>
-<input id="b" type="number" value="100">
-</div>
-
-<button class="btn" onclick="randomNumber()">توليد</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="QR Code"){
-
-html=`
-<div class="field">
-<label>النص أو الرابط</label>
-<input id="text">
-</div>
-
-<button class="btn" onclick="qr()">إنشاء QR</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="منتقي الألوان"){
-
-html=`
-<div class="field">
-<label>اختر اللون</label>
-<input id="color" type="color" value="#ff304f">
-</div>
-
-<div class="result" id="result">
-#FF304F
-</div>
-`;
-
-setTimeout(()=>{
-document.getElementById("color").oninput=e=>{
-document.getElementById("result").textContent=e.target.value;
-}
-},10);
-
-}
-
-else if(name==="Binary"){
-
-html=`
-<div class="field">
-<textarea id="text" rows="6"></textarea>
-</div>
-
-<button class="btn" onclick="binaryEncode()">تحويل إلى Binary</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="ضغط الأكواد"){
-
-html=`
-<div class="field">
-<label>نوع الكود:</label>
-<select id="codeType" style="margin-bottom:10px;">
-<option value="html">HTML</option>
-<option value="css">CSS</option>
-<option value="js">JavaScript</option>
+<select id="lengthUnit">
+<option value="m">متر</option>
+<option value="cm">سنتيمتر</option>
+<option value="km">كيلومتر</option>
+<option value="ft">قدم</option>
+<option value="in">إنش</option>
 </select>
-</div>
 
-<div class="field">
-<label>الكود الأصلي:</label>
-<textarea id="inputCode" rows="6" placeholder="ألصق كود الـ HTML أو CSS أو JS هنا..."></textarea>
-</div>
+<button class="action" onclick="
+let v=Number(lengthValue.value),u=lengthUnit.value;
+let m=u==='m'?v:u==='cm'?v/100:u==='km'?v*1000:u==='ft'?v*.3048:v*.0254;
+result.innerHTML='<strong>بالمتر:</strong> '+m+' m<br><strong>بالسنتيمتر:</strong> '+(m*100)+' cm<br><strong>بالكيلومتر:</strong> '+(m/1000)+' km';
+">
+تحويل
+</button>
 
-<button class="btn" onclick="minifyCode()">ضغط وتنظيف الكود</button>
-
-<div class="field" style="margin-top:15px;">
-<label>الكود بعد الضغط:</label>
-<textarea id="outputCode" rows="6" readonly placeholder="سيظهر الكود المضغوط هنا..."></textarea>
-</div>
-
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
-<span id="stats" class="stats" style="font-size:13px; font-weight:bold;"></span>
-<button class="btn" style="margin-top:0; background:linear-gradient(135deg,#20d978,#16b957);" onclick="copyResult()">نسخ النتيجة</button>
-</div>
-`;
-
-}
-
-else if(name==="Resize Image"){
-
-html=`
-<div class="field">
-<label>اختر الصورة</label>
-<input id="image" type="file" accept="image/*">
-</div>
-
-<div class="field">
-<label>العرض</label>
-<input id="width" type="number">
-</div>
-
-<button class="btn" onclick="resizeImage()">تغيير الحجم</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="Compress Image"){
-
-html=`
-<div class="field">
-<label>اختر الصورة</label>
-<input id="image" type="file" accept="image/*">
-</div>
-
-<div class="field">
-<label>الجودة %</label>
-<input id="quality" type="number" value="70">
-</div>
-
-<button class="btn" onclick="compressImage()">ضغط الصورة</button>
-
-<div class="result" id="result"></div>
-`;
-
-}
-
-else if(name==="Image PDF"){
-
-html=`
-<div class="field">
-<label>اختر الصورة</label>
-<input id="image" type="file" accept="image/*">
-</div>
-
-<button class="btn" onclick="imagePDF()">إنشاء PDF</button>
-
-<div class="result">
-سيتم فتح الصورة للطباعة وحفظها كـ PDF.
-</div>
-`;
-
-}
-
-else if(name==="الساعة والتاريخ"){
-
-html=`
-<div class="result">
-
-<strong id="clock"></strong>
-
-<small id="today"></small>
+<div class="result" id="result">النتيجة هنا</div>
 
 </div>
 `;
 
-setTimeout(clock,50);
 
-}
+case "weight":
+return `
+<div class="tool-form">
 
-else{
+<input id="weightValue" type="number" placeholder="أدخل القيمة">
 
-html=`
-<div class="result">
-الأداة غير متاحة حالياً.
+<select id="weightUnit">
+<option value="kg">كيلوجرام</option>
+<option value="g">جرام</option>
+<option value="lb">رطل</option>
+</select>
+
+<button class="action" onclick="
+let v=Number(weightValue.value),u=weightUnit.value;
+let kg=u==='kg'?v:u==='g'?v/1000:v*.453592;
+result.innerHTML='<strong>كيلوجرام:</strong> '+kg.toFixed(4)+' kg<br><strong>جرام:</strong> '+(kg*1000).toFixed(2)+' g<br><strong>رطل:</strong> '+(kg/0.453592).toFixed(2)+' lb';
+">
+تحويل
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
 </div>
 `;
 
-}
 
-content.innerHTML=html;
+case "temperature":
+return `
+<div class="tool-form">
 
-modal.classList.add("show");
+<input id="tempValue" type="number" placeholder="أدخل الحرارة">
 
-}
+<select id="tempUnit">
+<option value="c">Celsius</option>
+<option value="f">Fahrenheit</option>
+</select>
 
-function closeTool(){
-modal.classList.remove("show");
-}
+<button class="action" onclick="
+let v=Number(tempValue.value),u=tempUnit.value;
+let c=u==='c'?v:(v-32)*5/9;
+let f=c*9/5+32;
+result.innerHTML='<strong>Celsius:</strong> '+c.toFixed(2)+'°C<br><strong>Fahrenheit:</strong> '+f.toFixed(2)+'°F';
+">
+تحويل
+</button>
 
-document.querySelectorAll(".tool").forEach(tool=>{
-tool.onclick=()=>openTool(tool.dataset.name);
-});
+<div class="result" id="result">النتيجة هنا</div>
 
+</div>
+`;
 
-/* SEARCH */
 
-function searchTools(){
+case "data":
+return `
+<div class="tool-form">
 
-let q=document.getElementById("search").value.toLowerCase();
+<input id="dataValue" type="number" placeholder="أدخل القيمة">
 
-document.querySelectorAll(".tool").forEach(tool=>{
+<select id="dataUnit">
+<option value="kb">KB</option>
+<option value="mb">MB</option>
+<option value="gb">GB</option>
+</select>
 
-let name=tool.dataset.name.toLowerCase();
+<button class="action" onclick="
+let v=Number(dataValue.value),u=dataUnit.value;
+let b=u==='kb'?v*1024:u==='mb'?v*1048576:v*1073741824;
+result.innerHTML='<strong>Bytes:</strong> '+b+'<br><strong>KB:</strong> '+(b/1024).toFixed(3)+'<br><strong>MB:</strong> '+(b/1048576).toFixed(3)+'<br><strong>GB:</strong> '+(b/1073741824).toFixed(3);
+">
+تحويل
+</button>
 
-tool.style.display=name.includes(q)?"block":"none";
+<div class="result" id="result">النتيجة هنا</div>
 
-});
+</div>
+`;
 
-}
 
+case "timeDiff":
+return `
+<div class="tool-form">
 
-/* FILTER */
+<label>الوقت الأول</label>
+<input id="time1" type="time">
 
-function filterTools(cat,btn){
+<label>الوقت الثاني</label>
+<input id="time2" type="time">
 
-document.querySelectorAll(".categories button")
-.forEach(x=>x.classList.remove("active"));
+<button class="action" onclick="
+let a=time1.value.split(':').map(Number),b=time2.value.split(':').map(Number);
+let x=a[0]*60+a[1],y=b[0]*60+b[1];
+let d=Math.abs(y-x);
+result.innerHTML='<strong>الفرق:</strong> '+Math.floor(d/60)+' ساعة و '+d%60+' دقيقة';
+">
+احسب
+</button>
 
-btn.classList.add("active");
+<div class="result" id="result">النتيجة هنا</div>
 
-document.querySelectorAll(".tool").forEach(tool=>{
+</div>
+`;
 
-tool.style.display=
-cat==="all" || tool.dataset.cat===cat
-?"block":"none";
 
-});
+case "words":
+return `
+<div class="tool-form">
 
-document.getElementById("search").value="";
+<textarea id="textValue" placeholder="اكتب النص هنا..."></textarea>
 
-}
+<button class="action" onclick="
+let t=textValue.value;
+let words=t.trim()?t.trim().split(/\\s+/).length:0;
+result.innerHTML='<strong>الكلمات:</strong> '+words+'<br><strong>الحروف:</strong> '+t.length+'<br><strong>بدون مسافات:</strong> '+t.replace(/\\s/g,'').length;
+">
+احسب
+</button>
 
+<div class="result" id="result">النتيجة هنا</div>
 
-/* CALCULATORS */
+</div>
+`;
 
-function calcPercent(){
 
-let a=Number(document.getElementById("a").value);
-let b=Number(document.getElementById("b").value);
+case "case":
+return `
+<div class="tool-form">
 
-document.getElementById("result").innerHTML=
-b ? `<strong>${((a/b)*100).toFixed(2)}%</strong>`:"أدخل القيم";
+<textarea id="caseText" placeholder="اكتب النص هنا..."></textarea>
 
-}
+<button class="action" onclick="
+let t=caseText.value;
+result.innerHTML='<strong>UPPERCASE:</strong><br>'+t.toUpperCase()+'<br><br><strong>lowercase:</strong><br>'+t.toLowerCase();
+">
+تغيير الحالة
+</button>
 
-function calcDiscount(){
+<div class="result" id="result">النتيجة هنا</div>
 
-let price=Number(document.getElementById("a").value);
-let discount=Number(document.getElementById("b").value);
+</div>
+`;
 
-let value=price-(price*discount/100);
 
-document.getElementById("result").innerHTML=
-`<strong>${value.toFixed(2)} ج</strong>
-<small>قيمة الخصم: ${(price-value).toFixed(2)} ج</small>`;
+case "reverse":
+return `
+<div class="tool-form">
 
-}
+<textarea id="reverseText" placeholder="اكتب النص هنا..."></textarea>
 
-function tip(){
+<button class="action" onclick="
+result.innerHTML='<strong>النص المعكوس:</strong><br>'+reverseText.value.split('').reverse().join('');
+">
+اعكس النص
+</button>
 
-let bill=Number(document.getElementById("a").value);
-let percent=Number(document.getElementById("b").value);
-let people=Number(document.getElementById("c").value)||1;
+<div class="result" id="result">النتيجة هنا</div>
 
-let t=bill*percent/100;
+</div>
+`;
 
-document.getElementById("result").innerHTML=
-`<strong>${(bill+t).toFixed(2)} ج</strong>
-<small>نصيب الفرد: ${((bill+t)/people).toFixed(2)} ج</small>`;
 
-}
+case "base64":
+return `
+<div class="tool-form">
 
-function installment(){
+<textarea id="baseText" placeholder="اكتب النص هنا..."></textarea>
 
-let amount=Number(document.getElementById("a").value);
-let months=Number(document.getElementById("b").value);
-let interest=Number(document.getElementById("c").value);
-
-let total=amount+(amount*interest/100);
-
-document.getElementById("result").innerHTML=
-`<strong>${(total/months).toFixed(2)} ج</strong>
-<small>إجمالي المبلغ: ${total.toFixed(2)} ج</small>`;
-
-}
-
-function age(){
-
-let birth=new Date(document.getElementById("birth").value);
-
-if(isNaN(birth)){
-document.getElementById("result").textContent="اختر تاريخ الميلاد";
-return;
-}
-
-let now=new Date();
-
-let years=now.getFullYear()-birth.getFullYear();
-
-let m=now.getMonth()-birth.getMonth();
-
-if(m<0 || (m===0 && now.getDate()<birth.getDate()))
-years--;
-
-document.getElementById("result").innerHTML=
-`<strong>${years} سنة</strong>`;
-
-}
-
-function bmi(){
-
-let w=Number(document.getElementById("a").value);
-let h=Number(document.getElementById("b").value)/100;
-
-let value=w/(h*h);
-
-let status=
-value<18.5?"نقص وزن":
-value<25?"وزن طبيعي":
-value<30?"زيادة وزن":"سمنة";
-
-document.getElementById("result").innerHTML=
-`<strong>${value.toFixed(1)}</strong>
-<small>${status}</small>`;
-
-}
-
-function calories(){
-
-let w=Number(document.getElementById("a").value);
-let h=Number(document.getElementById("b").value);
-let age=Number(document.getElementById("c").value);
-
-let gender=document.getElementById("gender").value;
-
-let bmr=
-gender==="m"
-?10*w+6.25*h-5*age+5
-:10*w+6.25*h-5*age-161;
-
-document.getElementById("result").innerHTML=
-`<strong>${Math.round(bmr)} سعرة</strong>
-<small>احتياجك الأساسي التقريبي</small>`;
-
-}
-
-function gpa(){
-
-let grades=document.getElementById("grades").value
-.split(",")
-.map(Number)
-.filter(x=>!isNaN(x));
-
-if(!grades.length)return;
-
-let avg=grades.reduce((a,b)=>a+b,0)/grades.length;
-
-document.getElementById("result").innerHTML=
-`<strong>${avg.toFixed(2)}%</strong>`;
-
-}
-
-function dateDiff(){
-
-let a=new Date(document.getElementById("date1").value);
-let b=new Date(document.getElementById("date2").value);
-
-let days=Math.abs((b-a)/86400000);
-
-document.getElementById("result").innerHTML=
-`<strong>${Math.round(days)} يوم</strong>`;
-
-}
-
-function speed(){
-
-let d=Number(document.getElementById("a").value);
-let t=Number(document.getElementById("b").value);
-
-document.getElementById("result").innerHTML=
-`<strong>${(d/t).toFixed(2)}</strong>
-<small>وحدة/ساعة</small>`;
-
-}
-
-function lengthConvert(){
-
-let m=Number(document.getElementById("a").value);
-
-document.getElementById("result").innerHTML=
-`<strong>${m} متر</strong>
-<small>${m*100} سم | ${(m*3.28084).toFixed(2)} قدم</small>`;
-
-}
-
-function weightConvert(){
-
-let kg=Number(document.getElementById("a").value);
-
-document.getElementById("result").innerHTML=
-`<strong>${kg} kg</strong>
-<small>${kg*1000} جرام | ${(kg*2.20462).toFixed(2)} رطل</small>`;
-
-}
-
-function tempConvert(){
-
-let c=Number(document.getElementById("a").value);
-
-document.getElementById("result").innerHTML=
-`<strong>${c}°C</strong>
-<small>${((c*9/5)+32).toFixed(2)}°F | ${(c+273.15).toFixed(2)}K</small>`;
-
-}
-
-function dataConvert(){
-
-let mb=Number(document.getElementById("a").value);
-
-document.getElementById("result").innerHTML=
-`<strong>${mb} MB</strong>
-<small>${(mb/1024).toFixed(2)} GB | ${(mb*1024).toFixed(0)} KB</small>`;
-
-}
-
-function timeDiff(){
-
-let a=document.getElementById("t1").value;
-let b=document.getElementById("t2").value;
-
-if(!a||!b)return;
-
-let x=a.split(":").map(Number);
-let y=b.split(":").map(Number);
-
-let min=Math.abs((y[0]*60+y[1])-(x[0]*60+x[1]));
-
-document.getElementById("result").innerHTML=
-`<strong>${Math.floor(min/60)} ساعة ${min%60} دقيقة</strong>`;
-
-}
-
-
-/* TEXT */
-
-function countText(){
-
-let t=document.getElementById("text").value;
-
-let words=t.trim()?t.trim().split(/\s+/).length:0;
-
-document.getElementById("result").innerHTML=
-`الكلمات: ${words}<br>
-الحروف: ${t.length}`;
-
-}
-
-function upper(){
-
-let x=document.getElementById("text");
-
-x.value=x.value.toUpperCase();
-
-}
-
-function lower(){
-
-let x=document.getElementById("text");
-
-x.value=x.value.toLowerCase();
-
-}
-
-function reverseText(){
-
-let x=document.getElementById("text").value;
-
-document.getElementById("result").textContent=
-[...x].reverse().join("");
-
-}
-
-
-/* DEV */
-
-function base64Encode(){
-
-let x=document.getElementById("text").value;
-
-document.getElementById("result").textContent=
-btoa(unescape(encodeURIComponent(x)));
-
-}
-
-function base64Decode(){
-
+<button class="action" onclick="
 try{
+result.innerHTML='<strong>Encoded:</strong><br>'+btoa(unescape(encodeURIComponent(baseText.value)));
+}catch(e){result.innerHTML='حدث خطأ'}
+">
+ترميز Base64
+</button>
 
-let x=document.getElementById("text").value;
-
-document.getElementById("result").textContent=
-decodeURIComponent(escape(atob(x)));
-
-}catch{
-
-document.getElementById("result").textContent=
-"النص غير صالح";
-
-}
-
-}
-
-function urlEncode(){
-
-let x=document.getElementById("text").value;
-
-document.getElementById("result").textContent=
-encodeURIComponent(x);
-
-}
-
-function urlDecode(){
-
+<button class="secondary" onclick="
 try{
+result.innerHTML='<strong>Decoded:</strong><br>'+decodeURIComponent(escape(atob(baseText.value)));
+}catch(e){result.innerHTML='النص غير صالح'}
+">
+فك Base64
+</button>
 
-document.getElementById("result").textContent=
-decodeURIComponent(document.getElementById("text").value);
+<div class="result" id="result">النتيجة هنا</div>
 
-}catch{
+</div>
+`;
 
-document.getElementById("result").textContent="الرابط غير صالح";
 
-}
+case "url":
+return `
+<div class="tool-form">
 
-}
+<textarea id="urlText" placeholder="ضع النص أو الرابط هنا..."></textarea>
 
-function formatJSON(){
+<button class="action" onclick="
+result.innerHTML='<strong>Encoded:</strong><br>'+encodeURIComponent(urlText.value);
+">
+Encode
+</button>
 
+<button class="secondary" onclick="
 try{
+result.innerHTML='<strong>Decoded:</strong><br>'+decodeURIComponent(urlText.value);
+}catch(e){result.innerHTML='الرابط غير صالح'}
+">
+Decode
+</button>
 
-let x=JSON.parse(document.getElementById("text").value);
+<div class="result" id="result">النتيجة هنا</div>
 
-document.getElementById("result").textContent=
-JSON.stringify(x,null,2);
+</div>
+`;
 
-}catch{
 
-document.getElementById("result").textContent=
-"JSON غير صالح";
+case "json":
+return `
+<div class="tool-form">
+
+<textarea id="jsonText" placeholder='{"name":"HeMa","tools":30}'></textarea>
+
+<button class="action" onclick="
+try{
+let x=JSON.parse(jsonText.value);
+result.innerHTML='<strong>JSON صحيح ✓</strong><pre style=&quot;direction:ltr;text-align:left;white-space:pre-wrap&quot;>'+JSON.stringify(x,null,2).replace(/</g,'&lt;')+'</pre>';
+}catch(e){
+result.innerHTML='<strong>JSON غير صحيح ✕</strong><br>'+e.message;
+}
+">
+تنسيق وفحص JSON
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
+`;
+
+
+case "password":
+return `
+<div class="tool-form">
+
+<label>طول كلمة السر</label>
+
+<input id="passLength" type="number" value="16" min="4" max="100">
+
+<button class="action" onclick="
+let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
+let len=Math.min(100,Math.max(4,Number(passLength.value)));
+let out='';
+for(let i=0;i<len;i++) out+=chars[Math.floor(Math.random()*chars.length)];
+result.innerHTML='<strong>كلمة السر:</strong><br><span style=&quot;direction:ltr;display:block&quot;>'+out+'</span>';
+">
+توليد كلمة سر
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
+`;
+
+
+case "random":
+return `
+<div class="tool-form">
+
+<input id="minRandom" type="number" value="1">
+
+<input id="maxRandom" type="number" value="100">
+
+<button class="action" onclick="
+let min=Number(minRandom.value),max=Number(maxRandom.value);
+result.innerHTML='<strong>الرقم:</strong> '+(Math.floor(Math.random()*(max-min+1))+min);
+">
+توليد رقم
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
+`;
+
+
+case "qr":
+return `
+<div class="tool-form">
+
+<input id="qrText" placeholder="اكتب رابط أو نص">
+
+<button class="action" onclick="
+qrHolder.innerHTML='';
+new QRCode(qrHolder,{text:qrText.value,width:220,height:220});
+">
+إنشاء QR Code
+</button>
+
+<div id="qrHolder" class="qr-holder"></div>
+
+</div>
+`;
+
+
+case "color":
+return `
+<div class="tool-form">
+
+<input id="colorInput" type="color" value="#ff294d" style="height:70px">
+
+<button class="action" onclick="
+result.innerHTML='<strong>HEX:</strong> '+colorInput.value;
+">
+اعرض الكود
+</button>
+
+<div class="result" id="result">اختر اللون</div>
+
+</div>
+`;
+
+
+case "binary":
+return `
+<div class="tool-form">
+
+<textarea id="binaryText" placeholder="اكتب نصًا باللغة الإنجليزية"></textarea>
+
+<button class="action" onclick="
+let out=[...binaryText.value].map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ');
+result.innerHTML='<strong>Binary:</strong><br><span style=&quot;direction:ltr;display:block&quot;>'+out+'</span>';
+">
+Text → Binary
+</button>
+
+<button class="secondary" onclick="
+try{
+let out=binaryText.value.trim().split(/\\s+/).map(x=>String.fromCharCode(parseInt(x,2))).join('');
+result.innerHTML='<strong>Text:</strong><br>'+out;
+}catch(e){result.innerHTML='Binary غير صالح'}
+">
+Binary → Text
+</button>
+
+<div class="result" id="result">النتيجة هنا</div>
+
+</div>
+`;
+
+
+case "resize":
+return `
+<div class="tool-form">
+
+<input id="resizeFile" type="file" accept="image/*">
+
+<label>العرض الجديد بالبكسل</label>
+<input id="newWidth" type="number" placeholder="مثال: 800">
+
+<button class="action" onclick="resizeImage()">
+تغيير الحجم
+</button>
+
+<div class="result" id="result">
+اختر صورة
+</div>
+
+</div>
+`;
+
+
+case "compress":
+return `
+<div class="tool-form">
+
+<input id="compressFile" type="file" accept="image/*">
+
+<label>جودة الصورة: 0.1 إلى 1</label>
+<input id="quality" type="number" value="0.7" min="0.1" max="1" step="0.1">
+
+<button class="action" onclick="compressImage()">
+ضغط الصورة
+</button>
+
+<div class="result" id="result">
+اختر صورة للضغط
+</div>
+
+</div>
+`;
+
+
+case "imagePdf":
+return `
+<div class="tool-form">
+
+<input id="pdfFile" type="file" accept="image/*">
+
+<button class="action" onclick="imageToPDF()">
+تحضير الصورة للطباعة كـ PDF
+</button>
+
+<div class="result" id="result">
+اختر الصورة ثم اضغط الزر.
+<br><br>
+ستفتح صفحة الطباعة، اختر <strong>Save as PDF</strong>.
+</div>
+
+</div>
+`;
+
+
+case "clock":
+return `
+<div class="result" id="clockResult" style="text-align:center;font-size:26px">
+جارٍ تحميل الوقت...
+</div>
+`;
+
+default:
+return `
+<div class="result">
+الأداة غير متاحة.
+</div>
+`;
 
 }
 
 }
 
-function password(){
 
-let len=Number(document.getElementById("a").value)||16;
-
-let chars=
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-
-let out="";
-
-for(let i=0;i<len;i++){
-
-out+=chars[Math.floor(Math.random()*chars.length)];
-
-}
-
-document.getElementById("result").textContent=out;
-
-}
-
-function randomNumber(){
-
-let a=Number(document.getElementById("a").value);
-let b=Number(document.getElementById("b").value);
-
-let x=Math.floor(Math.random()*(b-a+1))+a;
-
-document.getElementById("result").innerHTML=
-`<strong>${x}</strong>`;
-
-}
-
-function qr(){
-
-let text=document.getElementById("text").value;
-
-if(!text)return;
-
-let url=
-"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="
-+encodeURIComponent(text);
-
-document.getElementById("result").innerHTML=
-`<img src="${url}" style="max-width:220px;border-radius:12px">`;
-
-}
-
-function binaryEncode(){
-
-let text=document.getElementById("text").value;
-
-let out=[...text]
-.map(c=>c.charCodeAt(0).toString(2).padStart(8,"0"))
-.join(" ");
-
-document.getElementById("result").textContent=out;
-
-}
-
-function minifyCode() {
-    let type = document.getElementById('codeType').value;
-    let input = document.getElementById('inputCode').value;
-    let output = '';
-
-    if (!input.trim()) {
-        alert('الرجاء إدخال بعض الأكواد أولاً!');
-        return;
-    }
-
-    if (type === 'html') {
-        output = input
-            .replace(/<!--[\s\S]*?-->/g, '')
-            .replace(/\s+/g, ' ')
-            .replace(/>\s+</g, '><')
-            .trim();
-    } 
-    else if (type === 'css') {
-        output = input
-            .replace(/\/\*[\s\S]*?\*\//g, '')
-            .replace(/\s+/g, ' ')
-            .replace(/\s*([{}:;,])\s*/g, '$1')
-            .replace(/;\}/g, '}')
-            .trim();
-    } 
-    else if (type === 'js') {
-        output = input
-            .replace(/\/\*[\s\S]*?\*\//g, '')
-            .replace(/\/\/.*/g, '')
-            .replace(/^\s*[\r\n]/gm, '')
-            .trim();
-    }
-
-    document.getElementById('outputCode').value = output;
-
-    let originalSize = new Blob([input]).size;
-    let compressedSize = new Blob([output]).size;
-    let saved = originalSize - compressedSize;
-    let percentage = originalSize > 0 ? ((saved / originalSize) * 100).toFixed(1) : 0;
-
-    let statsEl = document.getElementById('stats');
-    if (saved > 0) {
-        statsEl.style.color = '#20d978';
-        statsEl.innerText = `تم توفير: ${saved} بايت (${percentage}%)`;
-    } else {
-        statsEl.style.color = '#858b99';
-        statsEl.innerText = 'الكود مضغوط بالفعل أو قصير جداً';
-    }
-}
-
-function copyResult() {
-    let outputBox = document.getElementById('outputCode');
-    if (!outputBox.value) return;
-    
-    outputBox.select();
-    navigator.clipboard.writeText(outputBox.value);
-    alert('تم نسخ الكود المضغوط بنجاح!');
-}
-
-
-/* IMAGE */
+/* =========================================================
+   IMAGE RESIZE
+========================================================= */
 
 function resizeImage(){
 
-let file=document.getElementById("image").files[0];
-let width=Number(document.getElementById("width").value);
+    const file =
+        document.getElementById("resizeFile").files[0];
 
-if(!file||!width)return;
+    const width =
+        Number(document.getElementById("newWidth").value);
 
-let img=new Image();
+    const result =
+        document.getElementById("result");
 
-img.onload=()=>{
+    if(!file || !width){
+        result.innerHTML="اختر صورة وأدخل العرض";
+        return;
+    }
 
-let canvas=document.createElement("canvas");
+    const img = new Image();
 
-let ratio=width/img.width;
+    img.onload = () => {
 
-canvas.width=width;
-canvas.height=img.height*ratio;
+        const canvas =
+            document.createElement("canvas");
 
-let ctx=canvas.getContext("2d");
+        const ratio =
+            width / img.width;
 
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        canvas.width = width;
+        canvas.height = img.height * ratio;
 
-canvas.toBlob(blob=>{
+        const ctx =
+            canvas.getContext("2d");
 
-let url=URL.createObjectURL(blob);
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
-document.getElementById("result").innerHTML=
-`<a class="btn" href="${url}" download="hema-resized.jpg">
-تحميل الصورة
-</a>`;
+        canvas.toBlob(blob => {
 
-},"image/jpeg",.9);
+            const url =
+                URL.createObjectURL(blob);
 
-};
+            result.innerHTML = `
+                <strong>تم تغيير الحجم ✓</strong><br>
+                <a href="${url}"
+                   download="hema-resized.jpg"
+                   style="color:#ff4967">
+                   ⬇️ تحميل الصورة
+                </a>
+            `;
 
-img.src=URL.createObjectURL(file);
+        },"image/jpeg",.9);
 
+    };
+
+    img.src =
+        URL.createObjectURL(file);
 }
+
+
+/* =========================================================
+   COMPRESS IMAGE
+========================================================= */
 
 function compressImage(){
 
-let file=document.getElementById("image").files[0];
-let quality=Number(document.getElementById("quality").value)/100;
+    const file =
+        document.getElementById("compressFile").files[0];
 
-if(!file)return;
+    const quality =
+        Number(document.getElementById("quality").value);
 
-let img=new Image();
+    const result =
+        document.getElementById("result");
 
-img.onload=()=>{
+    if(!file){
+        result.innerHTML="اختر صورة أولاً";
+        return;
+    }
 
-let canvas=document.createElement("canvas");
+    const img = new Image();
 
-canvas.width=img.width;
-canvas.height=img.height;
+    img.onload = () => {
 
-let ctx=canvas.getContext("2d");
+        const canvas =
+            document.createElement("canvas");
 
-ctx.drawImage(img,0,0);
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-canvas.toBlob(blob=>{
+        const ctx =
+            canvas.getContext("2d");
 
-let url=URL.createObjectURL(blob);
+        ctx.drawImage(img,0,0);
 
-document.getElementById("result").innerHTML=
-`<strong>${Math.round(blob.size/1024)} KB</strong>
-<br><br>
-<a class="btn" href="${url}" download="hema-compressed.jpg">
-تحميل الصورة
-</a>`;
+        canvas.toBlob(blob => {
 
-},"image/jpeg",quality);
+            const url =
+                URL.createObjectURL(blob);
 
-};
+            const oldSize =
+                (file.size/1024).toFixed(1);
 
-img.src=URL.createObjectURL(file);
+            const newSize =
+                (blob.size/1024).toFixed(1);
 
-}
+            const saved =
+                Math.max(
+                    0,
+                    (1 - blob.size/file.size)*100
+                ).toFixed(1);
 
-function imagePDF(){
+            result.innerHTML = `
+                <strong>تم الضغط ✓</strong><br><br>
 
-let file=document.getElementById("image").files[0];
+                الحجم الأصلي:
+                ${oldSize} KB
+                <br>
 
-if(!file)return;
+                الحجم الجديد:
+                ${newSize} KB
+                <br>
 
-let url=URL.createObjectURL(file);
+                نسبة التوفير:
+                ${saved}%
+                <br><br>
 
-let w=window.open("");
+                <a href="${url}"
+                   download="hema-compressed.jpg"
+                   style="color:#ff4967">
+                   ⬇️ تحميل الصورة المضغوطة
+                </a>
+            `;
 
-w.document.write(`
-<html>
-<head>
-<title>HeMa Tools PDF</title>
-</head>
-<body style="margin:0;text-align:center">
-<img src="${url}" style="max-width:100%;max-height:100vh">
-<script>
-window.onload=function(){
-window.print();
-}
-<\/script>
-</body>
-</html>
-`);
+        },"image/jpeg",quality);
 
-}
+    };
 
-
-/* CLOCK */
-
-function clock(){
-
-let now=new Date();
-
-document.getElementById("clock").textContent=
-now.toLocaleTimeString("ar-EG");
-
-document.getElementById("today").textContent=
-now.toLocaleDateString("ar-EG",{
-weekday:"long",
-year:"numeric",
-month:"long",
-day:"numeric"
-});
-
-setTimeout(clock,1000);
-
+    img.src =
+        URL.createObjectURL(file);
 }
 
 
-/* CLOSE */
+/* =========================================================
+   IMAGE TO PDF
+========================================================= */
 
-modal.addEventListener("click",e=>{
+function imageToPDF(){
 
-if(e.target===modal){
-closeTool();
+    const file =
+        document.getElementById("pdfFile").files[0];
+
+    const result =
+        document.getElementById("result");
+
+    if(!file){
+        result.innerHTML="اختر صورة أولاً";
+        return;
+    }
+
+    const url =
+        URL.createObjectURL(file);
+
+    const win =
+        window.open("","_blank");
+
+    win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>HeMa Tools PDF</title>
+        <style>
+        body{
+            margin:0;
+            text-align:center;
+            background:white;
+        }
+        img{
+            max-width:100%;
+            height:auto;
+        }
+        @media print{
+            @page{
+                margin:0;
+            }
+        }
+        </style>
+        </head>
+        <body>
+        <img src="${url}" onload="setTimeout(()=>window.print(),500)">
+        </body>
+        </html>
+    `);
+
+    result.innerHTML =
+        "تم فتح الصورة للطباعة. اختر Save as PDF.";
 }
 
-});
+
+/* =========================================================
+   CLOCK
+========================================================= */
+
+function updateClock(){
+
+    const el =
+        document.getElementById("clockResult");
+
+    if(!el) return;
+
+    const now = new Date();
+
+    const time =
+        now.toLocaleTimeString("ar-EG");
+
+    const date =
+        now.toLocaleDateString(
+            "ar-EG",
+            {
+                weekday:"long",
+                year:"numeric",
+                month:"long",
+                day:"numeric"
+            }
+        );
+
+    el.innerHTML =
+        `<strong>${time}</strong><br><small>${date}</small>`;
+}
+
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+function shareTool(){
+
+    if(!currentTool) return;
+
+    const url =
+        location.origin +
+        location.pathname +
+        "#" +
+        currentTool.id;
+
+    if(navigator.share){
+
+        navigator.share({
+            title:currentTool.title+" | HeMa Tools",
+            text:"جرب هذه الأداة المجانية من HeMa Tools",
+            url:url
+        });
+
+    }else{
+
+        navigator.clipboard.writeText(url);
+
+        alert("تم نسخ رابط الأداة ✓");
+
+    }
+
+}
+
+
+function copyCurrentLink(){
+
+    if(!currentTool) return;
+
+    const url =
+        location.origin +
+        location.pathname +
+        "#" +
+        currentTool.id;
+
+    navigator.clipboard.writeText(url)
+        .then(() => {
+            alert("تم نسخ رابط الأداة ✓");
+        });
+
+}
+
+
+/* =========================================================
+   FAVORITES VIEW
+========================================================= */
+
+function showFavorites(){
+
+    const fav =
+        getFavorites();
+
+    if(!fav.length){
+
+        alert("لم تضف أي أداة للمفضلة ⭐");
+
+        return;
+    }
+
+    const list =
+        tools.filter(t => fav.includes(t.id));
+
+    toolsGrid.innerHTML =
+        list.map(cardHTML).join("");
+
+    document.getElementById("popularSection")
+        .style.display="none";
+
+    document.getElementById("tools")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* =========================================================
+   URL HASH
+========================================================= */
+
+function openHashTool(){
+
+    const id =
+        location.hash.replace("#","");
+
+    if(id && tools.some(t => t.id === id)){
+        setTimeout(() => openTool(id),300);
+    }
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+renderTools();
+renderPopular();
+openHashTool();
 
 </script>
 
 </body>
 </html>
-

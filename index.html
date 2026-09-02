@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090d">
-<title>HeMa Tools | إدارة الشركات</title>
+<meta name="theme-color" content="#07080d">
+
+<title>HeMa Tools</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,32 +19,30 @@
 }
 
 :root{
-    --bg:#07080c;
-    --card:#101219;
-    --card2:#141720;
+    --bg:#06070b;
+    --card:#10131b;
+    --card2:#151923;
     --border:#252a35;
-    --text:#f4f4f5;
+    --text:#f5f5f7;
     --muted:#858b99;
     --red:#ff304f;
-    --red2:#ff1744;
-    --green:#16d978;
-    --blue:#3b82f6;
+    --green:#20d978;
+    --blue:#4b8cff;
     --yellow:#ffc857;
     --purple:#a855f7;
-    --orange:#ff8a30;
 }
 
 body{
-    font-family:'Cairo',sans-serif;
+    font-family:Cairo,sans-serif;
     background:
-        radial-gradient(circle at 85% 5%,rgba(255,40,75,.12),transparent 25%),
-        radial-gradient(circle at 10% 35%,rgba(40,100,255,.08),transparent 25%),
+        radial-gradient(circle at 85% 0%,rgba(255,48,79,.13),transparent 27%),
+        radial-gradient(circle at 10% 35%,rgba(70,100,255,.08),transparent 25%),
         var(--bg);
     color:var(--text);
     min-height:100vh;
 }
 
-button,input,select{
+button,input,select,textarea{
     font-family:inherit;
 }
 
@@ -56,27 +55,26 @@ a{
     color:inherit;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    height:76px;
-    background:rgba(7,8,12,.88);
+    height:72px;
+    background:rgba(6,7,11,.88);
     backdrop-filter:blur(20px);
-    border-bottom:1px solid #1d2029;
+    border-bottom:1px solid #20242d;
 }
 
-.header-inner{
-    max-width:1250px;
+.header{
+    max-width:1200px;
     height:100%;
     margin:auto;
-    padding:0 20px;
+    padding:0 18px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
 }
 
 .hema-brand{
@@ -90,33 +88,33 @@ header{
     color:#ff304f;
     font-size:23px;
     font-weight:900;
-    animation:hemaGlow 2s ease-in-out infinite;
+    animation:glow 2s infinite;
 }
 
 .online-dot{
-    width:11px;
-    height:11px;
-    background:#16d978;
+    width:10px;
+    height:10px;
     border-radius:50%;
-    box-shadow:0 0 7px #16d978,0 0 18px #16d978;
-    animation:onlinePulse 1.8s infinite;
+    background:#20d978;
+    box-shadow:0 0 7px #20d978,0 0 18px #20d978;
+    animation:pulse 1.7s infinite;
 }
 
-@keyframes hemaGlow{
+@keyframes glow{
     0%,100%{
-        opacity:.55;
-        text-shadow:0 0 4px rgba(255,48,79,.2);
+        opacity:.5;
+        text-shadow:0 0 3px #ff304f;
     }
     50%{
         opacity:1;
-        text-shadow:0 0 7px #ff304f,0 0 20px rgba(255,48,79,.8);
+        text-shadow:0 0 7px #ff304f,0 0 22px #ff304f;
     }
 }
 
-@keyframes onlinePulse{
+@keyframes pulse{
     0%,100%{
         opacity:.35;
-        transform:scale(.8);
+        transform:scale(.75);
     }
     50%{
         opacity:1;
@@ -126,119 +124,37 @@ header{
 
 .whatsapp{
     background:#16b957;
-    padding:10px 18px;
-    border-radius:14px;
+    padding:9px 16px;
+    border-radius:13px;
     font-weight:800;
-    box-shadow:0 0 18px rgba(22,217,120,.18);
-    transition:.2s;
+    box-shadow:0 0 20px rgba(22,185,87,.2);
 }
 
-.whatsapp:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(22,217,120,.3);
-}
-
-/* ================= NAV ================= */
-
-.navbar{
-    position:sticky;
-    top:76px;
-    z-index:900;
-    background:rgba(9,10,15,.92);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid #1c2028;
-    overflow-x:auto;
-}
-
-.nav{
-    max-width:1250px;
-    margin:auto;
-    padding:8px 15px;
-    display:flex;
-    gap:8px;
-    min-width:max-content;
-}
-
-.nav button{
-    border:0;
-    color:#858b99;
-    background:transparent;
-    padding:12px 17px;
-    border-radius:15px;
-    font-weight:700;
-    transition:.2s;
-}
-
-.nav button:hover{
-    color:white;
-    background:#151821;
-}
-
-.nav button.active{
-    color:#fff;
-    background:linear-gradient(135deg,#211118,#171a22);
-    box-shadow:inset 0 -3px #ff304f,0 0 20px rgba(255,48,79,.08);
-}
-
-/* ================= MAIN ================= */
+/* HERO */
 
 main{
-    max-width:1250px;
+    max-width:1200px;
     margin:auto;
-    padding:25px 18px 70px;
+    padding:25px 16px 80px;
 }
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-    animation:fade .25s ease;
-}
-
-@keyframes fade{
-    from{opacity:0;transform:translateY(8px)}
-    to{opacity:1;transform:none}
-}
-
-/* ================= HERO ================= */
 
 .hero{
     position:relative;
     overflow:hidden;
-    padding:35px;
-    border:1px solid #282d38;
+    padding:38px 28px;
     border-radius:27px;
+    border:1px solid #282d38;
     background:
-        radial-gradient(circle at 85% 10%,rgba(255,48,79,.13),transparent 30%),
-        radial-gradient(circle at 10% 90%,rgba(59,130,246,.08),transparent 30%),
-        #0e1118;
-    margin-bottom:22px;
-}
-
-.hero:after{
-    content:"";
-    position:absolute;
-    width:200px;
-    height:200px;
-    border-radius:50%;
-    background:#ff304f;
-    filter:blur(120px);
-    opacity:.08;
-    left:-60px;
-    bottom:-100px;
-}
-
-.hero small{
-    color:#858b99;
-    font-size:14px;
+        radial-gradient(circle at 85% 20%,rgba(255,48,79,.14),transparent 32%),
+        radial-gradient(circle at 5% 90%,rgba(70,100,255,.08),transparent 30%),
+        #0d1017;
+    margin-bottom:24px;
 }
 
 .hero h1{
-    margin-top:8px;
-    font-size:34px;
+    font-size:36px;
     font-weight:900;
+    margin:8px 0;
 }
 
 .hero h1 span{
@@ -246,282 +162,112 @@ main{
 }
 
 .hero p{
-    color:#7e8491;
-    margin-top:8px;
-}
-
-/* ================= SECTION TITLE ================= */
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:25px 0 14px;
-}
-
-.section-title h2{
-    font-size:21px;
-}
-
-.section-title span{
-    color:#777d8a;
-    font-size:13px;
-}
-
-/* ================= STATS ================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-}
-
-.stat{
-    position:relative;
-    overflow:hidden;
-    padding:21px;
-    min-height:150px;
-    border:1px solid var(--border);
-    border-radius:22px;
-    background:linear-gradient(145deg,#11141c,#0d0f15);
-}
-
-.stat-icon{
-    width:45px;
-    height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:14px;
-    background:#181b24;
-    font-size:22px;
-    margin-bottom:18px;
-}
-
-.stat h3{
-    font-size:27px;
-    margin-bottom:3px;
-}
-
-.stat p{
     color:#858b99;
-    font-size:13px;
 }
 
-.stat.green h3{color:var(--green)}
-.stat.red h3{color:var(--red)}
-.stat.blue h3{color:#5d9cff}
-.stat.yellow h3{color:var(--yellow)}
-
-/* ================= GRID ================= */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
+.hero small{
+    color:#7e8491;
 }
 
-.card{
-    background:linear-gradient(145deg,#11141c,#0e1016);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:22px;
+/* SEARCH */
+
+.search-box{
+    margin-bottom:20px;
+    position:relative;
 }
 
-.card h3{
-    font-size:18px;
-    margin-bottom:18px;
-}
-
-.card-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.card-head h3{
-    margin:0;
-}
-
-/* ================= FORM ================= */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-.field.full{
-    grid-column:1/-1;
-}
-
-.field label{
-    color:#9298a5;
-    font-size:13px;
-}
-
-.field input,
-.field select{
+.search-box input{
     width:100%;
-    background:#090b10;
-    border:1px solid #282d37;
+    height:55px;
+    border:1px solid #292e39;
+    background:#0e1118;
     color:white;
-    padding:13px 14px;
-    border-radius:13px;
+    border-radius:17px;
+    padding:0 18px;
     outline:none;
-    transition:.2s;
+    font-size:14px;
 }
 
-.field input:focus,
-.field select:focus{
+.search-box input:focus{
     border-color:#ff304f;
     box-shadow:0 0 0 3px rgba(255,48,79,.08);
 }
 
-.btn{
-    border:0;
-    padding:13px 18px;
-    border-radius:13px;
-    color:white;
-    font-weight:800;
-    transition:.2s;
-}
+/* CATEGORIES */
 
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-red{
-    background:linear-gradient(135deg,#ff304f,#d91f3e);
-}
-
-.btn-green{
-    background:linear-gradient(135deg,#16d978,#0eae5e);
-}
-
-.btn-blue{
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-}
-
-.btn-gray{
-    background:#20242d;
-}
-
-.form-actions{
-    margin-top:14px;
+.categories{
     display:flex;
     gap:8px;
-    flex-wrap:wrap;
-}
-
-/* ================= TABLE ================= */
-
-.table-wrap{
     overflow-x:auto;
+    padding-bottom:8px;
+    margin-bottom:20px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:600px;
+.categories button{
+    white-space:nowrap;
+    border:1px solid #252a35;
+    color:#8d93a0;
+    background:#10131a;
+    padding:10px 16px;
+    border-radius:13px;
+    font-weight:700;
 }
 
-th{
-    text-align:right;
-    color:#777e8b;
-    font-size:13px;
-    padding:12px;
-    border-bottom:1px solid #292e39;
+.categories button.active,
+.categories button:hover{
+    color:white;
+    background:#211118;
+    border-color:#ff304f;
 }
 
-td{
-    padding:13px 12px;
-    border-bottom:1px solid #1c2028;
-    font-size:14px;
-}
+/* TOOLS */
 
-.delete-btn{
-    border:0;
-    background:#30131a;
-    color:#ff536c;
-    padding:7px 10px;
-    border-radius:9px;
-}
-
-/* ================= RESULT ================= */
-
-.result{
-    margin-top:15px;
-    padding:17px;
-    border-radius:15px;
-    background:#151821;
-    border:1px solid #282d37;
-}
-
-.result strong{
-    font-size:25px;
-}
-
-/* ================= PROGRESS ================= */
-
-.progress{
-    height:9px;
-    border-radius:99px;
-    background:#1a1e27;
-    overflow:hidden;
-    margin-top:10px;
-}
-
-.progress span{
-    display:block;
-    height:100%;
-    border-radius:99px;
-    background:linear-gradient(90deg,#ff304f,#ff6680);
-}
-
-/* ================= TOOL CARDS ================= */
-
-.tools-grid{
+.tools{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
 .tool{
     position:relative;
-    padding:22px;
-    min-height:155px;
-    border:1px solid var(--border);
-    border-radius:21px;
-    background:#10131a;
-    transition:.25s;
-    cursor:pointer;
     overflow:hidden;
+    min-height:175px;
+    padding:20px;
+    border-radius:21px;
+    border:1px solid #252a35;
+    background:linear-gradient(145deg,#11141c,#0c0f15);
+    cursor:pointer;
+    transition:.25s;
 }
 
 .tool:hover{
     transform:translateY(-5px);
-    border-color:#3a3036;
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    border-color:#40303a;
+    box-shadow:0 18px 45px rgba(0,0,0,.3);
 }
 
-.tool-icon{
-    width:47px;
-    height:47px;
+.tool:after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:#ff304f;
+    filter:blur(70px);
+    opacity:.05;
+    left:-30px;
+    bottom:-40px;
+}
+
+.icon{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:#191c25;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:14px;
-    background:#191c25;
-    font-size:22px;
-    margin-bottom:15px;
+    font-size:24px;
+    margin-bottom:18px;
 }
 
 .tool h3{
@@ -531,148 +277,28 @@ td{
 .tool p{
     color:#777e8c;
     font-size:12px;
-    margin-top:4px;
+    margin-top:5px;
 }
 
-.tool-arrow{
+.arrow{
     position:absolute;
     left:18px;
-    bottom:17px;
-    color:#555c69;
+    bottom:16px;
+    color:#555c68;
 }
 
-/* ================= ALERT ================= */
-
-.alert{
-    padding:14px 16px;
-    border-radius:14px;
-    margin-bottom:15px;
-    background:#171a22;
-    color:#999fab;
-    border:1px solid #272c36;
-}
-
-.alert.red{
-    border-color:#57202a;
-    background:#1d1115;
-    color:#ff8798;
-}
-
-.alert.green{
-    border-color:#174e37;
-    background:#0d1d16;
-    color:#66e3a1;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:900px){
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .tools-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px){
-
-    header{
-        height:68px;
-    }
-
-    .navbar{
-        top:68px;
-    }
-
-    .header-inner{
-        padding:0 13px;
-    }
-
-    .hema-name{
-        font-size:20px;
-    }
-
-    .whatsapp{
-        padding:9px 13px;
-        font-size:13px;
-    }
-
-    main{
-        padding:17px 12px 60px;
-    }
-
-    .hero{
-        padding:25px 20px;
-        border-radius:21px;
-    }
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    .stats{
-        gap:10px;
-    }
-
-    .stat{
-        min-height:135px;
-        padding:16px;
-        border-radius:18px;
-    }
-
-    .stat h3{
-        font-size:22px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .field.full{
-        grid-column:auto;
-    }
-
-    .tools-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .tool{
-        min-height:145px;
-        padding:16px;
-    }
-
-    .tool h3{
-        font-size:14px;
-    }
-
-    .tool p{
-        font-size:11px;
-    }
-
-    .section-title h2{
-        font-size:18px;
-    }
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
     display:none;
     position:fixed;
     inset:0;
     z-index:3000;
-    background:rgba(0,0,0,.75);
-    backdrop-filter:blur(8px);
-    padding:20px;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(10px);
     align-items:center;
     justify-content:center;
+    padding:18px;
 }
 
 .modal.show{
@@ -680,10 +306,10 @@ td{
 }
 
 .modal-box{
-    width:min(600px,100%);
+    width:min(570px,100%);
     max-height:90vh;
     overflow:auto;
-    background:#10131a;
+    background:#10131b;
     border:1px solid #303541;
     border-radius:25px;
     padding:23px;
@@ -697,6 +323,10 @@ td{
     margin-bottom:20px;
 }
 
+.modal-head h2{
+    font-size:21px;
+}
+
 .close{
     border:0;
     width:40px;
@@ -707,47 +337,141 @@ td{
     font-size:20px;
 }
 
-/* ================= FLOAT WHATSAPP ================= */
+.field{
+    margin-bottom:13px;
+}
+
+.field label{
+    display:block;
+    color:#8d93a0;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    border:1px solid #292e39;
+    background:#090b10;
+    color:white;
+    padding:13px;
+    border-radius:13px;
+    outline:none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:#ff304f;
+}
+
+.btn{
+    border:0;
+    padding:13px 18px;
+    border-radius:13px;
+    color:white;
+    font-weight:800;
+    background:linear-gradient(135deg,#ff304f,#d91e3d);
+    margin-top:5px;
+}
+
+.result{
+    margin-top:15px;
+    padding:18px;
+    border-radius:15px;
+    background:#171a22;
+    border:1px solid #292e39;
+    text-align:center;
+}
+
+.result strong{
+    font-size:25px;
+    color:#20d978;
+}
+
+.result small{
+    display:block;
+    color:#858b99;
+    margin-top:5px;
+}
+
+/* FLOAT */
 
 .float-wa{
     position:fixed;
     left:18px;
     bottom:18px;
     z-index:2000;
-    width:55px;
-    height:55px;
+    width:56px;
+    height:56px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     background:#16c967;
     font-size:25px;
-    box-shadow:0 0 20px rgba(22,201,103,.4);
+    box-shadow:0 0 25px rgba(22,201,103,.4);
 }
 
-/* ================= EMPTY ================= */
+/* MOBILE */
 
-.empty{
-    padding:30px;
-    text-align:center;
-    color:#686f7c;
+@media(max-width:900px){
+    .tools{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
-/* ================= PRINT ================= */
+@media(max-width:600px){
 
-@media print{
-    header,.navbar,.float-wa,.no-print{
-        display:none!important;
+    header{
+        height:67px;
     }
 
-    body{
-        background:white;
-        color:black;
+    .hema-name{
+        font-size:20px;
     }
 
-    .card,.stat,.hero{
-        border:1px solid #ddd;
-        color:black;
+    .whatsapp{
+        font-size:12px;
+        padding:8px 12px;
+    }
+
+    main{
+        padding:17px 11px 70px;
+    }
+
+    .hero{
+        padding:27px 20px;
+        border-radius:22px;
+    }
+
+    .hero h1{
+        font-size:26px;
+    }
+
+    .tools{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .tool{
+        min-height:155px;
+        padding:16px;
+    }
+
+    .tool h3{
+        font-size:14px;
+    }
+
+    .tool p{
+        font-size:11px;
+    }
+
+    .icon{
+        width:45px;
+        height:45px;
+        font-size:21px;
     }
 }
 </style>
@@ -756,1692 +480,1426 @@ td{
 <body>
 
 <header>
-    <div class="header-inner">
+<div class="header">
 
-        <a class="hema-brand"
-           href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
-           target="_blank">
+<a class="hema-brand"
+href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
+target="_blank">
 
-            <span class="online-dot"></span>
-            <span class="hema-name">HeMa Tools</span>
+<span class="online-dot"></span>
+<span class="hema-name">HeMa Tools</span>
 
-        </a>
+</a>
 
-        <a class="whatsapp"
-           href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
-           target="_blank">
-            واتساب
-        </a>
+<a class="whatsapp"
+href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
+target="_blank">
+واتساب
+</a>
 
-    </div>
+</div>
 </header>
-
-<nav class="navbar">
-    <div class="nav">
-
-        <button class="active" onclick="showPage('dashboard',this)">
-            📊 لوحة التحكم
-        </button>
-
-        <button onclick="showPage('employees',this)">
-            👷 الموظفين
-        </button>
-
-        <button onclick="showPage('sales',this)">
-            💰 المبيعات
-        </button>
-
-        <button onclick="showPage('expenses',this)">
-            💸 المصروفات
-        </button>
-
-        <button onclick="showPage('production',this)">
-            🏭 الإنتاج
-        </button>
-
-        <button onclick="showPage('electricity',this)">
-            ⚡ الكهرباء
-        </button>
-
-        <button onclick="showPage('inventory',this)">
-            📦 المخزون
-        </button>
-
-        <button onclick="showPage('reports',this)">
-            📈 التقارير
-        </button>
-
-    </div>
-</nav>
 
 <main>
 
-<!-- ================= DASHBOARD ================= -->
-
-<section id="dashboard" class="page active">
-
-    <div class="hero">
-        <small>نظام إدارة الأعمال الذكي</small>
-
-        <h1>
-            مرحباً بك في
-            <span>HeMa</span> Business
-        </h1>
-
-        <p>
-            إدارة شركتك ومتابعة الأرقام والربح والمخزون والإنتاج من مكان واحد.
-        </p>
-    </div>
-
-    <div class="stats">
-
-        <div class="stat green">
-            <div class="stat-icon">💰</div>
-            <h3 id="dashSales">0 ج</h3>
-            <p>إجمالي المبيعات</p>
-        </div>
-
-        <div class="stat red">
-            <div class="stat-icon">💸</div>
-            <h3 id="dashExpenses">0 ج</h3>
-            <p>إجمالي المصروفات</p>
-        </div>
-
-        <div class="stat blue">
-            <div class="stat-icon">📦</div>
-            <h3 id="dashProduction">0</h3>
-            <p>وحدات الإنتاج</p>
-        </div>
-
-        <div class="stat yellow">
-            <div class="stat-icon">👷</div>
-            <h3 id="dashEmployees">0</h3>
-            <p>عدد الموظفين</p>
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>ملخص الأداء</h2>
-        <span>مباشر من بياناتك</span>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <div class="card-head">
-                <h3>📈 صافي الربح</h3>
-            </div>
-
-            <div class="result">
-                <strong id="dashProfit">0 ج</strong>
-            </div>
-
-            <div style="margin-top:15px;color:#858b99;font-size:13px">
-                المبيعات مقابل جميع التكاليف
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <div class="card-head">
-                <h3>📊 نسبة الربح</h3>
-            </div>
-
-            <div class="result">
-                <strong id="profitPercent">0%</strong>
-            </div>
-
-            <div class="progress">
-                <span id="profitProgress" style="width:0%"></span>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>أدوات الشركة</h2>
-        <span>اختر الأداة</span>
-    </div>
-
-    <div class="tools-grid">
-
-        <div class="tool" onclick="showPage('employees')">
-            <div class="tool-icon">👷</div>
-            <h3>إدارة الموظفين</h3>
-            <p>رواتب وعدد الموظفين</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-        <div class="tool" onclick="showPage('sales')">
-            <div class="tool-icon">💰</div>
-            <h3>إدارة المبيعات</h3>
-            <p>تسجيل ومتابعة المبيعات</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-        <div class="tool" onclick="showPage('expenses')">
-            <div class="tool-icon">💸</div>
-            <h3>المصروفات</h3>
-            <p>إدارة كل مصاريف الشركة</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-        <div class="tool" onclick="showPage('production')">
-            <div class="tool-icon">🏭</div>
-            <h3>الإنتاج</h3>
-            <p>حساب الإنتاج والتكلفة</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-        <div class="tool" onclick="showPage('electricity')">
-            <div class="tool-icon">⚡</div>
-            <h3>الكهرباء والطاقة</h3>
-            <p>حساب استهلاك الكهرباء</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-        <div class="tool" onclick="showPage('inventory')">
-            <div class="tool-icon">📦</div>
-            <h3>المخزون</h3>
-            <p>الكمية وقيمة المخزون</p>
-            <span class="tool-arrow">←</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= EMPLOYEES ================= -->
-
-<section id="employees" class="page">
-
-    <div class="hero">
-        <small>إدارة الموارد البشرية</small>
-        <h1>👷 الموظفين والرواتب</h1>
-        <p>أضف الموظفين واحسب إجمالي الرواتب الشهرية.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>➕ إضافة موظف</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>اسم الموظف</label>
-                    <input id="empName" placeholder="مثال: أحمد محمد">
-                </div>
-
-                <div class="field">
-                    <label>الوظيفة</label>
-                    <input id="empJob" placeholder="مثال: عامل">
-                </div>
-
-                <div class="field">
-                    <label>الراتب الشهري</label>
-                    <input id="empSalary" type="number" placeholder="0">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-red" onclick="addEmployee()">
-                    إضافة الموظف
-                </button>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>💰 ملخص الرواتب</h3>
-
-            <div class="result">
-                <strong id="salaryTotal">0 ج</strong>
-                <div style="color:#858b99;font-size:13px">
-                    إجمالي الرواتب الشهرية
-                </div>
-            </div>
-
-            <div class="result">
-                <strong id="employeeCount">0</strong>
-                <div style="color:#858b99;font-size:13px">
-                    إجمالي الموظفين
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>قائمة الموظفين</h2>
-    </div>
-
-    <div class="card table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>الاسم</th>
-                    <th>الوظيفة</th>
-                    <th>الراتب</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-            <tbody id="employeesTable"></tbody>
-        </table>
-    </div>
-
-</section>
-
-
-<!-- ================= SALES ================= -->
-
-<section id="sales" class="page">
-
-    <div class="hero">
-        <small>الإيرادات</small>
-        <h1>💰 إدارة المبيعات</h1>
-        <p>سجل عمليات البيع واعرف إجمالي الإيرادات.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>➕ تسجيل عملية بيع</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>اسم المنتج</label>
-                    <input id="saleProduct" placeholder="اسم المنتج">
-                </div>
-
-                <div class="field">
-                    <label>الكمية</label>
-                    <input id="saleQty" type="number" value="1">
-                </div>
-
-                <div class="field">
-                    <label>سعر الوحدة</label>
-                    <input id="salePrice" type="number" placeholder="0">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-green" onclick="addSale()">
-                    تسجيل البيع
-                </button>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>📊 إجمالي المبيعات</h3>
-
-            <div class="result">
-                <strong id="salesTotal">0 ج</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>سجل المبيعات</h2>
-    </div>
-
-    <div class="card table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>المنتج</th>
-                    <th>الكمية</th>
-                    <th>السعر</th>
-                    <th>الإجمالي</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-            <tbody id="salesTable"></tbody>
-        </table>
-    </div>
-
-</section>
-
-
-<!-- ================= EXPENSES ================= -->
-
-<section id="expenses" class="page">
-
-    <div class="hero">
-        <small>الإدارة المالية</small>
-        <h1>💸 المصروفات</h1>
-        <p>سجل أي مصروف يخص الشركة وتابع إجمالي التكاليف.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>➕ إضافة مصروف</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>نوع المصروف</label>
-                    <select id="expenseType">
-                        <option>إيجار</option>
-                        <option>مواصلات</option>
-                        <option>صيانة</option>
-                        <option>مواد خام</option>
-                        <option>تسويق</option>
-                        <option>مياه</option>
-                        <option>إنترنت</option>
-                        <option>أخرى</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label>المبلغ</label>
-                    <input id="expenseAmount" type="number" placeholder="0">
-                </div>
-
-                <div class="field full">
-                    <label>ملاحظات</label>
-                    <input id="expenseNote" placeholder="ملاحظات اختيارية">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-red" onclick="addExpense()">
-                    إضافة المصروف
-                </button>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>💸 إجمالي المصروفات</h3>
-
-            <div class="result">
-                <strong id="expensesTotal">0 ج</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>سجل المصروفات</h2>
-    </div>
-
-    <div class="card table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>النوع</th>
-                    <th>المبلغ</th>
-                    <th>الملاحظات</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-            <tbody id="expensesTable"></tbody>
-        </table>
-    </div>
-
-</section>
-
-
-<!-- ================= PRODUCTION ================= -->
-
-<section id="production" class="page">
-
-    <div class="hero">
-        <small>إدارة المصانع والإنتاج</small>
-        <h1>🏭 الإنتاج والتكلفة</h1>
-        <p>اعرف كمية الإنتاج وتكلفة الوحدة وإجمالي تكلفة التصنيع.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>➕ تسجيل إنتاج</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>اسم المنتج</label>
-                    <input id="prodName" placeholder="مثال: منتج A">
-                </div>
-
-                <div class="field">
-                    <label>عدد الوحدات</label>
-                    <input id="prodQty" type="number" placeholder="0">
-                </div>
-
-                <div class="field">
-                    <label>تكلفة الوحدة</label>
-                    <input id="prodCost" type="number" placeholder="0">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-blue" onclick="addProduction()">
-                    تسجيل الإنتاج
-                </button>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>🏭 ملخص الإنتاج</h3>
-
-            <div class="result">
-                <strong id="productionTotal">0</strong>
-                <div style="color:#858b99">إجمالي الوحدات</div>
-            </div>
-
-            <div class="result">
-                <strong id="productionCostTotal">0 ج</strong>
-                <div style="color:#858b99">إجمالي تكلفة الإنتاج</div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>سجل الإنتاج</h2>
-    </div>
-
-    <div class="card table-wrap">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>المنتج</th>
-                    <th>الوحدات</th>
-                    <th>تكلفة الوحدة</th>
-                    <th>الإجمالي</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-
-            <tbody id="productionTable"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-
-<!-- ================= ELECTRICITY ================= -->
-
-<section id="electricity" class="page">
-
-    <div class="hero">
-        <small>إدارة الطاقة</small>
-        <h1>⚡ الكهرباء والطاقة</h1>
-        <p>احسب استهلاك الكهرباء وتكلفتها على الشركة.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>⚡ حساب استهلاك الكهرباء</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>الاستهلاك بالكيلو وات</label>
-                    <input id="elecKwh" type="number" placeholder="مثال: 500">
-                </div>
-
-                <div class="field">
-                    <label>سعر الكيلو وات</label>
-                    <input id="elecPrice" type="number" placeholder="مثال: 2">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-yellow btn-red" onclick="calculateElectricity()">
-                    احسب
-                </button>
-            </div>
-
-            <div class="result">
-                <strong id="elecResult">0 ج</strong>
-                <div style="color:#858b99">تكلفة الكهرباء</div>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>⚡ تسجيل الفاتورة</h3>
-
-            <div class="alert">
-                يمكنك تسجيل تكلفة الكهرباء ضمن تكاليف الشركة لحساب الربح الحقيقي.
-            </div>
-
-            <button class="btn btn-green" onclick="saveElectricity()">
-                إضافة آخر حساب للمصروفات
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= INVENTORY ================= -->
-
-<section id="inventory" class="page">
-
-    <div class="hero">
-        <small>إدارة المنتجات</small>
-        <h1>📦 المخزون</h1>
-        <p>تابع الكميات وقيمة المخزون ونبه نفسك عند انخفاض الكمية.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>➕ إضافة منتج للمخزون</h3>
-
-            <div class="form-grid">
-
-                <div class="field">
-                    <label>اسم المنتج</label>
-                    <input id="stockName" placeholder="اسم المنتج">
-                </div>
-
-                <div class="field">
-                    <label>الكمية</label>
-                    <input id="stockQty" type="number" placeholder="0">
-                </div>
-
-                <div class="field">
-                    <label>سعر الشراء</label>
-                    <input id="stockBuy" type="number" placeholder="0">
-                </div>
-
-                <div class="field">
-                    <label>سعر البيع</label>
-                    <input id="stockSell" type="number" placeholder="0">
-                </div>
-
-                <div class="field">
-                    <label>حد التنبيه</label>
-                    <input id="stockMin" type="number" value="5">
-                </div>
-
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-blue" onclick="addStock()">
-                    إضافة المنتج
-                </button>
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h3>📦 قيمة المخزون</h3>
-
-            <div class="result">
-                <strong id="stockValue">0 ج</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>المخزون الحالي</h2>
-    </div>
-
-    <div class="card table-wrap">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>المنتج</th>
-                    <th>الكمية</th>
-                    <th>شراء</th>
-                    <th>بيع</th>
-                    <th>الحالة</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-
-            <tbody id="stockTable"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-
-<!-- ================= REPORTS ================= -->
-
-<section id="reports" class="page">
-
-    <div class="hero">
-        <small>تقارير الإدارة</small>
-        <h1>📈 التقارير المالية</h1>
-        <p>ملخص شامل لأهم أرقام الشركة.</p>
-    </div>
-
-    <div class="stats">
-
-        <div class="stat green">
-            <div class="stat-icon">💰</div>
-            <h3 id="reportSales">0</h3>
-            <p>المبيعات</p>
-        </div>
-
-        <div class="stat red">
-            <div class="stat-icon">💸</div>
-            <h3 id="reportExpenses">0</h3>
-            <p>المصروفات</p>
-        </div>
-
-        <div class="stat blue">
-            <div class="stat-icon">👷</div>
-            <h3 id="reportSalaries">0</h3>
-            <p>الرواتب</p>
-        </div>
-
-        <div class="stat yellow">
-            <div class="stat-icon">⚡</div>
-            <h3 id="reportElectricity">0</h3>
-            <p>الكهرباء</p>
-        </div>
-
-    </div>
-
-    <div class="grid" style="margin-top:16px">
-
-        <div class="card">
-
-            <h3>📊 حساب الربح</h3>
-
-            <div class="result">
-                <strong id="reportProfit">0 ج</strong>
-            </div>
-
-            <p style="color:#858b99;margin-top:10px">
-                الربح = المبيعات − المصروفات − الرواتب − الكهرباء − تكلفة الإنتاج
-            </p>
-
-        </div>
-
-        <div class="card">
-
-            <h3>📦 تكلفة الإنتاج</h3>
-
-            <div class="result">
-                <strong id="reportProduction">0 ج</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="card" style="margin-top:16px">
-
-        <div class="card-head">
-            <h3>🧮 نقطة التعادل</h3>
-        </div>
-
-        <div class="form-grid">
-
-            <div class="field">
-                <label>التكاليف الثابتة</label>
-                <input id="fixedCost" type="number" placeholder="مثال: 50000">
-            </div>
-
-            <div class="field">
-                <label>سعر بيع الوحدة</label>
-                <input id="breakPrice" type="number" placeholder="100">
-            </div>
-
-            <div class="field">
-                <label>تكلفة الوحدة المتغيرة</label>
-                <input id="variableCost" type="number" placeholder="60">
-            </div>
-
-        </div>
-
-        <div class="form-actions">
-            <button class="btn btn-red" onclick="breakEven()">
-                احسب نقطة التعادل
-            </button>
-        </div>
-
-        <div class="result">
-            <strong id="breakResult">0 وحدة</strong>
-        </div>
-
-    </div>
-
-    <div class="form-actions no-print" style="margin-top:20px">
-
-        <button class="btn btn-blue" onclick="window.print()">
-            🖨️ طباعة التقرير
-        </button>
-
-        <button class="btn btn-gray" onclick="exportData()">
-            📥 تصدير البيانات
-        </button>
-
-        <button class="btn btn-red" onclick="resetAll()">
-            🗑️ مسح كل البيانات
-        </button>
-
-    </div>
-
-</section>
+<div class="hero">
+<small>أدوات مجانية وسريعة</small>
+
+<h1>
+كل أدواتك في
+<span>HeMa Tools</span>
+</h1>
+
+<p>
+حاسبات ومحولات وأدوات للنصوص والصور والملفات في مكان واحد.
+</p>
+</div>
+
+<div class="search-box">
+<input
+id="search"
+type="search"
+placeholder="🔎 ابحث عن أداة..."
+oninput="searchTools()">
+</div>
+
+<div class="categories">
+
+<button class="active" onclick="filterTools('all',this)">الكل</button>
+<button onclick="filterTools('calc',this)">🧮 حسابات</button>
+<button onclick="filterTools('convert',this)">🔄 محولات</button>
+<button onclick="filterTools('text',this)">📝 نصوص</button>
+<button onclick="filterTools('dev',this)">💻 تقنية</button>
+<button onclick="filterTools('image',this)">🖼️ صور</button>
+
+</div>
+
+<div class="tools" id="tools">
+
+<div class="tool" data-cat="calc" data-name="حساب النسبة">
+<div class="icon">%</div>
+<h3>حساب النسبة</h3>
+<p>احسب النسبة المئوية بسهولة</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="حاسبة الخصم">
+<div class="icon">🏷️</div>
+<h3>حاسبة الخصم</h3>
+<p>احسب السعر بعد الخصم</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="حاسبة البقشيش">
+<div class="icon">💵</div>
+<h3>حاسبة البقشيش</h3>
+<p>احسب البقشيش وتقسيمه</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="حاسبة القسط">
+<div class="icon">💳</div>
+<h3>حاسبة القسط</h3>
+<p>احسب القسط الشهري</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="حساب العمر">
+<div class="icon">🎂</div>
+<h3>حساب العمر</h3>
+<p>احسب عمرك بالتفصيل</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="BMI مؤشر كتلة الجسم">
+<div class="icon">⚖️</div>
+<h3>BMI</h3>
+<p>مؤشر كتلة الجسم</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="حساب السعرات">
+<div class="icon">🔥</div>
+<h3>السعرات</h3>
+<p>احسب احتياجك اليومي</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="GPA المعدل">
+<div class="icon">🎓</div>
+<h3>GPA</h3>
+<p>حساب المعدل الدراسي</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="فرق التاريخ">
+<div class="icon">📅</div>
+<h3>فرق التاريخ</h3>
+<p>الفرق بين تاريخين</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="السرعة">
+<div class="icon">🚗</div>
+<h3>حاسبة السرعة</h3>
+<p>سرعة ومسافة وزمن</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="convert" data-name="محول الطول">
+<div class="icon">📏</div>
+<h3>محول الطول</h3>
+<p>متر، سم، قدم، بوصة</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="convert" data-name="محول الوزن">
+<div class="icon">⚖️</div>
+<h3>محول الوزن</h3>
+<p>كيلو، جرام، رطل</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="convert" data-name="محول الحرارة">
+<div class="icon">🌡️</div>
+<h3>محول الحرارة</h3>
+<p>مئوية وفهرنهايت وكلفن</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="convert" data-name="محول البيانات">
+<div class="icon">💾</div>
+<h3>محول البيانات</h3>
+<p>KB MB GB TB</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="فرق الوقت">
+<div class="icon">⏱️</div>
+<h3>فرق الوقت</h3>
+<p>احسب الفرق بين وقتين</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="text" data-name="عداد الكلمات">
+<div class="icon">🔤</div>
+<h3>عداد الكلمات</h3>
+<p>كلمات وحروف وأسطر</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="text" data-name="حالة النص">
+<div class="icon">Aa</div>
+<h3>حالة النص</h3>
+<p>UPPERCASE / lowercase</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="text" data-name="عكس النص">
+<div class="icon">↔️</div>
+<h3>عكس النص</h3>
+<p>اعكس النص بضغطة</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="Base64">
+<div class="icon">🔐</div>
+<h3>Base64</h3>
+<p>تشفير وفك Base64</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="URL Encoder">
+<div class="icon">🔗</div>
+<h3>URL Encoder</h3>
+<p>ترميز وفك الروابط</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="JSON Formatter">
+<div class="icon">{}</div>
+<h3>JSON Formatter</h3>
+<p>تنسيق JSON</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="مولد كلمات السر">
+<div class="icon">🔑</div>
+<h3>مولد كلمات السر</h3>
+<p>كلمة مرور قوية وعشوائية</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="رقم عشوائي">
+<div class="icon">🎲</div>
+<h3>رقم عشوائي</h3>
+<p>توليد رقم داخل نطاق</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="QR Code">
+<div class="icon">▦</div>
+<h3>QR Code</h3>
+<p>إنشاء رمز QR</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="منتقي الألوان">
+<div class="icon">🎨</div>
+<h3>منتقي الألوان</h3>
+<p>اختيار ومعرفة كود اللون</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="dev" data-name="Binary">
+<div class="icon">01</div>
+<h3>Binary</h3>
+<p>تحويل النص إلى Binary</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="image" data-name="Resize Image">
+<div class="icon">🖼️</div>
+<h3>تغيير حجم الصورة</h3>
+<p>Resize للصور</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="image" data-name="Compress Image">
+<div class="icon">📦</div>
+<h3>ضغط الصورة</h3>
+<p>تقليل حجم الصورة</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="image" data-name="Image PDF">
+<div class="icon">📄</div>
+<h3>صورة إلى PDF</h3>
+<p>تحويل الصورة إلى PDF</p>
+<span class="arrow">←</span>
+</div>
+
+<div class="tool" data-cat="calc" data-name="الساعة والتاريخ">
+<div class="icon">🕐</div>
+<h3>الساعة والتاريخ</h3>
+<p>الوقت والتاريخ الحالي</p>
+<span class="arrow">←</span>
+</div>
+
+</div>
 
 </main>
 
-
 <a class="float-wa"
-   href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
-   target="_blank">
-    💬
+href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
+target="_blank">
+💬
 </a>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2 id="modalTitle">الأداة</h2>
+
+<button class="close" onclick="closeTool()">×</button>
+
+</div>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
 
 
 <script>
 
-/* =====================================================
-   DATA
-===================================================== */
+const modal=document.getElementById("modal");
+const title=document.getElementById("modalTitle");
+const content=document.getElementById("modalContent");
 
-let data = JSON.parse(localStorage.getItem("hemaBusiness")) || {
+function openTool(name){
 
-    employees:[],
-    sales:[],
-    expenses:[],
-    production:[],
-    electricity:[],
-    inventory:[]
+title.textContent=name;
+
+let html="";
+
+if(name==="حساب النسبة"){
+
+html=`
+<div class="field">
+<label>الجزء</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>الكل</label>
+<input id="b" type="number">
+</div>
+
+<button class="btn" onclick="calcPercent()">احسب</button>
+
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="حاسبة الخصم"){
+
+html=`
+<div class="field">
+<label>السعر</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>نسبة الخصم %</label>
+<input id="b" type="number">
+</div>
+
+<button class="btn" onclick="calcDiscount()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="حاسبة البقشيش"){
+
+html=`
+<div class="field">
+<label>قيمة الفاتورة</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>البقشيش %</label>
+<input id="b" type="number" value="10">
+</div>
+
+<div class="field">
+<label>عدد الأشخاص</label>
+<input id="c" type="number" value="1">
+</div>
+
+<button class="btn" onclick="tip()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="حاسبة القسط"){
+
+html=`
+<div class="field">
+<label>المبلغ</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>عدد الشهور</label>
+<input id="b" type="number">
+</div>
+
+<div class="field">
+<label>الفائدة %</label>
+<input id="c" type="number" value="0">
+</div>
+
+<button class="btn" onclick="installment()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="حساب العمر"){
+
+html=`
+<div class="field">
+<label>تاريخ الميلاد</label>
+<input id="birth" type="date">
+</div>
+
+<button class="btn" onclick="age()">احسب العمر</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="BMI"){
+
+html=`
+<div class="field">
+<label>الوزن بالكيلو</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>الطول بالسنتيمتر</label>
+<input id="b" type="number">
+</div>
+
+<button class="btn" onclick="bmi()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="السعرات"){
+
+html=`
+<div class="field">
+<label>الوزن kg</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>الطول cm</label>
+<input id="b" type="number">
+</div>
+
+<div class="field">
+<label>العمر</label>
+<input id="c" type="number">
+</div>
+
+<div class="field">
+<label>الجنس</label>
+<select id="gender">
+<option value="m">ذكر</option>
+<option value="f">أنثى</option>
+</select>
+</div>
+
+<button class="btn" onclick="calories()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="GPA"){
+
+html=`
+<div class="field">
+<label>أدخل درجاتك مفصولة بفواصل</label>
+<input id="grades" placeholder="90,80,75,95">
+</div>
+
+<button class="btn" onclick="gpa()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="فرق التاريخ"){
+
+html=`
+<div class="field">
+<label>التاريخ الأول</label>
+<input id="date1" type="date">
+</div>
+
+<div class="field">
+<label>التاريخ الثاني</label>
+<input id="date2" type="date">
+</div>
+
+<button class="btn" onclick="dateDiff()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="السرعة"){
+
+html=`
+<div class="field">
+<label>المسافة</label>
+<input id="a" type="number">
+</div>
+
+<div class="field">
+<label>الزمن بالساعات</label>
+<input id="b" type="number">
+</div>
+
+<button class="btn" onclick="speed()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="محول الطول"){
+
+html=`
+<div class="field">
+<label>القيمة بالمتر</label>
+<input id="a" type="number">
+</div>
+
+<button class="btn" onclick="lengthConvert()">تحويل</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="محول الوزن"){
+
+html=`
+<div class="field">
+<label>القيمة بالكيلو</label>
+<input id="a" type="number">
+</div>
+
+<button class="btn" onclick="weightConvert()">تحويل</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="محول الحرارة"){
+
+html=`
+<div class="field">
+<label>الحرارة بالمئوية</label>
+<input id="a" type="number">
+</div>
+
+<button class="btn" onclick="tempConvert()">تحويل</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="محول البيانات"){
+
+html=`
+<div class="field">
+<label>القيمة بالـ MB</label>
+<input id="a" type="number">
+</div>
+
+<button class="btn" onclick="dataConvert()">تحويل</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="فرق الوقت"){
+
+html=`
+<div class="field">
+<label>الوقت الأول</label>
+<input id="t1" type="time">
+</div>
+
+<div class="field">
+<label>الوقت الثاني</label>
+<input id="t2" type="time">
+</div>
+
+<button class="btn" onclick="timeDiff()">احسب</button>
+<div class="result" id="result">النتيجة</div>
+`;
+
+}
+
+else if(name==="عداد الكلمات"){
+
+html=`
+<div class="field">
+<label>النص</label>
+<textarea id="text" rows="7" oninput="countText()"></textarea>
+</div>
+
+<div class="result" id="result">
+الكلمات: 0<br>
+الحروف: 0
+</div>
+`;
+
+}
+
+else if(name==="حالة النص"){
+
+html=`
+<div class="field">
+<label>النص</label>
+<textarea id="text" rows="6"></textarea>
+</div>
+
+<button class="btn" onclick="upper()">UPPERCASE</button>
+<button class="btn" onclick="lower()">lowercase</button>
+
+`;
+
+}
+
+else if(name==="عكس النص"){
+
+html=`
+<div class="field">
+<textarea id="text" rows="6"></textarea>
+</div>
+
+<button class="btn" onclick="reverseText()">اعكس النص</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="Base64"){
+
+html=`
+<div class="field">
+<textarea id="text" rows="6"></textarea>
+</div>
+
+<button class="btn" onclick="base64Encode()">تشفير</button>
+<button class="btn" onclick="base64Decode()">فك التشفير</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="URL Encoder"){
+
+html=`
+<div class="field">
+<textarea id="text" rows="6"></textarea>
+</div>
+
+<button class="btn" onclick="urlEncode()">ترميز</button>
+<button class="btn" onclick="urlDecode()">فك الترميز</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="JSON Formatter"){
+
+html=`
+<div class="field">
+<textarea id="text" rows="10" placeholder='{"name":"HeMa"}'></textarea>
+</div>
+
+<button class="btn" onclick="formatJSON()">تنسيق JSON</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="مولد كلمات السر"){
+
+html=`
+<div class="field">
+<label>طول كلمة السر</label>
+<input id="a" type="number" value="16">
+</div>
+
+<button class="btn" onclick="password()">توليد</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="رقم عشوائي"){
+
+html=`
+<div class="field">
+<label>من</label>
+<input id="a" type="number" value="1">
+</div>
+
+<div class="field">
+<label>إلى</label>
+<input id="b" type="number" value="100">
+</div>
+
+<button class="btn" onclick="randomNumber()">توليد</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="QR Code"){
+
+html=`
+<div class="field">
+<label>النص أو الرابط</label>
+<input id="text">
+</div>
+
+<button class="btn" onclick="qr()">إنشاء QR</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="منتقي الألوان"){
+
+html=`
+<div class="field">
+<label>اختر اللون</label>
+<input id="color" type="color" value="#ff304f">
+</div>
+
+<div class="result" id="result">
+#FF304F
+</div>
+`;
+
+setTimeout(()=>{
+document.getElementById("color").oninput=e=>{
+document.getElementById("result").textContent=e.target.value;
+}
+},10);
+
+}
+
+else if(name==="Binary"){
+
+html=`
+<div class="field">
+<textarea id="text" rows="6"></textarea>
+</div>
+
+<button class="btn" onclick="binaryEncode()">تحويل إلى Binary</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="Resize Image"){
+
+html=`
+<div class="field">
+<label>اختر الصورة</label>
+<input id="image" type="file" accept="image/*">
+</div>
+
+<div class="field">
+<label>العرض</label>
+<input id="width" type="number">
+</div>
+
+<button class="btn" onclick="resizeImage()">تغيير الحجم</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="Compress Image"){
+
+html=`
+<div class="field">
+<label>اختر الصورة</label>
+<input id="image" type="file" accept="image/*">
+</div>
+
+<div class="field">
+<label>الجودة %</label>
+<input id="quality" type="number" value="70">
+</div>
+
+<button class="btn" onclick="compressImage()">ضغط الصورة</button>
+
+<div class="result" id="result"></div>
+`;
+
+}
+
+else if(name==="Image PDF"){
+
+html=`
+<div class="field">
+<label>اختر الصورة</label>
+<input id="image" type="file" accept="image/*">
+</div>
+
+<button class="btn" onclick="imagePDF()">إنشاء PDF</button>
+
+<div class="result">
+سيتم فتح الصورة للطباعة وحفظها كـ PDF.
+</div>
+`;
+
+}
+
+else if(name==="الساعة والتاريخ"){
+
+html=`
+<div class="result">
+
+<strong id="clock"></strong>
+
+<small id="today"></small>
+
+</div>
+`;
+
+setTimeout(clock,50);
+
+}
+
+else{
+
+html=`
+<div class="result">
+الأداة غير متاحة حالياً.
+</div>
+`;
+
+}
+
+content.innerHTML=html;
+
+modal.classList.add("show");
+
+}
+
+function closeTool(){
+modal.classList.remove("show");
+}
+
+document.querySelectorAll(".tool").forEach(tool=>{
+tool.onclick=()=>openTool(tool.dataset.name);
+});
+
+
+/* SEARCH */
+
+function searchTools(){
+
+let q=document.getElementById("search").value.toLowerCase();
+
+document.querySelectorAll(".tool").forEach(tool=>{
+
+let name=tool.dataset.name.toLowerCase();
+
+tool.style.display=name.includes(q)?"block":"none";
+
+});
+
+}
+
+
+/* FILTER */
+
+function filterTools(cat,btn){
+
+document.querySelectorAll(".categories button")
+.forEach(x=>x.classList.remove("active"));
+
+btn.classList.add("active");
+
+document.querySelectorAll(".tool").forEach(tool=>{
+
+tool.style.display=
+cat==="all" || tool.dataset.cat===cat
+?"block":"none";
+
+});
+
+document.getElementById("search").value="";
+
+}
+
+
+/* CALCULATORS */
+
+function calcPercent(){
+
+let a=Number(document.getElementById("a").value);
+let b=Number(document.getElementById("b").value);
+
+document.getElementById("result").innerHTML=
+b ? `<strong>${((a/b)*100).toFixed(2)}%</strong>`:"أدخل القيم";
+
+}
+
+function calcDiscount(){
+
+let price=Number(document.getElementById("a").value);
+let discount=Number(document.getElementById("b").value);
+
+let value=price-(price*discount/100);
+
+document.getElementById("result").innerHTML=
+`<strong>${value.toFixed(2)} ج</strong>
+<small>قيمة الخصم: ${(price-value).toFixed(2)} ج</small>`;
+
+}
+
+function tip(){
+
+let bill=Number(document.getElementById("a").value);
+let percent=Number(document.getElementById("b").value);
+let people=Number(document.getElementById("c").value)||1;
+
+let t=bill*percent/100;
+
+document.getElementById("result").innerHTML=
+`<strong>${(bill+t).toFixed(2)} ج</strong>
+<small>نصيب الفرد: ${((bill+t)/people).toFixed(2)} ج</small>`;
+
+}
+
+function installment(){
+
+let amount=Number(document.getElementById("a").value);
+let months=Number(document.getElementById("b").value);
+let interest=Number(document.getElementById("c").value);
+
+let total=amount+(amount*interest/100);
+
+document.getElementById("result").innerHTML=
+`<strong>${(total/months).toFixed(2)} ج</strong>
+<small>إجمالي المبلغ: ${total.toFixed(2)} ج</small>`;
+
+}
+
+function age(){
+
+let birth=new Date(document.getElementById("birth").value);
+
+if(isNaN(birth)){
+document.getElementById("result").textContent="اختر تاريخ الميلاد";
+return;
+}
+
+let now=new Date();
+
+let years=now.getFullYear()-birth.getFullYear();
+
+let m=now.getMonth()-birth.getMonth();
+
+if(m<0 || (m===0 && now.getDate()<birth.getDate()))
+years--;
+
+document.getElementById("result").innerHTML=
+`<strong>${years} سنة</strong>`;
+
+}
+
+function bmi(){
+
+let w=Number(document.getElementById("a").value);
+let h=Number(document.getElementById("b").value)/100;
+
+let value=w/(h*h);
+
+let status=
+value<18.5?"نقص وزن":
+value<25?"وزن طبيعي":
+value<30?"زيادة وزن":"سمنة";
+
+document.getElementById("result").innerHTML=
+`<strong>${value.toFixed(1)}</strong>
+<small>${status}</small>`;
+
+}
+
+function calories(){
+
+let w=Number(document.getElementById("a").value);
+let h=Number(document.getElementById("b").value);
+let age=Number(document.getElementById("c").value);
+
+let gender=document.getElementById("gender").value;
+
+let bmr=
+gender==="m"
+?10*w+6.25*h-5*age+5
+:10*w+6.25*h-5*age-161;
+
+document.getElementById("result").innerHTML=
+`<strong>${Math.round(bmr)} سعرة</strong>
+<small>احتياجك الأساسي التقريبي</small>`;
+
+}
+
+function gpa(){
+
+let grades=document.getElementById("grades").value
+.split(",")
+.map(Number)
+.filter(x=>!isNaN(x));
+
+if(!grades.length)return;
+
+let avg=grades.reduce((a,b)=>a+b,0)/grades.length;
+
+document.getElementById("result").innerHTML=
+`<strong>${avg.toFixed(2)}%</strong>`;
+
+}
+
+function dateDiff(){
+
+let a=new Date(document.getElementById("date1").value);
+let b=new Date(document.getElementById("date2").value);
+
+let days=Math.abs((b-a)/86400000);
+
+document.getElementById("result").innerHTML=
+`<strong>${Math.round(days)} يوم</strong>`;
+
+}
+
+function speed(){
+
+let d=Number(document.getElementById("a").value);
+let t=Number(document.getElementById("b").value);
+
+document.getElementById("result").innerHTML=
+`<strong>${(d/t).toFixed(2)}</strong>
+<small>وحدة/ساعة</small>`;
+
+}
+
+function lengthConvert(){
+
+let m=Number(document.getElementById("a").value);
+
+document.getElementById("result").innerHTML=
+`<strong>${m} متر</strong>
+<small>${m*100} سم | ${(m*3.28084).toFixed(2)} قدم</small>`;
+
+}
+
+function weightConvert(){
+
+let kg=Number(document.getElementById("a").value);
+
+document.getElementById("result").innerHTML=
+`<strong>${kg} kg</strong>
+<small>${kg*1000} جرام | ${(kg*2.20462).toFixed(2)} رطل</small>`;
+
+}
+
+function tempConvert(){
+
+let c=Number(document.getElementById("a").value);
+
+document.getElementById("result").innerHTML=
+`<strong>${c}°C</strong>
+<small>${((c*9/5)+32).toFixed(2)}°F | ${(c+273.15).toFixed(2)}K</small>`;
+
+}
+
+function dataConvert(){
+
+let mb=Number(document.getElementById("a").value);
+
+document.getElementById("result").innerHTML=
+`<strong>${mb} MB</strong>
+<small>${(mb/1024).toFixed(2)} GB | ${(mb*1024).toFixed(0)} KB</small>`;
+
+}
+
+function timeDiff(){
+
+let a=document.getElementById("t1").value;
+let b=document.getElementById("t2").value;
+
+if(!a||!b)return;
+
+let x=a.split(":").map(Number);
+let y=b.split(":").map(Number);
+
+let min=Math.abs((y[0]*60+y[1])-(x[0]*60+x[1]));
+
+document.getElementById("result").innerHTML=
+`<strong>${Math.floor(min/60)} ساعة ${min%60} دقيقة</strong>`;
+
+}
+
+
+/* TEXT */
+
+function countText(){
+
+let t=document.getElementById("text").value;
+
+let words=t.trim()?t.trim().split(/\s+/).length:0;
+
+document.getElementById("result").innerHTML=
+`الكلمات: ${words}<br>
+الحروف: ${t.length}`;
+
+}
+
+function upper(){
+
+let x=document.getElementById("text");
+
+x.value=x.value.toUpperCase();
+
+}
+
+function lower(){
+
+let x=document.getElementById("text");
+
+x.value=x.value.toLowerCase();
+
+}
+
+function reverseText(){
+
+let x=document.getElementById("text").value;
+
+document.getElementById("result").textContent=
+[...x].reverse().join("");
+
+}
+
+
+/* DEV */
+
+function base64Encode(){
+
+let x=document.getElementById("text").value;
+
+document.getElementById("result").textContent=
+btoa(unescape(encodeURIComponent(x)));
+
+}
+
+function base64Decode(){
+
+try{
+
+let x=document.getElementById("text").value;
+
+document.getElementById("result").textContent=
+decodeURIComponent(escape(atob(x)));
+
+}catch{
+
+document.getElementById("result").textContent=
+"النص غير صالح";
+
+}
+
+}
+
+function urlEncode(){
+
+let x=document.getElementById("text").value;
+
+document.getElementById("result").textContent=
+encodeURIComponent(x);
+
+}
+
+function urlDecode(){
+
+try{
+
+document.getElementById("result").textContent=
+decodeURIComponent(document.getElementById("text").value);
+
+}catch{
+
+document.getElementById("result").textContent="الرابط غير صالح";
+
+}
+
+}
+
+function formatJSON(){
+
+try{
+
+let x=JSON.parse(document.getElementById("text").value);
+
+document.getElementById("result").textContent=
+JSON.stringify(x,null,2);
+
+}catch{
+
+document.getElementById("result").textContent=
+"JSON غير صالح";
+
+}
+
+}
+
+function password(){
+
+let len=Number(document.getElementById("a").value)||16;
+
+let chars=
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+
+let out="";
+
+for(let i=0;i<len;i++){
+
+out+=chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+document.getElementById("result").textContent=out;
+
+}
+
+function randomNumber(){
+
+let a=Number(document.getElementById("a").value);
+let b=Number(document.getElementById("b").value);
+
+let x=Math.floor(Math.random()*(b-a+1))+a;
+
+document.getElementById("result").innerHTML=
+`<strong>${x}</strong>`;
+
+}
+
+function qr(){
+
+let text=document.getElementById("text").value;
+
+if(!text)return;
+
+let url=
+"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="
++encodeURIComponent(text);
+
+document.getElementById("result").innerHTML=
+`<img src="${url}" style="max-width:220px;border-radius:12px">`;
+
+}
+
+function binaryEncode(){
+
+let text=document.getElementById("text").value;
+
+let out=[...text]
+.map(c=>c.charCodeAt(0).toString(2).padStart(8,"0"))
+.join(" ");
+
+document.getElementById("result").textContent=out;
+
+}
+
+
+/* IMAGE */
+
+function resizeImage(){
+
+let file=document.getElementById("image").files[0];
+let width=Number(document.getElementById("width").value);
+
+if(!file||!width)return;
+
+let img=new Image();
+
+img.onload=()=>{
+
+let canvas=document.createElement("canvas");
+
+let ratio=width/img.width;
+
+canvas.width=width;
+canvas.height=img.height*ratio;
+
+let ctx=canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+canvas.toBlob(blob=>{
+
+let url=URL.createObjectURL(blob);
+
+document.getElementById("result").innerHTML=
+`<a class="btn" href="${url}" download="hema-resized.jpg">
+تحميل الصورة
+</a>`;
+
+},"image/jpeg",.9);
 
 };
 
-function save(){
+img.src=URL.createObjectURL(file);
 
-    localStorage.setItem(
-        "hemaBusiness",
-        JSON.stringify(data)
-    );
+}
 
-    refresh();
+function compressImage(){
+
+let file=document.getElementById("image").files[0];
+let quality=Number(document.getElementById("quality").value)/100;
+
+if(!file)return;
+
+let img=new Image();
+
+img.onload=()=>{
+
+let canvas=document.createElement("canvas");
+
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
+
+ctx.drawImage(img,0,0);
+
+canvas.toBlob(blob=>{
+
+let url=URL.createObjectURL(blob);
+
+document.getElementById("result").innerHTML=
+`<strong>${Math.round(blob.size/1024)} KB</strong>
+<br><br>
+<a class="btn" href="${url}" download="hema-compressed.jpg">
+تحميل الصورة
+</a>`;
+
+},"image/jpeg",quality);
+
+};
+
+img.src=URL.createObjectURL(file);
+
+}
+
+function imagePDF(){
+
+let file=document.getElementById("image").files[0];
+
+if(!file)return;
+
+let url=URL.createObjectURL(file);
+
+let w=window.open("");
+
+w.document.write(`
+<html>
+<head>
+<title>HeMa Tools PDF</title>
+</head>
+<body style="margin:0;text-align:center">
+<img src="${url}" style="max-width:100%;max-height:100vh">
+<script>
+window.onload=function(){
+window.print();
+}
+<\/script>
+</body>
+</html>
+`);
 
 }
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* CLOCK */
 
-function money(value){
+function clock(){
 
-    return Number(value || 0).toLocaleString("ar-EG") + " ج";
+let now=new Date();
 
-}
+document.getElementById("clock").textContent=
+now.toLocaleTimeString("ar-EG");
 
-function num(id){
+document.getElementById("today").textContent=
+now.toLocaleDateString("ar-EG",{
+weekday:"long",
+year:"numeric",
+month:"long",
+day:"numeric"
+});
 
-    return Number(document.getElementById(id).value) || 0;
-
-}
-
-function clearInputs(ids){
-
-    ids.forEach(id=>{
-        let el=document.getElementById(id);
-        if(el) el.value="";
-    });
+setTimeout(clock,1000);
 
 }
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+/* CLOSE */
 
-function showPage(id,button){
+modal.addEventListener("click",e=>{
 
-    document.querySelectorAll(".page").forEach(page=>{
-        page.classList.remove("active");
-    });
-
-    const page=document.getElementById(id);
-
-    if(page){
-        page.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav button").forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    if(button){
-        button.classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    refresh();
-
+if(e.target===modal){
+closeTool();
 }
 
-
-/* =====================================================
-   EMPLOYEES
-===================================================== */
-
-function addEmployee(){
-
-    const name=document.getElementById("empName").value.trim();
-    const job=document.getElementById("empJob").value.trim();
-    const salary=num("empSalary");
-
-    if(!name || salary<=0){
-
-        alert("اكتب اسم الموظف والراتب أولاً");
-
-        return;
-
-    }
-
-    data.employees.push({
-
-        id:Date.now(),
-        name,
-        job,
-        salary
-
-    });
-
-    clearInputs([
-        "empName",
-        "empJob",
-        "empSalary"
-    ]);
-
-    save();
-
-}
-
-
-function deleteEmployee(id){
-
-    data.employees=data.employees.filter(
-        x=>x.id!==id
-    );
-
-    save();
-
-}
-
-
-/* =====================================================
-   SALES
-===================================================== */
-
-function addSale(){
-
-    const product=document.getElementById("saleProduct").value.trim();
-    const qty=num("saleQty");
-    const price=num("salePrice");
-
-    if(!product || qty<=0 || price<=0){
-
-        alert("أدخل بيانات البيع بشكل صحيح");
-
-        return;
-
-    }
-
-    data.sales.push({
-
-        id:Date.now(),
-        product,
-        qty,
-        price,
-        total:qty*price
-
-    });
-
-    clearInputs([
-        "saleProduct",
-        "salePrice"
-    ]);
-
-    document.getElementById("saleQty").value=1;
-
-    save();
-
-}
-
-
-function deleteSale(id){
-
-    data.sales=data.sales.filter(
-        x=>x.id!==id
-    );
-
-    save();
-
-}
-
-
-/* =====================================================
-   EXPENSES
-===================================================== */
-
-function addExpense(){
-
-    const type=document.getElementById("expenseType").value;
-    const amount=num("expenseAmount");
-    const note=document.getElementById("expenseNote").value;
-
-    if(amount<=0){
-
-        alert("أدخل قيمة المصروف");
-
-        return;
-
-    }
-
-    data.expenses.push({
-
-        id:Date.now(),
-        type,
-        amount,
-        note
-
-    });
-
-    clearInputs([
-        "expenseAmount",
-        "expenseNote"
-    ]);
-
-    save();
-
-}
-
-
-function deleteExpense(id){
-
-    data.expenses=data.expenses.filter(
-        x=>x.id!==id
-    );
-
-    save();
-
-}
-
-
-/* =====================================================
-   PRODUCTION
-===================================================== */
-
-function addProduction(){
-
-    const name=document.getElementById("prodName").value.trim();
-    const qty=num("prodQty");
-    const cost=num("prodCost");
-
-    if(!name || qty<=0 || cost<0){
-
-        alert("أدخل بيانات الإنتاج");
-
-        return;
-
-    }
-
-    data.production.push({
-
-        id:Date.now(),
-        name,
-        qty,
-        cost,
-        total:qty*cost
-
-    });
-
-    clearInputs([
-        "prodName",
-        "prodQty",
-        "prodCost"
-    ]);
-
-    save();
-
-}
-
-
-function deleteProduction(id){
-
-    data.production=data.production.filter(
-        x=>x.id!==id
-    );
-
-    save();
-
-}
-
-
-/* =====================================================
-   ELECTRICITY
-===================================================== */
-
-let lastElectricity=0;
-
-function calculateElectricity(){
-
-    const kwh=num("elecKwh");
-    const price=num("elecPrice");
-
-    if(kwh<=0 || price<0){
-
-        alert("أدخل بيانات الكهرباء");
-
-        return;
-
-    }
-
-    lastElectricity=kwh*price;
-
-    document.getElementById("elecResult").textContent=
-        money(lastElectricity);
-
-}
-
-
-function saveElectricity(){
-
-    if(lastElectricity<=0){
-
-        alert("احسب تكلفة الكهرباء أولاً");
-
-        return;
-
-    }
-
-    data.electricity.push({
-
-        id:Date.now(),
-        amount:lastElectricity
-
-    });
-
-    alert("تم تسجيل فاتورة الكهرباء");
-
-    save();
-
-}
-
-
-/* =====================================================
-   INVENTORY
-===================================================== */
-
-function addStock(){
-
-    const name=document.getElementById("stockName").value.trim();
-    const qty=num("stockQty");
-    const buy=num("stockBuy");
-    const sell=num("stockSell");
-    const min=num("stockMin");
-
-    if(!name || qty<0 || buy<0 || sell<0){
-
-        alert("أدخل بيانات المنتج بشكل صحيح");
-
-        return;
-
-    }
-
-    data.inventory.push({
-
-        id:Date.now(),
-        name,
-        qty,
-        buy,
-        sell,
-        min
-
-    });
-
-    clearInputs([
-        "stockName",
-        "stockQty",
-        "stockBuy",
-        "stockSell"
-    ]);
-
-    document.getElementById("stockMin").value=5;
-
-    save();
-
-}
-
-
-function deleteStock(id){
-
-    data.inventory=data.inventory.filter(
-        x=>x.id!==id
-    );
-
-    save();
-
-}
-
-
-/* =====================================================
-   CALCULATIONS
-===================================================== */
-
-function totalSales(){
-
-    return data.sales.reduce(
-        (sum,x)=>sum+Number(x.total||0),
-        0
-    );
-
-}
-
-function totalExpenses(){
-
-    return data.expenses.reduce(
-        (sum,x)=>sum+Number(x.amount||0),
-        0
-    );
-
-}
-
-function totalSalaries(){
-
-    return data.employees.reduce(
-        (sum,x)=>sum+Number(x.salary||0),
-        0
-    );
-
-}
-
-function totalProduction(){
-
-    return data.production.reduce(
-        (sum,x)=>sum+Number(x.qty||0),
-        0
-    );
-
-}
-
-function totalProductionCost(){
-
-    return data.production.reduce(
-        (sum,x)=>sum+Number(x.total||0),
-        0
-    );
-
-}
-
-function totalElectricity(){
-
-    return data.electricity.reduce(
-        (sum,x)=>sum+Number(x.amount||0),
-        0
-    );
-
-}
-
-function totalStockValue(){
-
-    return data.inventory.reduce(
-        (sum,x)=>sum+(Number(x.qty||0)*Number(x.buy||0)),
-        0
-    );
-
-}
-
-function calculateProfit(){
-
-    return totalSales()
-        - totalExpenses()
-        - totalSalaries()
-        - totalProductionCost()
-        - totalElectricity();
-
-}
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-function refresh(){
-
-    /* Dashboard */
-
-    document.getElementById("dashSales").textContent=
-        money(totalSales());
-
-    document.getElementById("dashExpenses").textContent=
-        money(totalExpenses());
-
-    document.getElementById("dashProduction").textContent=
-        totalProduction().toLocaleString("ar-EG");
-
-    document.getElementById("dashEmployees").textContent=
-        data.employees.length.toLocaleString("ar-EG");
-
-    const profit=calculateProfit();
-
-    document.getElementById("dashProfit").textContent=
-        money(profit);
-
-    let percent=0;
-
-    if(totalSales()>0){
-
-        percent=(profit/totalSales())*100;
-
-    }
-
-    document.getElementById("profitPercent").textContent=
-        percent.toFixed(1)+"%";
-
-    document.getElementById("profitProgress").style.width=
-        Math.max(0,Math.min(100,percent))+"%";
-
-
-    /* Employees */
-
-    document.getElementById("salaryTotal").textContent=
-        money(totalSalaries());
-
-    document.getElementById("employeeCount").textContent=
-        data.employees.length;
-
-
-    document.getElementById("employeesTable").innerHTML=
-        data.employees.length ?
-
-        data.employees.map(x=>`
-
-            <tr>
-
-                <td>${escapeHTML(x.name)}</td>
-
-                <td>${escapeHTML(x.job)}</td>
-
-                <td>${money(x.salary)}</td>
-
-                <td>
-                    <button
-                        class="delete-btn"
-                        onclick="deleteEmployee(${x.id})">
-                        حذف
-                    </button>
-                </td>
-
-            </tr>
-
-        `).join("")
-
-        :
-
-        `<tr>
-            <td colspan="4" class="empty">
-                لا يوجد موظفون حتى الآن
-            </td>
-        </tr>`;
-
-
-    /* Sales */
-
-    document.getElementById("salesTotal").textContent=
-        money(totalSales());
-
-    document.getElementById("salesTable").innerHTML=
-        data.sales.length ?
-
-        data.sales.map(x=>`
-
-            <tr>
-
-                <td>${escapeHTML(x.product)}</td>
-
-                <td>${x.qty}</td>
-
-                <td>${money(x.price)}</td>
-
-                <td>${money(x.total)}</td>
-
-                <td>
-                    <button
-                        class="delete-btn"
-                        onclick="deleteSale(${x.id})">
-                        حذف
-                    </button>
-                </td>
-
-            </tr>
-
-        `).join("")
-
-        :
-
-        `<tr>
-            <td colspan="5" class="empty">
-                لا توجد مبيعات
-            </td>
-        </tr>`;
-
-
-    /* Expenses */
-
-    document.getElementById("expensesTotal").textContent=
-        money(totalExpenses());
-
-    document.getElementById("expensesTable").innerHTML=
-        data.expenses.length ?
-
-        data.expenses.map(x=>`
-
-            <tr>
-
-                <td>${escapeHTML(x.type)}</td>
-
-                <td>${money(x.amount)}</td>
-
-                <td>${escapeHTML(x.note||"-")}</td>
-
-                <td>
-                    <button
-                        class="delete-btn"
-                        onclick="deleteExpense(${x.id})">
-                        حذف
-                    </button>
-                </td>
-
-            </tr>
-
-        `).join("")
-
-        :
-
-        `<tr>
-            <td colspan="4" class="empty">
-                لا توجد مصروفات
-            </td>
-        </tr>`;
-
-
-    /* Production */
-
-    document.getElementById("productionTotal").textContent=
-        totalProduction().toLocaleString("ar-EG");
-
-    document.getElementById("productionCostTotal").textContent=
-        money(totalProductionCost());
-
-    document.getElementById("productionTable").innerHTML=
-        data.production.length ?
-
-        data.production.map(x=>`
-
-            <tr>
-
-                <td>${escapeHTML(x.name)}</td>
-
-                <td>${x.qty}</td>
-
-                <td>${money(x.cost)}</td>
-
-                <td>${money(x.total)}</td>
-
-                <td>
-                    <button
-                        class="delete-btn"
-                        onclick="deleteProduction(${x.id})">
-                        حذف
-                    </button>
-                </td>
-
-            </tr>
-
-        `).join("")
-
-        :
-
-        `<tr>
-            <td colspan="5" class="empty">
-                لا يوجد إنتاج مسجل
-            </td>
-        </tr>`;
-
-
-    /* Inventory */
-
-    document.getElementById("stockValue").textContent=
-        money(totalStockValue());
-
-    document.getElementById("stockTable").innerHTML=
-        data.inventory.length ?
-
-        data.inventory.map(x=>{
-
-            const low=x.qty<=x.min;
-
-            return `
-
-                <tr>
-
-                    <td>${escapeHTML(x.name)}</td>
-
-                    <td>${x.qty}</td>
-
-                    <td>${money(x.buy)}</td>
-
-                    <td>${money(x.sell)}</td>
-
-                    <td>
-                        ${
-                            low
-                            ?
-                            '<span style="color:#ff536c">⚠️ منخفض</span>'
-                            :
-                            '<span style="color:#4ee294">✓ جيد</span>'
-                        }
-                    </td>
-
-                    <td>
-                        <button
-                            class="delete-btn"
-                            onclick="deleteStock(${x.id})">
-                            حذف
-                        </button>
-                    </td>
-
-                </tr>
-
-            `;
-
-        }).join("")
-
-        :
-
-        `<tr>
-            <td colspan="6" class="empty">
-                لا يوجد منتجات
-            </td>
-        </tr>`;
-
-
-    /* Reports */
-
-    document.getElementById("reportSales").textContent=
-        money(totalSales());
-
-    document.getElementById("reportExpenses").textContent=
-        money(totalExpenses());
-
-    document.getElementById("reportSalaries").textContent=
-        money(totalSalaries());
-
-    document.getElementById("reportElectricity").textContent=
-        money(totalElectricity());
-
-    document.getElementById("reportProduction").textContent=
-        money(totalProductionCost());
-
-    document.getElementById("reportProfit").textContent=
-        money(calculateProfit());
-
-}
-
-
-/* =====================================================
-   BREAK EVEN
-===================================================== */
-
-function breakEven(){
-
-    const fixed=num("fixedCost");
-    const price=num("breakPrice");
-    const variable=num("variableCost");
-
-    if(fixed<=0 || price<=variable){
-
-        alert(
-            "تأكد من إدخال البيانات وأن سعر البيع أكبر من تكلفة الوحدة"
-        );
-
-        return;
-
-    }
-
-    const units=fixed/(price-variable);
-
-    document.getElementById("breakResult").textContent=
-        Math.ceil(units).toLocaleString("ar-EG")
-        +" وحدة";
-
-}
-
-
-/* =====================================================
-   EXPORT
-===================================================== */
-
-function exportData(){
-
-    const text=JSON.stringify(data,null,2);
-
-    const blob=new Blob(
-        [text],
-        {type:"application/json"}
-    );
-
-    const url=URL.createObjectURL(blob);
-
-    const a=document.createElement("a");
-
-    a.href=url;
-    a.download="hema-business-backup.json";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-}
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetAll(){
-
-    const ok=confirm(
-        "⚠️ سيتم حذف كل بيانات الشركة من هذا الجهاز. هل أنت متأكد؟"
-    );
-
-    if(!ok)return;
-
-    localStorage.removeItem("hemaBusiness");
-
-    data={
-        employees:[],
-        sales:[],
-        expenses:[],
-        production:[],
-        electricity:[],
-        inventory:[]
-    };
-
-    refresh();
-
-    alert("تم حذف جميع البيانات");
-
-}
-
-
-/* =====================================================
-   SECURITY
-===================================================== */
-
-function escapeHTML(value){
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-refresh();
+});
 
 </script>
 

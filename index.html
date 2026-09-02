@@ -1,1687 +1,1663 @@
-<!doctype html>
-<html lang="ar" dir="rtl" class="dark">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Abo Kayan Tools - 30 أداة مجانية">
-<title>Abo Kayan Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07080d">
+<title>HeMa Tools | أدواتك في مكان واحد</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-*{box-sizing:border-box}
+:root{
+    --bg:#06070b;
+    --card:#0d1018;
+    --card2:#11151f;
+    --red:#ff2d3d;
+    --red2:#ff5260;
+    --green:#20e879;
+    --text:#f7f7fa;
+    --muted:#8d94a5;
+    --border:rgba(255,255,255,.075);
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-    font-family:Cairo,sans-serif;
+    font-family:"Cairo",sans-serif;
+    background:
+        radial-gradient(circle at 10% 0%,rgba(255,35,55,.12),transparent 28%),
+        radial-gradient(circle at 90% 15%,rgba(255,35,55,.07),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-.card{
-    background:#18181bcc;
-    border:1px solid #dc262633;
-    backdrop-filter:blur(14px);
+/* ================= HEADER ================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    padding:15px 20px;
+    background:rgba(6,7,11,.72);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.tool{
-    min-height:150px;
-    transition:.2s;
+.nav{
+    max-width:1200px;
+    margin:auto;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.tool:hover{
-    transform:translateY(-3px);
-    border-color:#dc262688;
+.brand{
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    direction:ltr;
 }
 
-input,select,textarea{
+.online-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:
+        0 0 6px var(--green),
+        0 0 15px rgba(32,232,121,.7);
+    animation:pulse 1.8s infinite;
+}
+
+.brand-name{
+    color:#ff3041;
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:-.7px;
+    text-shadow:0 0 10px rgba(255,45,61,.35);
+    animation:brandGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(.8);
+        opacity:.45;
+    }
+    50%{
+        transform:scale(1.2);
+        opacity:1;
+    }
+}
+
+@keyframes brandGlow{
+    0%,100%{
+        opacity:.65;
+        text-shadow:0 0 5px rgba(255,45,61,.2);
+    }
+    50%{
+        opacity:1;
+        text-shadow:
+            0 0 8px rgba(255,45,61,.65),
+            0 0 22px rgba(255,45,61,.3);
+    }
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.nav-link{
+    color:#aeb4c2;
+    text-decoration:none;
+    padding:9px 14px;
+    border-radius:11px;
+    font-size:14px;
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:white;
+    background:rgba(255,255,255,.06);
+}
+
+.whatsapp-btn{
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(135deg,#159d58,#20c66d);
+    padding:10px 17px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:800;
+    box-shadow:0 7px 25px rgba(32,200,109,.15);
+    transition:.25s;
+}
+
+.whatsapp-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(32,200,109,.3);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    max-width:1200px;
+    margin:auto;
+    padding:85px 20px 45px;
+    text-align:center;
+    position:relative;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,25,45,.08);
+    filter:blur(80px);
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    pointer-events:none;
+}
+
+.badge{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 15px;
+    border:1px solid rgba(255,45,61,.18);
+    background:rgba(255,45,61,.06);
+    color:#ff7580;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:22px;
+}
+
+.badge span{
+    width:6px;
+    height:6px;
+    background:var(--red);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--red);
+}
+
+.hero h1{
+    position:relative;
+    font-size:clamp(35px,6vw,65px);
+    line-height:1.15;
+    font-weight:900;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.hero h1 .red{
+    color:var(--red);
+    text-shadow:0 0 30px rgba(255,45,61,.22);
+}
+
+.hero p{
+    position:relative;
+    max-width:650px;
+    margin:auto;
+    color:var(--muted);
+    font-size:15px;
+    line-height:2;
+}
+
+.hero-stats{
+    position:relative;
+    margin:35px auto 0;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.stat{
+    min-width:130px;
+    padding:13px 20px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.025);
+    border-radius:14px;
+}
+
+.stat strong{
+    display:block;
+    font-size:18px;
+    color:white;
+}
+
+.stat span{
+    color:#747b8c;
+    font-size:11px;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 20px 80px;
+}
+
+/* SEARCH */
+
+.search-wrap{
+    position:relative;
+    margin:10px 0 20px;
+}
+
+.search{
+    width:100%;
+    height:58px;
+    border:1px solid var(--border);
+    outline:none;
+    background:rgba(255,255,255,.035);
+    color:white;
+    border-radius:17px;
+    padding:0 52px 0 20px;
+    font-family:inherit;
+    font-size:14px;
+    transition:.3s;
+}
+
+.search::placeholder{
+    color:#626979;
+}
+
+.search:focus{
+    border-color:rgba(255,45,61,.4);
+    box-shadow:0 0 0 4px rgba(255,45,61,.06);
+}
+
+.search-icon{
+    position:absolute;
+    right:19px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:20px;
+    color:#727989;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:3px 0 22px;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:0 0 auto;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.025);
+    color:#898f9e;
+    padding:9px 17px;
+    border-radius:30px;
+    font-family:inherit;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.category:hover{
+    color:white;
+    background:rgba(255,255,255,.06);
+}
+
+.category.active{
+    color:white;
+    background:var(--red);
+    border-color:var(--red);
+    box-shadow:0 7px 25px rgba(255,45,61,.2);
+}
+
+/* SECTION TITLE */
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin:15px 0 20px;
+}
+
+.section-head h2{
+    font-size:21px;
+    font-weight:900;
+}
+
+.section-head p{
+    color:#6d7484;
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* ================= TOOLS GRID ================= */
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.tool-card{
+    position:relative;
+    min-height:205px;
+    padding:20px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),
+        var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.tool-card::before{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:rgba(255,45,61,.12);
+    filter:blur(45px);
+    top:-50px;
+    left:-30px;
+    opacity:0;
+    transition:.3s;
+}
+
+.tool-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,45,61,.28);
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.3),
+        0 0 30px rgba(255,45,61,.06);
+}
+
+.tool-card:hover::before{
+    opacity:1;
+}
+
+.card-top{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.tool-number{
+    color:#444b5a;
+    font-size:11px;
+    font-weight:800;
+}
+
+.tool-icon{
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:rgba(255,45,61,.09);
+    border:1px solid rgba(255,45,61,.1);
+    font-size:21px;
+    transition:.3s;
+}
+
+.tool-card:hover .tool-icon{
+    background:rgba(255,45,61,.16);
+    transform:rotate(-5deg) scale(1.05);
+}
+
+.tool-content{
+    position:relative;
+    margin-top:27px;
+}
+
+.tool-content h3{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.tool-content p{
+    color:#737a8a;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.open-tool{
+    position:absolute;
+    bottom:17px;
+    right:20px;
+    left:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#747b8a;
+    font-size:11px;
+    font-weight:700;
+}
+
+.open-tool span{
+    color:#ff5360;
+    transition:.3s;
+}
+
+.tool-card:hover .open-tool span{
+    transform:translateX(-4px);
+    color:#ff7782;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(520px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#0d1017;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    font-size:19px;
+}
+
+.close{
+    border:0;
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:rgba(255,255,255,.06);
+    color:#aaa;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.close:hover{
+    background:rgba(255,45,61,.12);
+    color:white;
+}
+
+.tool-body{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.tool-body input,
+.tool-body select,
+.tool-body textarea{
+    width:100%;
+    background:#080a0f;
+    border:1px solid rgba(255,255,255,.09);
+    color:white;
+    outline:none;
+    border-radius:12px;
+    padding:13px;
     font-family:inherit;
 }
 
-.field{
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    background:#27272a;
-    color:#fff;
-    border:1px solid #3f3f46;
-    outline:0;
-    margin-bottom:10px;
+.tool-body input:focus,
+.tool-body select:focus,
+.tool-body textarea:focus{
+    border-color:rgba(255,45,61,.45);
 }
 
-.field:focus{
-    border-color:#dc2626;
-}
-
-.btn{
-    background:#dc2626;
-    color:#fff;
-    padding:11px 15px;
+.tool-body button{
+    border:0;
     border-radius:12px;
+    padding:13px;
+    background:var(--red);
+    color:white;
+    font-family:inherit;
     font-weight:800;
     cursor:pointer;
 }
 
 .result{
-    margin-top:12px;
-    padding:14px;
-    border-radius:12px;
-    background:#18181b;
-    border:1px solid #3f3f46;
-    line-height:2;
-    word-break:break-word;
+    padding:16px;
+    border-radius:13px;
+    background:rgba(32,232,121,.06);
+    border:1px solid rgba(32,232,121,.12);
+    color:#67ed9e;
+    text-align:center;
+    font-weight:800;
 }
 
-.chip{
-    padding:8px 15px;
-    border-radius:999px;
-    background:#27272a;
-    white-space:nowrap;
-    font-weight:700;
-    cursor:pointer;
+/* ================= FLOAT WHATSAPP ================= */
+
+.float-wa{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    width:53px;
+    height:53px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#1bc76c;
+    color:white;
+    text-decoration:none;
+    font-size:24px;
+    box-shadow:
+        0 8px 30px rgba(27,199,108,.3),
+        0 0 0 5px rgba(27,199,108,.06);
+    z-index:900;
+    transition:.25s;
 }
 
-.active{
-    background:#dc2626;
+.float-wa:hover{
+    transform:scale(1.08);
 }
 
-.hidden{
-    display:none!important;
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 20px;
+    text-align:center;
+    color:#5f6675;
+    font-size:11px;
 }
 
-.light body{
-    background:#f4f4f5;
-    color:#18181b;
+footer strong{
+    color:#ff4050;
 }
 
-.light .card{
-    background:#ffffffdd;
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+    .tools-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
-.light .field{
-    background:#f4f4f5;
-    color:#18181b;
-}
-
-@media(max-width:480px){
-    .tool{
-        min-height:135px;
+@media(max-width:700px){
+    .nav-links .nav-link{
+        display:none;
     }
 
-    h1{
-        font-size:27px!important;
+    .whatsapp-btn{
+        display:none;
     }
 
-    .tool b{
+    .hero{
+        padding:55px 20px 35px;
+    }
+
+    .hero h1{
+        letter-spacing:-1px;
+    }
+
+    .tools-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .tool-card{
+        min-height:190px;
+        padding:16px;
+        border-radius:17px;
+    }
+
+    .tool-content{
+        margin-top:20px;
+    }
+
+    .tool-content h3{
+        font-size:14px;
+    }
+
+    .open-tool{
+        right:16px;
+        left:16px;
+    }
+}
+
+@media(max-width:420px){
+    .brand-name{
+        font-size:19px;
+    }
+
+    .online-dot{
+        width:8px;
+        height:8px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero p{
         font-size:13px;
+    }
+
+    .tools-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .tool-card{
+        min-height:185px;
     }
 }
 </style>
 </head>
 
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+<body>
 
-<header class="sticky top-0 z-50 card border-x-0 border-t-0">
+<!-- HEADER -->
+<header class="header">
+    <nav class="nav">
 
-<div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+        <a class="brand"
+           href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools،%20أريد%20التواصل%20معك"
+           target="_blank"
+           rel="noopener noreferrer">
 
-<a class="text-xl font-extrabold text-red-500" href="#">
-Abo Kayan Tools
-</a>
+            <span class="online-dot"></span>
+            <span class="brand-name">HeMa Tools</span>
+        </a>
 
-<div class="flex gap-2 items-center">
+        <div class="nav-links">
+            <a href="#tools" class="nav-link">الأدوات</a>
+            <a href="#about" class="nav-link">عن الموقع</a>
 
-<select id="language" class="field !w-auto !py-2 !px-3 !text-xs !mb-0">
-<option>العربية</option>
-<option>English</option>
-</select>
+            <a class="whatsapp-btn"
+               href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
+               target="_blank"
+               rel="noopener noreferrer">
+                تواصل معنا
+            </a>
+        </div>
 
-<button class="chip" onclick="theme()">🌙</button>
-
-</div>
-</div>
+    </nav>
 </header>
 
 
-<main class="max-w-5xl mx-auto px-4 py-7">
+<!-- HERO -->
+<section class="hero">
 
-<section class="text-center mb-7">
+    <div class="badge">
+        <span></span>
+        أدوات مجانية وسريعة
+    </div>
 
-<div class="inline-block px-4 py-2 rounded-full bg-red-950 text-red-400 font-bold mb-4">
-⚡ أدوات مجانية وسريعة
-</div>
+    <h1>
+        كل أدواتك في مكان
+        <span class="red">واحد</span>
+    </h1>
 
-<h1 class="text-3xl sm:text-4xl font-extrabold mb-2">
-أهلاً بك في
-<span class="text-red-500">Abo Kayan Tools</span>
-</h1>
+    <p>
+        مجموعة من الأدوات الذكية والبسيطة التي تساعدك في الحساب،
+        التحويل، النصوص، الصور والمزيد — بدون تعقيد.
+    </p>
 
-<p class="text-zinc-400">
-30 أداة للحساب والتحويل والنصوص والصور في مكان واحد.
-</p>
+    <div class="hero-stats">
+        <div class="stat">
+            <strong>30+</strong>
+            <span>أداة مجانية</span>
+        </div>
+
+        <div class="stat">
+            <strong>100%</strong>
+            <span>مجاني</span>
+        </div>
+
+        <div class="stat">
+            <strong>⚡</strong>
+            <span>سريع وسهل</span>
+        </div>
+    </div>
 
 </section>
 
 
-<div class="card rounded-2xl p-3 mb-4">
+<!-- MAIN -->
+<main class="container" id="tools">
 
-<input
-id="search"
-class="field text-center !mb-0"
-placeholder="🔎 ابحث عن أداة... مثال: نسبة، صورة، QR"
-oninput="render()">
+    <!-- SEARCH -->
+    <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="ابحث عن أداة... مثل العمر، النسبة، QR..."
+        >
+    </div>
 
-</div>
+    <!-- CATEGORIES -->
+    <div class="categories">
 
+        <button class="category active" data-cat="all">
+            الكل
+        </button>
 
-<div id="cats" class="flex gap-2 overflow-x-auto pb-3 mb-5">
+        <button class="category" data-cat="calc">
+            🧮 حسابات
+        </button>
 
-<button class="chip active" onclick="cat('all',this)">
-كل الأدوات
-</button>
+        <button class="category" data-cat="convert">
+            🔄 تحويل
+        </button>
 
-<button class="chip" onclick="cat('calc',this)">
-حاسبات 🧮
-</button>
+        <button class="category" data-cat="text">
+            📝 نصوص
+        </button>
 
-<button class="chip" onclick="cat('text',this)">
-نصوص ✍️
-</button>
+        <button class="category" data-cat="image">
+            🖼️ صور
+        </button>
 
-<button class="chip" onclick="cat('image',this)">
-صور 🖼️
-</button>
+        <button class="category" data-cat="other">
+            ⚡ أخرى
+        </button>
 
-<button class="chip" onclick="cat('convert',this)">
-تحويل 🔄
-</button>
-
-<button class="chip" onclick="cat('other',this)">
-أخرى 🛠️
-</button>
-
-</div>
-
-
-<div class="flex justify-between mb-4">
-
-<h2 class="text-2xl font-extrabold">
-الأدوات 🔥
-</h2>
-
-<span id="count" class="text-zinc-500"></span>
-
-</div>
+    </div>
 
 
-<div id="grid"
-class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-</div>
+    <div class="section-head">
+        <div>
+            <h2>الأدوات</h2>
+            <p>اختر الأداة التي تحتاجها</p>
+        </div>
+    </div>
+
+
+    <!-- TOOLS -->
+    <div class="tools-grid" id="toolsGrid">
+
+        <div class="tool-card" data-cat="calc" data-name="حساب النسبة النسبة المئوية">
+            <div class="card-top">
+                <span class="tool-number">01</span>
+                <div class="tool-icon">％</div>
+            </div>
+            <div class="tool-content">
+                <h3>حساب النسبة</h3>
+                <p>احسب النسبة المئوية بسهولة وسرعة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span>
+                <span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="حاسبة الخصم خصم">
+            <div class="card-top">
+                <span class="tool-number">02</span>
+                <div class="tool-icon">🏷️</div>
+            </div>
+            <div class="tool-content">
+                <h3>حاسبة الخصم</h3>
+                <p>اعرف السعر بعد الخصم وقيمة الخصم.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="حاسبة البقشيش">
+            <div class="card-top">
+                <span class="tool-number">03</span>
+                <div class="tool-icon">💵</div>
+            </div>
+            <div class="tool-content">
+                <h3>حاسبة البقشيش</h3>
+                <p>احسب البقشيش وتقسيم الفاتورة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="حاسبة القسط">
+            <div class="card-top">
+                <span class="tool-number">04</span>
+                <div class="tool-icon">💳</div>
+            </div>
+            <div class="tool-content">
+                <h3>حاسبة القسط</h3>
+                <p>احسب قيمة القسط الشهري بسهولة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="حساب العمر">
+            <div class="card-top">
+                <span class="tool-number">05</span>
+                <div class="tool-icon">🎂</div>
+            </div>
+            <div class="tool-content">
+                <h3>حساب العمر</h3>
+                <p>اعرف عمرك بالسنوات والأشهر والأيام.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="BMI مؤشر كتلة الجسم">
+            <div class="card-top">
+                <span class="tool-number">06</span>
+                <div class="tool-icon">⚖️</div>
+            </div>
+            <div class="tool-content">
+                <h3>BMI</h3>
+                <p>احسب مؤشر كتلة الجسم.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="السعرات">
+            <div class="card-top">
+                <span class="tool-number">07</span>
+                <div class="tool-icon">🔥</div>
+            </div>
+            <div class="tool-content">
+                <h3>حاسبة السعرات</h3>
+                <p>احسب احتياجك اليومي من السعرات.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="GPA المعدل الدراسي">
+            <div class="card-top">
+                <span class="tool-number">08</span>
+                <div class="tool-icon">🎓</div>
+            </div>
+            <div class="tool-content">
+                <h3>GPA</h3>
+                <p>احسب المعدل الدراسي بسهولة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="فرق التاريخ">
+            <div class="card-top">
+                <span class="tool-number">09</span>
+                <div class="tool-icon">📅</div>
+            </div>
+            <div class="tool-content">
+                <h3>فرق التاريخ</h3>
+                <p>احسب الفرق بين تاريخين.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="calc" data-name="السرعة">
+            <div class="card-top">
+                <span class="tool-number">10</span>
+                <div class="tool-icon">🚀</div>
+            </div>
+            <div class="tool-content">
+                <h3>حاسبة السرعة</h3>
+                <p>احسب السرعة والمسافة والزمن.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="convert" data-name="محول الطول">
+            <div class="card-top">
+                <span class="tool-number">11</span>
+                <div class="tool-icon">📏</div>
+            </div>
+            <div class="tool-content">
+                <h3>محول الطول</h3>
+                <p>حوّل بين المتر والسنتيمتر والكيلومتر.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="convert" data-name="محول الوزن">
+            <div class="card-top">
+                <span class="tool-number">12</span>
+                <div class="tool-icon">⚖️</div>
+            </div>
+            <div class="tool-content">
+                <h3>محول الوزن</h3>
+                <p>تحويل سريع بين وحدات الوزن.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="convert" data-name="محول الحرارة">
+            <div class="card-top">
+                <span class="tool-number">13</span>
+                <div class="tool-icon">🌡️</div>
+            </div>
+            <div class="tool-content">
+                <h3>محول الحرارة</h3>
+                <p>حوّل بين Celsius و Fahrenheit.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="convert" data-name="محول البيانات">
+            <div class="card-top">
+                <span class="tool-number">14</span>
+                <div class="tool-icon">💾</div>
+            </div>
+            <div class="tool-content">
+                <h3>محول البيانات</h3>
+                <p>حوّل بين KB و MB و GB.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="فرق الوقت">
+            <div class="card-top">
+                <span class="tool-number">15</span>
+                <div class="tool-icon">⏱️</div>
+            </div>
+            <div class="tool-content">
+                <h3>فرق الوقت</h3>
+                <p>احسب الفرق بين وقتين.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="عداد الكلمات">
+            <div class="card-top">
+                <span class="tool-number">16</span>
+                <div class="tool-icon">🔢</div>
+            </div>
+            <div class="tool-content">
+                <h3>عداد الكلمات</h3>
+                <p>احسب عدد الكلمات والحروف في النص.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="حالة النص">
+            <div class="card-top">
+                <span class="tool-number">17</span>
+                <div class="tool-icon">Aa</div>
+            </div>
+            <div class="tool-content">
+                <h3>حالة النص</h3>
+                <p>حوّل النص إلى UPPERCASE أو lowercase.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="عكس النص">
+            <div class="card-top">
+                <span class="tool-number">18</span>
+                <div class="tool-icon">↔️</div>
+            </div>
+            <div class="tool-content">
+                <h3>عكس النص</h3>
+                <p>اعكس ترتيب الحروف والكلمات.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="Base64">
+            <div class="card-top">
+                <span class="tool-number">19</span>
+                <div class="tool-icon">🔐</div>
+            </div>
+            <div class="tool-content">
+                <h3>Base64</h3>
+                <p>ترميز وفك ترميز النصوص بصيغة Base64.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="URL Encoder">
+            <div class="card-top">
+                <span class="tool-number">20</span>
+                <div class="tool-icon">🔗</div>
+            </div>
+            <div class="tool-content">
+                <h3>URL Encoder</h3>
+                <p>تشفير وفك تشفير الروابط.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="text" data-name="JSON Formatter">
+            <div class="card-top">
+                <span class="tool-number">21</span>
+                <div class="tool-icon">{ }</div>
+            </div>
+            <div class="tool-content">
+                <h3>JSON Formatter</h3>
+                <p>تنسيق JSON بشكل مرتب وواضح.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="مولد كلمات السر">
+            <div class="card-top">
+                <span class="tool-number">22</span>
+                <div class="tool-icon">🔑</div>
+            </div>
+            <div class="tool-content">
+                <h3>مولد كلمات السر</h3>
+                <p>أنشئ كلمة مرور قوية وعشوائية.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="رقم عشوائي">
+            <div class="card-top">
+                <span class="tool-number">23</span>
+                <div class="tool-icon">🎲</div>
+            </div>
+            <div class="tool-content">
+                <h3>رقم عشوائي</h3>
+                <p>توليد رقم عشوائي ضمن نطاق تختاره.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="QR Code">
+            <div class="card-top">
+                <span class="tool-number">24</span>
+                <div class="tool-icon">▦</div>
+            </div>
+            <div class="tool-content">
+                <h3>QR Code</h3>
+                <p>أنشئ رمز QR للنص أو الرابط.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="منتقي الألوان">
+            <div class="card-top">
+                <span class="tool-number">25</span>
+                <div class="tool-icon">🎨</div>
+            </div>
+            <div class="tool-content">
+                <h3>منتقي الألوان</h3>
+                <p>اختر اللون واعرف كوده HEX.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="convert" data-name="Binary">
+            <div class="card-top">
+                <span class="tool-number">26</span>
+                <div class="tool-icon">01</div>
+            </div>
+            <div class="tool-content">
+                <h3>Binary Converter</h3>
+                <p>تحويل النصوص والأرقام إلى Binary.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="image" data-name="Resize Image">
+            <div class="card-top">
+                <span class="tool-number">27</span>
+                <div class="tool-icon">↗️</div>
+            </div>
+            <div class="tool-content">
+                <h3>تغيير حجم الصورة</h3>
+                <p>غيّر أبعاد الصور بسهولة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="image" data-name="Compress Image">
+            <div class="card-top">
+                <span class="tool-number">28</span>
+                <div class="tool-icon">🗜️</div>
+            </div>
+            <div class="tool-content">
+                <h3>ضغط الصور</h3>
+                <p>قلل حجم الصورة مع الحفاظ على الجودة.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="image" data-name="Image PDF">
+            <div class="card-top">
+                <span class="tool-number">29</span>
+                <div class="tool-icon">📄</div>
+            </div>
+            <div class="tool-content">
+                <h3>صورة إلى PDF</h3>
+                <p>حوّل صورك إلى ملف PDF.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+
+        <div class="tool-card" data-cat="other" data-name="الساعة التاريخ">
+            <div class="card-top">
+                <span class="tool-number">30</span>
+                <div class="tool-icon">🕐</div>
+            </div>
+            <div class="tool-content">
+                <h3>الساعة والتاريخ</h3>
+                <p>اعرض الوقت والتاريخ الحاليين.</p>
+            </div>
+            <div class="open-tool">
+                <span>فتح الأداة</span><span>←</span>
+            </div>
+        </div>
+
+    </div>
 
 </main>
 
 
-<div id="modal"
-class="hidden fixed inset-0 z-[100] bg-black/75 p-4 overflow-y-auto">
-
-<div class="max-w-lg mx-auto mt-8 card rounded-2xl p-5">
-
-<div class="flex justify-between mb-4">
-
-<h3 id="title"
-class="text-xl font-extrabold text-red-500">
-</h3>
-
-<button onclick="closeM()" class="text-2xl">
-×
-</button>
-
-</div>
-
-<div id="body"></div>
-
-</div>
-</div>
+<!-- FLOATING WHATSAPP -->
+<a class="float-wa"
+   href="https://wa.me/201094122436?text=مرحباً%20HeMa%20Tools"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="WhatsApp">
+    ☎
+</a>
 
 
-<footer class="text-center text-zinc-500 text-xs py-8">
-
-© 2026 Abo Kayan Tools
-—
-جميع الأدوات تعمل داخل المتصفح
-
+<footer id="about">
+    <div>
+        صُنع بواسطة <strong>HeMa Tools</strong>
+    </div>
+    <div style="margin-top:6px;">
+        أدوات بسيطة • سريعة • مجانية
+    </div>
 </footer>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h2 id="modalTitle">الأداة</h2>
+            <button class="close" onclick="closeModal()">×</button>
+        </div>
+
+        <div class="tool-body" id="toolBody"></div>
+
+    </div>
+</div>
 
 
 <script>
 
-const A=[
+/* ================= SEARCH ================= */
 
-['percent','🧮','حساب النسبة','نسبة مئوية دقيقة','calc'],
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".tool-card")];
+const categories = [...document.querySelectorAll(".category")];
 
-['discount','💸','حاسبة الخصم','السعر قبل وبعد الخصم','calc'],
+let currentCategory = "all";
 
-['tip','💳','حاسبة البقشيش','تقسيم الفاتورة','calc'],
+function filterTools(){
 
-['loan','💰','حاسبة القسط','قسط شهري بسيط','calc'],
+    const query = search.value.trim().toLowerCase();
 
-['age','🎂','حساب العمر','بالسنين','calc'],
+    cards.forEach(card => {
 
-['bmi','⚖️','حاسبة BMI','مؤشر كتلة الجسم','calc'],
+        const name = card.dataset.name.toLowerCase();
+        const cat = card.dataset.cat;
 
-['calories','🥗','حاسبة السعرات','سعرات وبروتين','calc'],
+        const matchSearch = name.includes(query);
+        const matchCategory =
+            currentCategory === "all" ||
+            cat === currentCategory;
 
-['gpa','🎓','حاسبة GPA','المعدل من 4','calc'],
-
-['date','📅','فرق التاريخ','عدد الأيام','calc'],
-
-['speed','🚗','حاسبة السرعة','المسافة والوقت','calc'],
-
-['length','📏','محول الطول','متر وسم وقدم','convert'],
-
-['weight','⚖️','محول الوزن','كجم وجرام ورطل','convert'],
-
-['temp','🌡️','محول الحرارة','مئوية وفهرنهايت','convert'],
-
-['data','💾','محول البيانات','KB وMB وGB','convert'],
-
-['timediff','⏱️','فرق الوقت','بين وقتين','calc'],
-
-['counter','📝','عداد الكلمات','كلمات وحروف','text'],
-
-['case','🔤','حالة النص','UPPER وlower','text'],
-
-['reverse','↩️','عكس النص','اعكس النص','text'],
-
-['base64','🔐','Base64','ترميز وفك ترميز','text'],
-
-['url','🔗','URL Encoder','ترميز الروابط','text'],
-
-['json','{ }','منسق JSON','تنسيق JSON','text'],
-
-['password','🔑','مولد كلمات السر','كلمات مرور قوية','other'],
-
-['random','🎲','رقم عشوائي','بين حدين','other'],
-
-['qr','▣','مولد QR Code','نص أو رابط','other'],
-
-['color','🎨','منتقي الألوان','HEX وRGB','other'],
-
-['binary','💻','محول Binary','نص وثنائي','convert'],
-
-['resize','🖼️','تغيير حجم الصورة','بالبكسل','image'],
-
-['compress','📦','ضغط الصورة','تقليل الحجم','image'],
-
-['pdf','📄','صورة إلى PDF','حفظ بالطباعة','image'],
-
-['clock','🕐','الوقت والتاريخ','الوقت الحالي','other']
-
-];
-
-
-let C='all';
-
-const $=id=>document.getElementById(id);
-
-const N=id=>parseFloat($(id).value);
-
-
-function cat(c,e){
-
-C=c;
-
-document
-.querySelectorAll('#cats button')
-.forEach(x=>x.classList.remove('active'));
-
-e.classList.add('active');
-
-render();
-
+        card.style.display =
+            matchSearch && matchCategory
+            ? ""
+            : "none";
+    });
 }
 
+search.addEventListener("input",filterTools);
 
-function render(){
+categories.forEach(btn => {
 
-let q=$('search').value.toLowerCase();
+    btn.addEventListener("click",()=>{
 
-let l=A.filter(x=>
-(C==='all'||x[4]===C)&&
-(
-x[2].toLowerCase().includes(q)||
-x[3].toLowerCase().includes(q)
-)
-);
+        categories.forEach(x=>x.classList.remove("active"));
 
-$('count').textContent=l.length+' أداة';
+        btn.classList.add("active");
 
-$('grid').innerHTML=l.map(x=>`
+        currentCategory = btn.dataset.cat;
 
-<button
-class="tool card rounded-2xl p-4 flex flex-col items-center justify-center text-center"
-onclick="openT('${x[0]}')">
-
-<div class="w-12 h-12 rounded-2xl bg-red-950 flex items-center justify-center text-2xl mb-3">
-${x[1]}
-</div>
-
-<b class="text-sm">
-${x[2]}
-</b>
-
-<span class="text-[11px] text-zinc-500 mt-1">
-${x[3]}
-</span>
-
-</button>
-
-`).join('');
-
-}
-
-
-function theme(){
-
-document.documentElement.classList.toggle('light');
-
-}
-
-
-function closeM(){
-
-$('modal').classList.add('hidden');
-
-}
-
-
-function F(id,p,t='text'){
-
-return `
-<input
-id="${id}"
-type="${t}"
-placeholder="${p}"
-class="field">
-`;
-
-}
-
-
-function T(id,p){
-
-return `
-<textarea
-id="${id}"
-class="field min-h-32"
-placeholder="${p}">
-</textarea>
-`;
-
-}
-
-
-function B(t,f){
-
-return `
-<button
-class="btn w-full"
-onclick="${f}">
-${t}
-</button>
-`;
-
-}
-
-
-function R(id='r'){
-
-return `
-<div
-id="${id}"
-class="result">
-</div>
-`;
-
-}
-
-
-function S(id,a){
-
-return `
-<select
-id="${id}"
-class="field">
-
-${a.map(x=>
-`<option value="${x[0]}">
-${x[1]}
-</option>`
-).join('')}
-
-</select>
-`;
-
-}
-
-
-function out(x,id='r'){
-
-$(id).innerHTML=x;
-
-}
-
-
-function openT(k){
-
-let x=A.find(a=>a[0]===k);
-
-$('title').textContent=x[1]+' '+x[2];
-
-$('modal').classList.remove('hidden');
-
-let b=$('body');
-
-switch(k){
-
-case'percent':
-
-b.innerHTML=
-F('p','الرقم','number')+
-F('q','النسبة %','number')+
-B('احسب','percent()')+
-R();
-
-break;
-
-
-case'discount':
-
-b.innerHTML=
-F('price','السعر','number')+
-F('disc','الخصم %','number')+
-B('احسب','discount()')+
-R();
-
-break;
-
-
-case'tip':
-
-b.innerHTML=
-F('bill','الفاتورة','number')+
-F('tipv','البقشيش %','number')+
-F('people','عدد الأشخاص','number')+
-B('احسب','tip()')+
-R();
-
-break;
-
-
-case'loan':
-
-b.innerHTML=
-F('la','المبلغ','number')+
-F('lm','الأشهر','number')+
-B('احسب','loan()')+
-R();
-
-break;
-
-
-case'age':
-
-b.innerHTML=
-F('birth','تاريخ الميلاد','date')+
-B('احسب','age()')+
-R();
-
-break;
-
-
-case'bmi':
-
-b.innerHTML=
-F('bw','الوزن كجم','number')+
-F('bh','الطول سم','number')+
-B('احسب','bmi()')+
-R();
-
-break;
-
-
-case'calories':
-
-b.innerHTML=
-F('cw','الوزن كجم','number')+
-F('ch','الطول سم','number')+
-F('ca','العمر','number')+
-S('sex',[
-['m','ذكر'],
-['f','أنثى']
-])+
-S('goal',[
-['lose','خسارة'],
-['maintain','ثبات'],
-['gain','زيادة']
-])+
-B('احسب','calories()')+
-R();
-
-break;
-
-
-case'gpa':
-
-b.innerHTML=
-F(
-'grades',
-'درجات مفصولة بفواصل، مثال 90,80,75'
-)+
-B('احسب','gpa()')+
-R();
-
-break;
-
-
-case'date':
-
-b.innerHTML=
-F('d1','التاريخ الأول','date')+
-F('d2','التاريخ الثاني','date')+
-B('احسب','dated()')+
-R();
-
-break;
-
-
-case'speed':
-
-b.innerHTML=
-F('dist','المسافة كم','number')+
-F('hrs','الوقت ساعات','number')+
-B('احسب','speed()')+
-R();
-
-break;
-
-
-case'length':
-
-b.innerHTML=
-F('lv','القيمة','number')+
-S('lu',[
-['mc','متر → سم'],
-['cm','سم → متر'],
-['km','كم → متر'],
-['mk','متر → كم'],
-['fm','قدم → متر'],
-['ic','بوصة → سم']
-])+
-B('تحويل','length()')+
-R();
-
-break;
-
-
-case'weight':
-
-b.innerHTML=
-F('wv','القيمة','number')+
-S('wu',[
-['kg_g','كجم → جرام'],
-['g_kg','جرام → كجم'],
-['kg_l','كجم → رطل'],
-['l_kg','رطل → كجم']
-])+
-B('تحويل','weight()')+
-R();
-
-break;
-
-
-case'temp':
-
-b.innerHTML=
-F('tv','القيمة','number')+
-S('tu',[
-['cf','مئوية → فهرنهايت'],
-['fc','فهرنهايت → مئوية'],
-['ck','مئوية → كلفن'],
-['kc','كلفن → مئوية']
-])+
-B('تحويل','temp()')+
-R();
-
-break;
-
-
-case'data':
-
-b.innerHTML=
-F('dv','القيمة','number')+
-S('du',[
-['mg','MB → GB'],
-['gm','GB → MB'],
-['gt','GB → TB'],
-['km','KB → MB']
-])+
-B('تحويل','data()')+
-R();
-
-break;
-
-
-case'timediff':
-
-b.innerHTML=
-F('t1','الوقت الأول','time')+
-F('t2','الوقت الثاني','time')+
-B('احسب','tdiff()')+
-R();
-
-break;
-
-
-case'counter':
-
-b.innerHTML=
-T('ct','اكتب النص...')+
-`
-<div class="grid grid-cols-3 gap-2">
-
-<div class="result text-center">
-كلمات<br>
-<b id="wc">0</b>
-</div>
-
-<div class="result text-center">
-حروف<br>
-<b id="cc">0</b>
-</div>
-
-<div class="result text-center">
-مسافات<br>
-<b id="sc">0</b>
-</div>
-
-</div>
-`;
-
-$('ct').oninput=count;
-
-break;
-
-
-case'case':
-
-b.innerHTML=
-T('ci','النص...')+
-S('cs',[
-['u','UPPERCASE'],
-['l','lowercase']
-])+
-B('تحويل','cases()')+
-R();
-
-break;
-
-
-case'reverse':
-
-b.innerHTML=
-T('ri','النص...')+
-B('اعكس','reverse()')+
-R();
-
-break;
-
-
-case'base64':
-
-b.innerHTML=
-T('bi','النص...')+
-S('bm',[
-['e','ترميز'],
-['d','فك الترميز']
-])+
-B('تنفيذ','base64()')+
-R();
-
-break;
-
-
-case'url':
-
-b.innerHTML=
-T('ui','الرابط أو النص...')+
-S('um',[
-['e','ترميز'],
-['d','فك الترميز']
-])+
-B('تنفيذ','urlx()')+
-R();
-
-break;
-
-
-case'json':
-
-b.innerHTML=
-T('ji','JSON...')+
-B('تنسيق','json()')+
-R();
-
-break;
-
-
-case'password':
-
-b.innerHTML=
-F('pl','الطول','number')+
-B('توليد','pass()')+
-R();
-
-break;
-
-
-case'random':
-
-b.innerHTML=
-F('rmin','الحد الأدنى','number')+
-F('rmax','الحد الأقصى','number')+
-B('توليد','randomN()')+
-R();
-
-break;
-
-
-case'qr':
-
-b.innerHTML=
-F('qr','النص أو الرابط')+
-B('إنشاء QR','qr()')+
-R('qrout');
-
-break;
-
-
-case'color':
-
-b.innerHTML=`
-<input
-id="col"
-type="color"
-value="#dc2626"
-class="w-full h-20">
-
-${R()}
-
-<div
-id="cp"
-class="h-20 rounded-xl mt-3">
-</div>
-`;
-
-$('col').oninput=color;
-
-color();
-
-break;
-
-
-case'binary':
-
-b.innerHTML=
-T('bin','النص أو Binary')+
-S('bmode',[
-['e','نص → Binary'],
-['d','Binary → نص']
-])+
-B('تحويل','binary()')+
-R();
-
-break;
-
-
-case'resize':
-
-b.innerHTML=`
-<input
-id="rf"
-type="file"
-accept="image/*"
-class="field">
-`+
-F('rw','العرض الجديد','number')+
-F('rh','الارتفاع الجديد','number')+
-B('تغيير وتنزيل','resize()')+
-R();
-
-break;
-
-
-case'compress':
-
-b.innerHTML=`
-<input
-id="cf"
-type="file"
-accept="image/*"
-class="field">
-`+
-F('cq','الجودة 10-100','number')+
-B('ضغط وتنزيل','compress()')+
-R();
-
-break;
-
-
-case'pdf':
-
-b.innerHTML=`
-<input
-id="pf"
-type="file"
-accept="image/*"
-class="field">
-`+
-B('فتح للطباعة وحفظ PDF','pdf()');
-
-break;
-
-
-case'clock':
-
-b.innerHTML=`
-<div
-id="clock"
-class="text-center text-2xl font-extrabold text-red-500">
-</div>
-`;
-
-clock();
-
-break;
-
-}
-
-}
-
-
-function percent(){
-
-out(
-'الناتج: <b>'+
-((N('p')*N('q'))/100).toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function discount(){
-
-let p=N('price');
-
-let d=N('disc');
-
-let value=p*d/100;
-
-out(
-'قيمة الخصم: '+
-value.toFixed(2)+
-'<br>السعر بعد الخصم: <b>'+
-(p-value).toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function tip(){
-
-let b=N('bill');
-
-let t=N('tipv');
-
-let p=Math.max(1,N('people'));
-
-let tip=b*t/100;
-
-let total=b+tip;
-
-out(
-'البقشيش: '+tip.toFixed(2)+
-'<br>الإجمالي: '+total.toFixed(2)+
-'<br>لكل شخص: <b>'+
-(total/p).toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function loan(){
-
-out(
-'القسط الشهري: <b>'+
-(N('la')/N('lm')).toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function age(){
-
-let b=new Date($('birth').value);
-
-let n=new Date();
-
-let a=n.getFullYear()-b.getFullYear();
-
-if(
-n.getMonth()<b.getMonth()||
-(
-n.getMonth()==b.getMonth()&&
-n.getDate()<b.getDate()
-)
-)a--;
-
-out(
-'عمرك: <b>'+
-a+
-' سنة</b>'
-);
-
-}
-
-
-function bmi(){
-
-let b=N('bw');
-
-let h=N('bh')/100;
-
-let x=b/h**2;
-
-let s=
-x<18.5?'نحيف':
-x<25?'طبيعي':
-x<30?'زيادة وزن':
-'سمنة';
-
-out(
-'BMI: <b>'+
-x.toFixed(1)+
-'</b><br>'+
-s
-);
-
-}
-
-
-function calories(){
-
-let w=N('cw');
-
-let h=N('ch');
-
-let a=N('ca');
-
-let base=
-$('sex').value==='m'
-?
-10*w+6.25*h-5*a+5
-:
-10*w+6.25*h-5*a-161;
-
-let g=$('goal').value;
-
-let t=
-base*1.375+
-(
-g==='lose'?-400:
-g==='gain'?300:
-0
-);
-
-out(
-'السعرات التقديرية: <b>'+
-Math.round(t)+
-' سعرة</b>'+
-'<br>البروتين: '+
-Math.round(w*1.6)+
-'–'+
-Math.round(w*2)+
-' جم'
-);
-
-}
-
-
-function gpa(){
-
-let a=
-$('grades')
-.value
-.split(',')
-.map(Number)
-.filter(x=>!isNaN(x));
-
-if(!a.length){
-
-out('أدخل الدرجات أولاً');
-
-return;
-
-}
-
-let v=
-a.reduce((x,y)=>x+y,0)/
-a.length;
-
-out(
-'المتوسط: '+
-v.toFixed(2)+
-'%<br>GPA تقريبي: <b>'+
-Math.min(4,v/25).toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function dated(){
-
-let d=
-Math.abs(
-Math.round(
-(
-new Date($('d2').value)-
-new Date($('d1').value)
-)/86400000
-)
-);
-
-out(
-'الفرق: <b>'+
-d+
-' يوم</b>'
-);
-
-}
-
-
-function speed(){
-
-out(
-'السرعة: <b>'+
-(N('dist')/N('hrs')).toFixed(2)+
-' كم/ساعة</b>'
-);
-
-}
-
-
-function length(){
-
-let v=N('lv');
-
-let t=$('lu').value;
-
-let r={
-mc:v*100,
-cm:v/100,
-km:v*1000,
-mk:v/1000,
-fm:v*.3048,
-ic:v*2.54
-}[t];
-
-out(
-'الناتج: <b>'+
-r.toFixed(4)+
-'</b>'
-);
-
-}
-
-
-function weight(){
-
-let v=N('wv');
-
-let t=$('wu').value;
-
-let r={
-kg_g:v*1000,
-g_kg:v/1000,
-kg_l:v*2.2046226,
-l_kg:v/2.2046226
-}[t];
-
-out(
-'الناتج: <b>'+
-r.toFixed(4)+
-'</b>'
-);
-
-}
-
-
-function temp(){
-
-let v=N('tv');
-
-let t=$('tu').value;
-
-let r={
-cf:v*9/5+32,
-fc:(v-32)*5/9,
-ck:v+273.15,
-kc:v-273.15
-}[t];
-
-out(
-'الناتج: <b>'+
-r.toFixed(2)+
-'</b>'
-);
-
-}
-
-
-function data(){
-
-let v=N('dv');
-
-let t=$('du').value;
-
-let r={
-mg:v/1024,
-gm:v*1024,
-gt:v/1024,
-km:v/1024
-}[t];
-
-out(
-'الناتج: <b>'+
-r.toFixed(4)+
-'</b>'
-);
-
-}
-
-
-function tdiff(){
-
-let a=$('t1').value.split(':');
-
-let b=$('t2').value.split(':');
-
-let d=
-Math.abs(
-(+b[0]*60+ +b[1])-
-(+a[0]*60+ +a[1])
-);
-
-out(
-'الفرق: <b>'+
-Math.floor(d/60)+
-' ساعة و '+
-d%60+
-' دقيقة</b>'
-);
-
-}
-
-
-function count(){
-
-let s=$('ct').value;
-
-$('wc').textContent=
-s.trim()?
-s.trim().split(/\s+/).length:
-0;
-
-$('cc').textContent=s.length;
-
-$('sc').textContent=
-(s.match(/\s/g)||[]).length;
-
-}
-
-
-function cases(){
-
-out(
-$('cs').value==='u'
-?
-$('ci').value.toUpperCase()
-:
-$('ci').value.toLowerCase()
-);
-
-}
-
-
-function reverse(){
-
-out(
-$('ri')
-.value
-.split('')
-.reverse()
-.join('')
-.replace(/</g,'&lt;')
-);
-
-}
-
-
-function base64(){
-
-try{
-
-let s=$('bi').value;
-
-out(
-$('bm').value==='e'
-?
-btoa(unescape(encodeURIComponent(s)))
-:
-decodeURIComponent(escape(atob(s)))
-);
-
-}
-
-catch(e){
-
-out('النص غير صالح');
-
-}
-
-}
-
-
-function urlx(){
-
-try{
-
-out(
-$('um').value==='e'
-?
-encodeURIComponent($('ui').value)
-:
-decodeURIComponent($('ui').value)
-);
-
-}
-
-catch(e){
-
-out('النص غير صالح');
-
-}
-
-}
-
-
-function json(){
-
-try{
-
-out(
-'<pre class="whitespace-pre-wrap">'+
-JSON.stringify(
-JSON.parse($('ji').value),
-null,
-2
-)
-.replace(/</g,'&lt;')+
-'</pre>'
-);
-
-}
-
-catch(e){
-
-out('JSON غير صالح');
-
-}
-
-}
-
-
-function pass(){
-
-let n=
-Math.min(
-100,
-Math.max(
-4,
-N('pl')||12
-)
-);
-
-let c=
-'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*_-+';
-
-let a=new Uint32Array(n);
-
-crypto.getRandomValues(a);
-
-out(
-'<b class="break-all">'+
-[...a]
-.map(x=>c[x%c.length])
-.join('')+
-'</b>'
-);
-
-}
-
-
-function randomN(){
-
-let a=N('rmin');
-
-let b=N('rmax');
-
-if(a>b){
-
-let t=a;
-
-a=b;
-
-b=t;
-
-}
-
-out(
-'<b>'+
-Math.floor(
-Math.random()*
-(b-a+1)+a
-)+
-'</b>'
-);
-
-}
-
-
-function qr(){
-
-let s=$('qr').value;
-
-if(!s){
-
-out('اكتب النص أو الرابط أولاً','qrout');
-
-return;
-
-}
-
-out(
-
-`
-<img
-class="mx-auto bg-white p-2 rounded-xl"
-width="220"
-src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(s)}">
-`
-
-,'qrout');
-
-}
-
-
-function color(){
-
-let c=$('col').value;
-
-$('cp').style.background=c;
-
-out(
-'HEX: <b>'+
-c+
-'</b>'
-);
-
-}
-
-
-function binary(){
-
-let s=$('bin').value;
-
-if($('bmode').value==='e'){
-
-out(
-[...s]
-.map(
-c=>
-c.charCodeAt(0)
-.toString(2)
-.padStart(8,'0')
-)
-.join(' ')
-);
-
-}
-
-else{
-
-try{
-
-out(
-s.trim()
-.split(/\s+/)
-.map(
-x=>
-String.fromCharCode(
-parseInt(x,2)
-)
-)
-.join('')
-);
-
-}
-
-catch(e){
-
-out('Binary غير صالح');
-
-}
-
-}
-
-}
-
-
-function img(f,cb){
-
-let r=new FileReader();
-
-r.onload=()=>{
-
-let i=new Image();
-
-i.onload=()=>cb(i);
-
-i.src=r.result;
-
-};
-
-r.readAsDataURL(f);
-
-}
-
-
-function dl(c,n,q=.8){
-
-let a=document.createElement('a');
-
-a.href=c.toDataURL(
-'image/jpeg',
-q
-);
-
-a.download=n;
-
-a.click();
-
-}
-
-
-function resize(){
-
-let f=$('rf').files[0];
-
-if(!f){
-
-out('اختر صورة');
-
-return;
-
-}
-
-img(f,i=>{
-
-let c=document.createElement('canvas');
-
-c.width=N('rw')||i.width;
-
-c.height=N('rh')||i.height;
-
-c.getContext('2d')
-.drawImage(
-i,
-0,
-0,
-c.width,
-c.height
-);
-
-dl(c,'resized.jpg');
-
-out('تم تنزيل الصورة');
+        filterTools();
+    });
 
 });
 
-}
 
+/* ================= MODAL ================= */
 
-function compress(){
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const toolBody = document.getElementById("toolBody");
 
-let f=$('cf').files[0];
+cards.forEach((card,index)=>{
 
-if(!f){
+    card.addEventListener("click",()=>{
 
-out('اختر صورة');
+        modalTitle.textContent =
+            card.querySelector("h3").textContent;
 
-return;
+        openTool(index + 1);
 
-}
-
-let q=
-Math.min(
-100,
-Math.max(
-10,
-N('cq')||70
-)
-)/100;
-
-img(f,i=>{
-
-let c=document.createElement('canvas');
-
-c.width=i.width;
-
-c.height=i.height;
-
-c.getContext('2d')
-.drawImage(i,0,0);
-
-dl(
-c,
-'compressed.jpg',
-q
-);
-
-out(
-'تم ضغط وتنزيل الصورة'
-);
+        modal.classList.add("show");
+    });
 
 });
 
+
+function closeModal(){
+    modal.classList.remove("show");
+}
+
+modal.addEventListener("click",(e)=>{
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+});
+
+
+/* ================= TOOLS ================= */
+
+function openTool(number){
+
+    let html = "";
+
+    switch(number){
+
+        case 1:
+            html = `
+                <input id="a" type="number" placeholder="الجزء">
+                <input id="b" type="number" placeholder="الكل">
+                <button onclick="
+                    let a=+document.getElementById('a').value;
+                    let b=+document.getElementById('b').value;
+                    document.getElementById('res').textContent =
+                    b ? ((a/b)*100).toFixed(2)+'%' : 'أدخل القيم';
+                ">احسب</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 2:
+            html = `
+                <input id="price" type="number" placeholder="السعر">
+                <input id="discount" type="number" placeholder="نسبة الخصم %">
+                <button onclick="
+                    let p=+price.value,d=+discount.value;
+                    res.textContent=d<=100?(p-p*d/100).toFixed(2)+' جنيه':'نسبة غير صحيحة';
+                ">احسب السعر</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 3:
+            html = `
+                <input id="bill" type="number" placeholder="قيمة الفاتورة">
+                <input id="tip" type="number" placeholder="البقشيش %">
+                <input id="people" type="number" placeholder="عدد الأشخاص">
+                <button onclick="
+                    let b=+bill.value,t=+tip.value,n=+people.value;
+                    let total=b+b*t/100;
+                    res.textContent=n>0?'الإجمالي: '+total.toFixed(2)+' — للفرد: '+(total/n).toFixed(2):'أدخل عدد الأشخاص';
+                ">احسب</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 4:
+            html = `
+                <input id="loan" type="number" placeholder="قيمة المبلغ">
+                <input id="months" type="number" placeholder="عدد الشهور">
+                <button onclick="
+                    let l=+loan.value,m=+months.value;
+                    res.textContent=m>0?(l/m).toFixed(2)+' جنيه شهرياً':'أدخل عدد الشهور';
+                ">احسب القسط</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 5:
+            html = `
+                <input id="birth" type="date">
+                <button onclick="
+                    let b=new Date(birth.value), n=new Date();
+                    let age=n.getFullYear()-b.getFullYear();
+                    let m=n.getMonth()-b.getMonth();
+                    if(m<0 || (m===0 && n.getDate()<b.getDate())) age--;
+                    res.textContent=age>=0?'عمرك: '+age+' سنة':'تاريخ غير صحيح';
+                ">احسب العمر</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 6:
+            html = `
+                <input id="weight" type="number" placeholder="الوزن بالكجم">
+                <input id="height" type="number" placeholder="الطول بالسنتيمتر">
+                <button onclick="
+                    let w=+weight.value,h=+height.value/100;
+                    let bmi=w/(h*h);
+                    res.textContent=h>0?'BMI = '+bmi.toFixed(1):'أدخل الطول';
+                ">احسب BMI</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 11:
+            html = `
+                <input id="val" type="number" placeholder="القيمة">
+                <select id="unit">
+                    <option value="1">متر</option>
+                    <option value=".01">سنتيمتر</option>
+                    <option value="1000">كيلومتر</option>
+                </select>
+                <button onclick="
+                    let v=+val.value,u=+unit.value;
+                    res.textContent='بالأمتار: '+(v*u).toFixed(4);
+                ">تحويل</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 13:
+            html = `
+                <input id="temp" type="number" placeholder="درجة الحرارة">
+                <select id="scale">
+                    <option value="c">Celsius → Fahrenheit</option>
+                    <option value="f">Fahrenheit → Celsius</option>
+                </select>
+                <button onclick="
+                    let t=+temp.value;
+                    res.textContent=scale.value==='c'
+                    ? ((t*9/5)+32).toFixed(2)+' °F'
+                    : ((t-32)*5/9).toFixed(2)+' °C';
+                ">تحويل</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 16:
+            html = `
+                <textarea id="txt" rows="7" placeholder="اكتب النص هنا"></textarea>
+                <button onclick="
+                    let t=txt.value;
+                    let words=t.trim()?t.trim().split(/\\s+/).length:0;
+                    res.textContent='الكلمات: '+words+' | الحروف: '+t.length;
+                ">احسب</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 18:
+            html = `
+                <textarea id="txt" rows="6" placeholder="اكتب النص"></textarea>
+                <button onclick="
+                    res.textContent=txt.value.split('').reverse().join('');
+                ">اعكس النص</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 22:
+            html = `
+                <input id="len" type="number" value="16" placeholder="طول كلمة المرور">
+                <button onclick="
+                    let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+                    let l=Math.max(4,+len.value||16);
+                    let out='';
+                    for(let i=0;i<l;i++) out+=chars[Math.floor(Math.random()*chars.length)];
+                    res.textContent=out;
+                ">توليد كلمة مرور</button>
+                <div class="result" id="res">اضغط توليد</div>
+            `;
+            break;
+
+
+        case 23:
+            html = `
+                <input id="min" type="number" placeholder="من">
+                <input id="max" type="number" placeholder="إلى">
+                <button onclick="
+                    let a=+min.value,b=+max.value;
+                    res.textContent=b>=a
+                    ? Math.floor(Math.random()*(b-a+1))+a
+                    : 'النطاق غير صحيح';
+                ">توليد</button>
+                <div class="result" id="res">النتيجة تظهر هنا</div>
+            `;
+            break;
+
+
+        case 25:
+            html = `
+                <input id="color" type="color" value="#ff2d3d" style="height:60px">
+                <button onclick="
+                    res.textContent=color.value;
+                ">اعرف الكود</button>
+                <div class="result" id="res">#ff2d3d</div>
+            `;
+            break;
+
+
+        case 30:
+            html = `
+                <div class="result" id="clock">--:--:--</div>
+                <div class="result" id="dateNow">--</div>
+            `;
+
+            setTimeout(updateClock,50);
+            break;
+
+
+        default:
+            html = `
+                <div style="text-align:center;padding:20px">
+                    <div style="font-size:45px;margin-bottom:15px">⚡</div>
+                    <p style="color:#858c9b;line-height:2">
+                        هذه الأداة موجودة في واجهة HeMa Tools،
+                        ويمكن إضافة وظيفتها الكاملة هنا.
+                    </p>
+                </div>
+            `;
+    }
+
+    toolBody.innerHTML = html;
 }
 
 
-function pdf(){
+function updateClock(){
 
-let f=$('pf').files[0];
+    const c=document.getElementById("clock");
+    const d=document.getElementById("dateNow");
 
-if(!f){
+    if(!c) return;
 
-alert('اختر صورة');
+    const now=new Date();
 
-return;
+    c.textContent=now.toLocaleTimeString("ar-EG");
 
-}
+    d.textContent=now.toLocaleDateString("ar-EG",{
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+    });
 
-let r=new FileReader();
-
-r.onload=()=>{
-
-let w=open();
-
-w.document.write(
-'<img style="max-width:100%" src="'+
-r.result+
-'">'
-);
-
-setTimeout(
-()=>w.print(),
-500
-);
-
-};
-
-r.readAsDataURL(f);
-
+    setTimeout(updateClock,1000);
 }
 
 
-function clock(){
-
-let e=$('clock');
-
-if(!e)return;
-
-e.textContent=
-new Date()
-.toLocaleString(
-'ar-EG',
-{
-dateStyle:'full',
-timeStyle:'medium'
-}
-);
-
-setTimeout(
-clock,
-1000
-);
-
-}
-
-
-render();
+/* ESC */
+document.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape"){
+        closeModal();
+    }
+});
 
 </script>
 

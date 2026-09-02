@@ -1,3022 +1,1687 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="ar" dir="rtl" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090d14">
-<meta name="description" content="HeMa Tools - مجموعة أدوات مجانية وسريعة تعمل مباشرة من المتصفح">
-<title>HeMa Tools</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Abo Kayan Tools - 30 أداة مجانية">
+<title>Abo Kayan Tools</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-*{
-    box-sizing:border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
 
-html{
-    scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
 
 body{
-    margin:0;
-    font-family:"Cairo",sans-serif;
-    background:#070b12;
-    color:#f8fafc;
-    min-height:100vh;
+    font-family:Cairo,sans-serif;
 }
 
-button,input,select,textarea{
+.card{
+    background:#18181bcc;
+    border:1px solid #dc262633;
+    backdrop-filter:blur(14px);
+}
+
+.tool{
+    min-height:150px;
+    transition:.2s;
+}
+
+.tool:hover{
+    transform:translateY(-3px);
+    border-color:#dc262688;
+}
+
+input,select,textarea{
     font-family:inherit;
 }
 
-.container-main{
-    width:min(1200px,94%);
-    margin:auto;
-}
-
-/* Header */
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(7,11,18,.88);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.header-inner{
-    min-height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-/* HeMa Brand */
-.hema-brand{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    text-decoration:none;
-    direction:ltr;
-    white-space:nowrap;
-}
-
-.hema-name{
-    color:#ef2b2b;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:-.5px;
-    animation:hemaGlow 1.8s ease-in-out infinite;
-}
-
-.online-dot{
-    width:11px;
-    height:11px;
-    background:#22c55e;
-    border-radius:50%;
-    display:inline-block;
-    box-shadow:
-        0 0 5px #22c55e,
-        0 0 12px #22c55e,
-        0 0 20px rgba(34,197,94,.8);
-    animation:onlinePulse 1.8s ease-in-out infinite;
-}
-
-@keyframes hemaGlow{
-    0%,100%{
-        opacity:.45;
-        text-shadow:0 0 3px rgba(239,43,43,.2);
-    }
-    50%{
-        opacity:1;
-        text-shadow:
-            0 0 5px #ef2b2b,
-            0 0 12px #ef2b2b,
-            0 0 22px rgba(239,43,43,.8);
-    }
-}
-
-@keyframes onlinePulse{
-    0%,100%{
-        opacity:.35;
-        transform:scale(.8);
-        box-shadow:0 0 3px #22c55e;
-    }
-    50%{
-        opacity:1;
-        transform:scale(1.15);
-        box-shadow:
-            0 0 6px #22c55e,
-            0 0 15px #22c55e,
-            0 0 25px rgba(34,197,94,.9);
-    }
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.icon-btn,
-.lang-select{
-    height:42px;
-    border:1px solid rgba(255,255,255,.08);
-    background:#111722;
-    color:#e5e7eb;
+.field{
+    width:100%;
+    padding:12px;
     border-radius:12px;
-}
-
-.icon-btn{
-    width:42px;
-    cursor:pointer;
-    font-size:18px;
-}
-
-.lang-select{
-    padding:0 12px;
-    outline:none;
-}
-
-/* Hero */
-.hero{
-    padding:58px 0 34px;
-    text-align:center;
-}
-
-.hero-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:7px 13px;
-    border-radius:999px;
-    background:rgba(239,43,43,.08);
-    border:1px solid rgba(239,43,43,.18);
-    color:#fca5a5;
-    font-size:13px;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    margin:0;
-    font-size:clamp(30px,6vw,56px);
-    line-height:1.15;
-    font-weight:800;
-}
-
-.hero h1 span{
-    color:#ef4444;
-}
-
-.hero p{
-    color:#94a3b8;
-    max-width:700px;
-    margin:17px auto 0;
-    line-height:1.9;
-    font-size:15px;
-}
-
-/* Search */
-.search-wrap{
-    margin:28px auto 25px;
-    max-width:700px;
-    position:relative;
-}
-
-.search-wrap input{
-    width:100%;
-    height:56px;
-    padding:0 52px 0 18px;
-    border-radius:17px;
-    border:1px solid rgba(255,255,255,.08);
-    outline:none;
-    background:#101722;
+    background:#27272a;
     color:#fff;
-    font-size:15px;
-    transition:.2s;
+    border:1px solid #3f3f46;
+    outline:0;
+    margin-bottom:10px;
 }
 
-.search-wrap input:focus{
-    border-color:rgba(239,68,68,.55);
-    box-shadow:0 0 0 4px rgba(239,68,68,.08);
+.field:focus{
+    border-color:#dc2626;
 }
 
-.search-icon{
-    position:absolute;
-    right:18px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#64748b;
-    font-size:20px;
-}
-
-/* Categories */
-.categories{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding:3px 2px 12px;
-    scrollbar-width:none;
-}
-
-.categories::-webkit-scrollbar{
-    display:none;
-}
-
-.category-btn{
-    flex:none;
-    border:1px solid rgba(255,255,255,.07);
-    background:#101722;
-    color:#94a3b8;
-    padding:9px 15px;
-    border-radius:11px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.category-btn:hover{
-    color:#fff;
-    border-color:rgba(239,68,68,.35);
-}
-
-.category-btn.active{
-    background:#ef2b2b;
-    color:#fff;
-    border-color:#ef2b2b;
-}
-
-/* Tools Grid */
-.tools-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    padding:18px 0 45px;
-}
-
-.tool-card{
-    background:linear-gradient(145deg,#101722,#0d131d);
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:18px;
-    padding:18px;
-    transition:.25s;
-    min-height:180px;
-    display:flex;
-    flex-direction:column;
-}
-
-.tool-card:hover{
-    transform:translateY(-3px);
-    border-color:rgba(239,68,68,.25);
-    box-shadow:0 12px 35px rgba(0,0,0,.22);
-}
-
-.tool-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.tool-icon{
-    width:46px;
-    height:46px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(239,68,68,.10);
-    font-size:23px;
-}
-
-.tool-card h3{
-    font-size:16px;
-    margin:14px 0 5px;
-}
-
-.tool-card p{
-    color:#64748b;
-    font-size:12px;
-    line-height:1.7;
-    margin:0 0 15px;
-}
-
-.tool-open{
-    margin-top:auto;
-    width:100%;
-    height:42px;
-    border:0;
-    border-radius:11px;
-    background:#171f2d;
-    color:#e2e8f0;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.tool-open:hover{
-    background:#ef2b2b;
-    color:#fff;
-}
-
-/* Empty */
-.empty{
-    display:none;
-    text-align:center;
-    color:#64748b;
-    padding:50px 10px;
-}
-
-/* Modal */
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:200;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(560px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:#0e151f;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:22px;
-    box-shadow:0 30px 90px rgba(0,0,0,.5);
-}
-
-.modal-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:19px 20px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.modal-head h2{
-    margin:0;
-    font-size:19px;
-}
-
-.close-btn{
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:10px;
-    background:#171f2d;
-    color:#cbd5e1;
-    cursor:pointer;
-    font-size:19px;
-}
-
-.modal-body{
-    padding:20px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    color:#cbd5e1;
-    font-size:13px;
-    margin-bottom:7px;
-}
-
-.form-control{
-    width:100%;
-    min-height:45px;
-    padding:9px 12px;
-    background:#090f18;
-    border:1px solid rgba(255,255,255,.09);
-    color:#fff;
-    border-radius:11px;
-    outline:none;
-}
-
-.form-control:focus{
-    border-color:#ef4444;
-}
-
-textarea.form-control{
-    min-height:130px;
-    resize:vertical;
-}
-
-.action-btn{
-    width:100%;
-    min-height:46px;
-    border:0;
-    border-radius:12px;
-    background:#ef2b2b;
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:4px;
-}
-
-.action-btn:hover{
+.btn{
     background:#dc2626;
-}
-
-.secondary-btn{
-    width:100%;
-    min-height:43px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:11px;
-    background:#171f2d;
-    color:#e2e8f0;
+    color:#fff;
+    padding:11px 15px;
+    border-radius:12px;
+    font-weight:800;
     cursor:pointer;
-    margin-top:9px;
 }
 
 .result{
-    margin-top:15px;
-    padding:15px;
+    margin-top:12px;
+    padding:14px;
     border-radius:12px;
-    background:#090f18;
-    border:1px solid rgba(255,255,255,.07);
-    color:#f8fafc;
-    line-height:1.8;
-    text-align:center;
+    background:#18181b;
+    border:1px solid #3f3f46;
+    line-height:2;
     word-break:break-word;
 }
 
-.result strong{
-    color:#f87171;
-    font-size:20px;
+.chip{
+    padding:8px 15px;
+    border-radius:999px;
+    background:#27272a;
+    white-space:nowrap;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.two-cols{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.active{
+    background:#dc2626;
 }
 
-.color-preview{
-    width:100%;
-    height:80px;
-    border-radius:12px;
-    margin-top:12px;
-    border:1px solid rgba(255,255,255,.08);
+.hidden{
+    display:none!important;
 }
 
-.qr-result img{
-    max-width:240px;
-    width:100%;
-    background:#fff;
-    padding:10px;
-    border-radius:12px;
+.light body{
+    background:#f4f4f5;
+    color:#18181b;
 }
 
-/* Footer */
-footer{
-    border-top:1px solid rgba(255,255,255,.07);
-    padding:28px 0;
-    color:#64748b;
-    text-align:center;
-    font-size:13px;
+.light .card{
+    background:#ffffffdd;
 }
 
-footer strong{
-    color:#ef4444;
+.light .field{
+    background:#f4f4f5;
+    color:#18181b;
 }
 
-/* Light mode */
-html.light body{
-    background:#f5f7fb;
-    color:#111827;
-}
-
-html.light header{
-    background:rgba(255,255,255,.88);
-    border-color:#e5e7eb;
-}
-
-html.light .search-wrap input,
-html.light .category-btn,
-html.light .tool-card,
-html.light .icon-btn,
-html.light .lang-select{
-    background:#fff;
-    color:#111827;
-    border-color:#e5e7eb;
-}
-
-html.light .tool-card p{
-    color:#64748b;
-}
-
-html.light .tool-open{
-    background:#f1f5f9;
-    color:#334155;
-}
-
-html.light .modal-box{
-    background:#fff;
-    color:#111827;
-}
-
-html.light .modal-head{
-    border-color:#e5e7eb;
-}
-
-html.light .form-control,
-html.light .result{
-    background:#f8fafc;
-    color:#111827;
-    border-color:#e2e8f0;
-}
-
-html.light .close-btn,
-html.light .secondary-btn{
-    background:#f1f5f9;
-    color:#334155;
-}
-
-/* Responsive */
-@media(max-width:900px){
-    .tools-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px){
-    .header-inner{
-        min-height:64px;
+@media(max-width:480px){
+    .tool{
+        min-height:135px;
     }
 
-    .hema-name{
-        font-size:19px;
+    h1{
+        font-size:27px!important;
     }
 
-    .online-dot{
-        width:9px;
-        height:9px;
-    }
-
-    .hema-brand{
-        gap:7px;
-    }
-
-    .hero{
-        padding:40px 0 25px;
-    }
-
-    .hero h1{
-        font-size:31px;
-    }
-
-    .hero p{
+    .tool b{
         font-size:13px;
-    }
-
-    .tools-grid{
-        grid-template-columns:1fr;
-        gap:12px;
-    }
-
-    .tool-card{
-        min-height:165px;
-    }
-
-    .two-cols{
-        grid-template-columns:1fr;
-    }
-
-    .lang-select{
-        display:none;
-    }
-
-    .modal{
-        padding:10px;
-    }
-
-    .modal-box{
-        max-height:92vh;
-        border-radius:18px;
-    }
-}
-
-@media(max-width:380px){
-    .header-actions{
-        gap:5px;
-    }
-
-    .icon-btn{
-        width:38px;
-        height:38px;
-    }
-
-    .hero h1{
-        font-size:27px;
     }
 }
 </style>
 </head>
 
-<body>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
 
-<header>
-    <div class="container-main header-inner">
+<header class="sticky top-0 z-50 card border-x-0 border-t-0">
 
-        <a
-            href="https://wa.me/201094122436?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20HeMa%20Tools%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hema-brand"
-        >
-            <span class="online-dot"></span>
-            <span class="hema-name">HeMa Tools</span>
-        </a>
+<div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
 
-        <div class="header-actions">
-            <select id="language" class="lang-select">
-                <option value="ar">العربية</option>
-                <option value="en">English</option>
-            </select>
+<a class="text-xl font-extrabold text-red-500" href="#">
+Abo Kayan Tools
+</a>
 
-            <button class="icon-btn" id="themeBtn" title="تغيير المظهر">
-                ☀️
-            </button>
-        </div>
+<div class="flex gap-2 items-center">
 
-    </div>
+<select id="language" class="field !w-auto !py-2 !px-3 !text-xs !mb-0">
+<option>العربية</option>
+<option>English</option>
+</select>
+
+<button class="chip" onclick="theme()">🌙</button>
+
+</div>
+</div>
 </header>
 
 
-<main class="container-main">
+<main class="max-w-5xl mx-auto px-4 py-7">
 
-    <section class="hero">
+<section class="text-center mb-7">
 
-        <div class="hero-badge">
-            ⚡ أدوات مجانية وسريعة
-        </div>
+<div class="inline-block px-4 py-2 rounded-full bg-red-950 text-red-400 font-bold mb-4">
+⚡ أدوات مجانية وسريعة
+</div>
 
-        <h1>
-            كل أدواتك في مكان واحد مع
-            <span>HeMa Tools</span>
-        </h1>
+<h1 class="text-3xl sm:text-4xl font-extrabold mb-2">
+أهلاً بك في
+<span class="text-red-500">Abo Kayan Tools</span>
+</h1>
 
-        <p>
-            مجموعة من الأدوات المفيدة للحساب، النصوص، الصور، التحويلات
-            والمزيد. كل الأدوات تعمل مباشرة من المتصفح.
-        </p>
+<p class="text-zinc-400">
+30 أداة للحساب والتحويل والنصوص والصور في مكان واحد.
+</p>
 
-        <div class="search-wrap">
-            <span class="search-icon">⌕</span>
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="ابحث عن أداة..."
-                autocomplete="off"
-            >
-        </div>
-
-    </section>
+</section>
 
 
-    <div class="categories" id="categories">
-        <button class="category-btn active" data-cat="all">الكل</button>
-        <button class="category-btn" data-cat="math">الحساب</button>
-        <button class="category-btn" data-cat="convert">تحويلات</button>
-        <button class="category-btn" data-cat="text">النصوص</button>
-        <button class="category-btn" data-cat="developer">برمجة</button>
-        <button class="category-btn" data-cat="image">الصور</button>
-        <button class="category-btn" data-cat="other">أخرى</button>
-    </div>
+<div class="card rounded-2xl p-3 mb-4">
+
+<input
+id="search"
+class="field text-center !mb-0"
+placeholder="🔎 ابحث عن أداة... مثال: نسبة، صورة، QR"
+oninput="render()">
+
+</div>
 
 
-    <section class="tools-grid" id="toolsGrid"></section>
+<div id="cats" class="flex gap-2 overflow-x-auto pb-3 mb-5">
 
-    <div class="empty" id="empty">
-        🔎 لم يتم العثور على أداة بهذا الاسم.
-    </div>
+<button class="chip active" onclick="cat('all',this)">
+كل الأدوات
+</button>
+
+<button class="chip" onclick="cat('calc',this)">
+حاسبات 🧮
+</button>
+
+<button class="chip" onclick="cat('text',this)">
+نصوص ✍️
+</button>
+
+<button class="chip" onclick="cat('image',this)">
+صور 🖼️
+</button>
+
+<button class="chip" onclick="cat('convert',this)">
+تحويل 🔄
+</button>
+
+<button class="chip" onclick="cat('other',this)">
+أخرى 🛠️
+</button>
+
+</div>
+
+
+<div class="flex justify-between mb-4">
+
+<h2 class="text-2xl font-extrabold">
+الأدوات 🔥
+</h2>
+
+<span id="count" class="text-zinc-500"></span>
+
+</div>
+
+
+<div id="grid"
+class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+</div>
 
 </main>
 
 
-<footer>
-    <div class="container-main">
-        جميع الحقوق محفوظة © <strong>HeMa Tools</strong>
-    </div>
-</footer>
+<div id="modal"
+class="hidden fixed inset-0 z-[100] bg-black/75 p-4 overflow-y-auto">
 
+<div class="max-w-lg mx-auto mt-8 card rounded-2xl p-5">
 
-<div class="modal" id="modal">
-    <div class="modal-box">
+<div class="flex justify-between mb-4">
 
-        <div class="modal-head">
-            <h2 id="modalTitle">الأداة</h2>
-            <button class="close-btn" id="closeModal">✕</button>
-        </div>
+<h3 id="title"
+class="text-xl font-extrabold text-red-500">
+</h3>
 
-        <div class="modal-body" id="modalBody"></div>
+<button onclick="closeM()" class="text-2xl">
+×
+</button>
 
-    </div>
+</div>
+
+<div id="body"></div>
+
+</div>
 </div>
 
 
+<footer class="text-center text-zinc-500 text-xs py-8">
+
+© 2026 Abo Kayan Tools
+—
+جميع الأدوات تعمل داخل المتصفح
+
+</footer>
+
+
 <script>
-"use strict";
 
-/* =========================
-   أدوات الموقع
-========================= */
+const A=[
 
-const tools = [
+['percent','🧮','حساب النسبة','نسبة مئوية دقيقة','calc'],
 
-{
-    id:"percent",
-    title:"حساب النسبة المئوية",
-    desc:"احسب النسبة المئوية بين رقمين بسهولة.",
-    icon:"📊",
-    cat:"math"
-},
+['discount','💸','حاسبة الخصم','السعر قبل وبعد الخصم','calc'],
 
-{
-    id:"discount",
-    title:"حاسبة الخصم",
-    desc:"احسب السعر بعد الخصم وقيمة الخصم.",
-    icon:"🏷️",
-    cat:"math"
-},
+['tip','💳','حاسبة البقشيش','تقسيم الفاتورة','calc'],
 
-{
-    id:"tip",
-    title:"حاسبة البقشيش",
-    desc:"احسب البقشيش والإجمالي بسرعة.",
-    icon:"💵",
-    cat:"math"
-},
+['loan','💰','حاسبة القسط','قسط شهري بسيط','calc'],
 
-{
-    id:"installment",
-    title:"حاسبة القسط",
-    desc:"احسب قيمة القسط الشهري.",
-    icon:"💳",
-    cat:"math"
-},
+['age','🎂','حساب العمر','بالسنين','calc'],
 
-{
-    id:"age",
-    title:"حساب العمر",
-    desc:"احسب عمرك بالسنوات والأشهر والأيام.",
-    icon:"🎂",
-    cat:"other"
-},
+['bmi','⚖️','حاسبة BMI','مؤشر كتلة الجسم','calc'],
 
-{
-    id:"bmi",
-    title:"حاسبة BMI",
-    desc:"احسب مؤشر كتلة الجسم.",
-    icon:"⚖️",
-    cat:"other"
-},
+['calories','🥗','حاسبة السعرات','سعرات وبروتين','calc'],
 
-{
-    id:"calories",
-    title:"حاسبة السعرات",
-    desc:"تقدير احتياجك اليومي من السعرات.",
-    icon:"🔥",
-    cat:"other"
-},
+['gpa','🎓','حاسبة GPA','المعدل من 4','calc'],
 
-{
-    id:"gpa",
-    title:"حاسبة GPA",
-    desc:"احسب المعدل التقريبي من النسبة.",
-    icon:"🎓",
-    cat:"math"
-},
+['date','📅','فرق التاريخ','عدد الأيام','calc'],
 
-{
-    id:"datediff",
-    title:"فرق التاريخ",
-    desc:"احسب الفرق بين تاريخين.",
-    icon:"📅",
-    cat:"other"
-},
+['speed','🚗','حاسبة السرعة','المسافة والوقت','calc'],
 
-{
-    id:"speed",
-    title:"حاسبة السرعة",
-    desc:"احسب السرعة أو المسافة أو الزمن.",
-    icon:"🚗",
-    cat:"math"
-},
+['length','📏','محول الطول','متر وسم وقدم','convert'],
 
-{
-    id:"length",
-    title:"محول الطول",
-    desc:"تحويل بين متر، كيلومتر، سم وغيرها.",
-    icon:"📏",
-    cat:"convert"
-},
+['weight','⚖️','محول الوزن','كجم وجرام ورطل','convert'],
 
-{
-    id:"weight",
-    title:"محول الوزن",
-    desc:"تحويل بين كجم، جرام، رطل وغيرها.",
-    icon:"⚖️",
-    cat:"convert"
-},
+['temp','🌡️','محول الحرارة','مئوية وفهرنهايت','convert'],
 
-{
-    id:"temperature",
-    title:"محول الحرارة",
-    desc:"تحويل بين Celsius و Fahrenheit و Kelvin.",
-    icon:"🌡️",
-    cat:"convert"
-},
+['data','💾','محول البيانات','KB وMB وGB','convert'],
 
-{
-    id:"data",
-    title:"محول البيانات",
-    desc:"تحويل KB و MB و GB و TB.",
-    icon:"💾",
-    cat:"convert"
-},
+['timediff','⏱️','فرق الوقت','بين وقتين','calc'],
 
-{
-    id:"timediff",
-    title:"فرق الوقت",
-    desc:"احسب الفرق بين وقتين.",
-    icon:"⏱️",
-    cat:"other"
-},
+['counter','📝','عداد الكلمات','كلمات وحروف','text'],
 
-{
-    id:"words",
-    title:"عداد الكلمات",
-    desc:"احسب الكلمات والحروف والأسطر.",
-    icon:"📝",
-    cat:"text"
-},
+['case','🔤','حالة النص','UPPER وlower','text'],
 
-{
-    id:"case",
-    title:"تغيير حالة النص",
-    desc:"تحويل النص إلى UPPERCASE أو lowercase.",
-    icon:"🔤",
-    cat:"text"
-},
+['reverse','↩️','عكس النص','اعكس النص','text'],
 
-{
-    id:"reverse",
-    title:"عكس النص",
-    desc:"اعكس ترتيب الحروف والكلمات.",
-    icon:"🔄",
-    cat:"text"
-},
+['base64','🔐','Base64','ترميز وفك ترميز','text'],
 
-{
-    id:"base64",
-    title:"Base64",
-    desc:"تشفير وفك تشفير النص باستخدام Base64.",
-    icon:"🔐",
-    cat:"developer"
-},
+['url','🔗','URL Encoder','ترميز الروابط','text'],
 
-{
-    id:"url",
-    title:"URL Encoder",
-    desc:"ترميز وفك ترميز روابط ونصوص URL.",
-    icon:"🔗",
-    cat:"developer"
-},
+['json','{ }','منسق JSON','تنسيق JSON','text'],
 
-{
-    id:"json",
-    title:"JSON Formatter",
-    desc:"تنسيق JSON والتحقق من صحته.",
-    icon:"{}",
-    cat:"developer"
-},
+['password','🔑','مولد كلمات السر','كلمات مرور قوية','other'],
 
-{
-    id:"password",
-    title:"مولد كلمات السر",
-    desc:"إنشاء كلمة مرور قوية وعشوائية.",
-    icon:"🔑",
-    cat:"developer"
-},
+['random','🎲','رقم عشوائي','بين حدين','other'],
 
-{
-    id:"random",
-    title:"رقم عشوائي",
-    desc:"إنشاء رقم عشوائي بين رقمين.",
-    icon:"🎲",
-    cat:"other"
-},
+['qr','▣','مولد QR Code','نص أو رابط','other'],
 
-{
-    id:"qr",
-    title:"مولد QR Code",
-    desc:"أنشئ رمز QR لأي نص أو رابط.",
-    icon:"▦",
-    cat:"other"
-},
+['color','🎨','منتقي الألوان','HEX وRGB','other'],
 
-{
-    id:"color",
-    title:"منتقي الألوان",
-    desc:"اختر لوناً واعرف كوده HEX و RGB.",
-    icon:"🎨",
-    cat:"other"
-},
+['binary','💻','محول Binary','نص وثنائي','convert'],
 
-{
-    id:"binary",
-    title:"Binary Converter",
-    desc:"تحويل النص إلى Binary والعكس.",
-    icon:"💻",
-    cat:"developer"
-},
+['resize','🖼️','تغيير حجم الصورة','بالبكسل','image'],
 
-{
-    id:"resize",
-    title:"تغيير حجم الصورة",
-    desc:"تغيير أبعاد الصور من المتصفح.",
-    icon:"🖼️",
-    cat:"image"
-},
+['compress','📦','ضغط الصورة','تقليل الحجم','image'],
 
-{
-    id:"compress",
-    title:"ضغط الصورة",
-    desc:"تقليل حجم الصورة باستخدام المتصفح.",
-    icon:"🗜️",
-    cat:"image"
-},
+['pdf','📄','صورة إلى PDF','حفظ بالطباعة','image'],
 
-{
-    id:"pdf",
-    title:"الصورة إلى PDF",
-    desc:"تحويل صورة إلى ملف PDF باستخدام الطباعة.",
-    icon:"📄",
-    cat:"image"
-},
-
-{
-    id:"clock",
-    title:"الساعة والتاريخ",
-    desc:"اعرض الوقت والتاريخ الحاليين.",
-    icon:"🕐",
-    cat:"other"
-}
+['clock','🕐','الوقت والتاريخ','الوقت الحالي','other']
 
 ];
 
 
-/* =========================
-   العناصر
-========================= */
+let C='all';
 
-const grid = document.getElementById("toolsGrid");
-const searchInput = document.getElementById("searchInput");
-const empty = document.getElementById("empty");
+const $=id=>document.getElementById(id);
 
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-
-let currentCategory = "all";
+const N=id=>parseFloat($(id).value);
 
 
-/* =========================
-   عرض الأدوات
-========================= */
+function cat(c,e){
 
-function renderTools(){
-
-    const query = searchInput.value.trim().toLowerCase();
-
-    const filtered = tools.filter(tool => {
-
-        const matchesCategory =
-            currentCategory === "all" ||
-            tool.cat === currentCategory;
-
-        const text =
-            (tool.title + " " + tool.desc).toLowerCase();
-
-        const matchesSearch =
-            !query || text.includes(query);
-
-        return matchesCategory && matchesSearch;
-    });
-
-    grid.innerHTML = "";
-
-    filtered.forEach(tool => {
-
-        const card = document.createElement("div");
-
-        card.className = "tool-card";
-
-        card.innerHTML = `
-            <div class="tool-top">
-                <div class="tool-icon">${tool.icon}</div>
-            </div>
-
-            <h3>${tool.title}</h3>
-
-            <p>${tool.desc}</p>
-
-            <button
-                class="tool-open"
-                onclick="openTool('${tool.id}')"
-            >
-                فتح الأداة
-            </button>
-        `;
-
-        grid.appendChild(card);
-    });
-
-    empty.style.display =
-        filtered.length ? "none" : "block";
-}
-
-
-/* =========================
-   البحث
-========================= */
-
-searchInput.addEventListener("input",renderTools);
-
-
-/* =========================
-   التصنيفات
-========================= */
-
-document.querySelectorAll(".category-btn")
-.forEach(btn => {
-
-    btn.addEventListener("click",()=>{
-
-        document
-            .querySelectorAll(".category-btn")
-            .forEach(x=>x.classList.remove("active"));
-
-        btn.classList.add("active");
-
-        currentCategory = btn.dataset.cat;
-
-        renderTools();
-    });
-
-});
-
-
-/* =========================
-   Modal
-========================= */
-
-function openTool(id){
-
-    const tool = tools.find(x=>x.id===id);
-
-    if(!tool) return;
-
-    modalTitle.textContent = tool.title;
-
-    modalBody.innerHTML = getToolHTML(id);
-
-    modal.classList.add("show");
-
-    if(id === "clock"){
-        startClock();
-    }
-
-    if(id === "color"){
-        updateColor();
-    }
-}
-
-
-function closeModal(){
-
-    modal.classList.remove("show");
-
-    if(clockTimer){
-        clearInterval(clockTimer);
-        clockTimer = null;
-    }
-}
+C=c;
 
 document
-    .getElementById("closeModal")
-    .addEventListener("click",closeModal);
+.querySelectorAll('#cats button')
+.forEach(x=>x.classList.remove('active'));
 
-modal.addEventListener("click",(e)=>{
+e.classList.add('active');
 
-    if(e.target === modal){
-        closeModal();
-    }
+render();
+
+}
+
+
+function render(){
+
+let q=$('search').value.toLowerCase();
+
+let l=A.filter(x=>
+(C==='all'||x[4]===C)&&
+(
+x[2].toLowerCase().includes(q)||
+x[3].toLowerCase().includes(q)
+)
+);
+
+$('count').textContent=l.length+' أداة';
+
+$('grid').innerHTML=l.map(x=>`
+
+<button
+class="tool card rounded-2xl p-4 flex flex-col items-center justify-center text-center"
+onclick="openT('${x[0]}')">
+
+<div class="w-12 h-12 rounded-2xl bg-red-950 flex items-center justify-center text-2xl mb-3">
+${x[1]}
+</div>
+
+<b class="text-sm">
+${x[2]}
+</b>
+
+<span class="text-[11px] text-zinc-500 mt-1">
+${x[3]}
+</span>
+
+</button>
+
+`).join('');
+
+}
+
+
+function theme(){
+
+document.documentElement.classList.toggle('light');
+
+}
+
+
+function closeM(){
+
+$('modal').classList.add('hidden');
+
+}
+
+
+function F(id,p,t='text'){
+
+return `
+<input
+id="${id}"
+type="${t}"
+placeholder="${p}"
+class="field">
+`;
+
+}
+
+
+function T(id,p){
+
+return `
+<textarea
+id="${id}"
+class="field min-h-32"
+placeholder="${p}">
+</textarea>
+`;
+
+}
+
+
+function B(t,f){
+
+return `
+<button
+class="btn w-full"
+onclick="${f}">
+${t}
+</button>
+`;
+
+}
+
+
+function R(id='r'){
+
+return `
+<div
+id="${id}"
+class="result">
+</div>
+`;
+
+}
+
+
+function S(id,a){
+
+return `
+<select
+id="${id}"
+class="field">
+
+${a.map(x=>
+`<option value="${x[0]}">
+${x[1]}
+</option>`
+).join('')}
+
+</select>
+`;
+
+}
+
+
+function out(x,id='r'){
+
+$(id).innerHTML=x;
+
+}
+
+
+function openT(k){
+
+let x=A.find(a=>a[0]===k);
+
+$('title').textContent=x[1]+' '+x[2];
+
+$('modal').classList.remove('hidden');
+
+let b=$('body');
+
+switch(k){
+
+case'percent':
+
+b.innerHTML=
+F('p','الرقم','number')+
+F('q','النسبة %','number')+
+B('احسب','percent()')+
+R();
+
+break;
+
+
+case'discount':
+
+b.innerHTML=
+F('price','السعر','number')+
+F('disc','الخصم %','number')+
+B('احسب','discount()')+
+R();
+
+break;
+
+
+case'tip':
+
+b.innerHTML=
+F('bill','الفاتورة','number')+
+F('tipv','البقشيش %','number')+
+F('people','عدد الأشخاص','number')+
+B('احسب','tip()')+
+R();
+
+break;
+
+
+case'loan':
+
+b.innerHTML=
+F('la','المبلغ','number')+
+F('lm','الأشهر','number')+
+B('احسب','loan()')+
+R();
+
+break;
+
+
+case'age':
+
+b.innerHTML=
+F('birth','تاريخ الميلاد','date')+
+B('احسب','age()')+
+R();
+
+break;
+
+
+case'bmi':
+
+b.innerHTML=
+F('bw','الوزن كجم','number')+
+F('bh','الطول سم','number')+
+B('احسب','bmi()')+
+R();
+
+break;
+
+
+case'calories':
+
+b.innerHTML=
+F('cw','الوزن كجم','number')+
+F('ch','الطول سم','number')+
+F('ca','العمر','number')+
+S('sex',[
+['m','ذكر'],
+['f','أنثى']
+])+
+S('goal',[
+['lose','خسارة'],
+['maintain','ثبات'],
+['gain','زيادة']
+])+
+B('احسب','calories()')+
+R();
+
+break;
+
+
+case'gpa':
+
+b.innerHTML=
+F(
+'grades',
+'درجات مفصولة بفواصل، مثال 90,80,75'
+)+
+B('احسب','gpa()')+
+R();
+
+break;
+
+
+case'date':
+
+b.innerHTML=
+F('d1','التاريخ الأول','date')+
+F('d2','التاريخ الثاني','date')+
+B('احسب','dated()')+
+R();
+
+break;
+
+
+case'speed':
+
+b.innerHTML=
+F('dist','المسافة كم','number')+
+F('hrs','الوقت ساعات','number')+
+B('احسب','speed()')+
+R();
+
+break;
+
+
+case'length':
+
+b.innerHTML=
+F('lv','القيمة','number')+
+S('lu',[
+['mc','متر → سم'],
+['cm','سم → متر'],
+['km','كم → متر'],
+['mk','متر → كم'],
+['fm','قدم → متر'],
+['ic','بوصة → سم']
+])+
+B('تحويل','length()')+
+R();
+
+break;
+
+
+case'weight':
+
+b.innerHTML=
+F('wv','القيمة','number')+
+S('wu',[
+['kg_g','كجم → جرام'],
+['g_kg','جرام → كجم'],
+['kg_l','كجم → رطل'],
+['l_kg','رطل → كجم']
+])+
+B('تحويل','weight()')+
+R();
+
+break;
+
+
+case'temp':
+
+b.innerHTML=
+F('tv','القيمة','number')+
+S('tu',[
+['cf','مئوية → فهرنهايت'],
+['fc','فهرنهايت → مئوية'],
+['ck','مئوية → كلفن'],
+['kc','كلفن → مئوية']
+])+
+B('تحويل','temp()')+
+R();
+
+break;
+
+
+case'data':
+
+b.innerHTML=
+F('dv','القيمة','number')+
+S('du',[
+['mg','MB → GB'],
+['gm','GB → MB'],
+['gt','GB → TB'],
+['km','KB → MB']
+])+
+B('تحويل','data()')+
+R();
+
+break;
+
+
+case'timediff':
+
+b.innerHTML=
+F('t1','الوقت الأول','time')+
+F('t2','الوقت الثاني','time')+
+B('احسب','tdiff()')+
+R();
+
+break;
+
+
+case'counter':
+
+b.innerHTML=
+T('ct','اكتب النص...')+
+`
+<div class="grid grid-cols-3 gap-2">
+
+<div class="result text-center">
+كلمات<br>
+<b id="wc">0</b>
+</div>
+
+<div class="result text-center">
+حروف<br>
+<b id="cc">0</b>
+</div>
+
+<div class="result text-center">
+مسافات<br>
+<b id="sc">0</b>
+</div>
+
+</div>
+`;
+
+$('ct').oninput=count;
+
+break;
+
+
+case'case':
+
+b.innerHTML=
+T('ci','النص...')+
+S('cs',[
+['u','UPPERCASE'],
+['l','lowercase']
+])+
+B('تحويل','cases()')+
+R();
+
+break;
+
+
+case'reverse':
+
+b.innerHTML=
+T('ri','النص...')+
+B('اعكس','reverse()')+
+R();
+
+break;
+
+
+case'base64':
+
+b.innerHTML=
+T('bi','النص...')+
+S('bm',[
+['e','ترميز'],
+['d','فك الترميز']
+])+
+B('تنفيذ','base64()')+
+R();
+
+break;
+
+
+case'url':
+
+b.innerHTML=
+T('ui','الرابط أو النص...')+
+S('um',[
+['e','ترميز'],
+['d','فك الترميز']
+])+
+B('تنفيذ','urlx()')+
+R();
+
+break;
+
+
+case'json':
+
+b.innerHTML=
+T('ji','JSON...')+
+B('تنسيق','json()')+
+R();
+
+break;
+
+
+case'password':
+
+b.innerHTML=
+F('pl','الطول','number')+
+B('توليد','pass()')+
+R();
+
+break;
+
+
+case'random':
+
+b.innerHTML=
+F('rmin','الحد الأدنى','number')+
+F('rmax','الحد الأقصى','number')+
+B('توليد','randomN()')+
+R();
+
+break;
+
+
+case'qr':
+
+b.innerHTML=
+F('qr','النص أو الرابط')+
+B('إنشاء QR','qr()')+
+R('qrout');
+
+break;
+
+
+case'color':
+
+b.innerHTML=`
+<input
+id="col"
+type="color"
+value="#dc2626"
+class="w-full h-20">
+
+${R()}
+
+<div
+id="cp"
+class="h-20 rounded-xl mt-3">
+</div>
+`;
+
+$('col').oninput=color;
+
+color();
+
+break;
+
+
+case'binary':
+
+b.innerHTML=
+T('bin','النص أو Binary')+
+S('bmode',[
+['e','نص → Binary'],
+['d','Binary → نص']
+])+
+B('تحويل','binary()')+
+R();
+
+break;
+
+
+case'resize':
+
+b.innerHTML=`
+<input
+id="rf"
+type="file"
+accept="image/*"
+class="field">
+`+
+F('rw','العرض الجديد','number')+
+F('rh','الارتفاع الجديد','number')+
+B('تغيير وتنزيل','resize()')+
+R();
+
+break;
+
+
+case'compress':
+
+b.innerHTML=`
+<input
+id="cf"
+type="file"
+accept="image/*"
+class="field">
+`+
+F('cq','الجودة 10-100','number')+
+B('ضغط وتنزيل','compress()')+
+R();
+
+break;
+
+
+case'pdf':
+
+b.innerHTML=`
+<input
+id="pf"
+type="file"
+accept="image/*"
+class="field">
+`+
+B('فتح للطباعة وحفظ PDF','pdf()');
+
+break;
+
+
+case'clock':
+
+b.innerHTML=`
+<div
+id="clock"
+class="text-center text-2xl font-extrabold text-red-500">
+</div>
+`;
+
+clock();
+
+break;
+
+}
+
+}
+
+
+function percent(){
+
+out(
+'الناتج: <b>'+
+((N('p')*N('q'))/100).toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function discount(){
+
+let p=N('price');
+
+let d=N('disc');
+
+let value=p*d/100;
+
+out(
+'قيمة الخصم: '+
+value.toFixed(2)+
+'<br>السعر بعد الخصم: <b>'+
+(p-value).toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function tip(){
+
+let b=N('bill');
+
+let t=N('tipv');
+
+let p=Math.max(1,N('people'));
+
+let tip=b*t/100;
+
+let total=b+tip;
+
+out(
+'البقشيش: '+tip.toFixed(2)+
+'<br>الإجمالي: '+total.toFixed(2)+
+'<br>لكل شخص: <b>'+
+(total/p).toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function loan(){
+
+out(
+'القسط الشهري: <b>'+
+(N('la')/N('lm')).toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function age(){
+
+let b=new Date($('birth').value);
+
+let n=new Date();
+
+let a=n.getFullYear()-b.getFullYear();
+
+if(
+n.getMonth()<b.getMonth()||
+(
+n.getMonth()==b.getMonth()&&
+n.getDate()<b.getDate()
+)
+)a--;
+
+out(
+'عمرك: <b>'+
+a+
+' سنة</b>'
+);
+
+}
+
+
+function bmi(){
+
+let b=N('bw');
+
+let h=N('bh')/100;
+
+let x=b/h**2;
+
+let s=
+x<18.5?'نحيف':
+x<25?'طبيعي':
+x<30?'زيادة وزن':
+'سمنة';
+
+out(
+'BMI: <b>'+
+x.toFixed(1)+
+'</b><br>'+
+s
+);
+
+}
+
+
+function calories(){
+
+let w=N('cw');
+
+let h=N('ch');
+
+let a=N('ca');
+
+let base=
+$('sex').value==='m'
+?
+10*w+6.25*h-5*a+5
+:
+10*w+6.25*h-5*a-161;
+
+let g=$('goal').value;
+
+let t=
+base*1.375+
+(
+g==='lose'?-400:
+g==='gain'?300:
+0
+);
+
+out(
+'السعرات التقديرية: <b>'+
+Math.round(t)+
+' سعرة</b>'+
+'<br>البروتين: '+
+Math.round(w*1.6)+
+'–'+
+Math.round(w*2)+
+' جم'
+);
+
+}
+
+
+function gpa(){
+
+let a=
+$('grades')
+.value
+.split(',')
+.map(Number)
+.filter(x=>!isNaN(x));
+
+if(!a.length){
+
+out('أدخل الدرجات أولاً');
+
+return;
+
+}
+
+let v=
+a.reduce((x,y)=>x+y,0)/
+a.length;
+
+out(
+'المتوسط: '+
+v.toFixed(2)+
+'%<br>GPA تقريبي: <b>'+
+Math.min(4,v/25).toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function dated(){
+
+let d=
+Math.abs(
+Math.round(
+(
+new Date($('d2').value)-
+new Date($('d1').value)
+)/86400000
+)
+);
+
+out(
+'الفرق: <b>'+
+d+
+' يوم</b>'
+);
+
+}
+
+
+function speed(){
+
+out(
+'السرعة: <b>'+
+(N('dist')/N('hrs')).toFixed(2)+
+' كم/ساعة</b>'
+);
+
+}
+
+
+function length(){
+
+let v=N('lv');
+
+let t=$('lu').value;
+
+let r={
+mc:v*100,
+cm:v/100,
+km:v*1000,
+mk:v/1000,
+fm:v*.3048,
+ic:v*2.54
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function weight(){
+
+let v=N('wv');
+
+let t=$('wu').value;
+
+let r={
+kg_g:v*1000,
+g_kg:v/1000,
+kg_l:v*2.2046226,
+l_kg:v/2.2046226
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function temp(){
+
+let v=N('tv');
+
+let t=$('tu').value;
+
+let r={
+cf:v*9/5+32,
+fc:(v-32)*5/9,
+ck:v+273.15,
+kc:v-273.15
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function data(){
+
+let v=N('dv');
+
+let t=$('du').value;
+
+let r={
+mg:v/1024,
+gm:v*1024,
+gt:v/1024,
+km:v/1024
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function tdiff(){
+
+let a=$('t1').value.split(':');
+
+let b=$('t2').value.split(':');
+
+let d=
+Math.abs(
+(+b[0]*60+ +b[1])-
+(+a[0]*60+ +a[1])
+);
+
+out(
+'الفرق: <b>'+
+Math.floor(d/60)+
+' ساعة و '+
+d%60+
+' دقيقة</b>'
+);
+
+}
+
+
+function count(){
+
+let s=$('ct').value;
+
+$('wc').textContent=
+s.trim()?
+s.trim().split(/\s+/).length:
+0;
+
+$('cc').textContent=s.length;
+
+$('sc').textContent=
+(s.match(/\s/g)||[]).length;
+
+}
+
+
+function cases(){
+
+out(
+$('cs').value==='u'
+?
+$('ci').value.toUpperCase()
+:
+$('ci').value.toLowerCase()
+);
+
+}
+
+
+function reverse(){
+
+out(
+$('ri')
+.value
+.split('')
+.reverse()
+.join('')
+.replace(/</g,'&lt;')
+);
+
+}
+
+
+function base64(){
+
+try{
+
+let s=$('bi').value;
+
+out(
+$('bm').value==='e'
+?
+btoa(unescape(encodeURIComponent(s)))
+:
+decodeURIComponent(escape(atob(s)))
+);
+
+}
+
+catch(e){
+
+out('النص غير صالح');
+
+}
+
+}
+
+
+function urlx(){
+
+try{
+
+out(
+$('um').value==='e'
+?
+encodeURIComponent($('ui').value)
+:
+decodeURIComponent($('ui').value)
+);
+
+}
+
+catch(e){
+
+out('النص غير صالح');
+
+}
+
+}
+
+
+function json(){
+
+try{
+
+out(
+'<pre class="whitespace-pre-wrap">'+
+JSON.stringify(
+JSON.parse($('ji').value),
+null,
+2
+)
+.replace(/</g,'&lt;')+
+'</pre>'
+);
+
+}
+
+catch(e){
+
+out('JSON غير صالح');
+
+}
+
+}
+
+
+function pass(){
+
+let n=
+Math.min(
+100,
+Math.max(
+4,
+N('pl')||12
+)
+);
+
+let c=
+'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*_-+';
+
+let a=new Uint32Array(n);
+
+crypto.getRandomValues(a);
+
+out(
+'<b class="break-all">'+
+[...a]
+.map(x=>c[x%c.length])
+.join('')+
+'</b>'
+);
+
+}
+
+
+function randomN(){
+
+let a=N('rmin');
+
+let b=N('rmax');
+
+if(a>b){
+
+let t=a;
+
+a=b;
+
+b=t;
+
+}
+
+out(
+'<b>'+
+Math.floor(
+Math.random()*
+(b-a+1)+a
+)+
+'</b>'
+);
+
+}
+
+
+function qr(){
+
+let s=$('qr').value;
+
+if(!s){
+
+out('اكتب النص أو الرابط أولاً','qrout');
+
+return;
+
+}
+
+out(
+
+`
+<img
+class="mx-auto bg-white p-2 rounded-xl"
+width="220"
+src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(s)}">
+`
+
+,'qrout');
+
+}
+
+
+function color(){
+
+let c=$('col').value;
+
+$('cp').style.background=c;
+
+out(
+'HEX: <b>'+
+c+
+'</b>'
+);
+
+}
+
+
+function binary(){
+
+let s=$('bin').value;
+
+if($('bmode').value==='e'){
+
+out(
+[...s]
+.map(
+c=>
+c.charCodeAt(0)
+.toString(2)
+.padStart(8,'0')
+)
+.join(' ')
+);
+
+}
+
+else{
+
+try{
+
+out(
+s.trim()
+.split(/\s+/)
+.map(
+x=>
+String.fromCharCode(
+parseInt(x,2)
+)
+)
+.join('')
+);
+
+}
+
+catch(e){
+
+out('Binary غير صالح');
+
+}
+
+}
+
+}
+
+
+function img(f,cb){
+
+let r=new FileReader();
+
+r.onload=()=>{
+
+let i=new Image();
+
+i.onload=()=>cb(i);
+
+i.src=r.result;
+
+};
+
+r.readAsDataURL(f);
+
+}
+
+
+function dl(c,n,q=.8){
+
+let a=document.createElement('a');
+
+a.href=c.toDataURL(
+'image/jpeg',
+q
+);
+
+a.download=n;
+
+a.click();
+
+}
+
+
+function resize(){
+
+let f=$('rf').files[0];
+
+if(!f){
+
+out('اختر صورة');
+
+return;
+
+}
+
+img(f,i=>{
+
+let c=document.createElement('canvas');
+
+c.width=N('rw')||i.width;
+
+c.height=N('rh')||i.height;
+
+c.getContext('2d')
+.drawImage(
+i,
+0,
+0,
+c.width,
+c.height
+);
+
+dl(c,'resized.jpg');
+
+out('تم تنزيل الصورة');
 
 });
 
-document.addEventListener("keydown",(e)=>{
+}
 
-    if(e.key === "Escape"){
-        closeModal();
-    }
+
+function compress(){
+
+let f=$('cf').files[0];
+
+if(!f){
+
+out('اختر صورة');
+
+return;
+
+}
+
+let q=
+Math.min(
+100,
+Math.max(
+10,
+N('cq')||70
+)
+)/100;
+
+img(f,i=>{
+
+let c=document.createElement('canvas');
+
+c.width=i.width;
+
+c.height=i.height;
+
+c.getContext('2d')
+.drawImage(i,0,0);
+
+dl(
+c,
+'compressed.jpg',
+q
+);
+
+out(
+'تم ضغط وتنزيل الصورة'
+);
 
 });
 
-
-/* =========================
-   HTML الأدوات
-========================= */
-
-function getToolHTML(id){
-
-    switch(id){
-
-        case "percent":
-            return `
-                ${input("part","القيمة","100","number")}
-                ${input("total","الإجمالي","500","number")}
-                ${button("احسب","calcPercent()")}
-                <div id="percentResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "discount":
-            return `
-                ${input("price","السعر الأصلي","1000","number")}
-                ${input("discount","نسبة الخصم %","20","number")}
-                ${button("احسب السعر","calcDiscount()")}
-                <div id="discountResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "tip":
-            return `
-                ${input("bill","قيمة الفاتورة","500","number")}
-                ${input("tipPercent","نسبة البقشيش %","10","number")}
-                ${button("احسب","calcTip()")}
-                <div id="tipResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "installment":
-            return `
-                ${input("loan","قيمة المبلغ","10000","number")}
-                ${input("months","عدد الشهور","12","number")}
-                ${input("interest","الفائدة %","0","number")}
-                ${button("احسب القسط","calcInstallment()")}
-                <div id="installmentResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "age":
-            return `
-                <div class="form-group">
-                    <label>تاريخ الميلاد</label>
-                    <input id="birthDate" class="form-control" type="date">
-                </div>
-                ${button("احسب العمر","calcAge()")}
-                <div id="ageResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "bmi":
-            return `
-                ${input("bmiWeight","الوزن بالكجم","80","number")}
-                ${input("bmiHeight","الطول بالسنتيمتر","175","number")}
-                ${button("احسب BMI","calcBMI()")}
-                <div id="bmiResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "calories":
-            return `
-                ${input("calWeight","الوزن بالكجم","80","number")}
-                ${input("calHeight","الطول بالسنتيمتر","175","number")}
-                ${input("calAge","العمر","20","number")}
-
-                <div class="form-group">
-                    <label>الجنس</label>
-                    <select id="calGender" class="form-control">
-                        <option value="male">ذكر</option>
-                        <option value="female">أنثى</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>مستوى النشاط</label>
-                    <select id="activity" class="form-control">
-                        <option value="1.2">قليل الحركة</option>
-                        <option value="1.375">نشاط خفيف</option>
-                        <option value="1.55">نشاط متوسط</option>
-                        <option value="1.725">نشاط مرتفع</option>
-                        <option value="1.9">نشاط مرتفع جداً</option>
-                    </select>
-                </div>
-
-                ${button("احسب السعرات","calcCalories()")}
-                <div id="calResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "gpa":
-            return `
-                ${input("percentage","النسبة المئوية","90","number")}
-                ${button("احسب GPA","calcGPA()")}
-                <div id="gpaResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "datediff":
-            return `
-                <div class="form-group">
-                    <label>التاريخ الأول</label>
-                    <input id="date1" class="form-control" type="date">
-                </div>
-
-                <div class="form-group">
-                    <label>التاريخ الثاني</label>
-                    <input id="date2" class="form-control" type="date">
-                </div>
-
-                ${button("احسب الفرق","calcDateDiff()")}
-                <div id="dateDiffResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "speed":
-            return `
-                <div class="form-group">
-                    <label>اختر العملية</label>
-                    <select id="speedMode" class="form-control">
-                        <option value="speed">السرعة = المسافة ÷ الزمن</option>
-                        <option value="distance">المسافة = السرعة × الزمن</option>
-                        <option value="time">الزمن = المسافة ÷ السرعة</option>
-                    </select>
-                </div>
-
-                ${input("distance","المسافة","100","number")}
-                ${input("speed","السرعة","50","number")}
-                ${input("time","الزمن","2","number")}
-
-                ${button("احسب","calcSpeed()")}
-                <div id="speedResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "length":
-            return `
-                ${input("lengthValue","القيمة","1","number")}
-
-                <div class="two-cols">
-                    ${select("lengthFrom",["m","km","cm","mm","ft","in"],["متر","كيلومتر","سنتيمتر","مليمتر","قدم","بوصة"])}
-                    ${select("lengthTo",["m","km","cm","mm","ft","in"],["متر","كيلومتر","سنتيمتر","مليمتر","قدم","بوصة"])}
-                </div>
-
-                ${button("تحويل","convertLength()")}
-                <div id="lengthResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "weight":
-            return `
-                ${input("weightValue","القيمة","1","number")}
-
-                <div class="two-cols">
-                    ${select("weightFrom",["kg","g","lb","oz"],["كيلوجرام","جرام","رطل","أوقية"])}
-                    ${select("weightTo",["kg","g","lb","oz"],["كيلوجرام","جرام","رطل","أوقية"])}
-                </div>
-
-                ${button("تحويل","convertWeight()")}
-                <div id="weightResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "temperature":
-            return `
-                ${input("tempValue","القيمة","25","number")}
-
-                <div class="two-cols">
-                    ${select("tempFrom",["c","f","k"],["Celsius","Fahrenheit","Kelvin"])}
-                    ${select("tempTo",["c","f","k"],["Celsius","Fahrenheit","Kelvin"])}
-                </div>
-
-                ${button("تحويل","convertTemperature()")}
-                <div id="tempResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "data":
-            return `
-                ${input("dataValue","القيمة","1","number")}
-
-                <div class="two-cols">
-                    ${select("dataFrom",["B","KB","MB","GB","TB"],["B","KB","MB","GB","TB"])}
-                    ${select("dataTo",["B","KB","MB","GB","TB"],["B","KB","MB","GB","TB"])}
-                </div>
-
-                ${button("تحويل","convertData()")}
-                <div id="dataResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "timediff":
-            return `
-                <div class="two-cols">
-                    <div class="form-group">
-                        <label>وقت البداية</label>
-                        <input id="time1" class="form-control" type="time">
-                    </div>
-
-                    <div class="form-group">
-                        <label>وقت النهاية</label>
-                        <input id="time2" class="form-control" type="time">
-                    </div>
-                </div>
-
-                ${button("احسب الفرق","calcTimeDiff()")}
-                <div id="timeDiffResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "words":
-            return `
-                <div class="form-group">
-                    <label>اكتب النص</label>
-                    <textarea id="wordsText" class="form-control" placeholder="اكتب أو الصق النص هنا..."></textarea>
-                </div>
-
-                ${button("احسب","countWords()")}
-                <div id="wordsResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "case":
-            return `
-                <div class="form-group">
-                    <label>النص</label>
-                    <textarea id="caseText" class="form-control" placeholder="اكتب النص هنا..."></textarea>
-                </div>
-
-                <div class="two-cols">
-                    <button class="action-btn" onclick="toUpper()">UPPERCASE</button>
-                    <button class="action-btn" onclick="toLower()">lowercase</button>
-                </div>
-
-                <div id="caseResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "reverse":
-            return `
-                <div class="form-group">
-                    <label>النص</label>
-                    <textarea id="reverseText" class="form-control" placeholder="اكتب النص هنا..."></textarea>
-                </div>
-
-                ${button("اعكس النص","reverseText()")}
-                <div id="reverseResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "base64":
-            return `
-                <div class="form-group">
-                    <label>النص</label>
-                    <textarea id="baseText" class="form-control" placeholder="اكتب النص هنا..."></textarea>
-                </div>
-
-                <div class="two-cols">
-                    <button class="action-btn" onclick="encodeBase64()">ترميز</button>
-                    <button class="action-btn" onclick="decodeBase64()">فك الترميز</button>
-                </div>
-
-                <div id="baseResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "url":
-            return `
-                <div class="form-group">
-                    <label>النص أو الرابط</label>
-                    <textarea id="urlText" class="form-control" placeholder="https://example.com/مرحبا"></textarea>
-                </div>
-
-                <div class="two-cols">
-                    <button class="action-btn" onclick="encodeURL()">Encode</button>
-                    <button class="action-btn" onclick="decodeURL()">Decode</button>
-                </div>
-
-                <div id="urlResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "json":
-            return `
-                <div class="form-group">
-                    <label>JSON</label>
-                    <textarea id="jsonText" class="form-control" placeholder='{"name":"HeMa","tools":30}'></textarea>
-                </div>
-
-                <button class="action-btn" onclick="formatJSON()">تنسيق JSON</button>
-
-                <div id="jsonResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "password":
-            return `
-                ${input("passLength","طول كلمة المرور","16","number")}
-
-                <div class="form-group">
-                    <label>
-                        <input id="passNumbers" type="checkbox" checked>
-                        أرقام
-                    </label>
-
-                    <label>
-                        <input id="passSymbols" type="checkbox" checked>
-                        رموز
-                    </label>
-                </div>
-
-                ${button("إنشاء كلمة مرور","generatePassword()")}
-                <div id="passResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "random":
-            return `
-                ${input("randomMin","الحد الأدنى","1","number")}
-                ${input("randomMax","الحد الأقصى","100","number")}
-                ${button("توليد رقم","generateRandom()")}
-                <div id="randomResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "qr":
-            return `
-                <div class="form-group">
-                    <label>النص أو الرابط</label>
-                    <textarea id="qrText" class="form-control" placeholder="اكتب النص أو الرابط هنا..."></textarea>
-                </div>
-
-                ${button("إنشاء QR Code","generateQR()")}
-
-                <div id="qrResult" class="result qr-result">
-                    رمز QR سيظهر هنا
-                </div>
-            `;
-
-
-        case "color":
-            return `
-                <div class="form-group">
-                    <label>اختر لوناً</label>
-                    <input
-                        id="colorPicker"
-                        type="color"
-                        value="#ef2b2b"
-                        style="width:100%;height:65px;border:0;background:transparent;cursor:pointer"
-                    >
-                </div>
-
-                <div id="colorPreview" class="color-preview"></div>
-
-                <div id="colorResult" class="result">
-                    اللون سيظهر هنا
-                </div>
-            `;
-
-
-        case "binary":
-            return `
-                <div class="form-group">
-                    <label>النص</label>
-                    <textarea id="binaryText" class="form-control" placeholder="HeMa Tools"></textarea>
-                </div>
-
-                <div class="two-cols">
-                    <button class="action-btn" onclick="textToBinary()">نص → Binary</button>
-                    <button class="action-btn" onclick="binaryToText()">Binary → نص</button>
-                </div>
-
-                <div id="binaryResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "resize":
-            return `
-                <div class="form-group">
-                    <label>اختر صورة</label>
-                    <input id="resizeFile" class="form-control" type="file" accept="image/*">
-                </div>
-
-                <div class="two-cols">
-                    ${input("newWidth","العرض","800","number")}
-                    ${input("newHeight","الارتفاع","600","number")}
-                </div>
-
-                ${button("تغيير الحجم","resizeImage()")}
-                <div id="resizeResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "compress":
-            return `
-                <div class="form-group">
-                    <label>اختر صورة</label>
-                    <input id="compressFile" class="form-control" type="file" accept="image/*">
-                </div>
-
-                ${input("quality","جودة الصورة %","70","number")}
-
-                ${button("ضغط الصورة","compressImage()")}
-                <div id="compressResult" class="result">النتيجة ستظهر هنا</div>
-            `;
-
-
-        case "pdf":
-            return `
-                <div class="form-group">
-                    <label>اختر صورة</label>
-                    <input id="pdfFile" class="form-control" type="file" accept="image/*">
-                </div>
-
-                ${button("فتح الصورة للطباعة كـ PDF","imageToPDF()")}
-
-                <div class="result">
-                    بعد فتح الصورة اختر
-                    <strong>Save as PDF</strong>
-                    من نافذة الطباعة.
-                </div>
-            `;
-
-
-        case "clock":
-            return `
-                <div
-                    id="clockDisplay"
-                    class="result"
-                    style="font-size:32px;font-weight:800"
-                >
-                    --:--:--
-                </div>
-
-                <div id="dateDisplay" class="result">
-                    --
-                </div>
-            `;
-
-        default:
-            return `<div class="result">الأداة غير موجودة.</div>`;
-    }
 }
 
 
-/* =========================
-   Helpers
-========================= */
+function pdf(){
 
-function input(id,label,placeholder,type="text"){
+let f=$('pf').files[0];
 
-    return `
-        <div class="form-group">
-            <label>${label}</label>
-            <input
-                id="${id}"
-                class="form-control"
-                type="${type}"
-                placeholder="${placeholder}"
-            >
-        </div>
-    `;
+if(!f){
+
+alert('اختر صورة');
+
+return;
+
+}
+
+let r=new FileReader();
+
+r.onload=()=>{
+
+let w=open();
+
+w.document.write(
+'<img style="max-width:100%" src="'+
+r.result+
+'">'
+);
+
+setTimeout(
+()=>w.print(),
+500
+);
+
+};
+
+r.readAsDataURL(f);
+
 }
 
 
-function select(id,values,labels){
+function clock(){
 
-    return `
-        <select id="${id}" class="form-control">
-            ${values.map((v,i)=>`
-                <option value="${v}">${labels[i]}</option>
-            `).join("")}
-        </select>
-    `;
+let e=$('clock');
+
+if(!e)return;
+
+e.textContent=
+new Date()
+.toLocaleString(
+'ar-EG',
+{
+dateStyle:'full',
+timeStyle:'medium'
+}
+);
+
+setTimeout(
+clock,
+1000
+);
+
 }
 
 
-function button(text,fn){
-
-    return `
-        <button class="action-btn" onclick="${fn}">
-            ${text}
-        </button>
-    `;
-}
-
-
-function num(id){
-
-    return parseFloat(document.getElementById(id).value);
-}
-
-
-function validNumber(value){
-
-    return Number.isFinite(value);
-}
-
-
-/* =========================
-   1 النسبة
-========================= */
-
-function calcPercent(){
-
-    const part = num("part");
-    const total = num("total");
-
-    if(!validNumber(part) || !validNumber(total) || total===0){
-
-        document.getElementById("percentResult").innerHTML =
-            "من فضلك أدخل أرقاماً صحيحة.";
-
-        return;
-    }
-
-    const result = (part/total)*100;
-
-    document.getElementById("percentResult").innerHTML =
-        `<strong>${result.toFixed(2)}%</strong>`;
-}
-
-
-/* =========================
-   2 الخصم
-========================= */
-
-function calcDiscount(){
-
-    const price = num("price");
-    const discount = num("discount");
-
-    if(!validNumber(price) || !validNumber(discount)){
-
-        document.getElementById("discountResult").textContent =
-            "أدخل البيانات بشكل صحيح.";
-
-        return;
-    }
-
-    const value = price * discount / 100;
-    const finalPrice = price - value;
-
-    document.getElementById("discountResult").innerHTML =
-        `
-        قيمة الخصم: <strong>${value.toFixed(2)}</strong><br>
-        السعر بعد الخصم: <strong>${finalPrice.toFixed(2)}</strong>
-        `;
-}
-
-
-/* =========================
-   3 البقشيش
-========================= */
-
-function calcTip(){
-
-    const bill = num("bill");
-    const percent = num("tipPercent");
-
-    if(!validNumber(bill) || !validNumber(percent)){
-
-        document.getElementById("tipResult").textContent =
-            "أدخل البيانات بشكل صحيح.";
-
-        return;
-    }
-
-    const tip = bill * percent / 100;
-    const total = bill + tip;
-
-    document.getElementById("tipResult").innerHTML =
-        `
-        البقشيش: <strong>${tip.toFixed(2)}</strong><br>
-        الإجمالي: <strong>${total.toFixed(2)}</strong>
-        `;
-}
-
-
-/* =========================
-   4 القسط
-========================= */
-
-function calcInstallment(){
-
-    const loan = num("loan");
-    const months = num("months");
-    const interest = num("interest");
-
-    if(
-        !validNumber(loan) ||
-        !validNumber(months) ||
-        months<=0 ||
-        !validNumber(interest)
-    ){
-
-        document.getElementById("installmentResult").textContent =
-            "أدخل البيانات بشكل صحيح.";
-
-        return;
-    }
-
-    const total = loan + loan*(interest/100);
-    const monthly = total/months;
-
-    document.getElementById("installmentResult").innerHTML =
-        `
-        إجمالي المبلغ: <strong>${total.toFixed(2)}</strong><br>
-        القسط الشهري: <strong>${monthly.toFixed(2)}</strong>
-        `;
-}
-
-
-/* =========================
-   5 العمر
-========================= */
-
-function calcAge(){
-
-    const value = document.getElementById("birthDate").value;
-
-    if(!value){
-
-        document.getElementById("ageResult").textContent =
-            "اختر تاريخ الميلاد.";
-
-        return;
-    }
-
-    const birth = new Date(value+"T00:00:00");
-    const now = new Date();
-
-    if(birth > now){
-
-        document.getElementById("ageResult").textContent =
-            "تاريخ الميلاد غير صحيح.";
-
-        return;
-    }
-
-    let years = now.getFullYear()-birth.getFullYear();
-    let months = now.getMonth()-birth.getMonth();
-    let days = now.getDate()-birth.getDate();
-
-    if(days<0){
-
-        months--;
-
-        const previousMonth =
-            new Date(now.getFullYear(),now.getMonth(),0);
-
-        days += previousMonth.getDate();
-    }
-
-    if(months<0){
-
-        years--;
-        months += 12;
-    }
-
-    document.getElementById("ageResult").innerHTML =
-        `
-        عمرك هو:<br>
-        <strong>${years}</strong> سنة
-        <strong>${months}</strong> شهر
-        <strong>${days}</strong> يوم
-        `;
-}
-
-
-/* =========================
-   6 BMI
-========================= */
-
-function calcBMI(){
-
-    const weight = num("bmiWeight");
-    const height = num("bmiHeight");
-
-    if(
-        !validNumber(weight) ||
-        !validNumber(height) ||
-        height<=0
-    ){
-
-        document.getElementById("bmiResult").textContent =
-            "أدخل الوزن والطول بشكل صحيح.";
-
-        return;
-    }
-
-    const meters = height/100;
-    const bmi = weight/(meters*meters);
-
-    let status = "";
-
-    if(bmi<18.5) status="نقص في الوزن";
-    else if(bmi<25) status="وزن طبيعي";
-    else if(bmi<30) status="زيادة في الوزن";
-    else status="سمنة";
-
-    document.getElementById("bmiResult").innerHTML =
-        `
-        BMI: <strong>${bmi.toFixed(1)}</strong><br>
-        ${status}
-        `;
-}
-
-
-/* =========================
-   7 السعرات
-========================= */
-
-function calcCalories(){
-
-    const weight = num("calWeight");
-    const height = num("calHeight");
-    const age = num("calAge");
-
-    const gender =
-        document.getElementById("calGender").value;
-
-    const activity =
-        parseFloat(document.getElementById("activity").value);
-
-    if(
-        !validNumber(weight) ||
-        !validNumber(height) ||
-        !validNumber(age)
-    ){
-
-        document.getElementById("calResult").textContent =
-            "أدخل البيانات بشكل صحيح.";
-
-        return;
-    }
-
-    let bmr;
-
-    if(gender==="male"){
-
-        bmr =
-            10*weight +
-            6.25*height -
-            5*age +
-            5;
-
-    }else{
-
-        bmr =
-            10*weight +
-            6.25*height -
-            5*age -
-            161;
-    }
-
-    const calories = bmr*activity;
-
-    document.getElementById("calResult").innerHTML =
-        `
-        احتياجك التقريبي:<br>
-        <strong>${Math.round(calories)}</strong>
-        سعرة يومياً
-        `;
-}
-
-
-/* =========================
-   8 GPA
-========================= */
-
-function calcGPA(){
-
-    const percentage = num("percentage");
-
-    if(!validNumber(percentage)){
-
-        document.getElementById("gpaResult").textContent =
-            "أدخل النسبة.";
-
-        return;
-    }
-
-    const gpa = Math.max(
-        0,
-        Math.min(4,percentage/25)
-    );
-
-    document.getElementById("gpaResult").innerHTML =
-        `GPA التقريبي: <strong>${gpa.toFixed(2)}</strong>`;
-}
-
-
-/* =========================
-   9 فرق التاريخ
-========================= */
-
-function calcDateDiff(){
-
-    const a = document.getElementById("date1").value;
-    const b = document.getElementById("date2").value;
-
-    if(!a || !b){
-
-        document.getElementById("dateDiffResult").textContent =
-            "اختر التاريخين.";
-
-        return;
-    }
-
-    const d1 = new Date(a+"T00:00:00");
-    const d2 = new Date(b+"T00:00:00");
-
-    const diff = Math.abs(d2-d1);
-
-    const days = Math.floor(
-        diff/(1000*60*60*24)
-    );
-
-    const weeks = Math.floor(days/7);
-
-    document.getElementById("dateDiffResult").innerHTML =
-        `
-        الفرق: <strong>${days}</strong> يوم<br>
-        تقريباً ${weeks} أسبوع
-        `;
-}
-
-
-/* =========================
-   10 السرعة
-========================= */
-
-function calcSpeed(){
-
-    const mode =
-        document.getElementById("speedMode").value;
-
-    const distance = num("distance");
-    const speed = num("speed");
-    const time = num("time");
-
-    let result;
-
-    if(mode==="speed"){
-
-        if(!validNumber(distance)||!validNumber(time)||time===0){
-            result="أدخل المسافة والزمن.";
-        }else{
-            result=`السرعة = ${(
-                distance/time
-            ).toFixed(2)}`;
-        }
-
-    }else if(mode==="distance"){
-
-        if(!validNumber(speed)||!validNumber(time)){
-            result="أدخل السرعة والزمن.";
-        }else{
-            result=`المسافة = ${(
-                speed*time
-            ).toFixed(2)}`;
-        }
-
-    }else{
-
-        if(!validNumber(distance)||!validNumber(speed)||speed===0){
-            result="أدخل المسافة والسرعة.";
-        }else{
-            result=`الزمن = ${(
-                distance/speed
-            ).toFixed(2)}`;
-        }
-    }
-
-    document.getElementById("speedResult").innerHTML =
-        result;
-}
-
-
-/* =========================
-   11 الطول
-========================= */
-
-function convertLength(){
-
-    const value = num("lengthValue");
-
-    const from =
-        document.getElementById("lengthFrom").value;
-
-    const to =
-        document.getElementById("lengthTo").value;
-
-    const units = {
-        m:1,
-        km:1000,
-        cm:.01,
-        mm:.001,
-        ft:.3048,
-        in:.0254
-    };
-
-    if(!validNumber(value)){
-
-        document.getElementById("lengthResult").textContent =
-            "أدخل قيمة صحيحة.";
-
-        return;
-    }
-
-    const meters = value*units[from];
-    const result = meters/units[to];
-
-    document.getElementById("lengthResult").innerHTML =
-        `<strong>${result}</strong> ${to}`;
-}
-
-
-/* =========================
-   12 الوزن
-========================= */
-
-function convertWeight(){
-
-    const value = num("weightValue");
-
-    const from =
-        document.getElementById("weightFrom").value;
-
-    const to =
-        document.getElementById("weightTo").value;
-
-    const units = {
-        kg:1,
-        g:.001,
-        lb:.45359237,
-        oz:.0283495231
-    };
-
-    if(!validNumber(value)){
-
-        document.getElementById("weightResult").textContent =
-            "أدخل قيمة صحيحة.";
-
-        return;
-    }
-
-    const kg = value*units[from];
-    const result = kg/units[to];
-
-    document.getElementById("weightResult").innerHTML =
-        `<strong>${result.toFixed(6)}</strong> ${to}`;
-}
-
-
-/* =========================
-   13 الحرارة
-========================= */
-
-function convertTemperature(){
-
-    const value = num("tempValue");
-
-    const from =
-        document.getElementById("tempFrom").value;
-
-    const to =
-        document.getElementById("tempTo").value;
-
-    if(!validNumber(value)){
-
-        document.getElementById("tempResult").textContent =
-            "أدخل قيمة صحيحة.";
-
-        return;
-    }
-
-    let celsius;
-
-    if(from==="c") celsius=value;
-
-    if(from==="f")
-        celsius=(value-32)*5/9;
-
-    if(from==="k")
-        celsius=value-273.15;
-
-    let result;
-
-    if(to==="c")
-        result=celsius;
-
-    if(to==="f")
-        result=(celsius*9/5)+32;
-
-    if(to==="k")
-        result=celsius+273.15;
-
-    document.getElementById("tempResult").innerHTML =
-        `<strong>${result.toFixed(2)}</strong> °${to.toUpperCase()}`;
-}
-
-
-/* =========================
-   14 البيانات
-========================= */
-
-function convertData(){
-
-    const value = num("dataValue");
-
-    const from =
-        document.getElementById("dataFrom").value;
-
-    const to =
-        document.getElementById("dataTo").value;
-
-    const units = {
-        B:1,
-        KB:1024,
-        MB:1024**2,
-        GB:1024**3,
-        TB:1024**4
-    };
-
-    if(!validNumber(value)){
-
-        document.getElementById("dataResult").textContent =
-            "أدخل قيمة صحيحة.";
-
-        return;
-    }
-
-    const bytes = value*units[from];
-    const result = bytes/units[to];
-
-    document.getElementById("dataResult").innerHTML =
-        `<strong>${result}</strong> ${to}`;
-}
-
-
-/* =========================
-   15 فرق الوقت
-========================= */
-
-function calcTimeDiff(){
-
-    const a = document.getElementById("time1").value;
-    const b = document.getElementById("time2").value;
-
-    if(!a || !b){
-
-        document.getElementById("timeDiffResult").textContent =
-            "اختر الوقتين.";
-
-        return;
-    }
-
-    const [h1,m1] = a.split(":").map(Number);
-    const [h2,m2] = b.split(":").map(Number);
-
-    let start = h1*60+m1;
-    let end = h2*60+m2;
-
-    if(end<start){
-        end += 24*60;
-    }
-
-    const diff = end-start;
-
-    const hours = Math.floor(diff/60);
-    const minutes = diff%60;
-
-    document.getElementById("timeDiffResult").innerHTML =
-        `
-        الفرق:
-        <strong>${hours}</strong> ساعة
-        <strong>${minutes}</strong> دقيقة
-        `;
-}
-
-
-/* =========================
-   16 عداد الكلمات
-========================= */
-
-function countWords(){
-
-    const text =
-        document.getElementById("wordsText").value;
-
-    const trimmed = text.trim();
-
-    const words = trimmed
-        ? trimmed.split(/\s+/).length
-        : 0;
-
-    const chars = text.length;
-
-    const charsNoSpaces =
-        text.replace(/\s/g,"").length;
-
-    const lines =
-        text ? text.split(/\r?\n/).length : 0;
-
-    document.getElementById("wordsResult").innerHTML =
-        `
-        الكلمات: <strong>${words}</strong><br>
-        الحروف: <strong>${chars}</strong><br>
-        بدون مسافات: <strong>${charsNoSpaces}</strong><br>
-        الأسطر: <strong>${lines}</strong>
-        `;
-}
-
-
-/* =========================
-   17 حالة النص
-========================= */
-
-function toUpper(){
-
-    const text =
-        document.getElementById("caseText").value;
-
-    document.getElementById("caseResult").textContent =
-        text.toUpperCase();
-}
-
-
-function toLower(){
-
-    const text =
-        document.getElementById("caseText").value;
-
-    document.getElementById("caseResult").textContent =
-        text.toLowerCase();
-}
-
-
-/* =========================
-   18 عكس النص
-========================= */
-
-function reverseText(){
-
-    const text =
-        document.getElementById("reverseText").value;
-
-    document.getElementById("reverseResult").textContent =
-        [...text].reverse().join("");
-}
-
-
-/* =========================
-   19 Base64
-========================= */
-
-function encodeBase64(){
-
-    const text =
-        document.getElementById("baseText").value;
-
-    try{
-
-        const result =
-            btoa(unescape(encodeURIComponent(text)));
-
-        document.getElementById("baseResult").textContent =
-            result;
-
-    }catch(e){
-
-        document.getElementById("baseResult").textContent =
-            "حدث خطأ أثناء الترميز.";
-    }
-}
-
-
-function decodeBase64(){
-
-    const text =
-        document.getElementById("baseText").value;
-
-    try{
-
-        const result =
-            decodeURIComponent(
-                escape(atob(text))
-            );
-
-        document.getElementById("baseResult").textContent =
-            result;
-
-    }catch(e){
-
-        document.getElementById("baseResult").textContent =
-            "Base64 غير صحيح.";
-    }
-}
-
-
-/* =========================
-   20 URL
-========================= */
-
-function encodeURL(){
-
-    const text =
-        document.getElementById("urlText").value;
-
-    document.getElementById("urlResult").textContent =
-        encodeURIComponent(text);
-}
-
-
-function decodeURL(){
-
-    const text =
-        document.getElementById("urlText").value;
-
-    try{
-
-        document.getElementById("urlResult").textContent =
-            decodeURIComponent(text);
-
-    }catch(e){
-
-        document.getElementById("urlResult").textContent =
-            "النص غير صالح.";
-    }
-}
-
-
-/* =========================
-   21 JSON
-========================= */
-
-function formatJSON(){
-
-    const text =
-        document.getElementById("jsonText").value;
-
-    try{
-
-        const object = JSON.parse(text);
-
-        document.getElementById("jsonResult").innerHTML =
-            `<pre style="text-align:left;white-space:pre-wrap;direction:ltr">${escapeHTML(
-                JSON.stringify(object,null,2)
-            )}</pre>`;
-
-    }catch(e){
-
-        document.getElementById("jsonResult").textContent =
-            "❌ JSON غير صحيح.";
-    }
-}
-
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-/* =========================
-   22 Password
-========================= */
-
-function generatePassword(){
-
-    let chars =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    if(document.getElementById("passNumbers").checked){
-        chars += "0123456789";
-    }
-
-    if(document.getElementById("passSymbols").checked){
-        chars += "!@#$%^&*()-_=+[]{}?";
-    }
-
-    let length =
-        parseInt(document.getElementById("passLength").value);
-
-    if(!Number.isFinite(length)){
-        length=16;
-    }
-
-    length=Math.max(4,Math.min(128,length));
-
-    let password="";
-
-    const array = new Uint32Array(length);
-
-    crypto.getRandomValues(array);
-
-    for(let i=0;i<length;i++){
-
-        password +=
-            chars[array[i] % chars.length];
-    }
-
-    document.getElementById("passResult").innerHTML =
-        `
-        <div style="direction:ltr;user-select:all;font-size:17px">
-            ${escapeHTML(password)}
-        </div>
-        <button
-            class="secondary-btn"
-            onclick="copyText('${escapeForAttribute(password)}')"
-        >
-            نسخ كلمة المرور
-        </button>
-        `;
-}
-
-
-function escapeForAttribute(text){
-
-    return text
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'");
-}
-
-
-/* =========================
-   23 Random
-========================= */
-
-function generateRandom(){
-
-    let min = num("randomMin");
-    let max = num("randomMax");
-
-    if(
-        !validNumber(min) ||
-        !validNumber(max)
-    ){
-
-        document.getElementById("randomResult").textContent =
-            "أدخل الرقمين.";
-
-        return;
-    }
-
-    if(min>max){
-        [min,max]=[max,min];
-    }
-
-    const result =
-        Math.floor(
-            Math.random()*(max-min+1)
-        )+min;
-
-    document.getElementById("randomResult").innerHTML =
-        `<strong>${result}</strong>`;
-}
-
-
-/* =========================
-   24 QR
-========================= */
-
-function generateQR(){
-
-    const text =
-        document.getElementById("qrText").value.trim();
-
-    const box =
-        document.getElementById("qrResult");
-
-    if(!text){
-
-        box.textContent =
-            "اكتب نصاً أو رابطاً أولاً.";
-
-        return;
-    }
-
-    const url =
-        "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+
-        encodeURIComponent(text);
-
-    box.innerHTML =
-        `
-        <img src="${url}" alt="QR Code">
-        <br>
-        <button
-            class="secondary-btn"
-            onclick="window.open('${url}','_blank')"
-        >
-            فتح QR في صفحة جديدة
-        </button>
-        `;
-}
-
-
-/* =========================
-   25 Color
-========================= */
-
-document.addEventListener("input",(e)=>{
-
-    if(e.target.id==="colorPicker"){
-        updateColor();
-    }
-
-});
-
-
-function updateColor(){
-
-    const picker =
-        document.getElementById("colorPicker");
-
-    if(!picker) return;
-
-    const hex = picker.value;
-
-    const r =
-        parseInt(hex.substring(1,3),16);
-
-    const g =
-        parseInt(hex.substring(3,5),16);
-
-    const b =
-        parseInt(hex.substring(5,7),16);
-
-    const preview =
-        document.getElementById("colorPreview");
-
-    const result =
-        document.getElementById("colorResult");
-
-    preview.style.background=hex;
-
-    result.innerHTML =
-        `
-        HEX: <strong>${hex}</strong><br>
-        RGB: <strong>rgb(${r}, ${g}, ${b})</strong>
-        `;
-}
-
-
-/* =========================
-   26 Binary
-========================= */
-
-function textToBinary(){
-
-    const text =
-        document.getElementById("binaryText").value;
-
-    const result =
-        [...text]
-        .map(char =>
-            char.charCodeAt(0)
-                .toString(2)
-                .padStart(8,"0")
-        )
-        .join(" ");
-
-    document.getElementById("binaryResult").textContent =
-        result || "اكتب نصاً أولاً.";
-}
-
-
-function binaryToText(){
-
-    const text =
-        document.getElementById("binaryText").value.trim();
-
-    if(!text){
-
-        document.getElementById("binaryResult").textContent =
-            "اكتب Binary أولاً.";
-
-        return;
-    }
-
-    try{
-
-        const result =
-            text
-            .split(/\s+/)
-            .map(bin=>String.fromCharCode(parseInt(bin,2)))
-            .join("");
-
-        document.getElementById("binaryResult").textContent =
-            result;
-
-    }catch(e){
-
-        document.getElementById("binaryResult").textContent =
-            "Binary غير صحيح.";
-    }
-}
-
-
-/* =========================
-   27 Resize
-========================= */
-
-function resizeImage(){
-
-    const file =
-        document.getElementById("resizeFile").files[0];
-
-    const width =
-        parseInt(document.getElementById("newWidth").value);
-
-    const height =
-        parseInt(document.getElementById("newHeight").value);
-
-    const result =
-        document.getElementById("resizeResult");
-
-    if(!file){
-
-        result.textContent =
-            "اختر صورة أولاً.";
-
-        return;
-    }
-
-    if(!width || !height || width<=0 || height<=0){
-
-        result.textContent =
-            "أدخل أبعاداً صحيحة.";
-
-        return;
-    }
-
-    const img = new Image();
-
-    img.onload=()=>{
-
-        const canvas =
-            document.createElement("canvas");
-
-        canvas.width=width;
-        canvas.height=height;
-
-        const ctx=canvas.getContext("2d");
-
-        ctx.drawImage(img,0,0,width,height);
-
-        canvas.toBlob(blob=>{
-
-            const url =
-                URL.createObjectURL(blob);
-
-            result.innerHTML =
-                `
-                تم تغيير الحجم بنجاح.
-                <br>
-                <a
-                    href="${url}"
-                    download="hema-resized-image.png"
-                    class="secondary-btn"
-                    style="display:block;text-decoration:none;text-align:center;padding-top:10px"
-                >
-                    تحميل الصورة
-                </a>
-                `;
-
-        },"image/png");
-    };
-
-    img.src =
-        URL.createObjectURL(file);
-}
-
-
-/* =========================
-   28 Compress
-========================= */
-
-function compressImage(){
-
-    const file =
-        document.getElementById("compressFile").files[0];
-
-    let quality =
-        parseFloat(document.getElementById("quality").value);
-
-    const result =
-        document.getElementById("compressResult");
-
-    if(!file){
-
-        result.textContent =
-            "اختر صورة أولاً.";
-
-        return;
-    }
-
-    if(!Number.isFinite(quality)){
-        quality=70;
-    }
-
-    quality =
-        Math.max(1,Math.min(100,quality));
-
-    const img = new Image();
-
-    img.onload=()=>{
-
-        const canvas =
-            document.createElement("canvas");
-
-        canvas.width=img.naturalWidth;
-        canvas.height=img.naturalHeight;
-
-        const ctx =
-            canvas.getContext("2d");
-
-        ctx.drawImage(img,0,0);
-
-        canvas.toBlob(blob=>{
-
-            const url =
-                URL.createObjectURL(blob);
-
-            const oldKB =
-                (file.size/1024).toFixed(1);
-
-            const newKB =
-                (blob.size/1024).toFixed(1);
-
-            result.innerHTML =
-                `
-                الحجم الأصلي: <strong>${oldKB} KB</strong><br>
-                بعد الضغط: <strong>${newKB} KB</strong>
-
-                <a
-                    href="${url}"
-                    download="hema-compressed.jpg"
-                    class="secondary-btn"
-                    style="display:block;text-decoration:none;text-align:center;padding-top:10px"
-                >
-                    تحميل الصورة المضغوطة
-                </a>
-                `;
-
-        },"image/jpeg",quality/100);
-    };
-
-    img.src =
-        URL.createObjectURL(file);
-}
-
-
-/* =========================
-   29 Image PDF
-========================= */
-
-function imageToPDF(){
-
-    const file =
-        document.getElementById("pdfFile").files[0];
-
-    if(!file){
-
-        document.getElementById("pdfFile")
-            .parentElement
-            .insertAdjacentHTML(
-                "afterend",
-                `<div class="result">اختر صورة أولاً.</div>`
-            );
-
-        return;
-    }
-
-    const url =
-        URL.createObjectURL(file);
-
-    const win =
-        window.open("","_blank");
-
-    if(!win){
-
-        alert("اسمح بفتح النوافذ المنبثقة ثم حاول مرة أخرى.");
-
-        return;
-    }
-
-    win.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>HeMa Tools - PDF</title>
-            <style>
-                body{
-                    margin:0;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    min-height:100vh;
-                    background:#fff;
-                }
-                img{
-                    max-width:100%;
-                    max-height:100vh;
-                }
-            </style>
-        </head>
-        <body>
-            <img src="${url}" onload="window.print()">
-        </body>
-        </html>
-    `);
-
-    win.document.close();
-}
-
-
-/* =========================
-   30 Clock
-========================= */
-
-let clockTimer = null;
-
-function startClock(){
-
-    updateClock();
-
-    if(clockTimer){
-        clearInterval(clockTimer);
-    }
-
-    clockTimer =
-        setInterval(updateClock,1000);
-}
-
-
-function updateClock(){
-
-    const clock =
-        document.getElementById("clockDisplay");
-
-    const date =
-        document.getElementById("dateDisplay");
-
-    if(!clock || !date) return;
-
-    const now = new Date();
-
-    clock.textContent =
-        now.toLocaleTimeString("ar-EG",{
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit"
-        });
-
-    date.textContent =
-        now.toLocaleDateString("ar-EG",{
-            weekday:"long",
-            year:"numeric",
-            month:"long",
-            day:"numeric"
-        });
-}
-
-
-/* =========================
-   Copy
-========================= */
-
-async function copyText(text){
-
-    try{
-
-        await navigator.clipboard.writeText(text);
-
-        alert("تم النسخ بنجاح ✅");
-
-    }catch(e){
-
-        const area =
-            document.createElement("textarea");
-
-        area.value=text;
-
-        document.body.appendChild(area);
-
-        area.select();
-
-        document.execCommand("copy");
-
-        area.remove();
-
-        alert("تم النسخ بنجاح ✅");
-    }
-}
-
-
-/* =========================
-   Theme
-========================= */
-
-const themeBtn =
-    document.getElementById("themeBtn");
-
-function applyTheme(){
-
-    const saved =
-        localStorage.getItem("hema-theme");
-
-    if(saved==="light"){
-
-        document.documentElement.classList.add("light");
-
-        themeBtn.textContent="🌙";
-
-    }else{
-
-        document.documentElement.classList.remove("light");
-
-        themeBtn.textContent="☀️";
-    }
-}
-
-themeBtn.addEventListener("click",()=>{
-
-    const isLight =
-        document.documentElement.classList.toggle("light");
-
-    localStorage.setItem(
-        "hema-theme",
-        isLight ? "light" : "dark"
-    );
-
-    themeBtn.textContent =
-        isLight ? "🌙" : "☀️";
-});
-
-applyTheme();
-
-
-/* =========================
-   Language
-========================= */
-
-document.getElementById("language")
-.addEventListener("change",function(){
-
-    if(this.value==="en"){
-
-        alert(
-            "النسخة الحالية من الأدوات تعمل بالعربية. يمكن إضافة ترجمة كاملة للواجهة في الإصدار القادم."
-        );
-
-        this.value="ar";
-    }
-
-});
-
-
-/* =========================
-   Start
-========================= */
-
-renderTools();
+render();
 
 </script>
 

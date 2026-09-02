@@ -1,33 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl" class="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Abo Kayan Tools - منصة أدوات مجانية للحسابات والصور وPDF والنصوص والطلاب.">
-<meta name="theme-color" content="#0a0a0a">
-<title>Abo Kayan Tools | أدوات مجانية أونلاين</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Abo Kayan Tools - 30 أداة مجانية">
+<title>Abo Kayan Tools</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-
-<script>
-tailwind.config = {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        brand: {
-          DEFAULT:'#DC2626',
-          dark:'#B91C1C',
-          light:'#EF4444'
-        }
-      }
-    }
-  }
-}
-</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
@@ -35,2467 +14,1674 @@ tailwind.config = {
 *{box-sizing:border-box}
 
 body{
-  font-family:'Cairo',sans-serif
+    font-family:Cairo,sans-serif;
 }
 
-.ios-card{
-  background:rgba(255,255,255,.86);
-  backdrop-filter:blur(16px);
-  border:1px solid rgba(220,38,38,.14)
+.card{
+    background:#18181bcc;
+    border:1px solid #dc262633;
+    backdrop-filter:blur(14px);
 }
 
-.dark .ios-card{
-  background:rgba(28,28,28,.88);
-  border-color:rgba(239,68,68,.20)
+.tool{
+    min-height:150px;
+    transition:.2s;
 }
 
-.tool-card{
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease
+.tool:hover{
+    transform:translateY(-3px);
+    border-color:#dc262688;
 }
 
-.tool-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(0,0,0,.18);
-  border-color:rgba(239,68,68,.5)
+input,select,textarea{
+    font-family:inherit;
 }
 
-.tool-card.hidden-tool{
-  display:none
+.field{
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    background:#27272a;
+    color:#fff;
+    border:1px solid #3f3f46;
+    outline:0;
+    margin-bottom:10px;
 }
 
-.input{
-  width:100%;
-  padding:.75rem 1rem;
-  border-radius:14px;
-  background:#f3f4f6;
-  outline:none;
-  border:1px solid transparent
-}
-
-.dark .input{
-  background:#18181b;
-  color:#f4f4f5
-}
-
-.input:focus{
-  border-color:#dc2626
+.field:focus{
+    border-color:#dc2626;
 }
 
 .btn{
-  padding:.72rem 1rem;
-  border-radius:14px;
-  font-weight:800;
-  transition:.15s
-}
-
-.btn-primary{
-  background:#dc2626;
-  color:#fff
-}
-
-.btn-primary:hover{
-  background:#b91c1c
-}
-
-.btn-secondary{
-  background:#e5e7eb;
-  color:#18181b
-}
-
-.dark .btn-secondary{
-  background:#27272a;
-  color:#fff
+    background:#dc2626;
+    color:#fff;
+    padding:11px 15px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
 }
 
 .result{
-  margin-top:.75rem;
-  padding:1rem;
-  border-radius:14px;
-  background:rgba(220,38,38,.08);
-  border:1px solid rgba(220,38,38,.15)
+    margin-top:12px;
+    padding:14px;
+    border-radius:12px;
+    background:#18181b;
+    border:1px solid #3f3f46;
+    line-height:2;
+    word-break:break-word;
 }
 
-.category-btn.active{
-  background:#dc2626;
-  color:#fff
+.chip{
+    padding:8px 15px;
+    border-radius:999px;
+    background:#27272a;
+    white-space:nowrap;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#18181b;
-  color:#fff;
-  padding:10px 16px;
-  border-radius:14px;
-  z-index:100;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
-  font-size:13px
+.active{
+    background:#dc2626;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.light body{
+    background:#f4f4f5;
+    color:#18181b;
+}
+
+.light .card{
+    background:#ffffffdd;
+}
+
+.light .field{
+    background:#f4f4f5;
+    color:#18181b;
+}
+
+@media(max-width:480px){
+    .tool{
+        min-height:135px;
+    }
+
+    h1{
+        font-size:27px!important;
+    }
+
+    .tool b{
+        font-size:13px;
+    }
 }
 </style>
 </head>
 
-<body class="bg-gray-100 dark:bg-zinc-950 text-gray-800 dark:text-gray-100 min-h-screen">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
 
-<header class="sticky top-0 z-50 ios-card border-b px-4 py-3 shadow-sm">
-  <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+<header class="sticky top-0 z-50 card border-x-0 border-t-0">
 
-    <a href="#" class="font-extrabold text-lg text-brand whitespace-nowrap">
-      Abo Kayan Tools
-    </a>
+<div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
 
-    <div class="flex items-center gap-2">
+<a class="text-xl font-extrabold text-red-500" href="#">
+Abo Kayan Tools
+</a>
 
-      <select
-        id="langSelect"
-        onchange="changeLanguage(this.value)"
-        class="bg-gray-200 dark:bg-zinc-800 text-xs px-2 py-2 rounded-xl outline-none"
-      >
-        <option value="ar">العربية</option>
-        <option value="en">English</option>
-      </select>
+<div class="flex gap-2 items-center">
 
-      <button
-        onclick="toggleDarkMode()"
-        class="p-2 rounded-xl bg-gray-200 dark:bg-zinc-800"
-        aria-label="تغيير المظهر"
-      >
-        🌙
-      </button>
+<select id="language" class="field !w-auto !py-2 !px-3 !text-xs !mb-0">
+<option>العربية</option>
+<option>English</option>
+</select>
 
-    </div>
-  </div>
+<button class="chip" onclick="theme()">🌙</button>
+
+</div>
+</div>
 </header>
 
-<main class="max-w-6xl mx-auto px-4 py-7">
+
+<main class="max-w-5xl mx-auto px-4 py-7">
 
 <section class="text-center mb-7">
 
-  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-bold mb-3">
-    ⚡ أدوات مجانية وسريعة
-  </div>
+<div class="inline-block px-4 py-2 rounded-full bg-red-950 text-red-400 font-bold mb-4">
+⚡ أدوات مجانية وسريعة
+</div>
 
-  <h1 id="welcomeText" class="text-3xl sm:text-4xl font-extrabold mb-2">
-    أهلاً بك في Abo Kayan Tools
-  </h1>
+<h1 class="text-3xl sm:text-4xl font-extrabold mb-2">
+أهلاً بك في
+<span class="text-red-500">Abo Kayan Tools</span>
+</h1>
 
-  <p id="subText" class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
-    حاسبات وأدوات للصور وPDF والنصوص والطلاب في مكان واحد.
-  </p>
-
-  <div class="max-w-2xl mx-auto mt-5 relative">
-
-    <input
-      id="searchInput"
-      oninput="filterTools()"
-      class="input pr-11 text-sm"
-      placeholder="🔎 ابحث عن أداة... مثال: PDF، عمر، نسبة، QR"
-    >
-
-  </div>
+<p class="text-zinc-400">
+30 أداة للحساب والتحويل والنصوص والصور في مكان واحد.
+</p>
 
 </section>
 
-<div class="flex gap-2 overflow-x-auto pb-2 mb-5" id="categories">
 
-  <button
-    class="category-btn active whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold"
-    data-cat="all"
-    onclick="setCategory('all',this)"
-  >
-    كل الأدوات
-  </button>
+<div class="card rounded-2xl p-3 mb-4">
 
-  <button
-    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
-    data-cat="calc"
-    onclick="setCategory('calc',this)"
-  >
-    🧮 حاسبات
-  </button>
-
-  <button
-    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
-    data-cat="image"
-    onclick="setCategory('image',this)"
-  >
-    🖼️ الصور
-  </button>
-
-  <button
-    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
-    data-cat="pdf"
-    onclick="setCategory('pdf',this)"
-  >
-    📄 PDF
-  </button>
-
-  <button
-    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
-    data-cat="text"
-    onclick="setCategory('text',this)"
-  >
-    ✍️ النصوص
-  </button>
-
-  <button
-    class="category-btn whitespace-nowrap px-4 py-2 rounded-xl bg-gray-200 dark:bg-zinc-800 text-xs font-bold"
-    data-cat="dev"
-    onclick="setCategory('dev',this)"
-  >
-    💻 المطورين
-  </button>
-
-</div>
-
-<div class="flex items-center justify-between mb-3">
-
-  <h2 class="font-extrabold text-lg">
-    🔥 الأدوات
-  </h2>
-
-  <span id="toolCount" class="text-xs text-gray-400"></span>
-
-</div>
-
-<div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-
-<!-- ================= CALCULATORS ================= -->
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="النسبة المئوية نسبة percent percentage"
-onclick="openTool('percent')"
->
-<div class="icon">🧮</div>
-<h3 class="font-bold text-sm text-brand mt-2">حساب النسبة</h3>
-<p class="text-[10px] text-gray-400 mt-1">نسبة مئوية دقيقة</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="الخصم خصم discount"
-onclick="openTool('discount')"
->
-<div class="icon">💸</div>
-<h3 class="font-bold text-sm">حاسبة الخصم</h3>
-<p class="text-[10px] text-gray-400 mt-1">السعر قبل وبعد الخصم</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="العمر age birthday"
-onclick="openTool('age')"
->
-<div class="icon">🎂</div>
-<h3 class="font-bold text-sm">حساب العمر</h3>
-<p class="text-[10px] text-gray-400 mt-1">بالسنين والأشهر والأيام</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="bmi كتلة الجسم وزن"
-onclick="openTool('bmi')"
->
-<div class="icon">⚖️</div>
-<h3 class="font-bold text-sm">حساب BMI</h3>
-<p class="text-[10px] text-gray-400 mt-1">مؤشر كتلة الجسم</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="سعرات calories بروتين كارب"
-onclick="openTool('calories')"
->
-<div class="icon">🥗</div>
-<h3 class="font-bold text-sm">حاسبة السعرات</h3>
-<p class="text-[10px] text-gray-400 mt-1">السعرات والماكروز</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="قسط قرض loan finance"
-onclick="openTool('loan')"
->
-<div class="icon">💰</div>
-<h3 class="font-bold text-sm">حاسبة القسط</h3>
-<p class="text-[10px] text-gray-400 mt-1">قسط شهري بسيط</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="تاريخ أيام فرق التاريخ date"
-onclick="openTool('dateDiff')"
->
-<div class="icon">📅</div>
-<h3 class="font-bold text-sm">فرق التاريخ</h3>
-<p class="text-[10px] text-gray-400 mt-1">عدد الأيام بين تاريخين</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="calc"
-data-search="gpa معدل درجات جامعة"
-onclick="openTool('gpa')"
->
-<div class="icon">🎓</div>
-<h3 class="font-bold text-sm">حاسبة GPA</h3>
-<p class="text-[10px] text-gray-400 mt-1">حساب المعدل من 4</p>
-</div>
-
-
-<!-- ================= IMAGE ================= -->
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="image"
-data-search="ضغط الصور compress image"
-onclick="openTool('compressImage')"
->
-<div class="icon">🗜️</div>
-<h3 class="font-bold text-sm">ضغط الصور</h3>
-<p class="text-[10px] text-gray-400 mt-1">تقليل الحجم من المتصفح</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="image"
-data-search="تغيير حجم الصورة resize"
-onclick="openTool('resizeImage')"
->
-<div class="icon">📐</div>
-<h3 class="font-bold text-sm">تغيير حجم الصورة</h3>
-<p class="text-[10px] text-gray-400 mt-1">عرض وارتفاع مخصص</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="image"
-data-search="jpg png تحويل صورة"
-onclick="openTool('imageConvert')"
->
-<div class="icon">🖼️</div>
-<h3 class="font-bold text-sm">تحويل JPG / PNG</h3>
-<p class="text-[10px] text-gray-400 mt-1">تحويل صيغ الصور</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="image"
-data-search="صورة pdf jpg"
-onclick="openTool('img2pdf')"
->
-<div class="icon">📁</div>
-<h3 class="font-bold text-sm">صورة إلى PDF</h3>
-<p class="text-[10px] text-gray-400 mt-1">تحويل الصورة إلى PDF</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="image"
-data-search="ocr نص صورة استخراج"
-onclick="openTool('ocr')"
->
-<div class="icon">👁️</div>
-<h3 class="font-bold text-sm">صورة إلى نص OCR</h3>
-<p class="text-[10px] text-gray-400 mt-1">استخراج النص من الصورة</p>
-</div>
-
-
-<!-- ================= PDF ================= -->
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="pdf"
-data-search="pdf jpg تحويل"
-onclick="openTool('pdf2jpg')"
->
-<div class="icon">📄</div>
-<h3 class="font-bold text-sm">PDF إلى صور</h3>
-<p class="text-[10px] text-gray-400 mt-1">فتح صفحات PDF كصور</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="pdf"
-data-search="دمج pdf merge"
-onclick="openTool('mergePdf')"
->
-<div class="icon">📚</div>
-<h3 class="font-bold text-sm">دمج PDF</h3>
-<p class="text-[10px] text-gray-400 mt-1">دمج عدة ملفات PDF</p>
-</div>
-
-
-<!-- ================= TEXT ================= -->
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="text"
-data-search="عداد كلمات حروف word counter character"
-onclick="openTool('counter')"
->
-<div class="icon">📝</div>
-<h3 class="font-bold text-sm">عداد الكلمات والحروف</h3>
-<p class="text-[10px] text-gray-400 mt-1">كلمات وحروف وأسطر</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="text"
-data-search="password كلمة سر باسورد"
-onclick="openTool('password')"
->
-<div class="icon">🔐</div>
-<h3 class="font-bold text-sm">مولد كلمات المرور</h3>
-<p class="text-[10px] text-gray-400 mt-1">كلمات مرور قوية</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="text"
-data-search="qr code باركود رابط"
-onclick="openTool('qr')"
->
-<div class="icon">🔳</div>
-<h3 class="font-bold text-sm">مولد QR Code</h3>
-<p class="text-[10px] text-gray-400 mt-1">إنشاء QR من نص أو رابط</p>
-</div>
-
-
-<!-- ================= DEVELOPERS ================= -->
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="dev"
-data-search="json formatter developer برمجة"
-onclick="openTool('json')"
->
-<div class="icon">💻</div>
-<h3 class="font-bold text-sm">JSON Formatter</h3>
-<p class="text-[10px] text-gray-400 mt-1">تنسيق وفحص JSON</p>
-</div>
-
-
-<div
-class="tool-card ios-card p-4 rounded-2xl cursor-pointer text-center"
-data-cat="dev"
-data-search="base64 encoder decoder برمجة"
-onclick="openTool('base64')"
->
-<div class="icon">🔤</div>
-<h3 class="font-bold text-sm">Base64</h3>
-<p class="text-[10px] text-gray-400 mt-1">ترميز وفك ترميز النص</p>
-</div>
+<input
+id="search"
+class="field text-center !mb-0"
+placeholder="🔎 ابحث عن أداة... مثال: نسبة، صورة، QR"
+oninput="render()">
 
 </div>
 
 
-<!-- ================= MODAL ================= -->
+<div id="cats" class="flex gap-2 overflow-x-auto pb-3 mb-5">
 
-<div
-id="toolModal"
-class="hidden mt-6 ios-card p-5 rounded-2xl border border-brand/30 shadow-lg"
->
+<button class="chip active" onclick="cat('all',this)">
+كل الأدوات
+</button>
 
-<div class="flex justify-between items-center mb-4">
+<button class="chip" onclick="cat('calc',this)">
+حاسبات 🧮
+</button>
 
-<h3 id="modalTitle" class="font-bold text-brand text-lg">
-اسم الأداة
-</h3>
+<button class="chip" onclick="cat('text',this)">
+نصوص ✍️
+</button>
 
-<button
-onclick="closeTool()"
-class="text-gray-400 hover:text-red-500 font-bold text-lg px-2"
->
-✕
+<button class="chip" onclick="cat('image',this)">
+صور 🖼️
+</button>
+
+<button class="chip" onclick="cat('convert',this)">
+تحويل 🔄
+</button>
+
+<button class="chip" onclick="cat('other',this)">
+أخرى 🛠️
 </button>
 
 </div>
 
-<div id="modalBody"></div>
 
+<div class="flex justify-between mb-4">
+
+<h2 class="text-2xl font-extrabold">
+الأدوات 🔥
+</h2>
+
+<span id="count" class="text-zinc-500"></span>
+
+</div>
+
+
+<div id="grid"
+class="grid grid-cols-2 sm:grid-cols-3 gap-3">
 </div>
 
 </main>
 
 
-<footer class="text-center py-8 text-xs text-gray-400">
-© 2026 Abo Kayan Tools. All Rights Reserved.
+<div id="modal"
+class="hidden fixed inset-0 z-[100] bg-black/75 p-4 overflow-y-auto">
+
+<div class="max-w-lg mx-auto mt-8 card rounded-2xl p-5">
+
+<div class="flex justify-between mb-4">
+
+<h3 id="title"
+class="text-xl font-extrabold text-red-500">
+</h3>
+
+<button onclick="closeM()" class="text-2xl">
+×
+</button>
+
+</div>
+
+<div id="body"></div>
+
+</div>
+</div>
+
+
+<footer class="text-center text-zinc-500 text-xs py-8">
+
+© 2026 Abo Kayan Tools
+—
+جميع الأدوات تعمل داخل المتصفح
+
 </footer>
-
-
-<div id="toastBox"></div>
 
 
 <script>
 
-const $ = id => document.getElementById(id);
+const A=[
 
-let currentCategory = 'all';
-let stopwatchInterval;
-let stopwatchSeconds = 0;
+['percent','🧮','حساب النسبة','نسبة مئوية دقيقة','calc'],
+
+['discount','💸','حاسبة الخصم','السعر قبل وبعد الخصم','calc'],
+
+['tip','💳','حاسبة البقشيش','تقسيم الفاتورة','calc'],
+
+['loan','💰','حاسبة القسط','قسط شهري بسيط','calc'],
+
+['age','🎂','حساب العمر','بالسنين','calc'],
+
+['bmi','⚖️','حاسبة BMI','مؤشر كتلة الجسم','calc'],
+
+['calories','🥗','حاسبة السعرات','سعرات وبروتين','calc'],
+
+['gpa','🎓','حاسبة GPA','المعدل من 4','calc'],
+
+['date','📅','فرق التاريخ','عدد الأيام','calc'],
+
+['speed','🚗','حاسبة السرعة','المسافة والوقت','calc'],
+
+['length','📏','محول الطول','متر وسم وقدم','convert'],
+
+['weight','⚖️','محول الوزن','كجم وجرام ورطل','convert'],
+
+['temp','🌡️','محول الحرارة','مئوية وفهرنهايت','convert'],
+
+['data','💾','محول البيانات','KB وMB وGB','convert'],
+
+['timediff','⏱️','فرق الوقت','بين وقتين','calc'],
+
+['counter','📝','عداد الكلمات','كلمات وحروف','text'],
+
+['case','🔤','حالة النص','UPPER وlower','text'],
+
+['reverse','↩️','عكس النص','اعكس النص','text'],
+
+['base64','🔐','Base64','ترميز وفك ترميز','text'],
+
+['url','🔗','URL Encoder','ترميز الروابط','text'],
+
+['json','{ }','منسق JSON','تنسيق JSON','text'],
+
+['password','🔑','مولد كلمات السر','كلمات مرور قوية','other'],
+
+['random','🎲','رقم عشوائي','بين حدين','other'],
+
+['qr','▣','مولد QR Code','نص أو رابط','other'],
+
+['color','🎨','منتقي الألوان','HEX وRGB','other'],
+
+['binary','💻','محول Binary','نص وثنائي','convert'],
+
+['resize','🖼️','تغيير حجم الصورة','بالبكسل','image'],
+
+['compress','📦','ضغط الصورة','تقليل الحجم','image'],
+
+['pdf','📄','صورة إلى PDF','حفظ بالطباعة','image'],
+
+['clock','🕐','الوقت والتاريخ','الوقت الحالي','other']
+
+];
 
 
-/* ================= DARK MODE ================= */
+let C='all';
 
-function toggleDarkMode(){
+const $=id=>document.getElementById(id);
 
-document.documentElement.classList.toggle('dark');
-
-}
+const N=id=>parseFloat($(id).value);
 
 
-/* ================= LANGUAGE ================= */
+function cat(c,e){
 
-const translations = {
+C=c;
 
-ar:{
-welcome:"أهلاً بك في Abo Kayan Tools",
-sub:"حاسبات وأدوات للصور وPDF والنصوص والطلاب في مكان واحد."
-},
+document
+.querySelectorAll('#cats button')
+.forEach(x=>x.classList.remove('active'));
 
-en:{
-welcome:"Welcome to Abo Kayan Tools",
-sub:"Calculators and tools for images, PDF, text and students in one place."
-}
+e.classList.add('active');
 
-};
-
-
-function changeLanguage(lang){
-
-document.documentElement.lang=lang;
-
-document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-
-$('welcomeText').textContent=translations[lang].welcome;
-
-$('subText').textContent=translations[lang].sub;
-
-}
-
-
-/* ================= TOAST ================= */
-
-function toast(message){
-
-const box=document.createElement('div');
-
-box.className='toast';
-
-box.textContent=message;
-
-document.body.appendChild(box);
-
-setTimeout(()=>box.remove(),2500);
-
-}
-
-
-/* ================= SEARCH ================= */
-
-function filterTools(){
-
-const query=$('searchInput').value.toLowerCase().trim();
-
-document.querySelectorAll('.tool-card').forEach(card=>{
-
-const text=(card.dataset.search||'').toLowerCase();
-
-const category=card.dataset.cat;
-
-const matchesSearch=!query||text.includes(query);
-
-const matchesCategory=currentCategory==='all'||category===currentCategory;
-
-card.classList.toggle(
-'hidden-tool',
-!(matchesSearch&&matchesCategory)
-);
-
-});
-
-updateToolCount();
+render();
 
 }
 
 
-function setCategory(category,button){
-
-currentCategory=category;
-
-document.querySelectorAll('.category-btn').forEach(btn=>{
-btn.classList.remove('active');
-});
-
-button.classList.add('active');
-
-filterTools();
-
-}
-
-
-function updateToolCount(){
-
-const visible=[...document.querySelectorAll('.tool-card')]
-.filter(card=>!card.classList.contains('hidden-tool')).length;
-
-$('toolCount').textContent=visible+' أداة';
-
-}
-
-
-/* ================= TOOL OPEN ================= */
-
-function openTool(type){
-
-clearInterval(stopwatchInterval);
-
-const modal=$('toolModal');
-
-const title=$('modalTitle');
-
-const body=$('modalBody');
-
-modal.classList.remove('hidden');
-
-
-const inputClass="input";
-
-
-const templates={
-
-
-percent:[
-`حساب النسبة المئوية`,
-
-`
-<div class="space-y-3">
-
-<input
-id="p1"
-type="number"
-class="${inputClass}"
-placeholder="أدخل الرقم"
->
-
-<input
-id="p2"
-type="number"
-class="${inputClass}"
-placeholder="أدخل النسبة %"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcPercent()"
->
-احسب الآن
-</button>
-
-<div id="pResult"></div>
-
-</div>
-`
-],
-
-
-discount:[
-`حاسبة الخصم`,
-
-`
-<div class="space-y-3">
-
-<input
-id="dPrice"
-type="number"
-class="${inputClass}"
-placeholder="السعر الأصلي"
->
-
-<input
-id="dRate"
-type="number"
-class="${inputClass}"
-placeholder="نسبة الخصم %"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcDiscount()"
->
-احسب الخصم
-</button>
-
-<div id="dResult"></div>
-
-</div>
-`
-],
-
-
-age:[
-`حساب العمر`,
-
-`
-<div class="space-y-3">
-
-<label class="text-xs text-gray-400">
-تاريخ الميلاد
-</label>
-
-<input
-id="birthDate"
-type="date"
-class="${inputClass}"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcAge()"
->
-احسب العمر
-</button>
-
-<div id="ageResult"></div>
-
-</div>
-`
-],
-
-
-bmi:[
-`حساب BMI`,
-
-`
-<div class="space-y-3">
-
-<input
-id="weight"
-type="number"
-class="${inputClass}"
-placeholder="الوزن بالكيلو"
->
-
-<input
-id="height"
-type="number"
-class="${inputClass}"
-placeholder="الطول بالسنتيمتر"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcBMI()"
->
-احسب BMI
-</button>
-
-<div id="bmiResult"></div>
-
-</div>
-`
-],
-
-
-calories:[
-`حاسبة السعرات والماكروز`,
-
-`
-<div class="space-y-3">
-
-<div class="grid grid-cols-2 gap-2">
-
-<input
-id="cWeight"
-type="number"
-class="${inputClass}"
-placeholder="الوزن كجم"
->
-
-<input
-id="cHeight"
-type="number"
-class="${inputClass}"
-placeholder="الطول سم"
->
-
-</div>
-
-
-<input
-id="cAge"
-type="number"
-class="${inputClass}"
-placeholder="العمر"
->
-
-
-<select
-id="cSex"
-class="${inputClass}"
->
-
-<option value="male">
-ذكر
-</option>
-
-<option value="female">
-أنثى
-</option>
-
-</select>
-
-
-<select
-id="cActivity"
-class="${inputClass}"
->
-
-<option value="1.2">
-قليل الحركة
-</option>
-
-<option value="1.375">
-نشاط خفيف
-</option>
-
-<option value="1.55">
-نشاط متوسط
-</option>
-
-<option value="1.725">
-نشاط مرتفع
-</option>
-
-</select>
-
-
-<select
-id="cGoal"
-class="${inputClass}"
->
-
-<option value="maintain">
-ثبات الوزن
-</option>
-
-<option value="lose">
-خسارة الدهون
-</option>
-
-<option value="gain">
-زيادة الوزن
-</option>
-
-</select>
-
-
-<button
-class="btn btn-primary w-full"
-onclick="calcCalories()"
->
-احسب السعرات
-</button>
-
-<div id="caloriesResult"></div>
-
-</div>
-`
-],
-
-
-loan:[
-`حاسبة القسط`,
-
-`
-<div class="space-y-3">
-
-<input
-id="loanAmount"
-type="number"
-class="${inputClass}"
-placeholder="مبلغ القرض"
->
-
-<input
-id="loanMonths"
-type="number"
-class="${inputClass}"
-placeholder="عدد الأشهر"
->
-
-<input
-id="loanRate"
-type="number"
-class="${inputClass}"
-placeholder="الفائدة السنوية %"
-value="0"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcLoan()"
->
-احسب القسط
-</button>
-
-<div id="loanResult"></div>
-
-</div>
-`
-],
-
-
-dateDiff:[
-`فرق التاريخ`,
-
-`
-<div class="space-y-3">
-
-<input
-id="date1"
-type="date"
-class="${inputClass}"
->
-
-<input
-id="date2"
-type="date"
-class="${inputClass}"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcDateDiff()"
->
-احسب الفرق
-</button>
-
-<div id="dateResult"></div>
-
-</div>
-`
-],
-
-
-gpa:[
-`حاسبة GPA`,
-
-`
-<div class="space-y-3">
-
-<p class="text-xs text-gray-400">
-أدخل حتى 4 مواد، كل مادة من 0 إلى 4
-</p>
-
-<input
-id="gpa1"
-type="number"
-min="0"
-max="4"
-step="0.01"
-class="${inputClass}"
-placeholder="المادة 1"
->
-
-<input
-id="gpa2"
-type="number"
-min="0"
-max="4"
-step="0.01"
-class="${inputClass}"
-placeholder="المادة 2"
->
-
-<input
-id="gpa3"
-type="number"
-min="0"
-max="4"
-step="0.01"
-class="${inputClass}"
-placeholder="المادة 3"
->
-
-<input
-id="gpa4"
-type="number"
-min="0"
-max="4"
-step="0.01"
-class="${inputClass}"
-placeholder="المادة 4"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="calcGPA()"
->
-احسب GPA
-</button>
-
-<div id="gpaResult"></div>
-
-</div>
-`
-],
-
-
-compressImage:[
-`ضغط الصور`,
-
-`
-<div class="space-y-3">
-
-<input
-id="compressFile"
-type="file"
-accept="image/*"
-class="${inputClass}"
->
-
-<label class="text-xs text-gray-400">
-جودة الصورة
-</label>
-
-<input
-id="quality"
-type="range"
-min="20"
-max="100"
-value="75"
-class="w-full"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="compressImage()"
->
-ضغط وتحميل
-</button>
-
-<div id="compressResult"></div>
-
-</div>
-`
-],
-
-
-resizeImage:[
-`تغيير حجم الصورة`,
-
-`
-<div class="space-y-3">
-
-<input
-id="resizeFile"
-type="file"
-accept="image/*"
-class="${inputClass}"
->
-
-<div class="grid grid-cols-2 gap-2">
-
-<input
-id="resizeW"
-type="number"
-class="${inputClass}"
-placeholder="العرض"
->
-
-<input
-id="resizeH"
-type="number"
-class="${inputClass}"
-placeholder="الارتفاع"
->
-
-</div>
-
-<button
-class="btn btn-primary w-full"
-onclick="resizeImage()"
->
-تغيير الحجم وتحميل
-</button>
-
-</div>
-`
-],
-
-
-imageConvert:[
-`تحويل الصور`,
-
-`
-<div class="space-y-3">
-
-<input
-id="convertFile"
-type="file"
-accept="image/*"
-class="${inputClass}"
->
-
-<select
-id="convertType"
-class="${inputClass}"
->
-
-<option value="image/jpeg">
-JPG
-</option>
-
-<option value="image/png">
-PNG
-</option>
-
-<option value="image/webp">
-WEBP
-</option>
-
-</select>
-
-<button
-class="btn btn-primary w-full"
-onclick="convertImage()"
->
-تحويل وتحميل
-</button>
-
-</div>
-`
-],
-
-
-img2pdf:[
-`تحويل صورة إلى PDF`,
-
-`
-<div class="space-y-3">
-
-<input
-id="imgPdfFile"
-type="file"
-accept="image/*"
-class="${inputClass}"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="imageToPdf()"
->
-تحويل وتحميل PDF
-</button>
-
-</div>
-`
-],
-
-
-ocr:[
-`استخراج النص من الصورة OCR`,
-
-`
-<div class="space-y-3">
-
-<input
-id="ocrFile"
-type="file"
-accept="image/*"
-class="${inputClass}"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="runOCR()"
->
-استخراج النص
-</button>
-
-<div
-id="ocrStatus"
-class="text-xs text-gray-400"
->
-</div>
-
-<textarea
-id="ocrResult"
-rows="8"
-class="${inputClass}"
-readonly
-placeholder="سيظهر النص هنا..."
-></textarea>
-
-<button
-class="btn btn-secondary w-full"
-onclick="copyOCR()"
->
-نسخ النص
-</button>
-
-</div>
-`
-],
-
-
-pdf2jpg:[
-`PDF إلى صور`,
-
-`
-<div class="space-y-3">
-
-<input
-id="pdfFile"
-type="file"
-accept="application/pdf"
-class="${inputClass}"
->
-
-<p class="text-xs text-gray-400">
-سيتم فتح صفحات PDF في المتصفح.
-</p>
-
-<button
-class="btn btn-primary w-full"
-onclick="openPdf()"
->
-فتح PDF
-</button>
-
-</div>
-`
-],
-
-
-mergePdf:[
-`دمج ملفات PDF`,
-
-`
-<div class="space-y-3">
-
-<input
-id="mergeFiles"
-type="file"
-accept="application/pdf"
-multiple
-class="${inputClass}"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="mergePDFs()"
->
-دمج وتحميل PDF
-</button>
-
-<div id="mergeResult"></div>
-
-</div>
-`
-],
-
-
-counter:[
-`عداد الكلمات والحروف`,
-
-`
-<div class="space-y-3">
-
-<textarea
-id="textInput"
-oninput="countText()"
-rows="7"
-class="${inputClass}"
-placeholder="اكتب أو الصق النص هنا..."
-></textarea>
-
-<div class="grid grid-cols-3 gap-2 text-center text-xs">
-
-<div class="result">
-<b id="wordCount">0</b>
-<br>
-كلمات
-</div>
-
-<div class="result">
-<b id="charCount">0</b>
-<br>
-حروف
-</div>
-
-<div class="result">
-<b id="lineCount">0</b>
-<br>
-أسطر
-</div>
-
-</div>
-
-</div>
-`
-],
-
-
-password:[
-`مولد كلمات مرور قوية`,
-
-`
-<div class="space-y-3">
-
-<input
-id="passLen"
-type="number"
-min="6"
-max="64"
-value="16"
-class="${inputClass}"
-placeholder="الطول"
->
-
-<label class="flex items-center gap-2 text-sm">
-
-<input
-id="passSymbols"
-type="checkbox"
-checked
->
-
-رموز
-
-</label>
-
-<button
-class="btn btn-primary w-full"
-onclick="generatePassword()"
->
-توليد كلمة مرور
-</button>
-
-<div
-id="passResult"
-class="result font-mono break-all text-center"
->
-</div>
-
-<button
-class="btn btn-secondary w-full"
-onclick="copyPassword()"
->
-نسخ
-</button>
-
-</div>
-`
-],
-
-
-qr:[
-`مولد QR Code`,
-
-`
-<div class="space-y-3">
-
-<input
-id="qrText"
-class="${inputClass}"
-placeholder="اكتب النص أو الرابط"
->
-
-<button
-class="btn btn-primary w-full"
-onclick="generateQR()"
->
-إنشاء QR
-</button>
-
-<div
-id="qrResult"
-class="flex justify-center"
->
-</div>
-
-</div>
-`
-],
-
-
-json:[
-`JSON Formatter`,
-
-`
-<div class="space-y-3">
-
-<textarea
-id="jsonInput"
-rows="8"
-class="${inputClass}"
-placeholder='{"name":"Abo Kayan","tools":20}'
-></textarea>
-
-<button
-class="btn btn-primary w-full"
-onclick="formatJSON()"
->
-تنسيق والتحقق
-</button>
-
-<div id="jsonResult"></div>
-
-</div>
-`
-],
-
-
-base64:[
-`Base64 Encoder / Decoder`,
-
-`
-<div class="space-y-3">
-
-<textarea
-id="baseText"
-rows="5"
-class="${inputClass}"
-placeholder="اكتب النص هنا"
-></textarea>
-
-<div class="grid grid-cols-2 gap-2">
-
-<button
-class="btn btn-primary"
-onclick="encodeBase64()"
->
-Encode
-</button>
-
-<button
-class="btn btn-secondary"
-onclick="decodeBase64()"
->
-Decode
-</button>
-
-</div>
-
-<textarea
-id="baseResult"
-rows="5"
-class="${inputClass}"
-readonly
-></textarea>
-
-</div>
-`
-]
-
-};
-
-
-if(templates[type]){
-
-title.textContent=templates[type][0];
-
-body.innerHTML=templates[type][1];
-
-}
-
-modal.scrollIntoView({
-behavior:'smooth',
-block:'start'
-});
-
-}
-
-
-/* ================= CLOSE ================= */
-
-function closeTool(){
-
-clearInterval(stopwatchInterval);
-
-$('toolModal').classList.add('hidden');
-
-}
-
-
-/* ================= RESULT ================= */
-
-function showResult(id,msg){
-
-$(id).innerHTML=
-'<div class="result font-bold text-sm">'+msg+'</div>';
-
-}
-
-
-/* ================= PERCENT ================= */
-
-function calcPercent(){
-
-const a=+$('p1').value;
-
-const b=+$('p2').value;
-
-if(!isFinite(a)||!isFinite(b))
-return toast('أدخل الرقم والنسبة');
-
-showResult(
-'pResult',
-`الناتج: ${(a*b/100).toLocaleString('ar-EG')}`
-);
-
-}
-
-
-/* ================= DISCOUNT ================= */
-
-function calcDiscount(){
-
-const p=+$('dPrice').value;
-
-const r=+$('dRate').value;
-
-if(p<0||r<0)
-return toast('أدخل قيمًا صحيحة');
-
-const save=p*r/100;
-
-const final=p-save;
-
-showResult(
-'dResult',
-`قيمة الخصم: ${save.toFixed(2)}<br>
-السعر بعد الخصم: ${final.toFixed(2)}`
-);
-
-}
-
-
-/* ================= AGE ================= */
-
-function calcAge(){
-
-const v=$('birthDate').value;
-
-if(!v)
-return toast('اختر تاريخ الميلاد');
-
-const b=new Date(v+'T00:00:00');
-
-const t=new Date();
-
-let y=t.getFullYear()-b.getFullYear();
-
-let m=t.getMonth()-b.getMonth();
-
-let d=t.getDate()-b.getDate();
-
-if(d<0){
-
-m--;
-
-d+=new Date(
-t.getFullYear(),
-t.getMonth(),
-0
-).getDate();
-
-}
-
-if(m<0){
-
-y--;
-
-m+=12;
-
-}
-
-showResult(
-'ageResult',
-`عمرك تقريبًا: ${y} سنة، ${m} شهر، ${d} يوم`
-);
-
-}
-
-
-/* ================= BMI ================= */
-
-function calcBMI(){
-
-const w=+$('weight').value;
-
-const h=+$('height').value/100;
-
-if(w<=0||h<=0)
-return toast('أدخل الوزن والطول');
-
-const bmi=w/(h*h);
-
-const s=
-bmi<18.5
-?'نقص وزن'
-:bmi<25
-?'ضمن النطاق المعتاد'
-:bmi<30
-?'زيادة وزن'
-:'سمنة';
-
-showResult(
-'bmiResult',
-`BMI = ${bmi.toFixed(1)}<br>
-التصنيف العام: ${s}`
-);
-
-}
-
-
-/* ================= CALORIES ================= */
-
-function calcCalories(){
-
-const w=+$('cWeight').value;
-
-const h=+$('cHeight').value;
-
-const a=+$('cAge').value;
-
-if(w<=0||h<=0||a<=0)
-return toast('أكمل البيانات');
-
-const sex=$('cSex').value;
-
-const activity=+$('cActivity').value;
-
-const goal=$('cGoal').value;
-
-let bmr=
-10*w+
-6.25*h-
-5*a+
-(sex==='male'?5:-161);
-
-let tdee=bmr*activity;
-
-if(goal==='lose')
-tdee-=400;
-
-if(goal==='gain')
-tdee+=300;
-
-const protein=Math.round(w*1.6);
-
-const fat=Math.round(tdee*.25/9);
-
-const carb=Math.max(
-0,
-Math.round(
-(tdee-protein*4-fat*9)/4
+function render(){
+
+let q=$('search').value.toLowerCase();
+
+let l=A.filter(x=>
+(C==='all'||x[4]===C)&&
+(
+x[2].toLowerCase().includes(q)||
+x[3].toLowerCase().includes(q)
 )
 );
 
-showResult(
-'caloriesResult',
-`السعرات التقريبية: ${Math.round(tdee)} سعرة<br>
-البروتين: ${protein} جم<br>
-الكارب: ${carb} جم<br>
-الدهون: ${fat} جم`
+$('count').textContent=l.length+' أداة';
+
+$('grid').innerHTML=l.map(x=>`
+
+<button
+class="tool card rounded-2xl p-4 flex flex-col items-center justify-center text-center"
+onclick="openT('${x[0]}')">
+
+<div class="w-12 h-12 rounded-2xl bg-red-950 flex items-center justify-center text-2xl mb-3">
+${x[1]}
+</div>
+
+<b class="text-sm">
+${x[2]}
+</b>
+
+<span class="text-[11px] text-zinc-500 mt-1">
+${x[3]}
+</span>
+
+</button>
+
+`).join('');
+
+}
+
+
+function theme(){
+
+document.documentElement.classList.toggle('light');
+
+}
+
+
+function closeM(){
+
+$('modal').classList.add('hidden');
+
+}
+
+
+function F(id,p,t='text'){
+
+return `
+<input
+id="${id}"
+type="${t}"
+placeholder="${p}"
+class="field">
+`;
+
+}
+
+
+function T(id,p){
+
+return `
+<textarea
+id="${id}"
+class="field min-h-32"
+placeholder="${p}">
+</textarea>
+`;
+
+}
+
+
+function B(t,f){
+
+return `
+<button
+class="btn w-full"
+onclick="${f}">
+${t}
+</button>
+`;
+
+}
+
+
+function R(id='r'){
+
+return `
+<div
+id="${id}"
+class="result">
+</div>
+`;
+
+}
+
+
+function S(id,a){
+
+return `
+<select
+id="${id}"
+class="field">
+
+${a.map(x=>
+`<option value="${x[0]}">
+${x[1]}
+</option>`
+).join('')}
+
+</select>
+`;
+
+}
+
+
+function out(x,id='r'){
+
+$(id).innerHTML=x;
+
+}
+
+
+function openT(k){
+
+let x=A.find(a=>a[0]===k);
+
+$('title').textContent=x[1]+' '+x[2];
+
+$('modal').classList.remove('hidden');
+
+let b=$('body');
+
+switch(k){
+
+case'percent':
+
+b.innerHTML=
+F('p','الرقم','number')+
+F('q','النسبة %','number')+
+B('احسب','percent()')+
+R();
+
+break;
+
+
+case'discount':
+
+b.innerHTML=
+F('price','السعر','number')+
+F('disc','الخصم %','number')+
+B('احسب','discount()')+
+R();
+
+break;
+
+
+case'tip':
+
+b.innerHTML=
+F('bill','الفاتورة','number')+
+F('tipv','البقشيش %','number')+
+F('people','عدد الأشخاص','number')+
+B('احسب','tip()')+
+R();
+
+break;
+
+
+case'loan':
+
+b.innerHTML=
+F('la','المبلغ','number')+
+F('lm','الأشهر','number')+
+B('احسب','loan()')+
+R();
+
+break;
+
+
+case'age':
+
+b.innerHTML=
+F('birth','تاريخ الميلاد','date')+
+B('احسب','age()')+
+R();
+
+break;
+
+
+case'bmi':
+
+b.innerHTML=
+F('bw','الوزن كجم','number')+
+F('bh','الطول سم','number')+
+B('احسب','bmi()')+
+R();
+
+break;
+
+
+case'calories':
+
+b.innerHTML=
+F('cw','الوزن كجم','number')+
+F('ch','الطول سم','number')+
+F('ca','العمر','number')+
+S('sex',[
+['m','ذكر'],
+['f','أنثى']
+])+
+S('goal',[
+['lose','خسارة'],
+['maintain','ثبات'],
+['gain','زيادة']
+])+
+B('احسب','calories()')+
+R();
+
+break;
+
+
+case'gpa':
+
+b.innerHTML=
+F(
+'grades',
+'درجات مفصولة بفواصل، مثال 90,80,75'
+)+
+B('احسب','gpa()')+
+R();
+
+break;
+
+
+case'date':
+
+b.innerHTML=
+F('d1','التاريخ الأول','date')+
+F('d2','التاريخ الثاني','date')+
+B('احسب','dated()')+
+R();
+
+break;
+
+
+case'speed':
+
+b.innerHTML=
+F('dist','المسافة كم','number')+
+F('hrs','الوقت ساعات','number')+
+B('احسب','speed()')+
+R();
+
+break;
+
+
+case'length':
+
+b.innerHTML=
+F('lv','القيمة','number')+
+S('lu',[
+['mc','متر → سم'],
+['cm','سم → متر'],
+['km','كم → متر'],
+['mk','متر → كم'],
+['fm','قدم → متر'],
+['ic','بوصة → سم']
+])+
+B('تحويل','length()')+
+R();
+
+break;
+
+
+case'weight':
+
+b.innerHTML=
+F('wv','القيمة','number')+
+S('wu',[
+['kg_g','كجم → جرام'],
+['g_kg','جرام → كجم'],
+['kg_l','كجم → رطل'],
+['l_kg','رطل → كجم']
+])+
+B('تحويل','weight()')+
+R();
+
+break;
+
+
+case'temp':
+
+b.innerHTML=
+F('tv','القيمة','number')+
+S('tu',[
+['cf','مئوية → فهرنهايت'],
+['fc','فهرنهايت → مئوية'],
+['ck','مئوية → كلفن'],
+['kc','كلفن → مئوية']
+])+
+B('تحويل','temp()')+
+R();
+
+break;
+
+
+case'data':
+
+b.innerHTML=
+F('dv','القيمة','number')+
+S('du',[
+['mg','MB → GB'],
+['gm','GB → MB'],
+['gt','GB → TB'],
+['km','KB → MB']
+])+
+B('تحويل','data()')+
+R();
+
+break;
+
+
+case'timediff':
+
+b.innerHTML=
+F('t1','الوقت الأول','time')+
+F('t2','الوقت الثاني','time')+
+B('احسب','tdiff()')+
+R();
+
+break;
+
+
+case'counter':
+
+b.innerHTML=
+T('ct','اكتب النص...')+
+`
+<div class="grid grid-cols-3 gap-2">
+
+<div class="result text-center">
+كلمات<br>
+<b id="wc">0</b>
+</div>
+
+<div class="result text-center">
+حروف<br>
+<b id="cc">0</b>
+</div>
+
+<div class="result text-center">
+مسافات<br>
+<b id="sc">0</b>
+</div>
+
+</div>
+`;
+
+$('ct').oninput=count;
+
+break;
+
+
+case'case':
+
+b.innerHTML=
+T('ci','النص...')+
+S('cs',[
+['u','UPPERCASE'],
+['l','lowercase']
+])+
+B('تحويل','cases()')+
+R();
+
+break;
+
+
+case'reverse':
+
+b.innerHTML=
+T('ri','النص...')+
+B('اعكس','reverse()')+
+R();
+
+break;
+
+
+case'base64':
+
+b.innerHTML=
+T('bi','النص...')+
+S('bm',[
+['e','ترميز'],
+['d','فك الترميز']
+])+
+B('تنفيذ','base64()')+
+R();
+
+break;
+
+
+case'url':
+
+b.innerHTML=
+T('ui','الرابط أو النص...')+
+S('um',[
+['e','ترميز'],
+['d','فك الترميز']
+])+
+B('تنفيذ','urlx()')+
+R();
+
+break;
+
+
+case'json':
+
+b.innerHTML=
+T('ji','JSON...')+
+B('تنسيق','json()')+
+R();
+
+break;
+
+
+case'password':
+
+b.innerHTML=
+F('pl','الطول','number')+
+B('توليد','pass()')+
+R();
+
+break;
+
+
+case'random':
+
+b.innerHTML=
+F('rmin','الحد الأدنى','number')+
+F('rmax','الحد الأقصى','number')+
+B('توليد','randomN()')+
+R();
+
+break;
+
+
+case'qr':
+
+b.innerHTML=
+F('qr','النص أو الرابط')+
+B('إنشاء QR','qr()')+
+R('qrout');
+
+break;
+
+
+case'color':
+
+b.innerHTML=`
+<input
+id="col"
+type="color"
+value="#dc2626"
+class="w-full h-20">
+
+${R()}
+
+<div
+id="cp"
+class="h-20 rounded-xl mt-3">
+</div>
+`;
+
+$('col').oninput=color;
+
+color();
+
+break;
+
+
+case'binary':
+
+b.innerHTML=
+T('bin','النص أو Binary')+
+S('bmode',[
+['e','نص → Binary'],
+['d','Binary → نص']
+])+
+B('تحويل','binary()')+
+R();
+
+break;
+
+
+case'resize':
+
+b.innerHTML=`
+<input
+id="rf"
+type="file"
+accept="image/*"
+class="field">
+`+
+F('rw','العرض الجديد','number')+
+F('rh','الارتفاع الجديد','number')+
+B('تغيير وتنزيل','resize()')+
+R();
+
+break;
+
+
+case'compress':
+
+b.innerHTML=`
+<input
+id="cf"
+type="file"
+accept="image/*"
+class="field">
+`+
+F('cq','الجودة 10-100','number')+
+B('ضغط وتنزيل','compress()')+
+R();
+
+break;
+
+
+case'pdf':
+
+b.innerHTML=`
+<input
+id="pf"
+type="file"
+accept="image/*"
+class="field">
+`+
+B('فتح للطباعة وحفظ PDF','pdf()');
+
+break;
+
+
+case'clock':
+
+b.innerHTML=`
+<div
+id="clock"
+class="text-center text-2xl font-extrabold text-red-500">
+</div>
+`;
+
+clock();
+
+break;
+
+}
+
+}
+
+
+function percent(){
+
+out(
+'الناتج: <b>'+
+((N('p')*N('q'))/100).toFixed(2)+
+'</b>'
 );
 
 }
 
 
-/* ================= LOAN ================= */
+function discount(){
 
-function calcLoan(){
+let p=N('price');
 
-const p=+$('loanAmount').value;
+let d=N('disc');
 
-const n=+$('loanMonths').value;
+let value=p*d/100;
 
-const r=+$('loanRate').value/100/12;
-
-if(p<=0||n<=0)
-return toast('أدخل المبلغ وعدد الأشهر');
-
-const pay=
-r===0
-?p/n
-:(p*r*Math.pow(1+r,n))/
-(Math.pow(1+r,n)-1);
-
-showResult(
-'loanResult',
-`القسط الشهري التقريبي: ${pay.toFixed(2)}<br>
-إجمالي المدفوع: ${(pay*n).toFixed(2)}`
+out(
+'قيمة الخصم: '+
+value.toFixed(2)+
+'<br>السعر بعد الخصم: <b>'+
+(p-value).toFixed(2)+
+'</b>'
 );
 
 }
 
 
-/* ================= DATE DIFFERENCE ================= */
+function tip(){
 
-function calcDateDiff(){
+let b=N('bill');
 
-const a=
-new Date(
-$('date1').value+'T00:00:00'
-);
+let t=N('tipv');
 
-const b=
-new Date(
-$('date2').value+'T00:00:00'
-);
+let p=Math.max(1,N('people'));
 
-if(isNaN(a)||isNaN(b))
-return toast('اختر التاريخين');
+let tip=b*t/100;
 
-showResult(
-'dateResult',
-`الفرق: ${Math.abs(
-Math.round((b-a)/86400000)
-).toLocaleString('ar-EG')} يوم`
+let total=b+tip;
+
+out(
+'البقشيش: '+tip.toFixed(2)+
+'<br>الإجمالي: '+total.toFixed(2)+
+'<br>لكل شخص: <b>'+
+(total/p).toFixed(2)+
+'</b>'
 );
 
 }
 
 
-/* ================= GPA ================= */
+function loan(){
 
-function calcGPA(){
-
-const vals=[
-'gpa1',
-'gpa2',
-'gpa3',
-'gpa4'
-]
-.map(id=>+$(id).value)
-.filter(
-v=>isFinite(v)&&v>=0&&v<=4
+out(
+'القسط الشهري: <b>'+
+(N('la')/N('lm')).toFixed(2)+
+'</b>'
 );
 
-if(!vals.length)
-return toast('أدخل درجات من 0 إلى 4');
+}
 
-const g=
-vals.reduce(
-(a,b)=>a+b,
+
+function age(){
+
+let b=new Date($('birth').value);
+
+let n=new Date();
+
+let a=n.getFullYear()-b.getFullYear();
+
+if(
+n.getMonth()<b.getMonth()||
+(
+n.getMonth()==b.getMonth()&&
+n.getDate()<b.getDate()
+)
+)a--;
+
+out(
+'عمرك: <b>'+
+a+
+' سنة</b>'
+);
+
+}
+
+
+function bmi(){
+
+let b=N('bw');
+
+let h=N('bh')/100;
+
+let x=b/h**2;
+
+let s=
+x<18.5?'نحيف':
+x<25?'طبيعي':
+x<30?'زيادة وزن':
+'سمنة';
+
+out(
+'BMI: <b>'+
+x.toFixed(1)+
+'</b><br>'+
+s
+);
+
+}
+
+
+function calories(){
+
+let w=N('cw');
+
+let h=N('ch');
+
+let a=N('ca');
+
+let base=
+$('sex').value==='m'
+?
+10*w+6.25*h-5*a+5
+:
+10*w+6.25*h-5*a-161;
+
+let g=$('goal').value;
+
+let t=
+base*1.375+
+(
+g==='lose'?-400:
+g==='gain'?300:
 0
-)/vals.length;
+);
 
-showResult(
-'gpaResult',
-`GPA = ${g.toFixed(2)} / 4`
+out(
+'السعرات التقديرية: <b>'+
+Math.round(t)+
+' سعرة</b>'+
+'<br>البروتين: '+
+Math.round(w*1.6)+
+'–'+
+Math.round(w*2)+
+' جم'
 );
 
 }
 
 
-/* ================= IMAGE ================= */
+function gpa(){
 
-function readImage(file,cb){
+let a=
+$('grades')
+.value
+.split(',')
+.map(Number)
+.filter(x=>!isNaN(x));
 
-if(!file)
-return toast('اختر صورة أولًا');
+if(!a.length){
 
-const img=new Image();
+out('أدخل الدرجات أولاً');
 
-const url=
-URL.createObjectURL(file);
+return;
 
-img.onload=()=>{
+}
 
-URL.revokeObjectURL(url);
+let v=
+a.reduce((x,y)=>x+y,0)/
+a.length;
 
-cb(img);
-
-};
-
-img.onerror=()=>{
-
-URL.revokeObjectURL(url);
-
-toast('تعذر قراءة الصورة');
-
-};
-
-img.src=url;
+out(
+'المتوسط: '+
+v.toFixed(2)+
+'%<br>GPA تقريبي: <b>'+
+Math.min(4,v/25).toFixed(2)+
+'</b>'
+);
 
 }
 
 
-/* ================= DOWNLOAD ================= */
+function dated(){
 
-function downloadBlob(blob,name){
+let d=
+Math.abs(
+Math.round(
+(
+new Date($('d2').value)-
+new Date($('d1').value)
+)/86400000
+)
+);
 
-const url=
-URL.createObjectURL(blob);
+out(
+'الفرق: <b>'+
+d+
+' يوم</b>'
+);
 
-const a=
-document.createElement('a');
+}
 
-a.href=url;
 
-a.download=name;
+function speed(){
 
-document.body.appendChild(a);
+out(
+'السرعة: <b>'+
+(N('dist')/N('hrs')).toFixed(2)+
+' كم/ساعة</b>'
+);
+
+}
+
+
+function length(){
+
+let v=N('lv');
+
+let t=$('lu').value;
+
+let r={
+mc:v*100,
+cm:v/100,
+km:v*1000,
+mk:v/1000,
+fm:v*.3048,
+ic:v*2.54
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function weight(){
+
+let v=N('wv');
+
+let t=$('wu').value;
+
+let r={
+kg_g:v*1000,
+g_kg:v/1000,
+kg_l:v*2.2046226,
+l_kg:v/2.2046226
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function temp(){
+
+let v=N('tv');
+
+let t=$('tu').value;
+
+let r={
+cf:v*9/5+32,
+fc:(v-32)*5/9,
+ck:v+273.15,
+kc:v-273.15
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(2)+
+'</b>'
+);
+
+}
+
+
+function data(){
+
+let v=N('dv');
+
+let t=$('du').value;
+
+let r={
+mg:v/1024,
+gm:v*1024,
+gt:v/1024,
+km:v/1024
+}[t];
+
+out(
+'الناتج: <b>'+
+r.toFixed(4)+
+'</b>'
+);
+
+}
+
+
+function tdiff(){
+
+let a=$('t1').value.split(':');
+
+let b=$('t2').value.split(':');
+
+let d=
+Math.abs(
+(+b[0]*60+ +b[1])-
+(+a[0]*60+ +a[1])
+);
+
+out(
+'الفرق: <b>'+
+Math.floor(d/60)+
+' ساعة و '+
+d%60+
+' دقيقة</b>'
+);
+
+}
+
+
+function count(){
+
+let s=$('ct').value;
+
+$('wc').textContent=
+s.trim()?
+s.trim().split(/\s+/).length:
+0;
+
+$('cc').textContent=s.length;
+
+$('sc').textContent=
+(s.match(/\s/g)||[]).length;
+
+}
+
+
+function cases(){
+
+out(
+$('cs').value==='u'
+?
+$('ci').value.toUpperCase()
+:
+$('ci').value.toLowerCase()
+);
+
+}
+
+
+function reverse(){
+
+out(
+$('ri')
+.value
+.split('')
+.reverse()
+.join('')
+.replace(/</g,'&lt;')
+);
+
+}
+
+
+function base64(){
+
+try{
+
+let s=$('bi').value;
+
+out(
+$('bm').value==='e'
+?
+btoa(unescape(encodeURIComponent(s)))
+:
+decodeURIComponent(escape(atob(s)))
+);
+
+}
+
+catch(e){
+
+out('النص غير صالح');
+
+}
+
+}
+
+
+function urlx(){
+
+try{
+
+out(
+$('um').value==='e'
+?
+encodeURIComponent($('ui').value)
+:
+decodeURIComponent($('ui').value)
+);
+
+}
+
+catch(e){
+
+out('النص غير صالح');
+
+}
+
+}
+
+
+function json(){
+
+try{
+
+out(
+'<pre class="whitespace-pre-wrap">'+
+JSON.stringify(
+JSON.parse($('ji').value),
+null,
+2
+)
+.replace(/</g,'&lt;')+
+'</pre>'
+);
+
+}
+
+catch(e){
+
+out('JSON غير صالح');
+
+}
+
+}
+
+
+function pass(){
+
+let n=
+Math.min(
+100,
+Math.max(
+4,
+N('pl')||12
+)
+);
+
+let c=
+'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*_-+';
+
+let a=new Uint32Array(n);
+
+crypto.getRandomValues(a);
+
+out(
+'<b class="break-all">'+
+[...a]
+.map(x=>c[x%c.length])
+.join('')+
+'</b>'
+);
+
+}
+
+
+function randomN(){
+
+let a=N('rmin');
+
+let b=N('rmax');
+
+if(a>b){
+
+let t=a;
+
+a=b;
+
+b=t;
+
+}
+
+out(
+'<b>'+
+Math.floor(
+Math.random()*
+(b-a+1)+a
+)+
+'</b>'
+);
+
+}
+
+
+function qr(){
+
+let s=$('qr').value;
+
+if(!s){
+
+out('اكتب النص أو الرابط أولاً','qrout');
+
+return;
+
+}
+
+out(
+
+`
+<img
+class="mx-auto bg-white p-2 rounded-xl"
+width="220"
+src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(s)}">
+`
+
+,'qrout');
+
+}
+
+
+function color(){
+
+let c=$('col').value;
+
+$('cp').style.background=c;
+
+out(
+'HEX: <b>'+
+c+
+'</b>'
+);
+
+}
+
+
+function binary(){
+
+let s=$('bin').value;
+
+if($('bmode').value==='e'){
+
+out(
+[...s]
+.map(
+c=>
+c.charCodeAt(0)
+.toString(2)
+.padStart(8,'0')
+)
+.join(' ')
+);
+
+}
+
+else{
+
+try{
+
+out(
+s.trim()
+.split(/\s+/)
+.map(
+x=>
+String.fromCharCode(
+parseInt(x,2)
+)
+)
+.join('')
+);
+
+}
+
+catch(e){
+
+out('Binary غير صالح');
+
+}
+
+}
+
+}
+
+
+function img(f,cb){
+
+let r=new FileReader();
+
+r.onload=()=>{
+
+let i=new Image();
+
+i.onload=()=>cb(i);
+
+i.src=r.result;
+
+};
+
+r.readAsDataURL(f);
+
+}
+
+
+function dl(c,n,q=.8){
+
+let a=document.createElement('a');
+
+a.href=c.toDataURL(
+'image/jpeg',
+q
+);
+
+a.download=n;
 
 a.click();
 
-a.remove();
+}
+
+
+function resize(){
+
+let f=$('rf').files[0];
+
+if(!f){
+
+out('اختر صورة');
+
+return;
+
+}
+
+img(f,i=>{
+
+let c=document.createElement('canvas');
+
+c.width=N('rw')||i.width;
+
+c.height=N('rh')||i.height;
+
+c.getContext('2d')
+.drawImage(
+i,
+0,
+0,
+c.width,
+c.height
+);
+
+dl(c,'resized.jpg');
+
+out('تم تنزيل الصورة');
+
+});
+
+}
+
+
+function compress(){
+
+let f=$('cf').files[0];
+
+if(!f){
+
+out('اختر صورة');
+
+return;
+
+}
+
+let q=
+Math.min(
+100,
+Math.max(
+10,
+N('cq')||70
+)
+)/100;
+
+img(f,i=>{
+
+let c=document.createElement('canvas');
+
+c.width=i.width;
+
+c.height=i.height;
+
+c.getContext('2d')
+.drawImage(i,0,0);
+
+dl(
+c,
+'compressed.jpg',
+q
+);
+
+out(
+'تم ضغط وتنزيل الصورة'
+);
+
+});
+
+}
+
+
+function pdf(){
+
+let f=$('pf').files[0];
+
+if(!f){
+
+alert('اختر صورة');
+
+return;
+
+}
+
+let r=new FileReader();
+
+r.onload=()=>{
+
+let w=open();
+
+w.document.write(
+'<img style="max-width:100%" src="'+
+r.result+
+'">'
+);
 
 setTimeout(
-()=>URL.revokeObjectURL(url),
+()=>w.print(),
+500
+);
+
+};
+
+r.readAsDataURL(f);
+
+}
+
+
+function clock(){
+
+let e=$('clock');
+
+if(!e)return;
+
+e.textContent=
+new Date()
+.toLocaleString(
+'ar-EG',
+{
+dateStyle:'full',
+timeStyle:'medium'
+}
+);
+
+setTimeout(
+clock,
 1000
 );
 
 }
 
 
-/* ================= CANVAS ================= */
-
-function canvasBlob(
-img,
-w,
-h,
-type,
-q,
-cb
-){
-
-const c=
-document.createElement('canvas');
-
-c.width=w;
-
-c.height=h;
-
-const x=
-c.getContext('2d');
-
-x.drawImage(
-img,
-0,
-0,
-w,
-h
-);
-
-c.toBlob(
-cb,
-type,
-q
-);
-
-}
-
-
-/* ================= COMPRESS ================= */
-
-function compressImage(){
-
-const f=
-$('compressFile').files[0];
-
-readImage(
-f,
-img=>{
-
-const max=1800;
-
-const scale=
-Math.min(
-1,
-max/
-Math.max(
-img.width,
-img.height
-)
-);
-
-const w=
-Math.round(img.width*scale);
-
-const h=
-Math.round(img.height*scale);
-
-const q=
-+$('quality').value/100;
-
-canvasBlob(
-img,
-w,
-h,
-'image/jpeg',
-q,
-b=>{
-
-downloadBlob(
-b,
-'abo-kayan-compressed.jpg'
-);
-
-showResult(
-'compressResult',
-`تم الضغط: ${Math.round(b.size/1024)} KB`
-);
-
-}
-);
-
-}
-);
-
-}
-
-
-/* ================= RESIZE ================= */
-
-function resizeImage(){
-
-const f=
-$('resizeFile').files[0];
-
-const w=
-+$('resizeW').value;
-
-const h=
-+$('resizeH').value;
-
-if(w<=0||h<=0)
-return toast('أدخل العرض والارتفاع');
-
-readImage(
-f,
-img=>
-canvasBlob(
-img,
-w,
-h,
-'image/png',
-1,
-b=>
-downloadBlob(
-b,
-'abo-kayan-resized.png'
-)
-)
-);
-
-}
-
-
-/* ================= CONVERT IMAGE ================= */
-
-function convertImage(){
-
-const f=
-$('convertFile').files[0];
-
-readImage(
-f,
-img=>{
-
-const type=
-$('convertType').value;
-
-const ext=
-type==='image/png'
-?'png'
-:type==='image/webp'
-?'webp'
-:'jpg';
-
-canvasBlob(
-img,
-img.width,
-img.height,
-type,
-.92,
-b=>
-downloadBlob(
-b,
-'abo-kayan-converted.'+ext
-)
-);
-
-}
-);
-
-}
-
-
-/* ================= IMAGE TO PDF ================= */
-
-function imageToPdf(){
-
-const f=
-$('imgPdfFile').files[0];
-
-if(!f)
-return toast('اختر صورة');
-
-readImage(
-f,
-img=>{
-
-const {jsPDF}=
-window.jspdf;
-
-const orientation=
-img.width>img.height
-?'landscape'
-:'portrait';
-
-const pdf=
-new jsPDF({
-orientation,
-unit:'px',
-format:[img.width,img.height]
-});
-
-pdf.addImage(
-img,
-'JPEG',
-0,
-0,
-img.width,
-img.height
-);
-
-pdf.save(
-'abo-kayan-image.pdf'
-);
-
-}
-);
-
-}
-
-
-/* ================= PDF ================= */
-
-function openPdf(){
-
-const f=
-$('pdfFile').files[0];
-
-if(!f)
-return toast('اختر PDF');
-
-window.open(
-URL.createObjectURL(f),
-'_blank'
-);
-
-}
-
-
-/* ================= MERGE PDF ================= */
-
-async function mergePDFs(){
-
-const files=[
-...$('mergeFiles').files
-];
-
-if(files.length<2)
-return toast('اختر ملفي PDF على الأقل');
-
-try{
-
-const out=
-await PDFLib.PDFDocument.create();
-
-for(
-const file of files
-){
-
-const src=
-await PDFLib.PDFDocument.load(
-await file.arrayBuffer()
-);
-
-const pages=
-await out.copyPages(
-src,
-src.getPageIndices()
-);
-
-pages.forEach(
-p=>out.addPage(p)
-);
-
-}
-
-const bytes=
-await out.save();
-
-downloadBlob(
-new Blob(
-[bytes],
-{type:'application/pdf'}
-),
-'abo-kayan-merged.pdf'
-);
-
-showResult(
-'mergeResult',
-'تم دمج الملفات بنجاح ✅'
-);
-
-}catch(e){
-
-console.error(e);
-
-showResult(
-'mergeResult',
-'حدث خطأ أثناء الدمج. تأكد أن الملفات سليمة.'
-);
-
-}
-
-}
-
-
-/* ================= OCR ================= */
-
-async function runOCR(){
-
-const file=
-$('ocrFile').files[0];
-
-if(!file)
-return toast('اختر صورة');
-
-$('ocrStatus').textContent=
-'جاري تحميل محرك OCR...';
-
-if(!window.Tesseract){
-
-const script=
-document.createElement('script');
-
-script.src=
-'https://unpkg.com/tesseract.js@v5.0.4/dist/tesseract.min.js';
-
-document.head.appendChild(script);
-
-await new Promise(
-resolve=>
-script.onload=resolve
-);
-
-}
-
-try{
-
-$('ocrStatus').textContent=
-'جاري استخراج النص...';
-
-const result=
-await Tesseract.recognize(
-file,
-'ara+eng',
-{
-logger:m=>{
-
-if(m.status==='recognizing text'){
-
-$('ocrStatus').textContent=
-`المعالجة: ${Math.round(m.progress*100)}%`;
-
-}
-
-}
-}
-);
-
-$('ocrResult').value=
-result.data.text.trim();
-
-$('ocrStatus').textContent=
-'تم استخراج النص بنجاح ✅';
-
-}catch(e){
-
-console.error(e);
-
-$('ocrStatus').textContent=
-'حدث خطأ أثناء قراءة الصورة ❌';
-
-}
-
-}
-
-
-function copyOCR(){
-
-const text=
-$('ocrResult').value;
-
-if(!text)
-return toast('لا يوجد نص لنسخه');
-
-navigator.clipboard
-?.writeText(text)
-.then(
-()=>toast('تم نسخ النص')
-);
-
-}
-
-
-/* ================= COUNTER ================= */
-
-function countText(){
-
-const t=
-$('textInput').value;
-
-const trim=
-t.trim();
-
-$('wordCount').textContent=
-trim
-?trim.split(/\s+/).length
-:0;
-
-$('charCount').textContent=
-t.length;
-
-$('lineCount').textContent=
-t
-?t.split(/\r?\n/).length
-:0;
-
-}
-
-
-/* ================= PASSWORD ================= */
-
-function secureRandomInt(max){
-
-const a=
-new Uint32Array(1);
-
-crypto.getRandomValues(a);
-
-return a[0]%max;
-
-}
-
-
-function generatePassword(){
-
-const len=
-Math.min(
-64,
-Math.max(
-6,
-+$('passLen').value||16
-)
-);
-
-let chars=
-'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
-
-if(
-$('passSymbols').checked
-)
-chars+='!@#$%^&*_-+=?';
-
-let p='';
-
-for(
-let i=0;
-i<len;
-i++
-){
-
-p+=
-chars[
-secureRandomInt(
-chars.length
-)
-];
-
-}
-
-$('passResult').textContent=p;
-
-}
-
-
-function copyPassword(){
-
-const p=
-$('passResult').textContent;
-
-if(!p)
-return;
-
-navigator.clipboard
-?.writeText(p)
-.then(
-()=>toast('تم نسخ كلمة المرور')
-);
-
-}
-
-
-/* ================= QR ================= */
-
-function generateQR(){
-
-const text=
-$('qrText').value.trim();
-
-if(!text)
-return toast('اكتب نصًا أو رابطًا');
-
-$('qrResult').innerHTML='';
-
-new QRCode(
-$('qrResult'),
-{
-text,
-width:190,
-height:190,
-colorDark:'#111827',
-colorLight:'#ffffff'
-}
-);
-
-}
-
-
-/* ================= JSON ================= */
-
-function formatJSON(){
-
-try{
-
-const obj=
-JSON.parse(
-$('jsonInput').value
-);
-
-$('jsonResult').innerHTML=
-'<pre class="result text-left overflow-auto whitespace-pre-wrap text-xs">'+
-escapeHtml(
-JSON.stringify(
-obj,
-null,
-2
-)
-)+
-'</pre>';
-
-}catch(e){
-
-showResult(
-'jsonResult',
-'JSON غير صالح ❌'
-);
-
-}
-
-}
-
-
-function escapeHtml(s){
-
-return s.replace(
-/[&<>"']/g,
-m=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[m])
-);
-
-}
-
-
-/* ================= BASE64 ================= */
-
-function encodeBase64(){
-
-const s=
-$('baseText').value;
-
-try{
-
-$('baseResult').value=
-btoa(
-unescape(
-encodeURIComponent(s)
-)
-);
-
-}catch(e){
-
-toast('تعذر الترميز');
-
-}
-
-}
-
-
-function decodeBase64(){
-
-try{
-
-$('baseResult').value=
-decodeURIComponent(
-escape(
-atob(
-$('baseText').value.trim()
-)
-)
-);
-
-}catch(e){
-
-toast('النص ليس Base64 صالحًا');
-
-}
-
-}
-
-
-/* ================= INITIALIZE ================= */
-
-updateToolCount();
+render();
 
 </script>
 

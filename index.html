@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M1KVZHSPKT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M1KVZHSPKT');
+</script>
+
 <title>HeMa Tools | أدوات مجانية وسريعة</title>
 <meta name="description" content="HeMa Tools - مجموعة أدوات مجانية للحساب والتحويل والنصوص والصور والمزيد.">
 <meta name="theme-color" content="#090b11">
@@ -2574,9 +2584,7 @@ function openHashTool(){
     const id =
         location.hash.replace("#","");
 
-    if(id && tools.some(t => t.id === id)){
-        setTimeout(() => openTool(id),300);
-    }
+    id && tools.some(t => t.id === id) && setTimeout(() => openTool(id), 300);
 
 }
 
@@ -2593,3 +2601,4 @@ openHashTool();
 
 </body>
 </html>
+
